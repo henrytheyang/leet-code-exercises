@@ -34,19 +34,28 @@
  */
 
 var asteroidCollision = function (asteroids) {
-  debugger
+  // debugger
   let answer = [];
   let copyOfInput = asteroids.slice();
-  let detectCollision = (someArr) => {
+  // optimization - pass in the index where we stopped, decrement
+    // and start from there instead of beginning
+    // this 'optimization' is slower?! 148ms vs 136ms without it
+  let detectionStartingIndex = 0;
+  let detectCollision = (someArr, startingIndex) => {
     if (someArr.length === 0) {
       answer = someArr;
     } else if (someArr.length === 1) {
       answer = someArr;
     } else {
-      for (var i = 0; i < (someArr.length - 1); i++) {
+      for (var i = startingIndex; i < (someArr.length - 1); i++) {
         if (someArr[i] > 0 && someArr[i + 1] < 0 && someArr.length > 1) {
           let postCollisionArr = compareAndAnnihilate(someArr, [someArr[i], i], [someArr[i + 1], i + 1]);
-          detectCollision(postCollisionArr);
+          if (i === 0) {
+            startingIndex = 0;
+          } else {
+            startingIndex = i - 1;
+          }
+          detectCollision(postCollisionArr, startingIndex);
         } else {
           answer = someArr;
         }
@@ -64,6 +73,6 @@ var asteroidCollision = function (asteroids) {
     // return array
     return currentAsteroidField;
   };
-  detectCollision(copyOfInput);
+  detectCollision(copyOfInput, detectionStartingIndex);
   return answer;
 };
