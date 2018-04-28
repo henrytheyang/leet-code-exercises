@@ -18,7 +18,12 @@ var reverse = function(x) {
       answer += inputToString[i];
     }
   }
-  return parseInt(answer);
+  answer = parseInt(answer);
+  if (answer < -Math.pow(2, 31) || answer > Math.pow(2, 31) - 1) {
+    return 0;
+  } else {
+    return answer;      
+  }
 };
 
 
