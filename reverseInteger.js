@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/reverse-integer/description/
+
 var reverse = function(x) {
   let answer = '';
   let trailingZeroFlag = true;
@@ -5,7 +7,7 @@ var reverse = function(x) {
     if (someChar !== '0') {
       trailingZeroFlag = false;
     }
-  }
+  };
   if (x < 0) {
     answer = '-';
   }
