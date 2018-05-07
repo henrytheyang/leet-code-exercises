@@ -19,10 +19,7 @@
 
 var addTwoNumbers = function(l1, l2) {
   // answer wil be the first node of the linked list answer
-  let answer = {
-    val: null,
-    next: null,
-  };
+  let answer = new ListNode(null);
   let createListNode = (val) => {
     return {
       val: val,
@@ -35,6 +32,10 @@ var addTwoNumbers = function(l1, l2) {
   let carryOverVal = 0;
   let currentAnswerNode;
 
+  // Add the nodes of each list and save the answer in the new list;
+  // If the answer > 10, save the last digit, and add 1 to the next sum;
+  // If one of the lists ends before the other, assume it's 0 and keep adding until the other list is done
+  // Watch out for the edge case where the last sum is 9 + 1;
   while (nodeA.val !== null || nodeB.val !== null || answer.val === null) {
     let a = nodeA.val || 0;
     let b = nodeB.val || 0;
@@ -47,19 +48,18 @@ var addTwoNumbers = function(l1, l2) {
     }
     // If answer is null make it the new node
     if (answer.val === null) {
-      answer = createListNode(newVal);
+      answer = new ListNode(newVal);
       currentAnswerNode = answer;
     } else {
       // else make the currentAnswerNode.next the new node
-      currentAnswerNode.next = createListNode(newVal);
+      currentAnswerNode.next = new ListNode(newVal);
       currentAnswerNode = currentAnswerNode.next;
     }
     nodeA = nodeA.next || {val: null, next: null};
     nodeB = nodeB.next || {val: null, next: null};
   }
-  // Add the nodes of each list and save the answer in the new list;
-    // If the answer > 10, save the last digit, and add 1 to the next sum;
-    // If one of the lists ends before the other, assume it's 0 and keep adding until the other list is done
-    // Watch out for the edge case where the last sum is 9 + 1;
+  if (carryOverVal === 1) {
+    currentAnswerNode.next = new ListNode(1);
+  }
   return answer;
 };
