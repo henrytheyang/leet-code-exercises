@@ -29,8 +29,8 @@ var threeSum = function(nums) {
     // [1, -1, 3] -> '1,-1,3'
     return array.join();
   }
-  for (var i = 0; i < nums.length; i++) {
-    for (var j = i + 1; j < nums.length; j++) {
+  for (var i = 0; i < nums.length - 2; i++) {
+    for (var j = i + 1; j < nums.length - 1; j++) {
       for (var k = j + 1; k < nums.length; k++) {
         let newTriplet = [];
         if (nums[i] + nums[j] + nums[k] === 0) {
