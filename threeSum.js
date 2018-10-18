@@ -61,6 +61,31 @@ var threeSum = function(nums) {
   }
   let sortedInput = arraySortAsc(nums);
   // Iterate through sorted array
+  for (var i = 0; i < sortedInput.length - 2; i++) {
+    let a = i + 1;
+    let z = sortedInput.length - 1;
+    while (a < z) {
+      if (sortedInput[i] + sortedInput[a] + sortedInput[z] === 0) {
+        answerArray.push([sortedInput[i], sortedInput[a], sortedInput[z]]);
+        debugger
+        do {
+          a = a + 1;
+        } while (sortedInput[a] === sortedInput[a - 1]);
+        do {
+          z = z - 1;
+        } while (sortedInput[z] === sortedInput[z + 1]);
+      }
+      if (sortedInput[i] + sortedInput[a] + sortedInput[z] < 0) {
+        a = a + 1;
+      }
+      if (sortedInput[i] + sortedInput[a] + sortedInput[z] > 0) {
+        z = z - 1;
+      }
+    }
+    while (sortedInput[i] === sortedInput[i + 1]) {
+      i = i + 1;
+    }
+  }
     // Add current element to first and last element of remaining number set
       // If the sum === 0, add the resulting set of numbers into the answer set
         // Continue through checking current first number sorted array
