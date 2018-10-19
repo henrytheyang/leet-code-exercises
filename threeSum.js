@@ -57,33 +57,71 @@ var threeSum = function(nums) {
   let arraySortAsc = function (inputArr) {
     return inputArr.sort(function(a, b) {
       return a-b;
-    })
-  }
+    });
+  };
+  // let incrementToNextUnique = someNum => {
+  //   do {
+  //     someNum = someNum + 1;
+  //   } while (sortedInput[someNum] === sortedInput[someNum - 1]);
+  // };
+  // let decrementToNextUnique = someNum => {
+  //   do {
+  //     someNum = someNum - 1;
+  //   } while (sortedInput[someNum] === sortedInput[someNum + 1]);
+  // };
   let sortedInput = arraySortAsc(nums);
+  let incrementToNextUnique = function (someNum) {
+    console.log('someNum = ', someNum);
+    someNum = someNum + 1;
+    console.log('now someNum = ', someNum);
+    // do {
+    //   someNum = someNum + 1;
+    // } while (sortedInput[someNum] === sortedInput[someNum - 1]);
+    return someNum;
+  };
+  let decrementToNextUnique = function (someNum) {
+    do {
+      someNum = someNum - 1;
+    } while (sortedInput[someNum] === sortedInput[someNum - 1]);
+  };
   // Iterate through sorted array
   for (var i = 0; i < sortedInput.length - 2; i++) {
     let a = i + 1;
     let z = sortedInput.length - 1;
+    debugger
     while (a < z) {
       if (sortedInput[i] + sortedInput[a] + sortedInput[z] === 0) {
         answerArray.push([sortedInput[i], sortedInput[a], sortedInput[z]]);
-        debugger
-        do {
-          a = a + 1;
-        } while (sortedInput[a] === sortedInput[a - 1]);
-        do {
-          z = z - 1;
-        } while (sortedInput[z] === sortedInput[z + 1]);
+        console.log('in while loop');
+        // Check again to see if (a < z) so they don't collide past each other
+        if (a < z) {
+          incrementToNextUnique(a);
+          decrementToNextUnique(z);
+          // do {
+          //   a = a + 1;
+          // } while (sortedInput[a] === sortedInput[a - 1]);
+          // do {
+          //   z = z - 1;
+          // } while (sortedInput[z] === sortedInput[z + 1]);
+        }
       }
       if (sortedInput[i] + sortedInput[a] + sortedInput[z] < 0) {
-        a = a + 1;
+        console.log('a = ', a);
+        incrementToNextUnique(a);
+        console.log('now a = ', a);
+      // do {
+        //   a = a + 1;
+        // } while (sortedInput[a] === sortedInput[a - 1]);
       }
       if (sortedInput[i] + sortedInput[a] + sortedInput[z] > 0) {
-        z = z - 1;
+        decrementToNextUnique(z);
+        // do {
+        //   z = z - 1;
+        // } while (sortedInput[z] === sortedInput[z + 1]);      
       }
     }
     while (sortedInput[i] === sortedInput[i + 1]) {
-      i = i + 1;
+      continue;
     }
   }
     // Add current element to first and last element of remaining number set
@@ -92,8 +130,8 @@ var threeSum = function(nums) {
       // If the sum < 0, advance the second number one index place
       // If the sum > 0, decrease the third number one index place
       // Keep searching through sorted array using current first number while second number < third number
-    
     // Edge case- dealing with duplicates. Anytime we advance 1st or 2nd, or decrease 3rd, if our new number === previous number, we skip 
-  
   return answerArray;
 };
+
+threeSum([-8, -4, -8, 0, 0, 8, 1, 1, 1, 1, 3, 4, 4, 0]);
