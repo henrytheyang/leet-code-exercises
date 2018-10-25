@@ -59,69 +59,44 @@ var threeSum = function(nums) {
       return a-b;
     });
   };
-  // let incrementToNextUnique = someNum => {
-  //   do {
-  //     someNum = someNum + 1;
-  //   } while (sortedInput[someNum] === sortedInput[someNum - 1]);
-  // };
-  // let decrementToNextUnique = someNum => {
-  //   do {
-  //     someNum = someNum - 1;
-  //   } while (sortedInput[someNum] === sortedInput[someNum + 1]);
-  // };
   let sortedInput = arraySortAsc(nums);
   let incrementToNextUnique = function (someNum) {
-    console.log('someNum = ', someNum);
-    someNum = someNum + 1;
-    console.log('now someNum = ', someNum);
-    // do {
-    //   someNum = someNum + 1;
-    // } while (sortedInput[someNum] === sortedInput[someNum - 1]);
+    do {
+      someNum = someNum + 1;
+    } while (sortedInput[someNum] === sortedInput[someNum - 1]);
     return someNum;
   };
   let decrementToNextUnique = function (someNum) {
     do {
       someNum = someNum - 1;
-    } while (sortedInput[someNum] === sortedInput[someNum - 1]);
+    } while (sortedInput[someNum] === sortedInput[someNum + 1]);
+    return someNum;
   };
   // Iterate through sorted array
-  for (var i = 0; i < sortedInput.length - 2; i++) {
+  // for (var i = 0; i < sortedInput.length - 2; i++) {
+  for (var i = 0; sortedInput[i] <= 0; i++) {
     let a = i + 1;
     let z = sortedInput.length - 1;
-    debugger
+    if (i > 0 && sortedInput[i] === sortedInput[i - 1]) {
+      continue;
+    }
     while (a < z) {
       if (sortedInput[i] + sortedInput[a] + sortedInput[z] === 0) {
         answerArray.push([sortedInput[i], sortedInput[a], sortedInput[z]]);
-        console.log('in while loop');
+        console.log('new answerArray entry = ', [sortedInput[i], sortedInput[a], sortedInput[z]]);
+        console.log('i = ', i);
+        console.log('a = ', a);
+        console.log('z = ', z);
         // Check again to see if (a < z) so they don't collide past each other
         if (a < z) {
-          incrementToNextUnique(a);
-          decrementToNextUnique(z);
-          // do {
-          //   a = a + 1;
-          // } while (sortedInput[a] === sortedInput[a - 1]);
-          // do {
-          //   z = z - 1;
-          // } while (sortedInput[z] === sortedInput[z + 1]);
+          a = incrementToNextUnique(a);
+          z = decrementToNextUnique(z);
         }
+      } else if (sortedInput[i] + sortedInput[a] + sortedInput[z] < 0) {
+        a = incrementToNextUnique(a);
+      } else if (sortedInput[i] + sortedInput[a] + sortedInput[z] > 0) {
+        z = decrementToNextUnique(z);   
       }
-      if (sortedInput[i] + sortedInput[a] + sortedInput[z] < 0) {
-        console.log('a = ', a);
-        incrementToNextUnique(a);
-        console.log('now a = ', a);
-      // do {
-        //   a = a + 1;
-        // } while (sortedInput[a] === sortedInput[a - 1]);
-      }
-      if (sortedInput[i] + sortedInput[a] + sortedInput[z] > 0) {
-        decrementToNextUnique(z);
-        // do {
-        //   z = z - 1;
-        // } while (sortedInput[z] === sortedInput[z + 1]);      
-      }
-    }
-    while (sortedInput[i] === sortedInput[i + 1]) {
-      continue;
     }
   }
     // Add current element to first and last element of remaining number set
