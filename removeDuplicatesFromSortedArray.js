@@ -78,7 +78,7 @@ var removeDuplicates = function(nums) {
 
   }
   if (nums.length === 0) {
-    return nums;
+    return nums.length;
   }
   recursiveArrayChecker(nums, indexHolder);
   return nums.length;
