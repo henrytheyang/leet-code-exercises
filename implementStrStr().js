@@ -31,18 +31,30 @@ var strStr = function(haystack, needle) {
   if (needle.length === 0) {
     return 0
   }
-  console.log('dont get here if needle.length === 0')
-  if (needle.length !== 0) {
-    // Two pointers
-    // scan haystack for first character of needle
-      // Once first is located, scan successive characters
+  // Two pointers
+  for (i = 0; i <= haystack.length - needle.length; i++) {
+    let needleIndex = 1
+    // Scan haystack for first character of needle
+    if (haystack[i] !== needle[0]) {
+      continue;
+    }
+    // Once first is located, scan successive characters (i is first char of needle, j is successive chars)
+    for (j = i + 1; j <= i + needle.length - 1; j++) {
+      // If the whole needle is not present, continue loop by advancing the first pointer and repeating
+      if (haystack[j] !== needle[needleIndex]) {
+        break;
+      }
+      needleIndex++;
+      if (needleIndex === needle.length) {
         // If the whole needle is present, reassign answer to index
-        // If the whole needle is not present, continue loop by advancing the first pointer and repeating
+        answer = i;
+        return answer;
+      }
       // Continue until there aren't enough characters left to find whole needle
+    }
   }
-  console.log(`after if statement, answer = ${answer}`);
   return answer
 };
 
 strStr('hello', '');
-console.log(strStr('hello', ''));
+console.log(strStr('hello', 'll'));
