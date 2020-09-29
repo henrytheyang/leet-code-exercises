@@ -40,8 +40,6 @@ for (int i = 0; i < len; i++) {
  */
 
 
-// Also need to account for null array, empty array, etc
-
 var removeDuplicates = function(nums) {
   let eleHolder = null;
   let indexHolder = 0;
@@ -63,19 +61,18 @@ var removeDuplicates = function(nums) {
         let duplicateCount = 1;
         for (j = i + 1; j <= array.length - 1; j++) {
           if (array[j] !== eleHolder) {
-            return duplicateCount;
+            // stop for loop when you encounter first non-duplicate
+            break;
           } else if (array[j] === eleHolder) {
             duplicateCount++;
           }
         }
         // Splice out the duplicates from nums. Break
-        array.splice(i + 1, duplicateCount);
-        break;
+        array.splice(i, duplicateCount);
         // Restart parent loop from next index
         recursiveArrayChecker(array, indexHolder);
       }
     }
-
   }
   if (nums.length === 0) {
     return nums.length;
@@ -83,3 +80,5 @@ var removeDuplicates = function(nums) {
   recursiveArrayChecker(nums, indexHolder);
   return nums.length;
 };
+console.log('test');
+console.log(removeDuplicates([1,1,1,1,1,1,1,2]));
