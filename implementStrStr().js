@@ -38,23 +38,27 @@ var strStr = function(haystack, needle) {
     if (haystack[i] !== needle[0]) {
       continue;
     }
+    // Edge case to cover needle.length === 1;
+    if (needle.length === 1) {
+      return i;
+    }
     // Once first is located, scan successive characters (i is first char of needle, j is successive chars)
     for (j = i + 1; j <= i + needle.length - 1; j++) {
-      // If the whole needle is not present, continue loop by advancing the first pointer and repeating
+      // If the whole needle is not present, exit interior loop and continue w/ exterior loop by advancing the first pointer
       if (haystack[j] !== needle[needleIndex]) {
         break;
       }
-      needleIndex++;
-      if (needleIndex === needle.length) {
+      if (needleIndex + 1 === needle.length) {
         // If the whole needle is present, reassign answer to index
         answer = i;
         return answer;
       }
+      needleIndex++;
       // Continue until there aren't enough characters left to find whole needle
     }
+
   }
   return answer
 };
 
-strStr('hello', '');
 console.log(strStr('hello', 'll'));
