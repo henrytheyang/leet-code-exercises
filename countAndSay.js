@@ -31,17 +31,8 @@ Output: "1211"
 Explanation: For n = 3 the term was "21" in which we have two groups "2" and "1", "2" can be read as "12" which means frequency = 1 and
 value = 2, the same way "1" is read as "11", so the answer is the concatenation of "12" and "11" which is "1211".
 */
-/**
- * @param {number} n
- * @return {string}
- */
 
-var countAndSay = function(n) {
-  let currentInteger = {
-    counter: 1,
-    val: 1,
-  };
-
+/*
   const produceNextNumber = (num) => {
     // Stringify number so you can loop through it
     let numStringified = JSON.stringify(num);
@@ -67,6 +58,57 @@ var countAndSay = function(n) {
     nextStringifiedNumber = nextStringifiedNumber + JSON.stringify(numberCount) + currentStringifiedNumber;
     return JSON.parse(nextStringifiedNumber);
   };
+*/
+
+/**
+ * @param {number} n
+ * @return {string}
+ */
+
+var countAndSay = function(n) {
+  let currentInteger = {
+    counter: 1,
+    val: 1,
+  };
+
+const countPlaces = (someNum) => {
+  if (someNum === 0) {
+    return 0;
+  }
+  let answer = 0;
+  do {
+    answer++;
+  } while (someNum / Math.pow(10, answer) > 1);
+  return answer;
+};
+
+  // Can't use stringify/parse method because javascript breaks above n = 9
+  const produceNextNumber = (num) => {
+    let placesCounter = 0;
+    let storedDigit = undefined;
+    let findCurrentDigit = (someNum, somePlace) => Math.floor(someNum % Math.pow(10, somePlace)/Math.pow(10, somePlace - 1));
+    let currentDigit = undefined;
+    let duplicateCounter = 0;
+    let nextNumber = 0;
+    do {
+      placesCounter++; 
+      currentDigit = findCurrentDigit(num, placesCounter);
+      if (storedDigit === currentDigit) {
+        duplicateCounter++;
+      } else {
+        // First time through
+        if (placesCounter !== 1) {
+          // Not first time but doesn't match up
+          nextNumber = nextNumber + ((duplicateCounter + 1) * Math.pow(10, countPlaces(nextNumber) + 1)) + (storedDigit * Math.pow(10, countPlaces(nextNumber)));
+          duplicateCounter = 0;
+        };
+        storedDigit = currentDigit;
+      }
+    } while (num/Math.pow(10, placesCounter) > 1)
+    // Add final digits onto nextNumber after exiting do/while loop
+    nextNumber = nextNumber + ((duplicateCounter + 1) * Math.pow(10, countPlaces(nextNumber) + 1)) + (storedDigit * Math.pow(10, countPlaces(nextNumber)));
+    return nextNumber;
+  };
 
   const computeNthTerm = (targetN) => {
     // Check if we've reached desired n
@@ -85,5 +127,5 @@ var countAndSay = function(n) {
   return JSON.stringify(currentInteger.val);
 };
 
-countAndSay(10);
-console.log(countAndSay(10));
+console.log(countAndSay(8));
+console.log(countAndSay(10))
