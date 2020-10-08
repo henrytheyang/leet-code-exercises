@@ -49,6 +49,11 @@ var isSymmetric = function(root) {
   let currentQueue = [];
   let nextLevelQueue = [];
   let answer = true;
+  let childrenFlag = false;
+
+  if (root === null) {
+    return true;
+  }
 
   if (root.left === null && root.right === null) {
     return true;
@@ -59,9 +64,12 @@ var isSymmetric = function(root) {
   // Recursively, on current queue:
     // Add current queue nodes values to value bank
     // Add children to next level queue
-    for (i = 0; i < someQueue.length - 1; i++) {
+    for (i = 0; i <= someQueue.length - 1; i++) {
       valueBank.push(someQueue[i] === null ? null : someQueue[i].val);
-      nextLevelQueue.push(someQueue[i].left, someQueue[i].right);
+      nextLevelQueue.push(someQueue[i] === null ? null : someQueue[i].left, someQueue[i] === null ? null : someQueue[i].right)
+      if (someQueue[i] !== null) {
+        childrenFlag = true;
+      }
     }
 
     // Check value bank for mirror status
@@ -78,18 +86,31 @@ var isSymmetric = function(root) {
     if (answer === false) {
       return answer;
     }
-    
+
     // If there are nodes in the next level's queue
       // Transfer next level queue to current queue
       // Blank next level queue
       // Recurse
-    if (nextLevelQueue.length > 0) {
+    if (nextLevelQueue.length > 0 && childrenFlag === true) {
       currentQueue = nextLevelQueue;
       nextLevelQueue = [];
+      valueBank = [];
+      childrenFlag = false;
       internalRecursiveFx(currentQueue);
     }
   };
 
   internalRecursiveFx(currentQueue);
+  console.log(`answer = ${answer}`);
   return answer;
 };
+
+let g = {val: 3, left: null, right: null};
+let f = {val: 4, left: null, right: null};
+let e = {val: 4, left: null, right: null};
+let d = {val: 3, left: null, right: null};
+let c = {val: 2, left: f, right: g}; 
+let b = {val: 2, left: d, right: e}; 
+let a = {val: 1, left: b, right: c};
+
+isSymmetric(a);
