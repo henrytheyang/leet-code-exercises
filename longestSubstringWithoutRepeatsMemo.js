@@ -50,9 +50,6 @@ var lengthOfLongestSubstring = function(s) {
   for (i = 0; i <= s.length - answer.length; i++) {
     // Check bank for existing substring, then update tempAnswer and advance i beyond last index to test;
     // Skip all s[i] scans that have been memoized
-    if (substringBank[i] !== undefined) {
-      continue;
-    }
     // Retrieve memoized data, if any
     if (substringBank[i] !== undefined) {
       tempAnswer = substringBank[i];
