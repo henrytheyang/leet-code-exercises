@@ -74,8 +74,7 @@ var isSymmetric = function(root) {
 
     // Check value bank for mirror status
       // If false, return false
-    // [0, 1, 1, 0], [0, 1, 2, 2, 1, 0]
-    //  0  1  2  3    0  1  2  3  4  5  
+
     let arrayMid = (valueBank.length / 2) - 1;
     for (j = 0; j <= arrayMid; j++) {
       if (valueBank[j] !== valueBank[valueBank.length - 1 - j]) {
