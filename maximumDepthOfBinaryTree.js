@@ -30,5 +30,44 @@ return its depth = 3.
  * @return {number}
  */
 var maxDepth = function(root) {
-    
+  let answer = 0;
+  let childrenQueue = [];
+  let nextQueue = [];
+  // Breadth-first search.
+  // Scan current node for all children, add children to queue.
+  // Increment counter
+  // Recurse on queue
+  let internalRecursiveFx = (someQueue) => {
+    for (i = 0; i <= someQueue.length - 1; i++) {
+      if (someQueue[i] !== null & someQueue[i].left !== null) {
+        nextQueue.push(someQueue[i].left);
+      }
+      if (someQueue[i] !== null & someQueue[i].right !== null) {
+        nextQueue.push(someQueue[i].right);
+      }
+    }
+    if (nextQueue.length > 0) {
+      answer++;
+    }
+    childrenQueue = nextQueue;
+    nextQueue = [];
+    internalRecursiveFx(childrenQueue);
+  }
+
+  if (root !== null) {
+    answer++;
+  } else {
+    return 0;
+  }
+  // Scan root node for children, add to queue. Recurse on queue
+  if (root.left !== null) {
+    childrenQueue.push(root.left);
+  }
+  if (root.right !== null) {
+    childrenQueue.push(root.right);
+  }
+  if (childrenQueue.length > 0) {
+    internalRecursiveFx(childrenQueue);
+  }
+  return answer;
 };
