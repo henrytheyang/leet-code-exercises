@@ -34,25 +34,27 @@ var sortedArrayToBST = function(nums) {
   let findCenterIndex = (someArr) => {
     return Math.floor(someArr.length / 2);
   }
-  // Set the center as the root node
-  let root =  {val: nums[findCenterIndex(nums)]}
+  // Set the center as the treeRoot node
+  let treeRoot =  {val: nums[findCenterIndex(nums)]}
   let treeMaker = (someParent, someArr) => {
     // Find the center of the 2 halves left over
-    // Set the center of left half as the root.left, center of right half as root.right
+    // Set the center of left half as the treeRoot.left, center of right half as treeRoot.right
     let leftArr = someArr.slice(0, findCenterIndex(someArr) );
-    let rightArr = someArr.slice(findCenterIndex(someArr), (someArr.length - 1) );
+    let rightArr = someArr.slice(findCenterIndex(someArr) + 1, (someArr.length) );
     if (leftArr.length > 0) {
-      someParent[left] = {val: leftArr[findCenterIndex(leftArr)]};
+      someParent['left'] = {val: leftArr[findCenterIndex(leftArr)]};
       // Recurse
-      treeMaker(someParent[left], leftArr);
+      treeMaker(someParent['left'], leftArr);
     }
     if (rightArr.length > 0) {
-      someParent[right] = {val: rightArr[findCenterIndex(rightArr)]};
+      someParent['right'] = {val: rightArr[findCenterIndex(rightArr)]};
       // Recurse
-      treeMaker(someParent[right], rightArr);
+      treeMaker(someParent['right'], rightArr);
     }
   }
 
-  treeMaker(root, nums);
-  return root;
+  treeMaker(treeRoot, nums);
+  return treeRoot;
 };
+
+console.log(sortedArrayToBST([-10,-3,0,5,9],))
