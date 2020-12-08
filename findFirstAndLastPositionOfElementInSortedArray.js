@@ -35,21 +35,7 @@ nums is a non-decreasing array.
  * @return {number[]}
  */
 var searchRange = function(nums, target) {
-  let answerRange = [];
-    for (i = 0; i < nums.length; i++) {
-      if (nums[i] > target) {
-        return [-1, -1]
-      }
-      if (nums[i] === target && answerRange.length === 0) {
-        answerRange.push(i);
-        for (j = i + 1; j <= nums.length; j++) {
-          if (nums[j] !== target) {
-            answerRange.push(j - 1);
-            return answerRange;
-          }
-        }
-      }
-    }
+
 };
 
 searchRange([5,7,7,8,8,10], 8)
