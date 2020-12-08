@@ -68,19 +68,23 @@ var removeElement = function(nums, val) {
         // Update pointers
       // Edge case- front pointer reaches end of array and that value is val; don't scan from rear, just pop
       if (front === rear && nums[front] === val) {
-        nums[front].pop();
+        nums.pop();
         return nums.length;
       }
-      for (i = rear; i--; i <= front) {
+      for (i = rear; i > front; i--) {
         if (nums[i] === val) {
           nums.pop();
         } else {
           nums[front] = nums[i];
           nums.pop();
           rear = i - 1;
+          front++;
+          break;
         }
       }
     }
   }
   return nums.length;
 };
+
+removeElement([3,2,2,3], 3);
