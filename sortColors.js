@@ -40,5 +40,24 @@ nums[i] is 0, 1, or 2.
  */
 
 var sortColors = function(nums) {
-    
+  // Iterate through array, comparing each item to the previous
+  // If lesser than, iterate backwards, rewriting and swapping
+    // If you reach a number that is less than or equal, break, and continue forward iteration
+  if (nums.length > 1) {
+    let valueHolder = 0;
+    for (i = 1; i <= nums.length - 1; i++) {
+      if (nums[i] < nums[i - 1]) {
+        for (j = i; j > 0; j--) {
+          if (nums[j] >= nums[j - 1]) {
+            break;
+          }
+          valueHolder = nums[j];
+          nums[j] = nums[j - 1];
+          nums[j - 1] = valueHolder;
+        }
+      }
+    }
+  }
 };
+
+sortColors([2,0,2,1,1,0]);
