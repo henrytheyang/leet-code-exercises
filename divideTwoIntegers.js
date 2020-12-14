@@ -1,6 +1,5 @@
 /*
 Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
-
 Return the quotient after dividing dividend by divisor.
 
 The integer division should truncate toward zero, which means losing its fractional part. For example, truncate(8.345) = 8 and truncate(-2.7335) = -2.
@@ -32,7 +31,7 @@ Output: 1
 
 Constraints:
 
--231 <= dividend, divisor <= 231 - 1
+-2^31 <= dividend, divisor <= 2^31 - 1
 divisor != 0
 
 */
@@ -43,5 +42,29 @@ divisor != 0
  * @return {number}
  */
 var divide = function(dividend, divisor) {
-    
+  let counter = 0;
+  let accumulator = 0;
+  let answer = 0;
+  // if (dividend === 0) {
+  //   return 0;
+  // }
+  while (Math.abs(accumulator) <= Math.abs(dividend)) {
+    accumulator += divisor;
+    counter++;
+  }
+  if (dividend < 0 && divisor < 0 || dividend > 0 && divisor > 0) {
+    answer = Math.floor(counter) - 1;
+  } else {
+    answer = Math.ceil(counter - 1) * (-1);
+  }
+  if (answer >= Math.pow(2, 31)) {
+    return Math.pow(2, 31) - 1;
+  } else if (answer <= -1 * Math.pow(2, 31)) {
+    return -1 * Math.pow(2, 31);
+  } else {
+    return answer;
+  }
 };
+
+// divide(10, 3);
+divide(0, 1);
