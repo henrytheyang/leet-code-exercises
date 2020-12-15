@@ -47,7 +47,6 @@ var divide = function(dividend, divisor) {
   let a = Math.abs(dividend);
   let b = Math.abs(divisor);
   let isPositive = true;
-  let answer =  0;
   if (dividend > 0 !== divisor > 0) {
     isPositive = false;
   }
@@ -55,12 +54,14 @@ var divide = function(dividend, divisor) {
   // Use bitwise operators to more quickly multiply divisor until the resulting number is larger than the dividend
   // Do the same for each remainder until the remainder is smaller than the divisor
   while (a >= b) {
-    let count = 0;
-    while (a >= (b << 1 << count)) {
-      count++;
+    let count = 1;
+    let bMultiple = b;
+    while ((a >> 1) >= bMultiple) {
+      count = count << 1;
+      bMultiple = bMultiple << 1
     }
-    result += 1 << count;
-    a -= b << count;
+    result += count;
+    a -= bMultiple;
   }
   if (!isPositive) {
     result *= -1;
@@ -75,3 +76,35 @@ var divide = function(dividend, divisor) {
 };
 
 divide(10, 3);
+
+// var divide = function(dividend, divisor) {
+//   let result = 0;
+//   let a = Math.abs(dividend);
+//   let b = Math.abs(divisor);
+//   let isPositive = true;
+//   let answer =  0;
+//   if (dividend > 0 !== divisor > 0) {
+//     isPositive = false;
+//   }
+
+//   // Use bitwise operators to more quickly multiply divisor until the resulting number is larger than the dividend
+//   // Do the same for each remainder until the remainder is smaller than the divisor
+//   while (a >= b) {
+//     let count = 0;
+//     while (a >= (b << 1 << count)) {
+//       count++;
+//     }
+//     result += 1 << count;
+//     a -= b << count;
+//   }
+//   if (!isPositive) {
+//     result *= -1;
+//   }
+//   if (result >= Math.pow(2, 31)) {
+//     return Math.pow(2, 31) - 1;
+//   } else if (result <= -1 * Math.pow(2, 31)) {
+//     return (-1 * Math.pow(2, 31));
+//   } else {
+//     return result;
+//   }
+// };
