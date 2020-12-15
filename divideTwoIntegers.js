@@ -41,30 +41,37 @@ divisor != 0
  * @param {number} divisor
  * @return {number}
  */
+
 var divide = function(dividend, divisor) {
-  let counter = 0;
-  let accumulator = 0;
-  let answer = 0;
-  // if (dividend === 0) {
-  //   return 0;
-  // }
-  while (Math.abs(accumulator) <= Math.abs(dividend)) {
-    accumulator += divisor;
-    counter++;
+  let result = 0;
+  let a = Math.abs(dividend);
+  let b = Math.abs(divisor);
+  let isPositive = true;
+  let answer =  0;
+  if (dividend > 0 !== divisor > 0) {
+    isPositive = false;
   }
-  if (dividend < 0 && divisor < 0 || dividend > 0 && divisor > 0) {
-    answer = Math.floor(counter) - 1;
-  } else {
-    answer = Math.ceil(counter - 1) * (-1);
+
+  // Use bitwise operators to more quickly multiply divisor until the resulting number is larger than the dividend
+  // Do the same for each remainder until the remainder is smaller than the divisor
+  while (a >= b) {
+    let count = 0;
+    while (a >= (b << 1 << count)) {
+      count++;
+    }
+    result += 1 << count;
+    a -= b << count;
   }
-  if (answer >= Math.pow(2, 31)) {
+  if (!isPositive) {
+    result *= -1;
+  }
+  if (result >= Math.pow(2, 31)) {
     return Math.pow(2, 31) - 1;
-  } else if (answer <= -1 * Math.pow(2, 31)) {
-    return -1 * Math.pow(2, 31);
+  } else if (result <= -1 * Math.pow(2, 31)) {
+    return (-1 * Math.pow(2, 31));
   } else {
-    return answer;
+    return result;
   }
 };
 
-// divide(10, 3);
-divide(0, 1);
+divide(10, 3);
