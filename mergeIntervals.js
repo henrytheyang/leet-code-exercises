@@ -25,6 +25,26 @@ intervals[i].length == 2
  * @param {number[][]} intervals
  * @return {number[][]}
  */
+
 var merge = function(intervals) {
-    
+  // Sort intervals entries by size
+  let firstEnd, secondStart, secondEnd, newEnd;
+  intervals.sort((a, b) => a-b);
+  // Loop through intervals
+  for (i = 0; i < intervals.length - 1; i++) {
+    [__, firstEnd] = intervals[i];
+    [secondStart, secondEnd] = intervals[i + 1];
+    // If the next entry's firstNumber <= current entry's secondNumber merge the two intervals by taking the larger of the two secondNumber
+    if (firstEnd >= secondStart) {
+      if (firstEnd >= secondEnd) {
+        newEnd = firstEnd;
+      } else {
+        newEnd = secondEnd;
+      }
+      intervals[i] = [__, secondEnd];
+    // Splice out the next entry
+      intervals.splice((i + 1), 1);
+    }
+  }
+  return intervals;
 };
