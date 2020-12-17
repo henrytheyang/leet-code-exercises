@@ -29,7 +29,7 @@ intervals[i].length == 2
 var merge = function(intervals) {
   // Sort intervals entries by size
   let firstEnd, secondStart, secondEnd, newEnd;
-  intervals.sort((a, b) => a-b);
+  intervals.sort((a, b) => a[0] - b[0]);
   // Loop through intervals
   for (i = 0; i < intervals.length - 1; i++) {
     [__, firstEnd] = intervals[i];
@@ -41,10 +41,14 @@ var merge = function(intervals) {
       } else {
         newEnd = secondEnd;
       }
-      intervals[i] = [__, secondEnd];
+      intervals[i] = [__, newEnd];
     // Splice out the next entry
       intervals.splice((i + 1), 1);
     }
   }
+  console.log(intervals)
   return intervals;
 };
+
+// merge([[1,4],[0,4]]);
+merge([[1,4],[2,3]]);
