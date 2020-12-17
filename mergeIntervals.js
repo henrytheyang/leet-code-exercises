@@ -31,7 +31,8 @@ var merge = function(intervals) {
   let firstEnd, secondStart, secondEnd, newEnd;
   intervals.sort((a, b) => a[0] - b[0]);
   // Loop through intervals
-  for (i = 0; i < intervals.length - 1; i++) {
+  let i = 0;
+  while (i < intervals.length - 1) {
     [__, firstEnd] = intervals[i];
     [secondStart, secondEnd] = intervals[i + 1];
     // If the next entry's firstNumber <= current entry's secondNumber merge the two intervals by taking the larger of the two secondNumber
@@ -44,9 +45,11 @@ var merge = function(intervals) {
       intervals[i] = [__, newEnd];
     // Splice out the next entry
       intervals.splice((i + 1), 1);
+    } else {
+      // Move onto next pairing if no overlap
+      i++;
     }
   }
-  console.log(intervals)
   return intervals;
 };
 
