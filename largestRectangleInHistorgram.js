@@ -51,47 +51,46 @@ var largestRectangleArea = function(heights) {
   ];
   const scanRightAtHeight = (someArray, someHeight, someStartIndex) => {
     let domain = [];
-    if (someHeight > someArray[x]) {
-      return domain;
-    }
     for (let x = someStartIndex; x < someArray.length; x++) {
       if (someHeight <= someArray[x]) {
-        if (!domain[0]) {
+        if (domain[0] === undefined) {
           domain = [x, x];
         } else {
           domain[1] = x;
         }
       } else {
+        console.log(`domain = ${JSON.stringify(domain)}`)
         return domain;
       }
     }
+    console.log(`domain = ${JSON.stringify(domain)}`)
     return domain;
   }
 
   if (heights.length === 0) {
     return 0;
   }
-  for (let x = 0; x < heights.length; x++) {
-    let currentWidth = [];
-    let y = 1;
-    while (y <= heights[x]) {
-      // If data at height is stored
-      if (storedDomains[y]) {
-        // Check to see if stored data at current height contains data at x
-        for (let i = 0; i < storedDomains[y].length; i++) {
-          if (storedDomains[y][i][0] <= x && storedDomains[y][i][1] >= x) {
-            currentWidth = [storedDomains[y][i][0], storedDomains[y][i][1]]
-          } else {
-            // If the stored data at current height doesn't contain x, it's in a new domain; store it
+  // for (let x = 0; x < heights.length; x++) {
+  //   let currentWidth = [];
+  //   let y = 1;
+  //   while (y <= heights[x]) {
+  //     // If data at height is stored
+  //     if (storedDomains[y]) {
+  //       // Check to see if stored data at current height contains data at x
+  //       for (let i = 0; i < storedDomains[y].length; i++) {
+  //         if (storedDomains[y][i][0] <= x && storedDomains[y][i][1] >= x) {
+  //           currentWidth = [storedDomains[y][i][0], storedDomains[y][i][1]]
+  //         } else {
+  //           // If the stored data at current height doesn't contain x, it's in a new domain; store it
 
-          }
-        }
-      }
-      // If data point is not stored
-      y++;
-    }
-  }
-  return storedDomains
+  //         }
+  //       }
+  //     }
+  //     // If data point is not stored
+  //     y++;
+  //   }
+  // }
+  scanRightAtHeight(heights, 3, 5);
   return largestArea;
 };
 
