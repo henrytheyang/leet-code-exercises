@@ -54,9 +54,9 @@ var largestRectangleArea = function(heights) {
     for (let x = someStartIndex; x < heights.length; x++) {
       if (someHeight <= heights[x]) {
         if (domain[0] === undefined) {
-          domain = [x, x];
+          domain = [x, x + 1];
         } else {
-          domain[1] = x;
+          domain[1] = x + 1;
         }
       } else {
         console.log(`domain = ${JSON.stringify(domain)}`)
@@ -70,13 +70,13 @@ var largestRectangleArea = function(heights) {
   if (heights.length === 0) {
     return 0;
   }
+  
   for (let x = 0; x < heights.length; x++) {
     let currentWidth = [];
     let previousWidth = [];
     let currentArea = 0;
     let y = 1;
     while (y <= heights[x]) {
-      let leftEdge, rightEdge;
       // If data at height is stored
       if (storedDomains[y]) {
         // Check to see if stored data at current height contains data at x
@@ -97,9 +97,7 @@ var largestRectangleArea = function(heights) {
       }
       // Calculate rectangle area at current x, for each height
       // If previousWidth empty
-      if (previousWidth[0] === undefined) {
-        currentWidth = (currentWidth[1] - currentWidth[0]) * y;
-      } else {
+      if (previousWidth[0] !== undefined) {
         // If currentWidth[0] is left of previousWidth[0], replace
         currentWidth[0] = (currentWidth[0] < previousWidth[0]) ? previousWidth[0] : currentWidth[0];
         // If currentWidth[1] is right of previousWidth[1], replace
@@ -111,7 +109,6 @@ var largestRectangleArea = function(heights) {
     }
     
   }
-
   return largestArea;
 };
 
