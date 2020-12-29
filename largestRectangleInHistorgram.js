@@ -49,10 +49,10 @@ var largestRectangleArea = function(heights) {
   let storedDomains = [
     [],
   ];
-  const scanRightAtHeight = (someArray, someHeight, someStartIndex) => {
+  const scanRightAtHeight = (someHeight, someStartIndex) => {
     let domain = [];
-    for (let x = someStartIndex; x < someArray.length; x++) {
-      if (someHeight <= someArray[x]) {
+    for (let x = someStartIndex; x < heights.length; x++) {
+      if (someHeight <= heights[x]) {
         if (domain[0] === undefined) {
           domain = [x, x];
         } else {
@@ -70,27 +70,48 @@ var largestRectangleArea = function(heights) {
   if (heights.length === 0) {
     return 0;
   }
-  // for (let x = 0; x < heights.length; x++) {
-  //   let currentWidth = [];
-  //   let y = 1;
-  //   while (y <= heights[x]) {
-  //     // If data at height is stored
-  //     if (storedDomains[y]) {
-  //       // Check to see if stored data at current height contains data at x
-  //       for (let i = 0; i < storedDomains[y].length; i++) {
-  //         if (storedDomains[y][i][0] <= x && storedDomains[y][i][1] >= x) {
-  //           currentWidth = [storedDomains[y][i][0], storedDomains[y][i][1]]
-  //         } else {
-  //           // If the stored data at current height doesn't contain x, it's in a new domain; store it
+  for (let x = 0; x < heights.length; x++) {
+    let currentWidth = [];
+    let previousWidth = [];
+    let currentArea = 0;
+    let y = 1;
+    while (y <= heights[x]) {
+      let leftEdge, rightEdge;
+      // If data at height is stored
+      if (storedDomains[y]) {
+        // Check to see if stored data at current height contains data at x
+        for (let i = 0; i < storedDomains[y].length; i++) {
+          // If data at height exists and x is in a stored domain
+          if (storedDomains[y][i][0] <= x && storedDomains[y][i][1] >= x) {
+            currentWidth = [storedDomains[y][i][0], storedDomains[y][i][1]]
+          } else {
+            // If data at height doesn't contain x, it's in a new domain; store it
+            currentWidth = scanRightAtHeight(y, x);
+            storedDomains[y].push(currentWidth);
+          }
+        }
+      } else {
+        // If no domains stored at height
+        currentWidth = scanRightAtHeight(y, x);
+        storedDomains[y] = [currentWidth];
+      }
+      // Calculate rectangle area at current x, for each height
+      // If previousWidth empty
+      if (previousWidth[0] === undefined) {
+        currentWidth = (currentWidth[1] - currentWidth[0]) * y;
+      } else {
+        // If currentWidth[0] is left of previousWidth[0], replace
+        currentWidth[0] = (currentWidth[0] < previousWidth[0]) ? previousWidth[0] : currentWidth[0];
+        // If currentWidth[1] is right of previousWidth[1], replace
+        currentWidth[1] = (currentWidth[1] > previousWidth[1]) ? previousWidth[1] : currentWidth[1];        
+      }
+      currentArea = (currentWidth[1] - currentWidth[0]) * y;
+      largestArea = (largestArea > currentArea) ? largestArea : currentArea;
+      y++;
+    }
+    
+  }
 
-  //         }
-  //       }
-  //     }
-  //     // If data point is not stored
-  //     y++;
-  //   }
-  // }
-  scanRightAtHeight(heights, 3, 5);
   return largestArea;
 };
 
