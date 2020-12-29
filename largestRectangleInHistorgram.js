@@ -59,7 +59,7 @@ var largestRectangleArea = function(heights) {
           domain[1] = x + 1;
         }
       } else {
-        console.log(`domain = ${JSON.stringify(domain)}`)
+        // console.log(`domain = ${JSON.stringify(domain)}`)
         return domain;
       }
     }
