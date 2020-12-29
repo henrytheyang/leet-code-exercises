@@ -70,7 +70,7 @@ var largestRectangleArea = function(heights) {
   if (heights.length === 0) {
     return 0;
   }
-  
+
   for (let x = 0; x < heights.length; x++) {
     let currentWidth = [];
     let previousWidth = [];
@@ -105,6 +105,7 @@ var largestRectangleArea = function(heights) {
       }
       currentArea = (currentWidth[1] - currentWidth[0]) * y;
       largestArea = (largestArea > currentArea) ? largestArea : currentArea;
+      previousWidth = currentWidth;
       y++;
     }
     
