@@ -24,20 +24,44 @@ Output: 10
  */
 
 var largestRectangleArea = function(heights) {
-  let largestarea = 0;
-  let pStack = [];
+  let largestArea = 0;
+  let tempHeight, tempPos, tempArea
   let hStack = [];
-  
+  let pStack = [];
+  if (heights.length === 0) {
+    return largestArea
+  }
   // Each index point has a largest possible rectangle
   // Iterate through heights
+  for (i = 0; i < heights.length; i++) {
     // Build stacks tracking heights and the index at which they start
-      // Add the height and position to the stacks if the new height is higher than the item at the top of the height stack
-    // When you reach a height that is lower than the top of the height stack you've reached the right-side boundary of a rectangle
-      // Pop the height off and calculate the area. 
+    // Add the height and position to the stacks if the new height is higher than the item at the top of the height stack
+    if (hStack.length === 0 || heights[i] > hStack[hStack.length - 1]) {
+      hStack.push(heights[i]);
+      pStack.push(i);
+    } else if (heights[i] < hStack[hStack.length - 1]) {
+      // When you reach a height that is lower than the top of the height stack you've reached the right-side boundary of a rectangle
+      while (hStack.length > 0 && heights[i] < hStack[hStack.length - 1]) {
+        // Pop the height off and calculate the area.
+        tempHeight = hStack.pop();
+        tempPos = pStack.pop();
+        tempArea = tempHeight * (i - tempPos);
         // If larger than stored area, store new largest area
-      // If the next height is greater than current height- pop previous position off, pop that height off as well and calculate area
+        largestArea = Math.max(tempArea, largestArea);
+        // If the next height is greater than current height- pop previous position off, pop that height off as well and calculate area
+      }
       // If you reach a height that is less than the current height, store the current height
+      hStack.push(heights[i]);
+      pStack.push(tempPos);
+    }
+  }
     // When you reach the end of the heights array- start calculating heights of all remaining points in stacks
+  while (hStack.length > 0) {
+    tempHeight = hStack.pop();
+    tempPos = pStack.pop();
+    tempArea = tempHeight * (i - tempPos);
+    largestArea = Math.max(tempArea, largestArea);
+  }
   return largestArea;
 };
 
