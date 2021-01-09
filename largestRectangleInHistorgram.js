@@ -25,7 +25,7 @@ Output: 10
 
 var largestRectangleArea = function(heights) {
   let largestArea = 0;
-  let tempHeight, tempPos, tempArea
+  let tempHeight, tempPos, tempArea;
   let hStack = [];
   let pStack = [];
   if (heights.length === 0) {
@@ -55,7 +55,7 @@ var largestRectangleArea = function(heights) {
       pStack.push(tempPos);
     }
   }
-    // When you reach the end of the heights array- start calculating heights of all remaining points in stacks
+  // When you reach the end of the heights array- start calculating heights of all remaining points in stacks
   while (hStack.length > 0) {
     tempHeight = hStack.pop();
     tempPos = pStack.pop();
