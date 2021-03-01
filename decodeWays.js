@@ -51,6 +51,15 @@ s contains only digits and may contain leading zero(s).
  * @param {string} s
  * @return {number}
  */
+
 var numDecodings = function(s) {
+  let letterBank = {};
+  let answer = 0;
+  if (s[0] === '0') {
+    return answer;
+  }
+
+
+  return answer;
 };
     
