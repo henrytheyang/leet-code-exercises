@@ -55,10 +55,26 @@ s contains only digits and may contain leading zero(s).
 var numDecodings = function(s) {
   let letterBank = {};
   let answer = 0;
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
   if (s[0] === '0') {
     return answer;
   }
+  // Loop through string
+  for (i = 0; i < s.length; i++) {
+    if (s[i] === '0') {
+      continue;
+    }
 
+
+    if (answer === 26) {
+      return answer;
+    }
+  }
+  // If current single letter is 0, skip
+  // If current single letter is not in letterBank, add it to the letterBank and increment answer;
+  // If current double letter is not in letterBank, add it to the letterBank and increment answer;
+
+  // If answer === 26 return answer
 
   return answer;
 };
