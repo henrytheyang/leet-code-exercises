@@ -53,28 +53,48 @@ s contains only digits and may contain leading zero(s).
  */
 
 var numDecodings = function(s) {
-  let letterBank = {};
   let answer = 0;
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
+  // Check first letter
   if (s[0] === '0') {
     return answer;
   }
-  // Loop through string
-  for (i = 0; i < s.length; i++) {
-    if (s[i] === '0') {
-      continue;
-    }
-
-
-    if (answer === 26) {
+  // Check illegal last 2 letters
+  if (s[s.length - 1] === '0') {
+    if (s[s.length - 2] !== '1' && s[s.length - 2] !== '2') {
       return answer;
     }
   }
-  // If current single letter is 0, skip
-  // If current single letter is not in letterBank, add it to the letterBank and increment answer;
-  // If current double letter is not in letterBank, add it to the letterBank and increment answer;
 
-  // If answer === 26 return answer
+  const recursiveFork = (index) => {
+    // Exit condition
+    if (index === s.length - 2 && s[index + 1] === '0') {
+      answer ++;
+      return;
+    }
+    if (index === s.length - 1) {
+      answer ++;
+      return;
+    }
+
+    // Check one digit letter
+    if (parseInt(s.slice(index, index + 1)) >= 1 && parseInt(s.slice(index, index + 1)) <= 26) {
+      recursiveFork(index + 1);
+    }
+    // Check two digit letter
+    if (parseInt(s.slice(index, index + 2)) >= 1 && parseInt(s.slice(index, index + 2)) <= 26) {
+      recursiveFork(index + 2);
+    }
+    return;
+  }
+
+  // Iterate through parameter string
+  recursiveFork(0);
+
+  // Use recursion, slice
+  // If current index === 0, continue
+  // Check 1 digit & 2 digit letters; for valid entries (digit is between 1 & 26), recurse
+  // At the end of each loop, increment answer counter
 
   return answer;
 };
