@@ -5,7 +5,8 @@ A message containing letters from A-Z can be encoded into numbers using the foll
 'B' -> "2"
 ...
 'Z' -> "26"
-To decode an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above (there may be multiple ways). For example, "11106" can be mapped into:
+To decode an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above (there may be multiple ways).
+For example, "11106" can be mapped into:
 
 "AAJF" with the grouping (1 1 10 6)
 "KJF" with the grouping (11 10 6)
@@ -54,47 +55,66 @@ s contains only digits and may contain leading zero(s).
 
 var numDecodings = function(s) {
   let answer = 0;
+  let letterBank = {
+    '1': true,
+    '2': true,
+    '3': true,
+    '4': true,
+    '5': true,
+    '6': true,
+    '7': true,
+    '8': true,
+    '9': true,
+    '10': true,
+    '11': true,
+    '12': true,
+    '13': true,
+    '14': true,
+    '15': true,
+    '17': true,
+    '18': true,
+    '19': true,
+    '20': true,
+    '21': true,
+    '22': true,
+    '23': true,
+    '24': true,
+    '25': true,
+    '26': true,
+  }
 
   // Check first letter
   if (s[0] === '0') {
     return answer;
   }
-  // Check illegal last 2 letters
-  if (s[s.length - 1] === '0') {
-    if (s[s.length - 2] !== '1' && s[s.length - 2] !== '2') {
-      return answer;
-    }
-  }
 
-  const recursiveFork = (index) => {
+  const recursiveFork = (someString) => {
+    // Illegal combos that result in no answer:
+    // 0 following any digit besides 1, 2
+
+    // Illegal edge cases:
+    // 0x, x > 26, x = 0
+
     // Exit condition
-    if (index === s.length - 2 && s[index + 1] === '0') {
+    if (someString.length === 2 && letterBank[someString]) {
       answer ++;
-      return;
     }
-    if (index === s.length - 1) {
+    if (someString.length === 1 && letterBank[someString]) {
       answer ++;
-      return;
     }
 
     // Check one digit letter
-    if (parseInt(s.slice(index, index + 1)) >= 1 && parseInt(s.slice(index, index + 1)) <= 26) {
-      recursiveFork(index + 1);
+    if (letterBank[someString.slice(0, 1)]) {
+      recursiveFork(someString.slice(1));
     }
     // Check two digit letter
-    if (parseInt(s.slice(index, index + 2)) >= 1 && parseInt(s.slice(index, index + 2)) <= 26) {
-      recursiveFork(index + 2);
+    if(letterBank[someString.slice(0, 2)]) {
+      recursiveFork(someString.slice(2))
     }
-    return;
   }
 
-  // Iterate through parameter string
-  recursiveFork(0);
-
-  // Use recursion, slice
-  // If current index === 0, continue
-  // Check 1 digit & 2 digit letters; for valid entries (digit is between 1 & 26), recurse
-  // At the end of each loop, increment answer counter
+  // Initiate internal recrusive w/ s
+  recursiveFork(s);
 
   return answer;
 };
