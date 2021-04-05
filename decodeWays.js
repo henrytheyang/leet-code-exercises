@@ -55,69 +55,12 @@ s contains only digits and may contain leading zero(s).
 
 var numDecodings = function(s) {
   let answer = 0;
-  let letterBank = {
-    '1': true,
-    '2': true,
-    '3': true,
-    '4': true,
-    '5': true,
-    '6': true,
-    '7': true,
-    '8': true,
-    '9': true,
-    '10': true,
-    '11': true,
-    '12': true,
-    '13': true,
-    '14': true,
-    '15': true,
-    '17': true,
-    '18': true,
-    '19': true,
-    '20': true,
-    '21': true,
-    '22': true,
-    '23': true,
-    '24': true,
-    '25': true,
-    '26': true,
-  }
-
-  if (s.length ===0) {
-    return answer;
-  }
-
-  const recursiveFork = (someString) => {
-    // Illegal combos that result in no answer:
-    // 0 following any digit besides 1, 2
-
-    // Illegal edge cases:
-    // 0x, x > 26, x = 0
-
-    // Exit condition
-    if (someString.length === 2 && letterBank[someString]) {
-      answer ++;
-    }
-    if (someString.length === 1 && letterBank[someString]) {
-      answer ++;
-      return;
-    }
-
-    // Check one digit letter
-    if (letterBank[someString.slice(0, 1)]) {
-      recursiveFork(someString.slice(1));
-    }
-    // Check two digit letter
-    if(someString.slice(0, 2).length === 2 && letterBank[someString.slice(0, 2)]) {
-      recursiveFork(someString.slice(2))
-    }
-  }
-
-  // Initiate internal recrusive w/ s
-  recursiveFork(s);
+  // Case 1- Pair ending in 0 that's not 10 or 20- No solution, stop and return 0
+  // Case 2- 0, inside a 10 or 20- use only double [i - 2] subproblem
+  // Case 3- Pair that's > 26; use only single [i-1] subproblem
+  // Case 4- Single and pair both valid; add previous 2 subproblems together
 
   return answer;
 };
 
 
-numDecodings("111111111111111111111111111111111111111111111");
