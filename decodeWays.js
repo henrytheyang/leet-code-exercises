@@ -83,6 +83,10 @@ var numDecodings = function(s) {
     '26': true,
   }
 
+  if (s.length ===0) {
+    return answer;
+  }
+
   const recursiveFork = (someString) => {
     // Illegal combos that result in no answer:
     // 0 following any digit besides 1, 2
