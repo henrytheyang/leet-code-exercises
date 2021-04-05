@@ -83,11 +83,6 @@ var numDecodings = function(s) {
     '26': true,
   }
 
-  // Check first letter
-  if (s[0] === '0') {
-    return answer;
-  }
-
   const recursiveFork = (someString) => {
     // Illegal combos that result in no answer:
     // 0 following any digit besides 1, 2
@@ -101,6 +96,7 @@ var numDecodings = function(s) {
     }
     if (someString.length === 1 && letterBank[someString]) {
       answer ++;
+      return;
     }
 
     // Check one digit letter
@@ -108,7 +104,7 @@ var numDecodings = function(s) {
       recursiveFork(someString.slice(1));
     }
     // Check two digit letter
-    if(letterBank[someString.slice(0, 2)]) {
+    if(someString.slice(0, 2).length === 2 && letterBank[someString.slice(0, 2)]) {
       recursiveFork(someString.slice(2))
     }
   }
@@ -118,4 +114,6 @@ var numDecodings = function(s) {
 
   return answer;
 };
-    
+
+
+numDecodings("111111111111111111111111111111111111111111111");
