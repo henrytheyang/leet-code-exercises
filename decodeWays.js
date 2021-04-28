@@ -53,12 +53,43 @@ s contains only digits and may contain leading zero(s).
  * @return {number}
  */
 
+/*
+  [1,1,1,0,6,]
+
+[1,1,2,3,2,2]
+*/
+
 var numDecodings = function(s) {
   let answer = 0;
   // Case 1- Pair ending in 0 that's not 10 or 20- No solution, stop and return 0
   // Case 2- 0, inside a 10 or 20- use only double [i - 2] subproblem
   // Case 3- Pair that's > 26; use only single [i-1] subproblem
   // Case 4- Single and pair both valid; add previous 2 subproblems together
+  let solutionTracker = [1];
+
+  if (s.length === 0) {
+    return answer;
+  }
+  if (s[0] === 0) {
+    return answer;
+  } else {
+    solutionTracker[1] = 1;
+  }
+  
+  for (i = 2; i < s.length + 2; i++) {
+    if (s[i - 1] === 0 && s[i - 2] !== 1 && s[i-2] !== 2) {
+      return answer;
+    } else if (s[i - 1] === 0) {
+      if (s[i - 2] === 1 || s[i - 2] === 2) {
+        solutionTracker[i] = solutionTracker[i - 2];
+      }
+    } else if (s[i - 1] >= 2 && s[i] >= 6) {
+      solutionTracker[i] = solutionTracker[i - 1];
+    } else {
+      solutionTracker[i] = solutionTracker[i - 1] + solutionTracker[i - 2];
+    }
+  }
+
 
   return answer;
 };
