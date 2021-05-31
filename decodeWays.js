@@ -59,6 +59,7 @@ s contains only digits and may contain leading zero(s).
 [1,1,2,3,2,2]
 */
 
+
 var numDecodings = function(s) {
   let answer = 0;
   // Case 1- Pair ending in 0 that's not 10 or 20- No solution, stop and return 0
@@ -76,8 +77,9 @@ var numDecodings = function(s) {
     solutionTracker[1] = 1;
   }
   
+  // Starting at s[1]
   for (i = 2; i < s.length + 2; i++) {
-    if (s[i - 1] === 0 && s[i - 2] !== 1 && s[i-2] !== 2) {
+    if (s[i - 1] === 0 && s[i - 2] !== 1 && s[i - 2] !== 2) {
       return answer;
     } else if (s[i - 1] === 0) {
       if (s[i - 2] === 1 || s[i - 2] === 2) {
@@ -89,9 +91,10 @@ var numDecodings = function(s) {
       solutionTracker[i] = solutionTracker[i - 1] + solutionTracker[i - 2];
     }
   }
-
-
+  answer = solutionTracker[s.length]
+  // console.log(answer);
   return answer;
 };
 
 
+numDecodings("226");
