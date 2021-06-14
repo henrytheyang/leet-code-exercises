@@ -79,15 +79,17 @@ var numDecodings = function(s) {
   
   // Starting at s[1]
   for (i = 2; i < s.length + 1; i++) {
-    if (s[i - 1] === 0 && s[i - 2] !== 1 && s[i - 2] !== 2) {
-      return answer;
-    } else if (s[i - 1] === '0') {
+    if (s[i - 1] === '0') {
       if (s[i - 2] == 1 || s[i - 2] == 2) {
         solutionTracker[i] = solutionTracker[i - 2];
+      } else {
+        return answer;
       }
-    } else if (s[i - 1] == 2 && s[i] > 6) {
+    } else if (s[i - 2] == 2 && s[i - 1] > 6) {
       solutionTracker[i] = solutionTracker[i - 1];
     } else if (s[i - 2] >= 3) {
+      solutionTracker[i] = solutionTracker[i - 1];
+    } else if (s[i - 2] == 0) {
       solutionTracker[i] = solutionTracker[i - 1];
     } else {
       solutionTracker[i] = solutionTracker[i - 1] + solutionTracker[i - 2];
@@ -99,11 +101,4 @@ var numDecodings = function(s) {
 };
 
 
-numDecodings("10"); // Giving 2, should be 1
-
-/*
-226
-B, B, F
-V, F
-B, Z
-*/
+numDecodings("2101"); // Giving 3, should be 1
