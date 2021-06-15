@@ -41,6 +41,37 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
  * @return {number}
  */
 
+// Integer array, even numbers of negatives cancel out
+
 var maxProduct = function(nums) {
-    
+  let answer = nums[0];
+  let product = 1;
+  let min = 1;
+  let max = 1;
+  let temp = 1;
+  for (i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      min = min * nums[i];
+      max = max * max[i];
+      if (min > max) {
+        temp = min;
+        min = max;
+        max = temp;
+      }
+      if (answer < min) {
+        answer = min;
+      } else if (answer < max) {
+        answer = max;
+      }
+    } else {
+      if (answer < 0) {
+        answer = 0;
+      }
+      min = 1;
+      max = 1;
+    }
+  }
+  return answer;
 };
+
+maxProduct([3, -1, 4]); // Output 3, Expected 4;
