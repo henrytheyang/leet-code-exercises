@@ -47,8 +47,11 @@ var productExceptSelf = function(nums) {
     right[j] = right[j + 1] * nums[j + 1];
   }
   // Make an answer array where each index is equal to left[i] * right[i]
-  for (k = 0; k < nums.length - 1; k++) {
+  for (k = 0; k <= nums.length - 1; k++) {
     answer[k] = left[k] * right[k];
   }
+  console.log(`answer = ${answer}`);
   return answer;
 };
+
+productExceptSelf([1,2,3,4]);
