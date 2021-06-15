@@ -45,25 +45,22 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 
 var maxProduct = function(nums) {
   let answer = nums[0];
-  let product = 1;
   let min = 1;
   let max = 1;
-  let temp = 1;
+  let lastMin = min;
   for (i = 0; i < nums.length; i++) {
     if (nums[i] !== 0) {
-      min = min * nums[i];
-      max = max * nums[i];
-      if (min > max) {
-        temp = min;
-        min = max;
-        max = temp;
-      }
+      lastMin = min;
+      // Get new min, check if min * nums[i] is new answer;
+      min = Math.min(nums[i], min * nums[i], max * nums[i]);
+
+      // Get new max, check if max * nums[i] is new answer or new min;
+      max = Math.max(nums[i], max * nums[i], lastMin * nums[i]);
+
       if (answer < max) {
         answer = max;
       }
-      if (answer < nums[i]) {
-        answer = nums[i];
-      }
+
     } else {
       if (answer < 0) {
         answer = 0;
