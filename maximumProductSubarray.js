@@ -52,16 +52,17 @@ var maxProduct = function(nums) {
   for (i = 0; i < nums.length; i++) {
     if (nums[i] !== 0) {
       min = min * nums[i];
-      max = max * max[i];
+      max = max * nums[i];
       if (min > max) {
         temp = min;
         min = max;
         max = temp;
       }
-      if (answer < min) {
-        answer = min;
-      } else if (answer < max) {
+      if (answer < max) {
         answer = max;
+      }
+      if (answer < nums[i]) {
+        answer = nums[i];
       }
     } else {
       if (answer < 0) {
@@ -71,7 +72,8 @@ var maxProduct = function(nums) {
       max = 1;
     }
   }
+  console.log(`answer = ${answer}`);
   return answer;
 };
 
-maxProduct([3, -1, 4]); // Output 3, Expected 4;
+maxProduct([2,-5,-2,-4,3]); // Output 20, Expected 24;
