@@ -89,14 +89,17 @@ var getSkyline = function(buildings) {
       }
     } else { // Encountering end height
       heightMap[currentHeight] = heightMap[currentHeight] - 1;
-      if (heightMap[maxHeight] === 0) { // Find new maxHeight in heightMap
-        delete heightMap[maxHeight];
+      if (heightMap[currentHeight] === 0) {
+        delete heightMap[currentHeight];
+      }
+      if (heightMap[maxHeight] === undefined) { // Find new maxHeight in heightMap
         maxHeight = 0;
         for (key in heightMap) {
           if (key > maxHeight) {
             maxHeight = key;
           }
         }
+        currentHeight = maxHeight;
       }
     }
     if (maxHeight !== lastHeight) {
