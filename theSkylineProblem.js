@@ -76,11 +76,11 @@ var getSkyline = function(buildings) {
   for (j = 0; j < buildingEdges.length; j++) {
     lastHeight = maxHeight;
     currentHeight = buildingEdges[j][1];
-    if (currentHeight > maxHeight) { // Update maxHeight
-      maxHeight = currentHeight;
-    }
     if (currentHeight < 0) {  // Encountering start height
       currentHeight = Math.abs(currentHeight);
+      if (currentHeight > maxHeight) { // Update maxHeight
+        maxHeight = currentHeight;
+      }
       if (!heightMap[currentHeight]) {
         heightMap = {
           [currentHeight]: 1,
@@ -91,15 +91,16 @@ var getSkyline = function(buildings) {
       }
     } else { // Encountering end height
       heightMap[currentHeight] = heightMap[currentHeight] - 1;
-      // Find new maxHeight in heightMap
-      for (key in heightMap) {
-        if (key > maxHeight) {
-          maxHeight = key;
+      if (heightMap[currentHeight] === 0) { // Find new maxHeight in heightMap
+        for (key in heightMap) {
+          if (key > maxHeight) {
+            maxHeight = key;
+          }
         }
       }
     }
     if (maxHeight !== lastHeight) {
-      answer.push[buildingEdges[j][0], buildingEdges[j][1]];
+      answer.push([buildingEdges[j][0], currentHeight]);
     }
   } 
   console.log(`answer = ${answer}`)
@@ -107,3 +108,4 @@ var getSkyline = function(buildings) {
 };
 
 getSkyline([[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]);
+// [[2,10],[3,15],[7,12],[12,0],[15,10],[20,8],[24,0]]
