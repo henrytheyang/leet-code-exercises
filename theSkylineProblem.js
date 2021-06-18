@@ -46,20 +46,19 @@ buildings is sorted by lefti in non-decreasing order.
  * @param {number[][]} buildings
  * @return {number[][]}
  */
+// Find highest point of every point along the range; x is where it starts, y is the height
+// Input is an array of arrays with left, right boundaries, and the height
+// Answer is an array made up of arrays with the starting point of new (x) and the height(y)
+
+// Transform input array into an [heights] array of start & end points, sorted by x-coord, of (x, y) shape
+
+// We are concerned with changes in max height.
+// Max height starts at 0
+// Iterate through heights array
+// Check max height after every heights input
+// Add height to map when hitting a start point, pop a height when hitting an end point
+// If max height changes, add [x, max height] to answer array
 var getSkyline = function(buildings) {
-  // Find highest point of every point along the range; x is where it starts, y is the height
-  // Input is an array of arrays with left, right boundaries, and the height
-  // Answer is an array made up of arrays with the starting point of new (x) and the height(y)
-
-  // Transform input array into an [heights] array of start & end points, sorted by x-coord, of (x, y) shape
-
-  // We are concerned with changes in max height.
-  // Max height starts at 0
-  // Iterate through heights array
-  // Check max height after every heights input
-  // Add height to map when hitting a start point, pop a height when hitting an end point
-  // If max height changes, add [x, max height] to answer array
-
   let answer = [];
   let buildingEdges = [];
   let maxHeight = 0;
@@ -72,17 +71,14 @@ var getSkyline = function(buildings) {
     buildingEdges.push([buildings[i][1], buildings[i][2]])
   }
   buildingEdges.sort((a, b) => {
-    if (a[0] - b[0]) {
-      return -1;
-    }
     if (a[0] === b[0]) {
       // Edge cases on sorting start/end points
       // Start points overlap- Higher first
       if (a[1] < 0 && b[1] < 0) {
         if (a[1] > b[1]) {
-          return -1;
-        } else {
           return 1;
+        } else {
+          return -1;
         }
       }
       // End points overlap- Lower first
@@ -101,6 +97,8 @@ var getSkyline = function(buildings) {
           return 1;
         }
       }
+    } else {
+      return a[0] - b[0];
     }
   });
   
@@ -141,7 +139,10 @@ var getSkyline = function(buildings) {
   return answer;
 };
 
-getSkyline([[0,2,3],[2,5,3]]);
-// Output: [[0,3],[2,0],[2,3],[5,0]]
-// Expected: [[0,3],[5,0]]
-
+getSkyline([[1,2,1],[1,2,2],[1,2,3]]);
+/*
+Output
+[[1,1],[1,2],[1,3],[2,0]]
+Expected
+[[1,3],[2,0]]
+*/
