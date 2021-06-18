@@ -82,9 +82,7 @@ var getSkyline = function(buildings) {
         maxHeight = currentHeight;
       }
       if (!heightMap[currentHeight]) {
-        heightMap = {
-          [currentHeight]: 1,
-        }
+        heightMap[currentHeight]= 1;
       } else {
         heightMap[currentHeight] = heightMap[currentHeight] + 1;
         // heightMap[currentHeight]++;
