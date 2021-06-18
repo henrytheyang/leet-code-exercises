@@ -32,5 +32,24 @@ Constraints:
  * @return {number}
  */
  var maxProfit = function(prices) {
-    
+  let profit = 0;
+  let min = prices[0];
+  let max = 0;
+
+  for (i = 1; i < prices.length; i++) {
+    if (i < prices.length - 1) {
+      min = (prices[i] < min) ? prices[i] : min;
+    }
+    max = prices[i] > min && prices[i] > max ? prices[i] : max;
+  }
+  profit = max - min > 0 ? max - min : 0;
+  return profit;
 };
+
+maxProfit([2,4,1]);
+/*
+Output:
+3
+Expected:
+2
+*/
