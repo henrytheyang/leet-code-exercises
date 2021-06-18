@@ -71,7 +71,38 @@ var getSkyline = function(buildings) {
     buildingEdges.push([buildings[i][0], -(buildings[i][2])]);
     buildingEdges.push([buildings[i][1], buildings[i][2]])
   }
-  buildingEdges.sort((a, b) => a[0] - b[0]);
+  buildingEdges.sort((a, b) => {
+    if (a[0] - b[0]) {
+      return -1;
+    }
+    if (a[0] === b[0]) {
+      // Edge cases on sorting start/end points
+      // Start points overlap- Higher first
+      if (a[1] < 0 && b[1] < 0) {
+        if (a[1] > b[1]) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+      // End points overlap- Lower first
+      else if (a[1] > 0 && b[1] > 0) {
+        if (a[1] < b[1]) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+      // Start and end point overlap- Start first
+      else if (a[1] * b[1] < 0) {
+        if (a[1] < 0) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+    }
+  });
   
   for (j = 0; j < buildingEdges.length; j++) {
     lastHeight = maxHeight;
@@ -110,5 +141,7 @@ var getSkyline = function(buildings) {
   return answer;
 };
 
-getSkyline([[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]);
-// [[2,10],[3,15],[7,12],[12,0],[15,10],[20,8],[24,0]]
+getSkyline([[0,2,3],[2,5,3]]);
+// Output: [[0,3],[2,0],[2,3],[5,0]]
+// Expected: [[0,3],[5,0]]
+
