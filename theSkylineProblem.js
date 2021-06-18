@@ -60,9 +60,49 @@ var getSkyline = function(buildings) {
   // Add height to map when hitting a start point, pop a height when hitting an end point
   // If max height changes, add [x, max height] to answer array
 
-
   let answer = [];
+  let buildingEdges = [];
+  let maxHeight = 0;
+  let lastHeight = 0;
+  let currentHeight = 0;
+  let heightMap = {};
 
+  for (i = 0; i < buildings.length; i++) {
+    buildingEdges.push([buildings[i][0], -(buildings[i][2])]);
+    buildingEdges.push([buildings[i][1], buildings[i][2]])
+  }
+  buildingEdges.sort((a, b) => a[0] - b[0]);
   
+  for (j = 0; j < buildingEdges.length; j++) {
+    lastHeight = maxHeight;
+    currentHeight = buildingEdges[i][1];
+    if (currentHeight > maxHeight) { // Update maxHeight
+      maxHeight = currentHeight;
+    }
+    if (currentHeight < 0) {  // Encountering start height
+      currentHeight = Math.abs(currentHeight);
+      if (!heightMap[currentHeight]) {
+        heightMap = {
+          [currentHeight]: 1,
+        }
+      } else {
+        heightMap[currentHeight] = heightMap[currentHeight] + 1;
+        // heightMap[currentHeight]++;
+      }
+    } else { // Encountering end height
+      heightMap[currentHeight] = heightMap[currentHeight] - 1;
+      // Find new maxHeight in heightMap
+      for (key in heightMap) {
+        if (key > maxHeight) {
+          maxHeight = key;
+        }
+      }
+    }
+    if (maxHeight !== lastHeight) {
+      answer.push[buildingEdges[i][0], buildingEdges[i][1]];
+    }
+  } 
   return answer;
 };
+
+getSkyline([[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]);
