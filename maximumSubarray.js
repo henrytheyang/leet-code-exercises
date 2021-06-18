@@ -34,5 +34,12 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
  */
 
 var maxSubArray = function(nums) {
-    
+  // As we iterate through the array we either keep what we already had or we start over at the new index
+  let answer = nums[0];
+  for (i = 1; i < nums.length; i++) {
+    // Is nums[i] greater w/ all previous or without it? Greater with it keep the accumulated, otherwise start over
+    nums[i] = (nums[i] + nums[i-1] > nums[i]) ? nums[i] + nums[i - 1] : nums[i];
+    answer = (answer > nums[i]) ? answer : nums[i];
+  }
+  return answer;
 };
