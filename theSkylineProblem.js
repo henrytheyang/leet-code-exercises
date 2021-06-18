@@ -75,7 +75,7 @@ var getSkyline = function(buildings) {
   
   for (j = 0; j < buildingEdges.length; j++) {
     lastHeight = maxHeight;
-    currentHeight = buildingEdges[i][1];
+    currentHeight = buildingEdges[j][1];
     if (currentHeight > maxHeight) { // Update maxHeight
       maxHeight = currentHeight;
     }
@@ -99,9 +99,10 @@ var getSkyline = function(buildings) {
       }
     }
     if (maxHeight !== lastHeight) {
-      answer.push[buildingEdges[i][0], buildingEdges[i][1]];
+      answer.push[buildingEdges[j][0], buildingEdges[j][1]];
     }
   } 
+  console.log(`answer = ${answer}`)
   return answer;
 };
 
