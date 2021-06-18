@@ -31,25 +31,25 @@ Constraints:
  * @param {number[]} prices
  * @return {number}
  */
- var maxProfit = function(prices) {
-  let profit = 0;
-  let min = prices[0];
-  let max = 0;
 
+var maxProfit = function(prices) {
+  let profit = 0;
+  let buyPrice = prices[0];
   for (i = 1; i < prices.length; i++) {
-    if (i < prices.length - 1) {
-      min = (prices[i] < min) ? prices[i] : min;
+    if (prices[i] < buyPrice) {
+      buyPrice = prices[i];
+    } else {
+      // profit = prices[i] - buyPrice > profit ? prices[i] - buyPrice : profit // 100ms, 96, 100, 88, 92
+      profit = Math.max(profit, prices[i] - buyPrice); // 80ms, 100, 92, 92, 92
     }
-    max = prices[i] > min && prices[i] > max ? prices[i] : max;
   }
-  profit = max - min > 0 ? max - min : 0;
   return profit;
 };
 
-maxProfit([2,4,1]);
+maxProfit([2,1,2,0,1]);
 /*
-Output:
-3
-Expected:
+Output
 2
+Expected
+1
 */
