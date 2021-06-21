@@ -38,5 +38,11 @@ Constraints:
  * @return {number}
  */
  var maxProfit = function(prices) {
-    
+  // Iterate right
+  // If the new index is lower than the starting buy, replace the buy price
+  // When we find an increase, record it as a potential sell
+    // If the price decreases, use that as the sell price, record profit. Use the new index as a new buy
+    // If the price increases use that as the new buy point, keep looking for a new sell
+  // Sum and return the two highest profit transactions
+  
 };
