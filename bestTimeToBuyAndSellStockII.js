@@ -44,14 +44,26 @@ var maxProfit = function(prices) {
   // Once you find an increase, track the starting point and keep iterating until you reach a decrease
   // Add the profit to the profit tracker
   let profit = 0;
-  let buy = undefined;
+  let buy = prices[0];
+  let sell = undefined;
   for (i = 1; i < prices.length; i++) {
-    if (!buy) { // No stock bought yet, looking to buy
-      if (prices[i] > prices[i - 1]) { // Found a price increase
-        buy = prices[i - 1];
-      }
-    } else { // Stock bought, looking to sell
-      
+    if (prices[i] > prices[i - 1]) { // found potential sell point
+      sell = prices[i];
+    } else if (prices[i] < buy && sell === undefined) { // Found lower buy point
+      buy = prices[i];
+    } else if (prices[i] < sell && sell !== undefined) { // Found local dip, sell here
+      profit = profit + sell - buy;
+      buy = prices[i];
+      sell = undefined;
+    }
+    if (prices[i] > buy && i === prices.length - 1) { // Reached end of array w/ steady increases and no dropoff
+      profit = profit + prices[i] - buy;
     }
   }
+  console.log(`profit = ${profit}`)
+  return profit
 };
+
+maxProfit([7,1,5,3,6,4]);
+// [1,2,3,4,5]
+// [7,6,4,3,1]
