@@ -60,7 +60,7 @@ var maxProfit = function(prices) {
       profit = profit + prices[i] - buy;
     }
   }
-  console.log(`profit = ${profit}`)
+  // console.log(`profit = ${profit}`)
   return profit
 };
 
