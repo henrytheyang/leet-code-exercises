@@ -44,21 +44,34 @@ Constraints:
   // Iterate right
   for (i = 1; i < prices.length; i++) {
     // When we find an increase, record it as a potential sell
-    if (prices[i] > buy) {
+    if (prices[i] > buy && sell === undefined) {
       sell = prices[i];
     // If the price decreases without a sell point use that as the new buy point
     } else if (prices[i] < buy && sell === undefined) {
       buy = prices[i];
     // If the price decreases below a sell point, use that as the sell price, record profit. Use the new index as a new buy
     } else if (prices[i] < sell) {
-      profit.push(sell - prices[i]);
-      if (profit.length > 2) {
-        profit.sort((a, b) => a - b);
-        profit.pop();
-      }
+      profit.push(sell - buy);
       buy = prices[i];
+      sell = undefined;
+    }
+    if (i === prices.length - 1 && sell) {
+      profit.push(sell - buy);
+    }
+    if (profit.length > 2) {
+      profit.sort((a, b) => b - a);
+      profit.pop();
     }
   }
+  console.log(profit)
   // Sum and return the two highest profit transactions
   return profit.reduce((accumulator, currentValue) => accumulator + currentValue);
 };
+
+maxProfit([3,3,5,0,0,3,1,4]);
+/*
+Output:
+5
+Expected:
+6
+*/
