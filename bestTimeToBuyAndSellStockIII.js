@@ -38,11 +38,27 @@ Constraints:
  * @return {number}
  */
  var maxProfit = function(prices) {
+  let profit = [0];
+  let buy = prices[i];
+  let sell = undefined;
   // Iterate right
-  // If the new index is lower than the starting buy, replace the buy price
-  // When we find an increase, record it as a potential sell
-    // If the price decreases, use that as the sell price, record profit. Use the new index as a new buy
-    // If the price increases use that as the new buy point, keep looking for a new sell
+  for (i = 1; i < prices.length; i++) {
+    // When we find an increase, record it as a potential sell
+    if (prices[i] > buy) {
+      sell = prices[i];
+    // If the price decreases without a sell point use that as the new buy point
+    } else if (prices[i] < buy && sell === undefined) {
+      buy = prices[i];
+    // If the price decreases below a sell point, use that as the sell price, record profit. Use the new index as a new buy
+    } else if (prices[i] < sell) {
+      profit.push(sell - prices[i]);
+      if (profit.length > 2) {
+        profit.sort((a, b) => a - b);
+        profit.pop();
+      }
+      buy = prices[i];
+    }
+  }
   // Sum and return the two highest profit transactions
-  
+  return profit.reduce((accumulator, currentValue) => accumulator + currentValue);
 };
