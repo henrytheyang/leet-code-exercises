@@ -39,7 +39,7 @@ Constraints:
  */
  var maxProfit = function(prices) {
   let profit = [0];
-  let buy = prices[i];
+  let buy = prices[0];
   let sell = undefined;
   // Iterate right
   for (i = 1; i < prices.length; i++) {
