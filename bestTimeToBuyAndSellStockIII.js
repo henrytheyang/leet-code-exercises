@@ -50,6 +50,8 @@ Constraints:
     } else if (prices[i] < buy && sell === undefined) {
       buy = prices[i];
     // If the price decreases below a sell point, use that as the sell price, record profit. Use the new index as a new buy
+    } else if (prices[i] > sell) {
+      sell = prices[i];
     } else if (prices[i] < sell) {
       profit.push(sell - buy);
       buy = prices[i];
@@ -68,10 +70,10 @@ Constraints:
   return profit.reduce((accumulator, currentValue) => accumulator + currentValue);
 };
 
-maxProfit([3,3,5,0,0,3,1,4]);
+maxProfit([1,2,3,4,5]);
 /*
-Output:
-5
-Expected:
-6
+Output
+1
+Expected
+4
 */
