@@ -38,42 +38,46 @@ Constraints:
  * @return {number}
  */
  var maxProfit = function(prices) {
-  let profit = [0];
+  let left = [0];
+  let right = [];
+  let leftProfit = 0;
+  let rightProfit = 0;
+  let profit = left[0] + right[0];
   let buy = prices[0];
-  let sell = undefined;
-  // Iterate right
+  let sell = prices[prices.length - 1];
+
+  // Dividing line through possible transactions.
+  // Iterate from the left to find greatest possible profit to the left of index, LEFT
   for (i = 1; i < prices.length; i++) {
-    // When we find an increase, record it as a potential sell
-    if (prices[i] > buy && sell === undefined) {
-      sell = prices[i];
-    // If the price decreases without a sell point use that as the new buy point
-    } else if (prices[i] < buy && sell === undefined) {
+    if (prices[i] < buy) {
       buy = prices[i];
-    // If the price decreases below a sell point, use that as the sell price, record profit. Use the new index as a new buy
-    } else if (prices[i] > sell) {
-      sell = prices[i];
-    } else if (prices[i] < sell) {
-      profit.push(sell - buy);
-      buy = prices[i];
-      sell = undefined;
     }
-    if (i === prices.length - 1 && sell) {
-      profit.push(sell - buy);
-    }
-    if (profit.length > 2) {
-      profit.sort((a, b) => b - a);
-      profit.pop();
-    }
+    leftProfit = Math.max(leftProfit, prices[i] - buy);
+    left.push(leftProfit);
   }
-  console.log(profit)
-  // Sum and return the two highest profit transactions
-  return profit.reduce((accumulator, currentValue) => accumulator + currentValue);
+  // Iterate from the right to find the greatest possible profit to the left of the index, 
+  for (j = prices.length - 1; j >= 0; j--) {
+    if (prices[j] > sell) {
+      sell = prices[j];
+    }
+    rightProfit = Math.max(rightProfit, sell - prices[j]);
+    right[j] = rightProfit;
+  }
+  // Iterate down LEFT and RIGHT to find greatest sum profit
+  for (k = 0; k < prices.length; k++) {
+    profit = Math.max(profit, left[k] + right[k]);
+  }
+  return profit;
 };
 
-maxProfit([1,2,3,4,5]);
+maxProfit([1,2,4,2,5,7,2,4,9,0]);
+// [[1, 4], [2, 7], [2, 9]]
 /*
-Output
-1
-Expected
-4
+Output:
+12
+Expected:
+13
 */
+
+// [1,2,4,2,5,7,2,4,9,0,1,10]
+// [[1, 4], [2, 7], [2, 9], [1, 7]]
