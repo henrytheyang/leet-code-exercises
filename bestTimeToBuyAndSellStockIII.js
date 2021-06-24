@@ -53,7 +53,7 @@ Constraints:
       buy = prices[i];
     }
     leftProfit = Math.max(leftProfit, prices[i] - buy);
-    left.push(leftProfit);
+    left[i] = leftProfit;
   }
   // Iterate from the right to find the greatest possible profit to the left of the index, 
   for (j = prices.length - 1; j >= 0; j--) {
