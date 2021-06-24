@@ -33,5 +33,21 @@ Constraints:
  * @return {number}
  */
 var maxProfit = function(k, prices) {
-    
+  let profit = []; // 2D array, with k + 1 arrays for # transactions, with prices.length - 1 cells for profit for each possible sell day
+  let maxProfitPerDay = [];
+  maxProfitPerDay.fill(0, 0, prices.length - 1);
+  profit.push(maxProfitPerDay);
+  for (i = 0; i <= k; i++) {
+    maxProfitPerDay = [];
+    // Iterate through prices for each number of transations
+    // Store profits per transaction number in an array, tracking max profit for each day;
+    // Each day's profit will either be the profit from the day before, or (price of the day - day bought + (max profit of the day bought but with one less transaction))
+    for (j = 0; j < prices.length; j++) {
+      
+    }
+  }
+
+  
+  // Max profit will be the number inside the last cell of the last array (last possible day of sale, of most transactions);
+  return profit[k + 1][prices.length - 1];
 };
