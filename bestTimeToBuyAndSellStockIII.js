@@ -55,7 +55,6 @@ Constraints:
     leftProfit = Math.max(leftProfit, prices[i] - buy);
     left.push(leftProfit);
   }
-  console.log(`left = ${left}`);
   // Iterate from the right to find the greatest possible profit to the left of the index, 
   for (j = prices.length - 1; j >= 0; j--) {
     if (prices[j] > sell) {
@@ -64,12 +63,10 @@ Constraints:
     rightProfit = Math.max(rightProfit, sell - prices[j]);
     right[j] = rightProfit;
   }
-  console.log(`right = ${right}`);
   // Iterate down LEFT and RIGHT to find greatest sum profit
   for (k = 0; k < prices.length; k++) {
     profit = Math.max(profit, left[k] + right[k]);
   }
-  console.log(`profit = ${profit}`)
   return profit;
 };
 
