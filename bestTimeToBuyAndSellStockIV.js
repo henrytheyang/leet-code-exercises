@@ -50,10 +50,13 @@ var maxProfit = function(k, prices) {
 
     for (j = 1; j < prices.length; j++) { // Iterate through possible days of sale
       maxProfitPerDay[j] = maxProfitPerDay[j - 1];
-      for (b = 0; b < j; b++) { // Iterate through day bought
-        // Find max profit for each day buy iterating through all possible buy days 0 <= b < prices.length - 1;
-        maxProfitPerDay[j] = Math.max(maxProfitPerDay[j], prices[j] - prices[b] + profit[i - 1][b]);
-      }
+      // for (b = 0; b < j; b++) { // Iterate through day bought
+      //   // Find max profit for each day buy iterating through all possible buy days 0 <= b < prices.length - 1;
+      //   maxProfitPerDay[j] = Math.max(maxProfitPerDay[j], prices[j] - prices[b] + profit[i - 1][b]);
+      // }
+
+      // Instead of recalculating all possible profits from buy day b, save the maxProfit from previous and calculate new case of buying on day j - 1;
+      
     }
     profit.push(maxProfitPerDay);
   }
