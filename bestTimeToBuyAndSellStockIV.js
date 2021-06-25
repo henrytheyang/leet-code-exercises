@@ -58,7 +58,7 @@ var maxProfit = function(k, prices) {
       if (bestPrevProfitPerTrnxNumber) {
         bestPrevProfitPerTrnxNumber = Math.max(bestPrevProfitPerTrnxNumber, (-1 * prices[d - 1]) + profit[i - 1][d - 1]);
       } else {
-        bestPrevProfitPerTrnxNumber =  (-1 * prices[d - 1]) + profit[i - 1][d];
+        bestPrevProfitPerTrnxNumber =  (-1 * prices[d - 1]) + profit[i - 1][d - 1];
       }
       maxProfitPerDay[d] = Math.max(maxProfitPerDay[d - 1], prices[d] + bestPrevProfitPerTrnxNumber);
 
@@ -71,4 +71,10 @@ var maxProfit = function(k, prices) {
   return profit[k][prices.length - 1];
 };
 
-maxProfit(2,[5, 11, 3, 50, 60, 90]); // 93
+maxProfit(2,[6,1,3,2,4,7]);
+/*
+Output:
+6
+Expected:
+7
+*/
