@@ -48,14 +48,8 @@ var maxProfit = function(k, prices) {
     // Each day's profit will either be the profit from the day before, or (price of the day - day bought + (max profit of the day bought but with one less transaction))
     bestPrevProfitPerTrnxNumber = undefined;
     for (d = 1; d < prices.length; d++) { // Iterate through possible days of sale
-      // maxProfitPerDay[d] = maxProfitPerDay[d - 1];
-      // for (b = 0; b < d; b++) { // Iterate through day bought
-      //   // Find max profit for each day buy iterating through all possible buy days 0 <= b < prices.length - 1;
-      //   maxProfitPerDay[d] = Math.max(maxProfitPerDay[d], prices[d] - prices[b] + profit[i - 1][b]);
-      // }
-
       // Instead of recalculating all possible profits from buy day b, save the maxProfit from previous and calculate new case of buying on day d - 1;
-      if (bestPrevProfitPerTrnxNumber) {
+      if (bestPrevProfitPerTrnxNumber !== undefined) {
         bestPrevProfitPerTrnxNumber = Math.max(bestPrevProfitPerTrnxNumber, (-1 * prices[d - 1]) + profit[i - 1][d - 1]);
       } else {
         bestPrevProfitPerTrnxNumber =  (-1 * prices[d - 1]) + profit[i - 1][d - 1];
@@ -78,3 +72,35 @@ Output:
 Expected:
 7
 */
+
+
+// O(n^2k) time solution
+// var maxProfit = function(k, prices) {
+//   let profit = []; // 2D array, with k + 1 arrays for # transactions, with prices.length - 1 cells for profit for each possible sell day
+//   let maxProfitPerDay = new Array(prices.length).fill(0);
+//   let bestPrevProfitPerTrnxNumber;
+//   if (prices.length === 0) {
+//     return 0;
+//   }
+//   profit.push(maxProfitPerDay);
+//   for (i = 1; i <= k; i++) { // Iterate through trnx number
+//     maxProfitPerDay = [0];
+//     // Iterate through prices for each number of transations
+//     // Store profits per transaction number in an array, tracking max profit for each day;
+//     // Each day's profit will either be the profit from the day before, or (price of the day - day bought + (max profit of the day bought but with one less transaction))
+//     bestPrevProfitPerTrnxNumber = undefined;
+//     for (d = 1; d < prices.length; d++) { // Iterate through possible days of sale
+//       maxProfitPerDay[d] = maxProfitPerDay[d - 1];
+//       for (b = 0; b < d; b++) { // Iterate through day bought
+//         // Find max profit for each day buy iterating through all possible buy days 0 <= b < prices.length - 1;
+//         maxProfitPerDay[d] = Math.max(maxProfitPerDay[d], prices[d] - prices[b] + profit[i - 1][b]);
+//       }
+
+//     }
+//     profit.push(maxProfitPerDay);
+//   }
+//   // Max profit will be the number inside the last cell of the last array (last possible day of sale, of most transactions);
+//   console.log(`profit[k][prices.length - 1] = ${profit[k][prices.length - 1]}`)
+//   console.log(profit);
+//   return profit[k][prices.length - 1];
+// };
