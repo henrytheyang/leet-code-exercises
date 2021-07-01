@@ -33,20 +33,28 @@ Constraints:
  * @return {number}
  */
 var climbStairs = function(n) {
-  if (n = 1) {
-    return 0;
+  if (n === 1) {
+    return 1;
+  } else if (n === 2) {
+    return 2;
   }
-
+  let sum = 2;
+  let counter = 2;
+  while (counter < n) {
+    sum += counter - 1;
+    counter++;
+  }
+  return sum;
 };
 
 /*
-n = 1, 0
+n = 1, 1
 
 n = 2, 11 2, 2
 n = 3, 111 12 21, 3
 n = 4, 1111 121 211 112 22, 5
 n = 5, 11111 2111 1211 1121 1112 221 212 122, 8
-n = 6, 111111 211111 12111 11211 11121 111112 2211 1221 1122 2121 2112 222, 12
+n = 6, 111111 211111 12111 11211 11121 111112 2211 1221 1122 2121 2112 1212 222, 13
 
 n = 7, 17
 */
