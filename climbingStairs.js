@@ -32,19 +32,34 @@ Constraints:
  * @param {number} n
  * @return {number}
  */
+// var climbStairs = function(n) {
+//   // Implement Fibonacci sequence
+//   let answerSet = [0, 1, 2];
+//   let counter = 3;
+//   while (counter <= n) {
+//     answerSet[counter] = answerSet[counter - 1] + answerSet[counter - 2];
+//     counter++;
+//   }
+//   return answerSet[n];
+// };
+
 var climbStairs = function(n) {
-  if (n === 1) {
-    return 1;
-  } else if (n === 2) {
-    return 2;
+  let a = 1;
+  let b = 2;
+  let c;
+  let counter = 3;
+  if (n === a) {
+    return a;
+  } else if (n === b) {
+    return b;
   }
-  let sum = 2;
-  let counter = 2;
-  while (counter < n) {
-    sum += counter - 1;
+  while (counter <= n) {
+    c = a + b;
+    a = b;
+    b = c;
     counter++;
   }
-  return sum;
+  return c;
 };
 
 /*
@@ -58,3 +73,5 @@ n = 6, 111111 211111 12111 11211 11121 111112 2211 1221 1122 2121 2112 1212 222,
 
 n = 7, 17
 */
+
+climbStairs(4)
