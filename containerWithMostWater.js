@@ -40,6 +40,26 @@ n == height.length
  * @param {number[]} height
  * @return {number}
  */
+
 var maxArea = function(height) {
-    
+  // Brute force- check area of every possible combination of points. O(n^2) time, O(n) space
+  // For any single point, the biggest area possible is the widest possible width
+  // Start with the widest rectangle and record the width. This is the largest area of the shorter wall
+  // Move the rectangle in on the shorter side. Again, this will be the largest area of the new shorter wall
+
+  let maxArea = 0;
+  let left = 0;
+  let right = height.length - 1;
+  let currentArea = 0;
+  while (left < right) {
+    currentArea = Math.min(height[left], height[right]) * (right - left);
+    maxArea = Math.max(currentArea, maxArea);
+    if (height[left] < height[right]) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+
+  return maxArea;
 };
