@@ -52,11 +52,13 @@ var trap = function(height) {
     maxLeft[i] = Math.max(tempMaxLeft, height[i]);
   }
   for (j = height.length - 2; j >= 0; j--) {
-    maxRight[i] = Math.max(tempMaxRight, height[j]);
+    maxRight[j] = Math.max(tempMaxRight, height[j]);
   }
   for (k = 1; k < height.length - 1; k++) {
     volume = volume + Math.min(maxLeft[k], maxRight[k]) - height[k];
   }
-
+  console.log(`volume = ${volume}`);
   return volume;
 };
+
+trap([4,2,0,3,2,5])
