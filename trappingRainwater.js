@@ -39,5 +39,12 @@ n == height.length
  */
 
 var trap = function(height) {
-    
+  // Height of water at each point of the array only depends upon the the max walls to the left & right and the current water level
+  // Scan the height array from left and right, recording max height
+  // Scan height array 3rd time, taking the diff between minimum of walls and the current height, accumulating diff
+  let volume = 0;
+  let maxLeft = [];
+  let maxRight = [];
+
+  return volume;
 };
