@@ -35,11 +35,15 @@ Each element in the array appears twice except for one element which appears onl
 var singleNumber = function(nums) {
   let answerBank = {};
   for (i = 0; i < nums.length; i++) {
-    if (answerBank[nums[i] === undefined]) {
+    if (answerBank[nums[i]] === undefined) {
       answerBank[nums[i]] = true;
     } else {
       delete answerBank[nums[i]];
     }
   }
+  // console.log(`answer = ${Object.keys(answerBank)[0]}`);
+  // console.log(Object.keys(answerBank))
   return Object.keys(answerBank)[0];
 };
+
+singleNumber([2,2,1]);
