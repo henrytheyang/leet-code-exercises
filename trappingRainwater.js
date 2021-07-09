@@ -43,8 +43,20 @@ var trap = function(height) {
   // Scan the height array from left and right, recording max height
   // Scan height array 3rd time, taking the diff between minimum of walls and the current height, accumulating diff
   let volume = 0;
-  let maxLeft = [];
+  let maxLeft = [0];
   let maxRight = [];
+  maxRight[height.length - 1] = 0;
+  let tempMaxLeft = height[0];
+  let tempMaxRight = height[height.length - 1];
+  for (i = 1; i < height.length; i++) {
+    maxLeft[i] = Math.max(tempMaxLeft, height[i]);
+  }
+  for (j = height.length - 2; j >= 0; j--) {
+    maxRight[i] = Math.max(tempMaxRight, height[j]);
+  }
+  for (k = 1; k < height.length - 1; k++) {
+    volume = volume + Math.min(maxLeft[k], maxRight[k]) - height[k];
+  }
 
   return volume;
 };
