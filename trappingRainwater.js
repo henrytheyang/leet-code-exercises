@@ -46,13 +46,12 @@ var trap = function(height) {
   let maxLeft = [0];
   let maxRight = [];
   maxRight[height.length - 1] = 0;
-  let tempMaxLeft = height[0];
-  let tempMaxRight = height[height.length - 1];
+
   for (i = 1; i < height.length; i++) {
-    maxLeft[i] = Math.max(tempMaxLeft, height[i]);
+    maxLeft[i] = Math.max(maxLeft[i - 1], height[i]);
   }
   for (j = height.length - 2; j >= 0; j--) {
-    maxRight[j] = Math.max(tempMaxRight, height[j]);
+    maxRight[j] = Math.max(maxRight[j + 1], height[j]);
   }
   for (k = 1; k < height.length - 1; k++) {
     volume = volume + Math.min(maxLeft[k], maxRight[k]) - height[k];
@@ -61,4 +60,10 @@ var trap = function(height) {
   return volume;
 };
 
-trap([4,2,0,3,2,5])
+trap([0,1,0,2,1,0,1,3,2,1,2,1])
+/*
+Output
+0
+Expected
+6
+*/
