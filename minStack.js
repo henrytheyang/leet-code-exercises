@@ -62,15 +62,17 @@ MinStack.prototype.push = function(val) {
 MinStack.prototype.pop = function() {
   if (this.stack.top() === this.minStack.top()) {
     this.minStack.pop();
+    console.log(`popped here`)
   }
-  return this.stack.pop();
+  console.log(`am i here`)
+  this.stack.pop();
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.top = function() {
-  this.stack.top();
+  return this.stack.top();
 };
 
 /**
