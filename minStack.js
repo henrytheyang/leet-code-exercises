@@ -62,9 +62,7 @@ MinStack.prototype.push = function(val) {
 MinStack.prototype.pop = function() {
   if (this.stack.top() === this.minStack.top()) {
     this.minStack.pop();
-    console.log(`popped here`)
   }
-  console.log(`am i here`)
   this.stack.pop();
 };
 
@@ -91,7 +89,6 @@ class Stack {
   push(val) {
     this.storage[this.size] = val;
     this.size++;
-    console.log(`this.storage = ${JSON.stringify(this.storage)} and this.size = ${this.size}`)
   }
   pop() {
     this.size--;
