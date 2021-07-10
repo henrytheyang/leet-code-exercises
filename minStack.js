@@ -70,13 +70,14 @@ MinStack.prototype.pop = function() {
  * @return {number}
  */
 MinStack.prototype.top = function() {
-  return this.stack.top();
+  this.stack.top();
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.getMin = function() {
+  console.log(this.minStack.top());
   return this.minStack.top();
 };
 
@@ -86,7 +87,6 @@ class Stack {
     this.size = 0;
   }
   push(val) {
-    console.log('triggered push')
     this.storage[this.size] = val;
     this.size++;
     console.log(`this.storage = ${JSON.stringify(this.storage)} and this.size = ${this.size}`)
@@ -96,7 +96,7 @@ class Stack {
     return this.storage[this.size + 1];
   }
   top() {
-    return this.storage[this.size];
+    return this.storage[this.size - 1];
   }
 }
 
