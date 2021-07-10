@@ -40,7 +40,7 @@ At most 3 * 104 calls will be made to push, pop, top, and getMin.
 /**
  * initialize your data structure here.
  */
- var MinStack = function() {
+var MinStack = function() {
     
 };
 
