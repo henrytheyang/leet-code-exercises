@@ -51,7 +51,7 @@ var MinStack = function() {
  */
 MinStack.prototype.push = function(val) {
   this.stack.push(val);
-  if (val < this.minStack.top() || this.minStack.top() === undefined) {
+  if (val <= this.minStack.top() || this.minStack.top() === undefined) {
     this.minStack.push(val);
   }
 };
@@ -95,6 +95,7 @@ class Stack {
   }
   pop() {
     this.size--;
+    delete this.storage[this.size + 1];
     return this.storage[this.size + 1];
   }
   top() {
@@ -112,10 +113,9 @@ class Stack {
  */
 
 let testStack = new MinStack();
-testStack.push(-2);
 testStack.push(0);
-testStack.push(-3);
+testStack.push(1);
+testStack.push(0);
 testStack.getMin();
 testStack.pop();
-testStack.top();
 testStack.getMin();
