@@ -41,7 +41,8 @@ At most 3 * 104 calls will be made to push, pop, top, and getMin.
  * initialize your data structure here.
  */
 var MinStack = function() {
-    
+  this.stack = new Stack();
+  this.minStack = new Stack();
 };
 
 /** 
@@ -49,29 +50,53 @@ var MinStack = function() {
  * @return {void}
  */
 MinStack.prototype.push = function(val) {
-    
+  this.stack.push(val);
+  if (val < this.minStack.top || this.minStack.top === undefined) {
+    this.minStack.push(val);
+  }
 };
 
 /**
  * @return {void}
  */
 MinStack.prototype.pop = function() {
-    
+  if (this.stack.top() === this.minStack.top()) {
+    this.minStack.pop();
+  }
+  this.stack.pop();
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.top = function() {
-    
+  this.stack.top();
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.getMin = function() {
-    
+  this.minStack.top();
 };
+
+class Stack {
+  constructor() {
+    this.storage = {};
+    this.size = 0;
+  }
+  push(val) {
+    this.storage[this.size] = val;
+    this.size++;
+  }
+  pop() {
+    this.size--;
+    return this.storage[this.size + 1];
+  }
+  top() {
+    return this.storage[this.size];
+  }
+}
 
 /** 
  * Your MinStack object will be instantiated and called as such:
