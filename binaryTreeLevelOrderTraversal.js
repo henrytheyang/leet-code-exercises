@@ -47,9 +47,23 @@ var levelOrder = function(root) {
         answerBank[currentLevel].push(someNode.val);
       }
     }
-    helperRecursive(someNode.left, currentLevel + 1);
-    helperRecursive(someNode.right, currentLevel + 1);
+    if (someNode.left !== null) {
+      helperRecursive(someNode.left, currentLevel + 1);
+    }    
+    if (someNode.right !== null) {
+      helperRecursive(someNode.right, currentLevel + 1);
+    }
+  }
+  if (root === null) {
+    return answerBank;
   }
   helperRecursive(root, 0);
   return answerBank;
 };
+
+/*
+[3,9,20,null,null,15,7]
+                3
+          9         20
+      null null   15  7
+*/
