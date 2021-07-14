@@ -43,25 +43,36 @@ The number of nodes in the tree is in the range [1, 104].
  */
 var isValidBST = function(root) {
   let answer = true;
-  let helperRecursion = (someNode) => {
-    if (someNode.left !== null) {
-      if (someNode.val <= someNode.left.val) {
-        answer = false;
-        return answer;
-      } else {
-        helperRecursion(someNode.left);
-      }
+  let helperRecursion = (someNode, lowerLimit, upperLimit) => {
+    if (someNode === null) {
+      return true;
     }
-
-    if (someNode.right !== null) {
-      if (someNode.val >= someNode.right.val) {
-        answer = false;
-        return answer;
-      } else {
-        helperRecursion(someNode.right);
-      }
+    if (lowerLimit !== null && someNode.val <= lowerLimit) {
+      answer = false;
+      return;
     }
+    if (upperLimit !== null && someNode.val >= upperLimit) {
+      answer = false;
+      return;
+    }
+    helperRecursion(someNode.left, lowerLimit, someNode.val);
+    helperRecursion(someNode.right, someNode.val, upperLimit);
   }
-  helperRecursion(root);
+  helperRecursion(root, null, null);
   return answer;
 };
+
+/*
+[5,1,4,null,null,3,6]
+
+[5,4,6,null,null,3,7]
+          5
+    4         6
+null null   3   7
+
+
+Output:
+true
+Expected:
+false
+*/
