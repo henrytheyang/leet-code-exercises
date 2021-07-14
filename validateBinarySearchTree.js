@@ -45,7 +45,7 @@ var isValidBST = function(root) {
   let answer = true;
   let helperRecursion = (someNode) => {
     if (someNode.left !== null) {
-      if (someNode.val < someNode.left.val) {
+      if (someNode.val <= someNode.left.val) {
         answer = false;
         return answer;
       } else {
@@ -54,7 +54,7 @@ var isValidBST = function(root) {
     }
 
     if (someNode.right !== null) {
-      if (someNode.val > someNode.right.val) {
+      if (someNode.val >= someNode.right.val) {
         answer = false;
         return answer;
       } else {
