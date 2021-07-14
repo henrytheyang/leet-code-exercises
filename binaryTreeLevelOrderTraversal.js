@@ -38,5 +38,18 @@ The number of nodes in the tree is in the range [0, 2000].
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    
+  let answerBank = [];
+  let helperRecursive = (someNode, currentLevel) => {
+    if (someNode !== null) {
+      if (answerBank[currentLevel] === undefined) {
+        answerBank[currentLevel] = [someNode.val];
+      } else {
+        answerBank[currentLevel].push(someNode.val);
+      }
+    }
+    helperRecursive(someNode.left, currentLevel + 1);
+    helperRecursive(someNode.right, currentLevel + 1);
+  }
+  helperRecursive(root, 0);
+  return answerBank;
 };
