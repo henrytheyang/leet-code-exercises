@@ -52,7 +52,7 @@ var isValidBST = function(root) {
         helperRecursion(this.left);
       }
     }
-    
+
     if (this.right !== null) {
       if (this.val > this.right.val) {
         answer = false;
@@ -62,5 +62,6 @@ var isValidBST = function(root) {
       }
     }
   }
+  helperRecursion(root);
   return answer;
 };
