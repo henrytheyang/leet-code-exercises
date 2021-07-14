@@ -51,8 +51,9 @@ var isValidBST = function(root) {
       } else {
         helperRecursion(this.left);
       }
-
-    } else if (this.right !== null) {
+    }
+    
+    if (this.right !== null) {
       if (this.val > this.right.val) {
         answer = false;
         return answer;
