@@ -47,5 +47,6 @@ var maxPathSum = function(root) {
     if (someNode === null) return 0;
     // Check left & right subtrees recursively
     // 
+    // Return the greatest contribution of that node (node + max of (left, right));
   }
 };
