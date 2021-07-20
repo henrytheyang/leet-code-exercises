@@ -43,10 +43,11 @@ The number of nodes in the tree is in the range [1, 3 * 104].
  */
 var maxPathSum = function(root) {
   let maxAnswer;
-  let pathSum = (someNode) => {
+  let checkPathSum = (someNode) => {
     if (someNode === null) return 0;
     // Check left & right subtrees recursively
     // 
-    // Return the greatest contribution of that node (node + max of (left, right));
+    // Compare the pathSum at this node against the max recorded pathSum
+    // Return the greatest contribution of that node (node + max of (left, right)) with one or zero child nodes;
   }
 };
