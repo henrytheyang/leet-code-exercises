@@ -29,25 +29,31 @@ One possible answer is: [0,-3,9,-10,null,5], which represents the following heig
  * @return {TreeNode}
  */
 
+ function TreeNode(val, left, right) {
+  this.val = (val===undefined ? 0 : val)
+  this.left = (left===undefined ? null : left)
+  this.right = (right===undefined ? null : right)
+}
+
 var sortedArrayToBST = function(nums) {
   // Find center of array in O(1) time
   let findCenterIndex = (someArr) => {
     return Math.floor(someArr.length / 2);
   }
   // Set the center as the treeRoot node
-  let treeRoot =  {val: nums[findCenterIndex(nums)]}
+  let treeRoot =  new TreeNode(nums[findCenterIndex(nums)]);
   let treeMaker = (someParent, someArr) => {
     // Find the center of the 2 halves left over
     // Set the center of left half as the treeRoot.left, center of right half as treeRoot.right
     let leftArr = someArr.slice(0, findCenterIndex(someArr) );
     let rightArr = someArr.slice(findCenterIndex(someArr) + 1, (someArr.length) );
     if (leftArr.length > 0) {
-      someParent['left'] = {val: leftArr[findCenterIndex(leftArr)]};
+      someParent['left'] = new TreeNode(leftArr[findCenterIndex(leftArr)]);
       // Recurse
       treeMaker(someParent['left'], leftArr);
     }
     if (rightArr.length > 0) {
-      someParent['right'] = {val: rightArr[findCenterIndex(rightArr)]};
+      someParent['right'] = new TreeNode(rightArr[findCenterIndex(rightArr)]);
       // Recurse
       treeMaker(someParent['right'], rightArr);
     }
@@ -57,4 +63,5 @@ var sortedArrayToBST = function(nums) {
   return treeRoot;
 };
 
-console.log(sortedArrayToBST([-10,-3,0,5,9],))
+
+sortedArrayToBST([-10,-3,0,5,9],);
