@@ -40,5 +40,30 @@ All the integers in nums appear only once except for precisely one integer which
 */
 
 var findDuplicate = function(nums) {
+  // Duplicated number must be inside the range of index values.
+  // Binary search method- compare array values against the middle of possible values
+    // Middle value = (low + high) / 2
+    // Initialize low = 1, high = length - 1
 
+    // Iterate through array
+      // Count the number of values in array <= middle value; if count <= middle value, middle value must be greater than duplicated value
+        // Reset low = middle value
+        // Else high = middle value;
+
+  }
+    // Return low when low = high;
 };
+
+[4, 2, 2, 4, 4]
+/*
+l = 1, h = 4, m = 2.5, count = 2
+l = 3, h = 4, m = 3.5, count = 2
+l = 4, h = 4
+*/
+
+[3,1,3,4,2]
+/*
+l = 1, h = 4, m = 2.5, count = 2
+l = 3, h = 4, m = 3.5, count = 4
+l = 3, h = 3;
+*/
