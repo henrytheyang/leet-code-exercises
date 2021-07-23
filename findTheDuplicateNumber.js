@@ -44,4 +44,19 @@ var findDuplicate = function(nums) {
   // Repeated integer is start of cycle
   // Slow/Fast pointers will intersect at a point that is same distance to cycle start as index 0
 
+  let fast = 0;
+  let slow = 0;
+  let slow2 = 0;
+
+  do {
+    slow = nums[slow];
+    fast = nums[nums[fast]];
+  } while (nums[fast] !== nums[slow]);
+
+  while (nums[slow] !== nums[slow2]) {
+    slow = nums[slow];
+    slow2 = nums[slow2];
+  }
+
+  return nums[slow];
 };
