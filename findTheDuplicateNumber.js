@@ -40,5 +40,8 @@ All the integers in nums appear only once except for precisely one integer which
 */
 
 var findDuplicate = function(nums) {
+  // Can think of values as pointers to next index, aka LL
+  // Repeated integer is start of cycle
+  // Slow/Fast pointers will intersect at a point that is same distance to cycle start as index 0
 
 };
