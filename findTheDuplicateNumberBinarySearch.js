@@ -44,14 +44,30 @@ var findDuplicate = function(nums) {
   // Binary search method- compare array values against the middle of possible values
     // Middle value = (low + high) / 2
     // Initialize low = 1, high = length - 1
-
+  let low = 1;
+  let high = nums.length - 1;
+  let middle;
+  let count = 0;
+  while (low !== high) {
     // Iterate through array
       // Count the number of values in array <= middle value; if count <= middle value, middle value must be greater than duplicated value
         // Reset low = middle value
         // Else high = middle value;
-
+    count = 0;
+    middle = (low + high) / 2;
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] <= middle) {
+        count++;
+      }
+    }
+    if (count <= middle) {
+      low = Math.ceil(middle);
+    } else {
+      high = Math.floor(middle);
+    }
   }
     // Return low when low = high;
+  return low;
 };
 
 [4, 2, 2, 4, 4]
