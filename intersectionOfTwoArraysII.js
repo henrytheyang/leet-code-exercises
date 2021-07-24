@@ -61,7 +61,7 @@ var intersect = function(nums1, nums2) {
   for (key in tracker) {
     if (tracker[key].nums2Counter) {
       let tempArray = new Array(Math.min(tracker[key].nums1Counter, tracker[key].nums2Counter));
-      tempArray.fill(2)
+      tempArray.fill(key)
       duplicates = [...duplicates, ...tempArray];
     }
   }
@@ -69,4 +69,12 @@ var intersect = function(nums1, nums2) {
   return duplicates;
 };
 
-intersect([1,2,2,1], [2,2])
+intersect([4,9,5]
+  [9,4,9,8,4])
+
+/*
+Output
+[2,2]
+Expected
+[4,9]
+*/
