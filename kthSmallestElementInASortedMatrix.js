@@ -37,8 +37,17 @@ var kthSmallest = function(matrix, k) {
     return matrix[0][0];
   }
   // Take k, divide by matrix.length. Math.ceil of dividend is row
-  let answerRow = Math.ceil(k/matrix.length) - 1;
+  let answerRowIndex = Math.ceil(k/matrix.length) - 1; //2
   // Take k, mod by matrix.length. answer is index of element. Return this value
-  let answerIndex = (k % matrix.length) - 1;
-  return matrix[answerRow][answerIndex];
+  let answerColumnIndex = k - (answerRowIndex * matrix.length) - 1; // 1
+
+  return matrix[answerRowIndex][answerColumnIndex];
 };
+
+kthSmallest([[1,2],[1,3]],2)
+/*
+Output:
+undefined
+Expected:
+1
+*/
