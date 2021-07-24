@@ -36,6 +36,34 @@ var intersect = function(nums1, nums2) {
   // Iterate through nums1 and store values & # of occurences in object
   // Iterate through nums2 and check against value of storage object
     // If present, increment nums2 counter
-    // For each key value pair, push the Math.min of nums1, nums2 counter to answer array
+  let tracker = {};
+  let duplicates = [];
+  for (let i = 0; i < nums1.length; i++) {
+    if (tracker[nums1[i]].nums1Counter === undefined) {
+      tracker[nums1[i]].nums1Counter = 1;
+    } else {
+      tracker[nums1[i]].nums1Counter++;
+    }
+  }
+  for (let j = 0; j < nums2.length; j++) {
+    // We only care if the number has already shown up in nums1
+    if (tracker[nums2[j]] !== undefined) {
+      if (tracker[nums2[j]].nums2Counter === undefined) {
+        tracker[nums2[j]].nums2Counter = 1;
+      } else {
+        tracker[nums2[j]].nums2Counter++;
+      }
+    }
+  }
 
+  // For each key value pair, push the Math.min of nums1, nums2 counter to answer array
+  for (key in tracker) {
+    if (tracker[key].nums2Counter) {
+      let tempArray = [];
+      tempArray.fill(key, 0, (Math.min(tracker[key].nums1Counter, tracker[key].nums2Counter) - 1));
+      duplicates.concat(tempArray);
+    }
+  }
+
+  return duplicates;
 };
