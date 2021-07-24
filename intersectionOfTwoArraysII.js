@@ -60,11 +60,13 @@ var intersect = function(nums1, nums2) {
   // For each key value pair, push the Math.min of nums1, nums2 counter to answer array
   for (key in tracker) {
     if (tracker[key].nums2Counter) {
-      let tempArray = [];
-      tempArray.fill(key, 0, (Math.min(tracker[key].nums1Counter, tracker[key].nums2Counter) - 1));
-      duplicates.concat(tempArray);
+      let tempArray = new Array(Math.min(tracker[key].nums1Counter, tracker[key].nums2Counter));
+      tempArray.fill(2)
+      duplicates = [...duplicates, ...tempArray];
     }
   }
 
   return duplicates;
 };
+
+intersect([1,2,2,1], [2,2])
