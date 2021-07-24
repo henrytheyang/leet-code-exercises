@@ -33,5 +33,6 @@ All the rows and columns of matrix are guaranteed to be sorted in non-decreasing
  * @return {number}
  */
 var kthSmallest = function(matrix, k) {
-    
+  // Take k, divide by matrix.length. Math.ceil of dividend is row
+  // Take k, mod by matrix.length. answer is index of element. Return this value
 };
