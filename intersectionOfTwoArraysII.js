@@ -39,7 +39,8 @@ var intersect = function(nums1, nums2) {
   let tracker = {};
   let duplicates = [];
   for (let i = 0; i < nums1.length; i++) {
-    if (tracker[nums1[i]].nums1Counter === undefined) {
+    if (tracker[nums1[i]] === undefined) {
+      tracker[nums1[i]] = {};
       tracker[nums1[i]].nums1Counter = 1;
     } else {
       tracker[nums1[i]].nums1Counter++;
@@ -50,7 +51,7 @@ var intersect = function(nums1, nums2) {
     if (tracker[nums2[j]] !== undefined) {
       if (tracker[nums2[j]].nums2Counter === undefined) {
         tracker[nums2[j]].nums2Counter = 1;
-      } else {
+        } else {
         tracker[nums2[j]].nums2Counter++;
       }
     }
