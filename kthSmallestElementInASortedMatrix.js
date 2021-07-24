@@ -33,21 +33,19 @@ All the rows and columns of matrix are guaranteed to be sorted in non-decreasing
  * @return {number}
  */
 var kthSmallest = function(matrix, k) {
-  if (k === 1) {
-    return matrix[0][0];
-  }
-  // Take k, divide by matrix.length. Math.ceil of dividend is row
-  let answerRowIndex = Math.ceil(k/matrix.length) - 1; //2
-  // Take k, mod by matrix.length. answer is index of element. Return this value
-  let answerColumnIndex = k - (answerRowIndex * matrix.length) - 1; // 1
-
-  return matrix[answerRowIndex][answerColumnIndex];
+  // First and last value of matrix are low and high limits of possible values
+  // Use binary search of possible limits to pinpoint the kth term
+  // Take the math.floor of the math avg of low & high for middle
+    // Count how many terms are less than or equal to middle
+    // If the count is less than k, set new low equal to middle + 1
+    // If the count is too high, set the new high equal to middle
+    // Keep going until low = high
 };
 
 kthSmallest([[1,2],[1,3]],2)
 /*
-Output:
-undefined
-Expected:
+Output
+2
+Expected
 1
 */
