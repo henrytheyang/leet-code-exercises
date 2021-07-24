@@ -34,12 +34,41 @@ All the rows and columns of matrix are guaranteed to be sorted in non-decreasing
  */
 var kthSmallest = function(matrix, k) {
   // First and last value of matrix are low and high limits of possible values
-  // Use binary search of possible limits to pinpoint the kth term
-  // Take the math.floor of the math avg of low & high for middle
+  let low = matrix[0][0];
+  let high = matrix[matrix.length - 1][matrix.length - 1];
+  let middle;
+  let count;
+  while (low !== high) {
+    // Use binary search of possible limits to pinpoint the kth term
+    // Take the math.floor of the math avg of low & high for middle
+    middle = Math.floor((low + high) / 2);
+    count = 0;
+    
     // Count how many terms are less than or equal to middle
+    for (let i = 0; i < matrix.length; i++) {
+      if (matrix[i][matrix.length - 1] <= middle) {
+        count += matrix.length;
+      } else {
+        for (let j = matrix.length - 1; j >= 0; j--) {
+          if (matrix[i][j] <= middle) {
+            count += j + 1;
+            break;
+          }
+        }
+        break;
+      }
+    }
+
     // If the count is less than k, set new low equal to middle + 1
     // If the count is too high, set the new high equal to middle
     // Keep going until low = high
+    if (count < k) {
+      low = middle + 1;
+    } else {
+      high = middle;
+    }
+  }
+  return low;
 };
 
 kthSmallest([[1,2],[1,3]],2)
