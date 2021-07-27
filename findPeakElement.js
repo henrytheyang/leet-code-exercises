@@ -43,17 +43,25 @@ var findPeakElement = function(nums) {
     // Set new value and check peak
     right = nums[i]
     if (mid > left && mid > right) {
-      return mid;
+      return (i - 1);
     }
     // Check if last number in sequence to compare
     if (i === nums.length - 1) {
       if (right > mid) {
-        return right;
+        return i;
       }
     }
     // Assign new value to prep for next iteration's check
     left = mid;
     mid = right;
   }
-
 };
+
+findPeakElement([1,2,3,1])
+
+/*
+Output
+3
+Expected
+2
+*/
