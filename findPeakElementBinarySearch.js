@@ -33,12 +33,31 @@ nums[i] != nums[i + 1] for all valid i.
 // []
 
 var findPeakElement = function(nums) {
+  let left = 0;
+  let right = nums.length - 1;
+  let mid;
+
+  // edge case
+  if (nums.length === 1) {
+    return 0;
+  }
+
   // Binary search- start w/ middle index
+  while (left < right) {
+    mid = (left + right) / 2;
     // Case 1- mid > left & mid > right
       // Return index of mid
-    // Case 2- mid < left & mid > right
-      // Search left half
-    // Case 3- mid < right & mid > left
-      // Search right half
-
+    if (nums[mid] > nums[left] && nums[mid] > nums[right]) {
+      return mid;
+    } else if (nums[mid] < nums[left]) {
+      // Case 2- mid < left & mid > right
+        // Search left half
+        right = mid;
+    } else if (nums[mid] > nums[left]) {
+      // Case 3- mid < right & mid > left
+        // Search right half
+      left = mid;
+    }
+  }
+  return left;
 };
