@@ -44,16 +44,16 @@ var findPeakElement = function(nums) {
 
   // Binary search- start w/ middle index
   while (left < right) {
-    mid = (left + right) / 2;
+    mid = Math.floor((left + right) / 2);
     // Case 1- mid > left & mid > right
       // Return index of mid
-    if (nums[mid] > nums[left] && nums[mid] > nums[right]) {
+    if (nums[mid] > nums[mid - 1] && nums[mid] > nums[mid + 1]) {
       return mid;
-    } else if (nums[mid] < nums[left]) {
+    } else if (nums[mid] < nums[mid - 1]) {
       // Case 2- mid < left & mid > right
         // Search left half
         right = mid;
-    } else if (nums[mid] > nums[left]) {
+    } else if (nums[mid] > nums[mid - 1]) {
       // Case 3- mid < right & mid > left
         // Search right half
       left = mid;
@@ -61,3 +61,5 @@ var findPeakElement = function(nums) {
   }
   return left;
 };
+
+findPeakElement([1,2,3,1])
