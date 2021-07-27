@@ -33,10 +33,27 @@ nums[i] != nums[i + 1] for all valid i.
  * @return {number}
  */
 var findPeakElement = function(nums) {
-
+  if (nums.length === 1) {
+    return 
+  }
+  let left = nums[0];
+  let mid = nums[1];
+  let right;
+  for (let i = 2; i < nums.length; i++) {
     // Set new value and check peak
-
+    right = nums[i]
+    if (mid > left && mid > right) {
+      return mid;
+    }
     // Check if last number in sequence to compare
+    if (i === nums.length - 1) {
+      if (right > mid) {
+        return right;
+      }
+    }
     // Assign new value to prep for next iteration's check
+    left = mid;
+    mid = right;
+  }
 
 };
