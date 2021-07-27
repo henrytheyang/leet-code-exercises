@@ -49,17 +49,17 @@ var findPeakElement = function(nums) {
       // Return index of mid
     if (nums[mid] > nums[mid - 1] && nums[mid] > nums[mid + 1]) {
       return mid;
-    } else if (nums[mid] < nums[mid - 1]) {
+    } else if (nums[mid] < nums[mid + 1]) {
       // Case 2- mid < left & mid > right
         // Search left half
-        right = mid;
-    } else if (nums[mid] > nums[mid - 1]) {
+        left = mid + 1;
+    } else if (nums[mid] > nums[mid + 1]) {
       // Case 3- mid < right & mid > left
         // Search right half
-      left = mid;
+      right = mid;
     }
   }
   return left;
 };
 
-findPeakElement([1,2,3,1])
+findPeakElement([1,2])
