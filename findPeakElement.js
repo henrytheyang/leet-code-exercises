@@ -35,7 +35,6 @@ nums[i] != nums[i + 1] for all valid i.
 var findPeakElement = function(nums) {
   // length === 0 edge
   if (nums.length === 1) {
-    console.log(0)
     return 0
   }
   let left = nums[0];
@@ -44,13 +43,11 @@ var findPeakElement = function(nums) {
 
   // edge case using nums[-1]
   if (left > mid) {
-    console.log(0)
     return 0;
   }
 
   // edge case using nums[n];
   if (nums.length === 2 && mid > left) {
-    console.log(1)
     return 1;
   }
 
@@ -58,13 +55,11 @@ var findPeakElement = function(nums) {
     // Set new value and check peak
     right = nums[i]
     if (mid > left && mid > right) {
-      console.log(i - 1)
       return (i - 1);
     }
     // Check if last number in sequence to compare
     if (i === nums.length - 1) {
       if (right > mid) {
-        console.log(i)
         return i;
       }
     }
