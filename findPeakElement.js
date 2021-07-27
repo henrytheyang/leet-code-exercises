@@ -33,5 +33,10 @@ nums[i] != nums[i + 1] for all valid i.
  * @return {number}
  */
 var findPeakElement = function(nums) {
-    
+
+    // Set new value and check peak
+
+    // Check if last number in sequence to compare
+    // Assign new value to prep for next iteration's check
+
 };
