@@ -55,7 +55,6 @@ var kthSmallest = function(matrix, k) {
             break;
           }
         }
-        break;
       }
     }
 
