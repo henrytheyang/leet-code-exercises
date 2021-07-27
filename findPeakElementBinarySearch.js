@@ -34,7 +34,11 @@ nums[i] != nums[i + 1] for all valid i.
 
 var findPeakElement = function(nums) {
   // Binary search- start w/ middle index
-    // Case 1- mid > left & right
-    // 
+    // Case 1- mid > left & mid > right
+      // Return index of mid
+    // Case 2- mid < left & mid > right
+      // Search left half
+    // Case 3- mid < right & mid > left
+      // Search right half
 
 };
