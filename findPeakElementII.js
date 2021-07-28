@@ -37,5 +37,17 @@ No two adjacent cells are equal.
  * @return {number[]}
  */
 var findPeakGrid = function(mat) {
-    
+  // Compare peak of each column with the column peaks of neighbors
+  // Finding peak of each column can be done with binary search
+  // Comparing peaks done in binary search
+  
 };
+
+/*
+[
+  [1, 2, 4, 2, 5],
+  [4, 3, 6, 3, 1],
+  [5, 1, 7, 1, 2],
+  [10, 7, 8, 2, 1]
+]
+*/
