@@ -52,7 +52,7 @@ var findPeakElement = function(nums) {
     } else if (nums[mid] < nums[mid + 1]) {
       // Case 2- mid < left & mid > right
         // Search left half
-        left = mid + 1;
+      left = mid + 1;
     } else if (nums[mid] > nums[mid + 1]) {
       // Case 3- mid < right & mid > left
         // Search right half
