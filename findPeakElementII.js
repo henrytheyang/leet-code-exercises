@@ -37,10 +37,52 @@ No two adjacent cells are equal.
  * @return {number[]}
  */
 var findPeakGrid = function(mat) {
-  // Compare peak of each column with the column peaks of neighbors
-  // Finding peak of each column can be done with binary search
+  // Compare max of each column with the column max of neighbors
+  // Finding peak of each column in linear time
+  const findColumnMax = (columnIndex) => {
+    let columnMax = 1;
+    for (let i = 0; i < mat.length; i++) {
+      if (mat[i][columnIndex] > columnMax) {
+        columnMax = mat[i][columnIndex];
+      }
+    }
+    return columnMax;
+  }
   // Comparing peaks done in binary search
+  let left = 0;
+  let right = mat.length - 1;
+  let mid;
+  let columnMaxes = new Array(mat.length);
+  let leftMax;
+  let midMax;
+  let rightMax;
   
+  while (left < right) {
+    mid = Math.floor(left + (right - left) / 2);
+    if (columnMaxes[left] === undefined) {
+      columnMaxes[left] = findColumnMax(left);
+    } 
+    leftMax = columnMaxes[left];
+
+    if (columnMaxes[mid] === undefined) {
+      columnMaxes[mid] = findColumnMax(mid);
+    } 
+    midMax = columnMaxes[mid];
+
+    if (columnMaxes[right] === undefined) {
+      columnMaxes[right] = findColumnMax(right);
+    } 
+    rightMax = columnMaxes[right];
+
+    if (midMax > leftMax && midMax > rightMax) {
+      return mid;
+    } else if (midMax < rightMax) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+  return left;
 };
 
 /*
