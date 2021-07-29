@@ -59,45 +59,50 @@ var findPeakGrid = function(mat) {
   let right = mat.length - 1;
   let mid;
   let columnMaxes = new Array(mat.length);
-  let leftMax;
+  let prevMax;
   let midMax;
-  let rightMax;
+  let nextMax;
   
   while (left < right) {
     mid = Math.floor(left + (right - left) / 2);
-    if (columnMaxes[left] === undefined) {
-      columnMaxes[left] = findColumnMax(left);
+
+    if (columnMaxes[mid - 1] === undefined) {
+      columnMaxes[mid - 1] = findColumnMax(mid - 1);
     } 
-    leftMax = columnMaxes[left];
+    prevMax = columnMaxes[mid - 1];
 
     if (columnMaxes[mid] === undefined) {
       columnMaxes[mid] = findColumnMax(mid);
     } 
     midMax = columnMaxes[mid];
 
-    if (columnMaxes[right] === undefined) {
-      columnMaxes[right] = findColumnMax(right);
+    if (columnMaxes[mid + 1] === undefined) {
+      columnMaxes[mid + 1] = findColumnMax(mid + 1);
     } 
-    rightMax = columnMaxes[right];
+    nextMax = columnMaxes[mid + 1];
 
-    if (midMax.value > leftMax.value && midMax.value > rightMax.value) {
+    if (midMax.value > prevMax.value && midMax.value > nextMax.value) {
       return [midMax.rowIndex, mid];
-    } else if (midMax.value < rightMax.value) {
+    } else if (midMax.value < nextMax.value) {
       left = mid + 1;
     } else {
       right = mid;
     }
   }
+
   return [columnMaxes[left].rowIndex, left];
 };
 
-findPeakGrid([[1,4],[3,2]]);
+findPeakGrid([
+  [1,2,3,4,5,6,7,8],
+  [2,3,4,5,6,7,8,9],
+  [3,4,5,6,7,8,9,10],
+  [4,5,6,7,8,9,10,11]
+]);
 
 /*
-[
-  [1, 2, 4, 2, 5],
-  [4, 3, 6, 3, 1],
-  [5, 1, 7, 1, 2],
-  [10, 7, 8, 2, 1]
-]
+Output:
+[3,3]
+Expected:
+[3,7]
 */
