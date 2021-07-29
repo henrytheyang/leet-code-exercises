@@ -56,9 +56,9 @@ var findPeakGrid = function(mat) {
   }
   // Comparing peaks done in binary search
   let left = 0;
-  let right = mat.length - 1;
+  let right = mat[0].length - 1;
   let mid;
-  let columnMaxes = new Array(mat.length);
+  let columnMaxes = new Array(mat[0].length);
   let prevMax;
   let midMax;
   let nextMax;
@@ -102,7 +102,7 @@ findPeakGrid([
 
 /*
 Output:
-[3,3]
+[3,3] 7
 Expected:
-[3,7]
+[3,7] 11
 */
