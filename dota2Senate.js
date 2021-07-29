@@ -54,26 +54,51 @@ var predictPartyVictory = function(senate) {
   let dCounter = 0;
   let dPresentInNewStr = false;
   let rPresentInNewStr = false;
+  let startingString = senate;
   let newString = '';
 
   // Scan string
   do {
     // When you encounter either D or R check the counters
+    for (let i = 0; i < startingString.length; i++) {
       // Encounter D
+      if (startingString[i] === 'D') {
         // If rcounter === 0,
           // increment dcounter
           // add char to new string
           // flag dpresent as true
-        // If rcounter > 0,
-          // decrement rcounter
-      // Encounter R
-        // If dcounter === 0
-          // increment rcounter
-          // add char to new string
-          // flag rpresent as true
-        // if dcounter > 0
-          // decrement dcounter
+        if (rCounter === 0) {
+          dCounter++;
+          newString = newString + startingString[i]
+          dPresentInNewStr = true;
+        } else {
+          // If rcounter > 0, decrement rcounter
+          rCounter--;
+        }
 
+      // Encounter R
+      } else {
+        if (dCounter === 0) {
+          // If dcounter === 0
+            // increment rcounter
+            // add char to new string
+            // flag rpresent as true
+          rCounter++;
+          newString = newString + startingString[i];
+          rPresentInNewStr = true;
+        } else {
+          // if dcounter > 0, decrement dcounter
+          dCounter--;
+        }
+      }
+    }
+
+    // End of loop
+    // Reassign startingString, newString
+    // reset counters, reset dpresent and rpresent
+    startingString = newString;
+    newString = '';
+    [rCounter, dCounter, dPresentInNewStr, rPresentInNewStr] = [0, 0, false, false];
 
     // Keep scanning while both D and R are present in new string
   } while (dPresentInNewStr === true && rPresentInNewStr === true);
