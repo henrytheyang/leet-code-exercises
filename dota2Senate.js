@@ -50,8 +50,14 @@ senate[i] is either 'R' or 'D'.
  * @return {string}
  */
 var predictPartyVictory = function(senate) {
+  let rCounter = 0;
+  let dCounter = 0;
+  let dPresentInNewStr = false;
+  let rPresentInNewStr = false;
+  let newString = '';
 
   // Scan string
+  do {
     // When you encounter either D or R check the counters
       // Encounter D
         // If rcounter === 0,
@@ -70,5 +76,11 @@ var predictPartyVictory = function(senate) {
 
 
     // Keep scanning while both D and R are present in new string
+  } while (dPresentInNewStr === true && rPresentInNewStr === true);
 
+  if (newString[0] === 'R') {
+    return 'Radiant'
+  } else {
+    return 'Dire';
+  }
 };
