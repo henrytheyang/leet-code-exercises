@@ -59,8 +59,8 @@ var predictPartyVictory = function(senate) {
 
   // Scan string
   do {
-    // reset counters, reset dpresent and rpresent
-    [rCounter, dCounter, dPresentInNewStr, rPresentInNewStr] = [0, 0, false, false];
+    // reset dpresent and rpresent
+    [dPresentInNewStr, rPresentInNewStr] = [false, false];
 
     // When you encounter either D or R check the counters
     for (let i = 0; i < startingString.length; i++) {
@@ -111,4 +111,4 @@ var predictPartyVictory = function(senate) {
   }
 };
 
-predictPartyVictory('RD')
+predictPartyVictory('RDD')
