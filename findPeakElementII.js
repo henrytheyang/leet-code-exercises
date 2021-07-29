@@ -39,11 +39,17 @@ No two adjacent cells are equal.
 var findPeakGrid = function(mat) {
   // Compare max of each column with the column max of neighbors
   // Finding peak of each column in linear time
+
+  // Need to store row index
   const findColumnMax = (columnIndex) => {
-    let columnMax = 1;
+    let columnMax = {
+      value: 0,
+      rowIndex: 0,
+    };
     for (let i = 0; i < mat.length; i++) {
-      if (mat[i][columnIndex] > columnMax) {
-        columnMax = mat[i][columnIndex];
+      if (mat[i][columnIndex] > columnMax.value) {
+        columnMax.value = mat[i][columnIndex];
+        columnMax.rowIndex = i;
       }
     }
     return columnMax;
@@ -74,16 +80,18 @@ var findPeakGrid = function(mat) {
     } 
     rightMax = columnMaxes[right];
 
-    if (midMax > leftMax && midMax > rightMax) {
-      return mid;
-    } else if (midMax < rightMax) {
+    if (midMax.value > leftMax.value && midMax.value > rightMax.value) {
+      return [midMax.rowIndex, mid];
+    } else if (midMax.value < rightMax.value) {
       left = mid + 1;
     } else {
       right = mid;
     }
   }
-  return left;
+  return [columnMaxes[left].rowIndex, left];
 };
+
+findPeakGrid([[1,4],[3,2]]);
 
 /*
 [
