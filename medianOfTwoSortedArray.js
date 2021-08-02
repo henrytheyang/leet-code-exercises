@@ -32,5 +32,28 @@ Output: 2.00000
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-    
+  // We find the median when the subset nums1 + subset nums2 = remainder nums1 + remainder nums2
+    // If nums1.length + nums2.length = odd, left side will have one more number
+  // Last member of nums1Left < first member of nums2Right
+  // Last member of nums2Left < first member of nums1Right
+
+  // Do binary search of smaller set
+  // 3 cases
+  // Case 1- nums1LeftLast < nums2RightFirst but nums2LeftLast > nums1RightFirst
+    // nums1Left needs to shift right
+  // Case 2- nums1LeftLast > nums2RightFirst
+    // nums1Left needs to shift left
+  // Case 3- size & value requirements met. Return the max of left side if odd, or return the mean of (max left side, min right side) if even
+
 };
+
+// [2, 3, 4], [2, 5, 6]
+// Case 1
+// 2        3 4
+// 2, 5     6
+// Case 2
+// 2 3 4   
+//          2 5 6
+// Case 3
+// 2, 3     4
+// 2        5 6
