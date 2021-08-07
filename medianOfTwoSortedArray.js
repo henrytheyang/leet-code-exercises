@@ -37,13 +37,16 @@ var findMedianSortedArrays = function(nums1, nums2) {
   // Last member of nums1Left < first member of nums2Right
   // Last member of nums2Left < first member of nums1Right
   // Do binary search of smaller set
+  let shortArray;
+  let longArray;
 
   if (nums1.length <= nums2.length) {
-    let shortArray = nums1;
-    let longArray = nums2;
+    console.log('im in here')
+    shortArray = nums1;
+    longArray = nums2;
   } else {
-    let shortArray = nums2;
-    let longArray = nums1;
+    shortArray = nums2;
+    longArray = nums1;
   }
 
   let low = 0;
@@ -79,8 +82,6 @@ var findMedianSortedArrays = function(nums1, nums2) {
       high = middle;
     }
   }
-
-
 
 };
 
