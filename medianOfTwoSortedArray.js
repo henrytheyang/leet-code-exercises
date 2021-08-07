@@ -50,7 +50,7 @@ var findMedianSortedArrays = function(nums1, nums2) {
   }
 
   let low = 0;
-  let high = nums1.length - 1;
+  let high = shortArray.length - 1;
   let middle;
   let leftShortLast;
   let rightShortFirst;
@@ -82,10 +82,9 @@ var findMedianSortedArrays = function(nums1, nums2) {
       high = middle;
     }
   }
-
 };
 
-findMedianSortedArrays([2, 3, 4], [2, 5, 6])
+findMedianSortedArrays([1,3], [2])
 
 // [2, 3, 4], [2, 5, 6]
 // Case 1
