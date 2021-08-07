@@ -57,21 +57,16 @@ var findMedianSortedArrays = function(nums1, nums2) {
   let leftLongLast;
   let rightLongFirst;
 
-  while (low < high) {
+  do {
     middle = Math.floor((low + (high - low) / 2));
     leftShortLast = middle;
     rightShortFirst = middle + 1;
     leftLongLast = longArray.length - 1 - middle - 1;
     rightLongFirst = longArray.length - 1 - middle;
     // 3 cases
-    // Case 1- size & value requirements met. Return the max of left side if odd, or return the mean of (max left side, min right side) if even
+    // Case 1- size & value requirements met
     if (shortArray[leftShortLast] <= longArray[rightLongFirst] && longArray[leftLongLast] <= shortArray[rightShortFirst]) {
-      if ((nums1.length + nums2.length) % 2 === 0) { // Even
-        console.log((Math.max(shortArray[leftShortLast], longArray[leftLongLast]) + Math.min(shortArray[rightShortFirst], longArray[rightLongFirst])) / 2)
-        return ((Math.max(shortArray[leftShortLast], longArray[leftLongLast]) + Math.min(shortArray[rightShortFirst], longArray[rightLongFirst])) / 2)
-      } else {
-        return Math.max(shortArray[leftShortLast], longArray[leftLongLast]);
-      }
+      break;
     } else if (longArray[leftLongLast] > shortArray[rightShortFirst]) {
       // Case 2- nums1LeftLast < nums2RightFirst but nums2LeftLast > nums1RightFirst
         // nums1Left needs to shift right
@@ -81,6 +76,15 @@ var findMedianSortedArrays = function(nums1, nums2) {
         // nums1Left needs to shift left
       high = middle;
     }
+  } while (low < high)
+
+  // Return the max of left side if odd, or return the mean of (max left side, min right side) if even
+  if ((nums1.length + nums2.length) % 2 === 0) { // Even
+    console.log((Math.max(shortArray[leftShortLast], longArray[leftLongLast]) + Math.min(shortArray[rightShortFirst], longArray[rightLongFirst])) / 2)
+    return ((Math.max(shortArray[leftShortLast], longArray[leftLongLast]) + Math.min(shortArray[rightShortFirst], longArray[rightLongFirst])) / 2)
+  } else {
+    console.log(Math.max(shortArray[leftShortLast], longArray[leftLongLast]));
+    return Math.max(shortArray[leftShortLast], longArray[leftLongLast]);
   }
 };
 
