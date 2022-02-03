@@ -36,12 +36,14 @@ var findMedianSortedArrays = function(nums1, nums2) {
     // If nums1.length + nums2.length = odd, left side will have one more number
   // Last member of nums1Left < first member of nums2Right
   // Last member of nums2Left < first member of nums1Right
+
+  // Last member of nums2Right < first member of nums1Left
+
   // Do binary search of smaller set
   let shortArray;
   let longArray;
 
   if (nums1.length <= nums2.length) {
-    console.log('im in here')
     shortArray = nums1;
     longArray = nums2;
   } else {
@@ -49,46 +51,9 @@ var findMedianSortedArrays = function(nums1, nums2) {
     longArray = nums1;
   }
 
-  let low = 0;
-  let high = shortArray.length - 1;
-  let middle;
-  let leftShortLast;
-  let rightShortFirst;
-  let leftLongLast;
-  let rightLongFirst;
-
-  do {
-    middle = Math.floor((low + (high - low) / 2));
-    leftShortLast = middle;
-    rightShortFirst = middle + 1;
-    leftLongLast = longArray.length - 1 - middle - 1;
-    rightLongFirst = longArray.length - 1 - middle;
-    // 3 cases
-    // Case 1- size & value requirements met
-    if (shortArray[leftShortLast] <= longArray[rightLongFirst] && longArray[leftLongLast] <= shortArray[rightShortFirst]) {
-      break;
-    } else if (longArray[leftLongLast] > shortArray[rightShortFirst]) {
-      // Case 2- nums1LeftLast < nums2RightFirst but nums2LeftLast > nums1RightFirst
-        // nums1Left needs to shift right
-      low = middle;
-    } else if (shortArray[leftShortLast] > longArray[rightLongFirst]) {
-      // Case 3- nums1LeftLast > nums2RightFirst
-        // nums1Left needs to shift left
-      high = middle;
-    }
-  } while (low < high)
-
-  // Return the max of left side if odd, or return the mean of (max left side, min right side) if even
-  if ((nums1.length + nums2.length) % 2 === 0) { // Even
-    console.log((Math.max(shortArray[leftShortLast], longArray[leftLongLast]) + Math.min(shortArray[rightShortFirst], longArray[rightLongFirst])) / 2)
-    return ((Math.max(shortArray[leftShortLast], longArray[leftLongLast]) + Math.min(shortArray[rightShortFirst], longArray[rightLongFirst])) / 2)
-  } else {
-    console.log(Math.max(shortArray[leftShortLast], longArray[leftLongLast]));
-    return Math.max(shortArray[leftShortLast], longArray[leftLongLast]);
-  }
 };
 
-findMedianSortedArrays([1,3], [2])
+findMedianSortedArrays([1,2], [3,4])
 
 // [2, 3, 4], [2, 5, 6]
 // Case 1
