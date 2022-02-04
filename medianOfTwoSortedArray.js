@@ -32,16 +32,16 @@ Output: 2.00000
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-  // We find the median when the subset nums1 + subset nums2 = remainder nums1 + remainder nums2
+  // We find the median when 
+  // the # of entries in (subset nums1 + subset nums2) = (remainder nums1 + remainder nums2)
     // If nums1.length + nums2.length = odd, left side will have one more number
   // Last member of nums1Left < first member of nums2Right
   // Last member of nums2Left < first member of nums1Right
 
-  // Last member of nums2Right < first member of nums1Left
-
   // Do binary search of smaller set
   let shortArray;
   let longArray;
+  let answer;
 
   if (nums1.length <= nums2.length) {
     shortArray = nums1;
@@ -50,7 +50,23 @@ var findMedianSortedArrays = function(nums1, nums2) {
     shortArray = nums2;
     longArray = nums1;
   }
+  let low = 0;
+  let high = shortArray.length - 1;
+  let partitionIndexShort = Math.floor((low + high)/2);
+  let partitionIndexLong = longArray.length - 1 - partitionIndexShort;
 
+  // 3 cases:
+  // Case 1: shortLeftLast < longRightFirst && longLeftLast < shortRightFirst
+    // Success; found correct partition
+    // If total number of digits is odd, return value of shortArray(partitionIndexShort)
+    // Else if total number of digits is even, return avg of (MaxLeft + MinRight)
+
+  // Case 2: shortLeftLast > longRightFirst; partitionIndexShort is too far right; do binary search of remainder of digits to the left in shortArray;
+
+  // Case 3: longLeftLast > shortRightFirst; partitionIndexShort is too far left; do binary search of remainder of digits to the right in shortArray;
+
+
+  return answer;
 };
 
 findMedianSortedArrays([1,2], [3,4])
