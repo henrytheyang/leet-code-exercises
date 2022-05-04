@@ -58,7 +58,8 @@ var findMedianSortedArrays = function(nums1, nums2) {
   // 3 cases:
   // Case 1: shortLeftLast < longRightFirst && longLeftLast < shortRightFirst
     // Success; found correct partition
-    // If total number of digits is odd, return value of shortArray(partitionIndexShort)
+
+    // If total number of digits is odd, return value of MaxLeft
     // Else if total number of digits is even, return avg of (MaxLeft + MinRight)
 
   // Case 2: shortLeftLast > longRightFirst; partitionIndexShort is too far right; do binary search of remainder of digits to the left in shortArray;
