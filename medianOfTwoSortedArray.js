@@ -51,9 +51,9 @@ var findMedianSortedArrays = function(nums1, nums2) {
     longArray = nums1;
   }
   let low = 0;
-  let high = shortArray.length - 1;
+  let high = shortArray.length;
   let partitionIndexShort = Math.floor((low + high)/2);
-  let partitionIndexLong = longArray.length - 1 - partitionIndexShort;
+  let partitionIndexLong = (shortArray.length + longArray.length + 1) /2 - partitionIndexShort;
 
   // 3 cases:
   // Case 1: shortLeftLast < longRightFirst && longLeftLast < shortRightFirst
