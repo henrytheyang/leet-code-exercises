@@ -66,6 +66,8 @@ var findMedianSortedArrays = function(nums1, nums2) {
 
   // Case 3: longLeftLast > shortRightFirst; partitionIndexShort is too far left; do binary search of remainder of digits to the right in shortArray;
 
+  // Edge case: partition is either at 0 or end of shortArray; in that case use -inf or +inf when comparing to get median
+
 
   return answer;
 };
