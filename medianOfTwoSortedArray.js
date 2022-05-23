@@ -68,21 +68,34 @@ var findMedianSortedArrays = function(nums1, nums2) {
 
   // 3 scenarios:
   while (!(shortLeftLast <= longRightFirst && longLeftLast <= shortRightFirst)) {
-    // Scenario 1: shortLeftLast > longRightFirst; partitionIndexShort is too far right; do binary search of remainder of digits to the left in shortArray;
-    
-    // Scenario 2: longLeftLast > shortRightFirst; partitionIndexShort is too far left; do binary search of remainder of digits to the right in shortArray;
-
+    // Scenario 1: shortLeftLast > longRightFirst;
+      // 50         60, 70
+      // 1 2 3      4
+    if (shortLeftLast > longRightFirst) {
+      // Short partition is too far right, need to move it left, do binary search of remainder of digits to the left in shortArray
+      high = partitionIndexShort - 1;
+      partitionIndexShort = Math.floor((low + high)/2);
+      partitionIndexLong = (shortArray.length + longArray.length + 1) /2 - partitionIndexShort;
+    } else if (longLeftLast > shortRightFirst) {
+    // Scenario 2: longLeftLast > shortRightFirst;
+      // empty       1, 2
+      // 10, 20, 30  empty
+      // partitionIndexShort is too far left; do binary search of remainder of digits to the right in shortArray;
+      low = partitionIndexShort;
+      partitionIndexShort = Math.floor((low + high)/2);
+      partitionIndexLong = (shortArray.length + longArray.length + 1) /2 - partitionIndexShort;
+    }
+  }
+  // Scenario 3: shortLeftLast < longRightFirst && longLeftLast < shortRightFirst
+  // Success; found correct partition
+  if ((nums1.length + nums2.length) % 2 === 0) {
+    // If total number of digits is even, return avg of (MaxLeft + MinRight)
+    answer = (Math.max(shortArray[partitionIndexShort], longArray[partitionIndexLong]) + Math.min(shortArray[partitionIndexLong + 1], longArray[partitionIndexLong + 1])) / 2
+  } else {
+    // else if total number of digits is odd, return value of MaxLeft
+    answer = Math.max(shortArray[partitionIndexShort], longArray[partitionIndexLong]);
   }
   
-  
-  
-  // Scenario 3: shortLeftLast < longRightFirst && longLeftLast < shortRightFirst
-    // Success; found correct partition
-
-    // If total number of digits is odd, return value of MaxLeft
-    // Else if total number of digits is even, return avg of (MaxLeft + MinRight)
-
-
   return answer;
 };
 
