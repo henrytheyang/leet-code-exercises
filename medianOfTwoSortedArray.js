@@ -79,7 +79,6 @@ var findMedianSortedArrays = function(nums1, nums2) {
     longLeftLast = (longArray[partitionIndexLong - 1] === undefined) ? Number.NEGATIVE_INFINITY: longArray[partitionIndexLong - 1];
     shortRightFirst = (shortArray[partitionIndexShort] === undefined) ? Number.POSITIVE_INFINITY: shortArray[partitionIndexShort];
   }
-
   calculateComparisonNums();
 
   // 3 scenarios:
@@ -112,7 +111,6 @@ var findMedianSortedArrays = function(nums1, nums2) {
     // else if total number of digits is odd, return value of MaxLeft
     answer = Math.max(shortLeftLast, longLeftLast);
   }
-  console.log(`answer = ${answer}`);
   return answer;
 };
 
