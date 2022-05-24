@@ -74,7 +74,7 @@ var findMedianSortedArrays = function(nums1, nums2) {
       // Short partition is too far right, need to move it left, do binary search of remainder of digits to the left in shortArray
       high = partitionIndexShort - 1;
       partitionIndexShort = Math.floor((low + high)/2);
-      partitionIndexLong = (shortArray.length + longArray.length + 1) /2 - partitionIndexShort;
+      partitionIndexLong = Math.floor((shortArray.length + longArray.length + 1) /2 - partitionIndexShort);
     } else if (longLeftLast > shortRightFirst) {
     // Scenario 2: longLeftLast > shortRightFirst;
       // empty       1, 2
@@ -103,7 +103,7 @@ var findMedianSortedArrays = function(nums1, nums2) {
   return answer;
 };
 
-findMedianSortedArrays([1, 2], [3,4])
+findMedianSortedArrays([3,4], [1,2])
 
 // [2, 3, 4], [2, 5, 6]
 // Case 1
