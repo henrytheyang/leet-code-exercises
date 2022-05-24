@@ -94,10 +94,10 @@ var findMedianSortedArrays = function(nums1, nums2) {
   // Success; found correct partition
   if ((nums1.length + nums2.length) % 2 === 0) {
     // If total number of digits is even, return avg of (MaxLeft + MinRight)
-    answer = (Math.max(shortArray[partitionIndexShort], longArray[partitionIndexLong]) + Math.min(shortArray[partitionIndexLong + 1], longArray[partitionIndexLong + 1])) / 2
+    answer = (Math.max(shortLeftLast, longLeftLast) + Math.min(shortRightFirst, longRightFirst)) / 2
   } else {
     // else if total number of digits is odd, return value of MaxLeft
-    answer = Math.max(shortArray[partitionIndexShort], longArray[partitionIndexLong]);
+    answer = Math.max(shortLeftLast, longLeftLast);
   }
   console.log(`answer = ${answer}`);
   return answer;
