@@ -50,10 +50,17 @@ var findMedianSortedArrays = function(nums1, nums2) {
     shortArray = nums2;
     longArray = nums1;
   }
+
   let low = 0;
   let high = shortArray.length;
-  let partitionIndexShort = Math.floor((low + high)/2);
-  let partitionIndexLong = Math.floor((shortArray.length + longArray.length + 1) /2 - partitionIndexShort);
+  let partitionIndexShort;
+  let partitionIndexLong;
+  
+  const calculatePartition = () => {
+    partitionIndexShort = Math.floor((low + high)/2);
+    partitionIndexLong = Math.floor((shortArray.length + longArray.length + 1) /2 - partitionIndexShort);
+  }
+  calculatePartition();
 
   // Edge case: partition is either at 0 or end of shortArray; in that case use -inf or +inf when comparing to get median
     // empty,    10, 20
@@ -72,7 +79,7 @@ var findMedianSortedArrays = function(nums1, nums2) {
     longLeftLast = (longArray[partitionIndexLong - 1] === undefined) ? Number.NEGATIVE_INFINITY: longArray[partitionIndexLong - 1];
     shortRightFirst = (shortArray[partitionIndexShort] === undefined) ? Number.POSITIVE_INFINITY: shortArray[partitionIndexShort];
   }
-  
+
   calculateComparisonNums();
 
   // 3 scenarios:
@@ -83,16 +90,14 @@ var findMedianSortedArrays = function(nums1, nums2) {
     if (shortLeftLast > longRightFirst) {
       // Short partition is too far right, need to move it left, do binary search of remainder of digits to the left in shortArray
       high = partitionIndexShort - 1;
-      partitionIndexShort = Math.floor((low + high)/2);
-      partitionIndexLong = Math.floor((shortArray.length + longArray.length + 1) /2 - partitionIndexShort);
+      calculatePartition();
     } else if (longLeftLast > shortRightFirst) {
     // Scenario 2: longLeftLast > shortRightFirst;
       // empty       1, 2
       // 10, 20, 30  empty
       // partitionIndexShort is too far left; do binary search of remainder of digits to the right in shortArray;
       low = partitionIndexShort + 1;
-      partitionIndexShort = Math.floor((low + high)/2);
-      partitionIndexLong = Math.floor((shortArray.length + longArray.length + 1) /2 - partitionIndexShort);
+      calculatePartition();
     }
 
     // Recalculate values to compare
