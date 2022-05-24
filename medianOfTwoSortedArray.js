@@ -61,10 +61,10 @@ var findMedianSortedArrays = function(nums1, nums2) {
 
     // 5, 6      empty
     // empty     8, 9, 10
-  let shortLeftLast = (shortArray[partitionIndexShort -1]) ? shortArray[partitionIndexShort -1] : Number.NEGATIVE_INFINITY;
-  let longRightFirst = (longArray[partitionIndexLong]) ? longArray[partitionIndexLong] : Number.POSITIVE_INFINITY;
-  let longLeftLast = (longArray[partitionIndexLong - 1]) ? longArray[partitionIndexLong - 1] : Number.NEGATIVE_INFINITY;
-  let shortRightFirst = (shortArray[partitionIndexShort]) ? shortArray[partitionIndexShort] : Number.POSITIVE_INFINITY;
+  let shortLeftLast = (shortArray[partitionIndexShort -1] === undefined) ? Number.NEGATIVE_INFINITY: shortArray[partitionIndexShort -1];
+  let longRightFirst = (longArray[partitionIndexLong] === undefined) ? Number.POSITIVE_INFINITY: longArray[partitionIndexLong];
+  let longLeftLast = (longArray[partitionIndexLong - 1] === undefined) ? Number.NEGATIVE_INFINITY: longArray[partitionIndexLong - 1];
+  let shortRightFirst = (shortArray[partitionIndexShort] === undefined) ? Number.POSITIVE_INFINITY: shortArray[partitionIndexShort];
   // 3 scenarios:
   while (!(shortLeftLast <= longRightFirst && longLeftLast <= shortRightFirst)) {
     // Scenario 1: shortLeftLast > longRightFirst;
@@ -85,11 +85,11 @@ var findMedianSortedArrays = function(nums1, nums2) {
       partitionIndexLong = Math.floor((shortArray.length + longArray.length + 1) /2 - partitionIndexShort);
     }
     // Recalculate values to compare
-    shortLeftLast = (shortArray[partitionIndexShort -1]) ? shortArray[partitionIndexShort -1] : Number.NEGATIVE_INFINITY;
-    longRightFirst = (longArray[partitionIndexLong]) ? longArray[partitionIndexLong] : Number.POSITIVE_INFINITY;
-    longLeftLast = (longArray[partitionIndexLong - 1]) ? longArray[partitionIndexLong - 1] : Number.NEGATIVE_INFINITY;
-    shortRightFirst = (shortArray[partitionIndexShort]) ? shortArray[partitionIndexShort] : Number.POSITIVE_INFINITY;
-  }
+    shortLeftLast = (shortArray[partitionIndexShort -1] === undefined) ? Number.NEGATIVE_INFINITY: shortArray[partitionIndexShort -1];
+    longRightFirst = (longArray[partitionIndexLong] === undefined) ? Number.POSITIVE_INFINITY: longArray[partitionIndexLong];
+    longLeftLast = (longArray[partitionIndexLong - 1] === undefined) ? Number.NEGATIVE_INFINITY: longArray[partitionIndexLong - 1];
+    shortRightFirst = (shortArray[partitionIndexShort] === undefined) ? Number.POSITIVE_INFINITY: shortArray[partitionIndexShort];
+    }
   // Scenario 3: shortLeftLast < longRightFirst && longLeftLast < shortRightFirst
   // Success; found correct partition
   if ((nums1.length + nums2.length) % 2 === 0) {
@@ -103,7 +103,7 @@ var findMedianSortedArrays = function(nums1, nums2) {
   return answer;
 };
 
-findMedianSortedArrays([1,2], [3,4])
+findMedianSortedArrays([1, 2], [3,4])
 
 // [2, 3, 4], [2, 5, 6]
 // Case 1
