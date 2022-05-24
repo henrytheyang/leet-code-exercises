@@ -61,10 +61,20 @@ var findMedianSortedArrays = function(nums1, nums2) {
 
     // 5, 6      empty
     // empty     8, 9, 10
-  let shortLeftLast = (shortArray[partitionIndexShort -1] === undefined) ? Number.NEGATIVE_INFINITY: shortArray[partitionIndexShort -1];
-  let longRightFirst = (longArray[partitionIndexLong] === undefined) ? Number.POSITIVE_INFINITY: longArray[partitionIndexLong];
-  let longLeftLast = (longArray[partitionIndexLong - 1] === undefined) ? Number.NEGATIVE_INFINITY: longArray[partitionIndexLong - 1];
-  let shortRightFirst = (shortArray[partitionIndexShort] === undefined) ? Number.POSITIVE_INFINITY: shortArray[partitionIndexShort];
+  let shortLeftLast;
+  let longRightFirst;
+  let longLeftLast;
+  let shortRightFirst;
+
+  const calculateComparisonNums = () => {
+    shortLeftLast = (shortArray[partitionIndexShort -1] === undefined) ? Number.NEGATIVE_INFINITY: shortArray[partitionIndexShort -1];
+    longRightFirst = (longArray[partitionIndexLong] === undefined) ? Number.POSITIVE_INFINITY: longArray[partitionIndexLong];
+    longLeftLast = (longArray[partitionIndexLong - 1] === undefined) ? Number.NEGATIVE_INFINITY: longArray[partitionIndexLong - 1];
+    shortRightFirst = (shortArray[partitionIndexShort] === undefined) ? Number.POSITIVE_INFINITY: shortArray[partitionIndexShort];
+  }
+  
+  calculateComparisonNums();
+
   // 3 scenarios:
   while (!(shortLeftLast <= longRightFirst && longLeftLast <= shortRightFirst)) {
     // Scenario 1: shortLeftLast > longRightFirst;
@@ -84,11 +94,9 @@ var findMedianSortedArrays = function(nums1, nums2) {
       partitionIndexShort = Math.floor((low + high)/2);
       partitionIndexLong = Math.floor((shortArray.length + longArray.length + 1) /2 - partitionIndexShort);
     }
+
     // Recalculate values to compare
-    shortLeftLast = (shortArray[partitionIndexShort -1] === undefined) ? Number.NEGATIVE_INFINITY: shortArray[partitionIndexShort -1];
-    longRightFirst = (longArray[partitionIndexLong] === undefined) ? Number.POSITIVE_INFINITY: longArray[partitionIndexLong];
-    longLeftLast = (longArray[partitionIndexLong - 1] === undefined) ? Number.NEGATIVE_INFINITY: longArray[partitionIndexLong - 1];
-    shortRightFirst = (shortArray[partitionIndexShort] === undefined) ? Number.POSITIVE_INFINITY: shortArray[partitionIndexShort];
+    calculateComparisonNums();
     }
   // Scenario 3: shortLeftLast < longRightFirst && longLeftLast < shortRightFirst
   // Success; found correct partition
