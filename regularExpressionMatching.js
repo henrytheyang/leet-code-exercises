@@ -32,3 +32,43 @@ s contains only lowercase English letters.
 p contains only lowercase English letters, '.', and '*'.
 It is guaranteed for each appearance of the character '*', there will be a previous valid character to match.
 */
+
+/**
+ * @param {string} s
+ * @param {string} p
+ * @return {boolean}
+ */
+ var isMatch = function(s, p) {
+  let answer = true;
+  let charHistory = {};
+
+  if (s.length !== p.length) {
+    return false;
+  } 
+
+  for (i = 0; i < s.length - 1; i++) {
+    charHistory[s[i]] = true;
+    if (p[i] === s[i] || p[i] === '.') {
+      charHistory[s[i]] = true;
+    } else if (p[i] === '*' && charHistory[p[i]] === true) {
+      charHistory['*'] = true;
+    } else if (p[i] === '*' && charHistory['.'] === true) {
+      charHistory['*'] = true;
+    } else {
+      answer = false;
+      break
+    }
+  }
+
+  return answer;
+};
+
+/*
+Input
+"aab"
+"c*a*b"
+Output
+false
+Expected
+true
+*/
