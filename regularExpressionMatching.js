@@ -40,25 +40,16 @@ It is guaranteed for each appearance of the character '*', there will be a previ
  */
  var isMatch = function(s, p) {
   let answer = true;
-  let charHistory = {};
+  // Create 2D table that memoizes results of checking each case; initialize [0,0] to be true (empty string === empty pattern);
+  
+  // 3 cases:
+  // 1) Current letter in string matches current letter in pattern AND previous string & previous pattern matched then TRUE
+  // s[i] === p[j] ||  p[j] === '.'
+  // 2) Current letter in string is '*'
+  //   a) 0 cases of letter preceding '*'. If the string[i] matches pattern[j - 2] (pattern before char, *) then TRUE
+  //   b) 1 or more cases of letter preceding '*'. If the current string s[i] matches letter before '*' or if the letter before '*' is '.' then check if one fewer case of letter before '*' matches pattern. If matches then YES
+  // 3) Else false
 
-  if (s.length !== p.length) {
-    return false;
-  } 
-
-  for (i = 0; i < s.length - 1; i++) {
-    charHistory[s[i]] = true;
-    if (p[i] === s[i] || p[i] === '.') {
-      charHistory[s[i]] = true;
-    } else if (p[i] === '*' && charHistory[p[i]] === true) {
-      charHistory['*'] = true;
-    } else if (p[i] === '*' && charHistory['.'] === true) {
-      charHistory['*'] = true;
-    } else {
-      answer = false;
-      break
-    }
-  }
 
   return answer;
 };
