@@ -41,21 +41,21 @@ It is guaranteed for each appearance of the character '*', there will be a previ
  var isMatch = function(s, p) {
   // Create 2D table that memoizes results of checking each case; initialize [0,0] to be true (empty string === empty pattern);
   let truthTable =[[true]];
-  for (i = 0; i < s.length; i++) {
-    for (j = 0; j < p.length; j++) {
+  for (i = 1; i <= s.length; i++) {
+    for (j = 1; j <= p.length; j++) {
       // 3 cases:
       // 1) Current letter in string matches current letter in pattern AND previous string & previous pattern matched then TRUE
         // s[i] === p[j] ||  p[j] === '.'
-      if (s[i] === p[j] || p[j] === '.') {
+      if (s[i - 1] === p[j -1] || p[j - 1] === '.') {
         truthTable[i][j] = truthTable[i - 1][j - 1];
-      } else if (p[j] === '*') {
+      } else if (p[j - 1] === '*') {
         // 2) Current letter in string is '*'
           //   a) 0 cases of letter preceding '*'. If the string[i] matches pattern[j - 2] (pattern before char, *) then TRUE
-        if (s[i] === p[j - 2]) { 
+        if (s[i - 1] === p[j - 2]) { 
           truthTable[i][j] = truthTable[i][j - 2];
           //   b) 1 or more cases of letter preceding '*'. If the current string s[i] matches letter before '*' or if the letter before '*' is '.' then
           // check if one fewer case of letter before '*' matches pattern. If matches then YES
-        } else if (s[i] === p[j - 1] || p[j - 1] === '.') {
+        } else if (s[i -1] === p[j - 2] || p[j - 2] === '.') {
           truthTable[i][j] = truthTable[i - 1][j];
           // 3) Else false
         } else {
@@ -68,10 +68,12 @@ It is guaranteed for each appearance of the character '*', there will be a previ
   return truthTable[s.length][p.length];
 };
 
+isMatch('aa', 'a')
 /*
 Input
-"aab"
-"c*a*b"
+s = 'aa'
+p = 'a'
+
 Output
 false
 Expected
