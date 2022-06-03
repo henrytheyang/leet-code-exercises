@@ -43,7 +43,13 @@ It is guaranteed for each appearance of the character '*', there will be a previ
   let truthTable = new Array(s.length + 1);
   truthTable.fill(false);
   truthTable[0][0] = true;
-  
+  // Account for patterns like a*  b*a* etc
+  for (j = 1; j < truthTable.length; j++) {
+    if (p[j - 1] === '*') {
+      truthTable[0][j] = truthTable[0][j - 2];
+    }
+  }
+
   for (i = 1; i <= s.length; i++) {
     for (j = 1; j <= p.length; j++) {
       // 3 cases:
