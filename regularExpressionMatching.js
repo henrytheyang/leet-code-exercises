@@ -39,10 +39,14 @@ It is guaranteed for each appearance of the character '*', there will be a previ
  * @return {boolean}
  */
  var isMatch = function(s, p) {
-  // Create 2D table that memoizes results of checking each case; initialize [0,0] to be true (empty string === empty pattern);
-  let truthTable = new Array(s.length + 1);
-  truthTable.fill([false]);
+  // Create 2D table that memoizes results of checking each case; initialize [0,0] to be true (empty string === empty pattern), rest of table false
+  // let truthTable = [...new Array(s.length + 1)].map(() => {
+  //   return new Array(p.length + 1).fill(false);
+  // });
+
+  let truthTable = new Array(s.length + 1).fill(false).map( x => new Array(p.length + 1).fill(false) );
   truthTable[0][0] = true;
+
   // Account for patterns like a*  b*a* etc
   for (j = 1; j < truthTable.length; j++) {
     if (p[j - 1] === '*') {
