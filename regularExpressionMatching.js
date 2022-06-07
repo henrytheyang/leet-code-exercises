@@ -48,7 +48,7 @@ var isMatch = function(s, p) {
   truthTable[0][0] = true;
 
   // Account for patterns like a*  b*a* etc
-  for (j = 1; j < truthTable.length; j++) {
+  for (j = 1; j <= truthTable.length; j++) {
     if (p[j - 1] === '*') {
       truthTable[0][j] = truthTable[0][j - 2];
     }
@@ -79,23 +79,25 @@ var isMatch = function(s, p) {
   return truthTable[s.length][p.length];
 };
 
-isMatch('aa', 'a*')
+isMatch('aab', 'c*a*b')
 /*
-Input:
-"aa"
-"a*"
-Output:
+Input
+"aab"
+"c*a*b"
+stdout
 false
-Expected:
-true
 
+Output
+false
+Expected
+true
 */
 
 /*
         Pattern
-          0 a *
-String 0 T F T
+          0 c * a * b
+String  0 T F T F T F
+        a 
         a
-        a
-
+        b
 */
