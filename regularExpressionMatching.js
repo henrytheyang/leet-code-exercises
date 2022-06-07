@@ -75,7 +75,6 @@ var isMatch = function(s, p) {
       }
     }
   }
-  console.log(truthTable[s.length][p.length])
   return truthTable[s.length][p.length];
 };
 
