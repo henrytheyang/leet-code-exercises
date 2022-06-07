@@ -38,7 +38,7 @@ It is guaranteed for each appearance of the character '*', there will be a previ
  * @param {string} p
  * @return {boolean}
  */
- var isMatch = function(s, p) {
+var isMatch = function(s, p) {
   // Create 2D table that memoizes results of checking each case; initialize [0,0] to be true (empty string === empty pattern), rest of table false
   // let truthTable = [...new Array(s.length + 1)].map(() => {
   //   return new Array(p.length + 1).fill(false);
@@ -59,36 +59,43 @@ It is guaranteed for each appearance of the character '*', there will be a previ
       // 3 cases:
       // 1) Current letter in string matches current letter in pattern AND previous string & previous pattern matched then TRUE
         // s[i] === p[j] ||  p[j] === '.'
-      if (s[i - 1] === p[j -1] || p[j - 1] === '.') {
+      if (s[i - 1] === p[j - 1] || p[j - 1] === '.') {
         truthTable[i][j] = truthTable[i - 1][j - 1];
       } else if (p[j - 1] === '*') {
         // 2) Current letter in string is '*'
           //   a) 0 cases of letter preceding '*'. If the string[i] matches pattern[j - 2] (pattern before char, *) then TRUE
-        if (s[i - 1] === p[j - 2]) { 
+        if (truthTable[i][j - 2]) { 
           truthTable[i][j] = truthTable[i][j - 2];
           //   b) 1 or more cases of letter preceding '*'. If the current string s[i] matches letter before '*' or if the letter before '*' is '.' then
           // check if one fewer case of letter before '*' matches pattern. If matches then YES
-        } else if (s[i -1] === p[j - 2] || p[j - 2] === '.') {
+        } else if (s[i - 1] === p[j - 2] || p[j - 2] === '.') {
           truthTable[i][j] = truthTable[i - 1][j];
           // 3) Else false
-        } else {
-          truthTable[i][j] = false;
         }
       }
     }
   }
-
+  console.log(truthTable[s.length][p.length])
   return truthTable[s.length][p.length];
 };
 
-isMatch('aa', 'a')
+isMatch('aa', 'a*')
 /*
-Input
-s = 'aa'
-p = 'a'
-
-Output
+Input:
+"aa"
+"a*"
+Output:
 false
-Expected
+Expected:
 true
+
+*/
+
+/*
+        Pattern
+          0 a *
+String 0 T F T
+        a
+        a
+
 */
