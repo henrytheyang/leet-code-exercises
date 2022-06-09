@@ -33,7 +33,27 @@ s consists of English letters, digits, symbols and spaces.
  * @return {number}
  */
  var lengthOfLongestSubstring = function(s) {
-  
+  let answerLength = 0;
+  let charBank = {};
+  let trailingPointer = 0;
+  // Iterate first pointer, adding each char to the bank
+  for (leadingPointer = 0; leadingPointer < s.length; leadingPointer++) {
+    if (charBank[s[leadingPointer]] === undefined) {
+      charBank[s[leadingPointer]] = leadingPointer;
+    } else {
+      // When we find a repeat:    
+        // Calculate length of substring
+        // Compare with longest substring length, if longer update
+        // Advance trailing pointer until one past repeated char
+        // Cont
+      if (answerLength < (leadingPointer - trailingPointer + 1)) {
+        answerLength = leadingPointer - trailingPointer + 1
+      }
+      trailingPointer = charBank[s[leadingPointer]] + 1;
+      charBank[s[leadingPointer]] = leadingPointer;
+    }
+  }
+  return answerLength;
 };
 
 // console.log(lengthOfLongestSubstring("abcabcbb"));
