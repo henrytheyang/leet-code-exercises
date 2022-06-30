@@ -39,7 +39,7 @@ var lengthOfLongestSubstring = function(s) {
 
   // Iterate first pointer, adding each char to the bank
   for (leadingPointer = 0; leadingPointer < s.length; leadingPointer++) {
-    if (charBank[s[leadingPointer]] === undefined) {
+    if (charBank[s[leadingPointer]] === undefined || charBank[s[leadingPointer]] < trailingPointer) {
       charBank[s[leadingPointer]] = leadingPointer;
     } else {
       // When we find a repeat:    
@@ -49,11 +49,11 @@ var lengthOfLongestSubstring = function(s) {
         // Cont
       trailingPointer = charBank[s[leadingPointer]] + 1;
       charBank[s[leadingPointer]] = leadingPointer;
-      for (prop in charBank) {
-        if (charBank[prop] < trailingPointer) {
-          delete charBank[prop];
-        }
-      }
+      // for (prop in charBank) {
+      //   if (charBank[prop] < trailingPointer) {
+      //     delete charBank[prop];
+      //   }
+      // }
     }
     if (answerLength < leadingPointer - trailingPointer + 1) {
       answerLength = leadingPointer - trailingPointer + 1
