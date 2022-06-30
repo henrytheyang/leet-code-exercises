@@ -32,7 +32,7 @@ s consists of English letters, digits, symbols and spaces.
  * @param {string} s
  * @return {number}
  */
- var lengthOfLongestSubstring = function(s) {
+var lengthOfLongestSubstring = function(s) {
   let answerLength = 0;
   let charBank = {};
   let trailingPointer = 0;
@@ -46,8 +46,8 @@ s consists of English letters, digits, symbols and spaces.
         // Compare with longest substring length, if longer update
         // Advance trailing pointer until one past repeated char
         // Cont
-      if (answerLength < (leadingPointer - trailingPointer + 1)) {
-        answerLength = leadingPointer - trailingPointer + 1
+      if (answerLength < (leadingPointer - trailingPointer)) {
+        answerLength = leadingPointer - trailingPointer
       }
       trailingPointer = charBank[s[leadingPointer]] + 1;
       charBank[s[leadingPointer]] = leadingPointer;
@@ -56,8 +56,13 @@ s consists of English letters, digits, symbols and spaces.
   return answerLength;
 };
 
-// console.log(lengthOfLongestSubstring("abcabcbb"));
-// console.log(lengthOfLongestSubstring("bbbbb"));
-// console.log(lengthOfLongestSubstring("pwwkew"));
-//expected 6, got 5. Cut off the first t from answer
-console.log(lengthOfLongestSubstring('bbtablud'));
+/*
+Input
+"abcabcbb"
+Output
+4
+Expected
+3
+*/
+
+console.log(lengthOfLongestSubstring('abcabcbb'));
