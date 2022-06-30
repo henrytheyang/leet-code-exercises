@@ -36,9 +36,7 @@ var lengthOfLongestSubstring = function(s) {
   let answerLength = 0;
   let charBank = {};
   let trailingPointer = 0;
-  if (s.length === 1) {
-    answerLength = 1;
-  }
+
   // Iterate first pointer, adding each char to the bank
   for (leadingPointer = 0; leadingPointer < s.length; leadingPointer++) {
     if (charBank[s[leadingPointer]] === undefined) {
@@ -52,8 +50,8 @@ var lengthOfLongestSubstring = function(s) {
       trailingPointer = charBank[s[leadingPointer]] + 1;
       charBank[s[leadingPointer]] = leadingPointer;
     }
-    if (answerLength < (leadingPointer - trailingPointer)) {
-      answerLength = leadingPointer - trailingPointer
+    if (answerLength < leadingPointer - trailingPointer + 1) {
+      answerLength = leadingPointer - trailingPointer + 1
     }
   }
   return answerLength;
@@ -61,11 +59,11 @@ var lengthOfLongestSubstring = function(s) {
 
 /*
 Input
-" "
+"abcabcbb"
 Output
-0
+2
 Expected
-1
+3
 */
 
 console.log(lengthOfLongestSubstring(' '));
