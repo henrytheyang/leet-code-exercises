@@ -49,6 +49,11 @@ var lengthOfLongestSubstring = function(s) {
         // Cont
       trailingPointer = charBank[s[leadingPointer]] + 1;
       charBank[s[leadingPointer]] = leadingPointer;
+      for (prop in charBank) {
+        if (charBank[prop] < trailingPointer) {
+          delete charBank[prop];
+        }
+      }
     }
     if (answerLength < leadingPointer - trailingPointer + 1) {
       answerLength = leadingPointer - trailingPointer + 1
@@ -59,11 +64,11 @@ var lengthOfLongestSubstring = function(s) {
 
 /*
 Input
-"abcabcbb"
+"abba"
 Output
-2
-Expected
 3
+Expected
+2
 */
 
-console.log(lengthOfLongestSubstring(' '));
+console.log(lengthOfLongestSubstring('abba'));
