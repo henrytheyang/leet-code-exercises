@@ -25,6 +25,8 @@ s consist of only digits and English letters.
  * @param {string} s
  * @return {string}
  */
- var longestPalindrome = function(s) {
-    
+var longestPalindrome = function(s) {
+  // Iterate through string
+  // Use middle out method to check for palindrome
+  // Run middle out again, checking for double letter in the center palindrome
 };
