@@ -66,17 +66,7 @@ var longestPalindrome = function(s) {
     }
 
   }
-  console.log(`answer = ${answer}`)
   return answer;
 };
 
 longestPalindrome("bb");
-
-/*
-Input:
-"bb"
-Output:
-"b"
-Expected:
-"bb"
-*/
