@@ -41,5 +41,23 @@ digits does not contain any leading 0's.
  * @return {number[]}
  */
 var plusOne = function(digits) {
-    
+  const incrementPrevious = (arr, index) => {
+    arr[index] = arr[index] + 1;
+    return arr;
+  }
+  let answer = [...digits];
+
+  for (i = answer.length - 1; i >= 0; i--) {
+    if (answer[i] >= 0 && answer[i] <= 8) {
+      answer[i]+= 1
+      return answer
+    } else if (answer[i] === 9) {
+      answer[i] = 0;
+      if (i === 0) {
+        return [1, ...answer];
+      }
+    }
+  }
+
+  return answer;
 };
