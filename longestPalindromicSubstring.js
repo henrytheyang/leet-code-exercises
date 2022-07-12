@@ -45,6 +45,8 @@ var longestPalindrome = function(s) {
       if (right - left + 1 > answer.length) {
         answer = s.slice(left, right + 1);
       }
+      left--;
+      right++;
     }
 
     // If current string === next string, run middle out again, checking for double letter in the center palindrome
@@ -56,8 +58,10 @@ var longestPalindrome = function(s) {
       }
       while (left >= 0 && right <= s.length - 1 && s[left] === s[right]) {
         if (right - left + 1 > answer.length) {
-          answer = s.slice(left, right);
+          answer = s.slice(left, right + 1);
         }
+        left--;
+        right++;
       }
     }
 
