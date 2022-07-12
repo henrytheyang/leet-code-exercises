@@ -43,7 +43,7 @@ var longestPalindrome = function(s) {
     let right = i + 1;
     while (left >= 0 && right <= s.length - 1 && s[left] === s[right]) {
       if (right - left + 1 > answer.length) {
-        answer = s.slice(left, right);
+        answer = s.slice(left, right + 1);
       }
     }
 
@@ -62,6 +62,8 @@ var longestPalindrome = function(s) {
     }
 
   }
-
+  console.log(`answer = ${answer}`)
   return answer;
 };
+
+longestPalindrome("babad");
