@@ -37,7 +37,7 @@ var longestPalindrome = function(s) {
   let answer = s[0];
 
   // Iterate through string
-  for (i = 1; i < s.length; i++) {
+  for (i = 0; i < s.length; i++) {
     // Use middle out method to check for palindrome
     let left = i - 1;
     let right = i + 1;
@@ -70,14 +70,13 @@ var longestPalindrome = function(s) {
   return answer;
 };
 
-longestPalindrome("cbbd");
+longestPalindrome("bb");
 
 /*
-Input
-"cbbd"
-
-Output
+Input:
+"bb"
+Output:
 "b"
-Expected
+Expected:
 "bb"
 */
