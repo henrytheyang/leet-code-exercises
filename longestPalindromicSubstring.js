@@ -54,7 +54,7 @@ var longestPalindrome = function(s) {
       let left = i - 1;
       let right = i + 2;
       if (answer.length < 2) { 
-        answer = s.slice(i, i + 1);
+        answer = s.slice(i, i + 2);
       }
       while (left >= 0 && right <= s.length - 1 && s[left] === s[right]) {
         if (right - left + 1 > answer.length) {
@@ -70,4 +70,14 @@ var longestPalindrome = function(s) {
   return answer;
 };
 
-longestPalindrome("babad");
+longestPalindrome("cbbd");
+
+/*
+Input
+"cbbd"
+
+Output
+"b"
+Expected
+"bb"
+*/
