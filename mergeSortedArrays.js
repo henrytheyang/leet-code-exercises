@@ -58,5 +58,33 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
 var merge = function(nums1, m, nums2, n) {
-    
+  let answer = [];
+  // Edge cases of empty m, empty n
+  if (m === 0) {
+    nums1 = [...nums2]
+    return;
+  }
+  if (n === 0) {
+    return;
+  }
+  // Iterate through arrays and sort into new array
+  let i = 0;
+  let j = 0;
+
+  while (i < m && j < n) {
+    if (nums1[i] >= nums2[j]) {
+      answer.push(nums1[i]);
+      i++;
+    } else if (nums2[j] > nums1[i]) {
+      answer.push(nums2[j]);
+      j++;
+    }
+  }
+  if (i === m && j < n) {
+    answer = [...answer, nums2.slice(j, n)];
+  } else if (j === n && i < m) {
+    answer = [...answer, nums1.slice(i, m)];
+  }
+  // Reassign nums1 to this array
+  nums1 = [...answer];
 };
