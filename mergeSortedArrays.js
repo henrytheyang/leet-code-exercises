@@ -59,7 +59,27 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
  */
 var merge = function(nums1, m, nums2, n) {
   // Fill from rear
+  while (m > 0 && n > 0) {
+    if (nums1[m - 1] >= nums2[n - 1]) {
+      nums1[m + n - 1] = nums1[m - 1];
+      m--;
+    } else {
+      nums1[m + n - 1] = nums2[n - 1];
+      n--;
+    }
+  }
   // Account for after one set is finished
+  if (m === 0) {
+    while (n > 0) {
+      nums1[m + n - 1] = nums2[n - 1];
+      n--;
+    }
+  } else if (n === 0) {
+    while (m > 0) {
+      nums1[m + n - 1] = nums1[m - 1];
+      m--;
+    }
+  }
 };
 
 merge([1,2,3,0,0,0],3,[2,5,6],3)
