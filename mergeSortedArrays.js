@@ -81,9 +81,9 @@ var merge = function(nums1, m, nums2, n) {
     }
   }
   if (i === m && j < n) {
-    answer = [...answer, nums2.slice(j, n)];
+    answer = [...answer, ...nums2.slice(j, n)];
   } else if (j === n && i < m) {
-    answer = [...answer, nums1.slice(i, m)];
+    answer = [...answer, ...nums1.slice(i, m)];
   }
   // Reassign nums1 to this array
   nums1 = [...answer];
