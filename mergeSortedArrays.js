@@ -72,10 +72,10 @@ var merge = function(nums1, m, nums2, n) {
   let j = 0;
 
   while (i < m && j < n) {
-    if (nums1[i] >= nums2[j]) {
+    if (nums1[i] <= nums2[j]) {
       answer.push(nums1[i]);
       i++;
-    } else if (nums2[j] > nums1[i]) {
+    } else if (nums2[j] < nums1[i]) {
       answer.push(nums2[j]);
       j++;
     }
@@ -88,3 +88,17 @@ var merge = function(nums1, m, nums2, n) {
   // Reassign nums1 to this array
   nums1 = [...answer];
 };
+
+merge([1,2,3,0,0,0],3,[2,5,6],3)
+
+/*
+Input
+[1,2,3,0,0,0]
+3
+[2,5,6]
+3
+Output
+[1,2,3,0,0,0]
+Expected
+[1,2,2,3,5,6]
+*/
