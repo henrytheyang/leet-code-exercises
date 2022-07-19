@@ -43,7 +43,7 @@ Follow up: Could you do this in one pass?
  * @param {number} n
  * @return {ListNode}
  */
- var removeNthFromEnd = function(head, n) {
+var removeNthFromEnd = function(head, n) {
   let fast = head;
   let slow = head;
   // Have 2 pointers running concurrently
@@ -58,7 +58,7 @@ Follow up: Could you do this in one pass?
     }
   }
   // Edge cases- n is equal to list length
-  if (slow === head) {
+  if (slow === head && n > 0) {
     head = head.next;
   } else {
     // Excise node in question, return head
@@ -67,3 +67,15 @@ Follow up: Could you do this in one pass?
 
   return head;
 };
+
+removeNthFromEnd([1, 2], 1)
+
+/*
+Input
+[1,2]
+1
+Output
+[2]
+Expected
+[1]
+*/
