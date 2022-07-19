@@ -44,11 +44,26 @@ Follow up: Could you do this in one pass?
  * @return {ListNode}
  */
  var removeNthFromEnd = function(head, n) {
+  let fast = head;
+  let slow = head;
   // Have 2 pointers running concurrently
-  // Run fast pointer until this.next is null (last node)
-  // Advance slow pointer n places behind fast, run simultaneously
-  // Excise node in question, return head
-
-
+  // Run fast pointer until fast.next is null (last node)
+  while (fast.next !== null) {
+    fast = fast.next;
+    if (n > 0) {
+      n--;
+    } else {
+      // Advance slow pointer n places behind fast
+      slow = slow.next;
+    }
+  }
   // Edge cases- n is equal to list length
+  if (slow === head) {
+    head = head.next;
+  } else {
+    // Excise node in question, return head
+    slow.next = slow.next.next;
+  }
+
+  return head;
 };
