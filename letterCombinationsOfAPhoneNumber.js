@@ -33,8 +33,30 @@ digits[i] is a digit in the range ['2', '9'].
  * @return {string[]}
  */
 var letterCombinations = function(digits) {
+  const letterBank = {
+    '2': ['a', 'b', 'c'],
+    '3': ['d', 'e', 'f'],
+    '4': ['g', 'h', 'i'],
+    '5': ['j', 'k', 'l'],
+    '6': ['m', 'n', 'o'],
+    '7': ['p', 'q', 'r', 's'],
+    '8': ['t', 'u', 'v'],
+    '9': ['w', 'x', 'y', 'z'],
+  }
+  let answer = [];
+  if (digits.length === 0) {
+    return answer;
+  }
+
+  const addMoreLetters = (arrPreviousLetters) => {
+    for (i = 0; i < arrPreviousLetters.length; i++) {
+
+    }
+  }
   // Recrusive function until we reach digits.length
   // Take previous array, add all possibile letters of the next digit to each item
   // Store in new array
   // Recurse until the length of each array contents equals digits.length
+
+  
 };
