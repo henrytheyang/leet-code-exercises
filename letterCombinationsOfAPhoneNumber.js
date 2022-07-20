@@ -60,12 +60,14 @@ var letterCombinations = function(digits) {
       }
     }
     currentDigit++;
+    // Store in new array
     if (currentDigit < digits.length) {
       addMoreLetters(newLayerLetters);
+    } else {
+      // Recurse until the length of each array contents equals digits.length
+      answer = [...answer, ...newLayerLetters];
     }
   }
-  // Store in new array
-  // Recurse until the length of each array contents equals digits.length
 
   
 };
