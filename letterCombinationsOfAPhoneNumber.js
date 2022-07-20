@@ -48,13 +48,22 @@ var letterCombinations = function(digits) {
     return answer;
   }
 
-  const addMoreLetters = (arrPreviousLetters) => {
-    for (i = 0; i < arrPreviousLetters.length; i++) {
+  let currentDigit = 0;
 
+  // Recrusive function until we reach digits.length
+  const addMoreLetters = (arrPreviousLetters) => {
+    let newLayerLetters = [];
+    // Take previous array, add all possibile letters of the next digit to each item
+    for (i = 0; i < arrPreviousLetters.length; i++) {
+      for (j = 0; j < letterBank[digits[currentDigit]].length; j++) {
+        newLayerLetters.push(arrPreviousLetters[i] + letterBank[digits[currentDigit]][j]);
+      }
+    }
+    currentDigit++;
+    if (currentDigit < digits.length) {
+      addMoreLetters(newLayerLetters);
     }
   }
-  // Recrusive function until we reach digits.length
-  // Take previous array, add all possibile letters of the next digit to each item
   // Store in new array
   // Recurse until the length of each array contents equals digits.length
 
