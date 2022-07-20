@@ -33,5 +33,8 @@ digits[i] is a digit in the range ['2', '9'].
  * @return {string[]}
  */
 var letterCombinations = function(digits) {
-    
+  // Recrusive function until we reach digits.length
+  // Take previous array, add all possibile letters of the next digit to each item
+  // Store in new array
+  // Recurse until the length of each array contents equals digits.length
 };
