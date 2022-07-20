@@ -69,5 +69,6 @@ var letterCombinations = function(digits) {
     }
   }
 
+  // Do first letter, store in array, and run recrusive helper on it
   
 };
