@@ -53,12 +53,19 @@ var letterCombinations = function(digits) {
   // Recrusive function until we reach digits.length
   const addMoreLetters = (arrPreviousLetters) => {
     let newLayerLetters = [];
-    // Take previous array, add all possibile letters of the next digit to each item
-    for (i = 0; i < arrPreviousLetters.length; i++) {
-      for (j = 0; j < letterBank[digits[currentDigit]].length; j++) {
-        newLayerLetters.push(arrPreviousLetters[i] + letterBank[digits[currentDigit]][j]);
+
+    // First iteration
+    if (arrPreviousLetters.length === 0) {
+      newLayerLetters = [...letterBank[digits[0]]];
+    } else {      
+      // Take previous array, add all possibile letters of the next digit to each item
+      for (i = 0; i < arrPreviousLetters.length; i++) {
+        for (j = 0; j < letterBank[digits[currentDigit]].length; j++) {
+          newLayerLetters.push(arrPreviousLetters[i] + letterBank[digits[currentDigit]][j]);
+        }
       }
     }
+    
     currentDigit++;
     // Store in new array
     if (currentDigit < digits.length) {
