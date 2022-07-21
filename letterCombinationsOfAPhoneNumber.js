@@ -51,31 +51,32 @@ var letterCombinations = function(digits) {
   let currentDigit = 0;
 
   // Recrusive function until we reach digits.length
-  const addMoreLetters = (arrPreviousLetters) => {
-    let newLayerLetters = [];
+  const convertToLetters = (previousLevelLetters) => {
+    let currentLevelLetters = [];
 
-    // First iteration
-    if (arrPreviousLetters.length === 0) {
-      newLayerLetters = [...letterBank[digits[0]]];
+    // Do first letter, store in array, and run recrusive helper on it
+    if (previousLevelLetters.length === 0) {
+      currentLevelLetters = [...letterBank[digits[0]]];
     } else {      
       // Take previous array, add all possibile letters of the next digit to each item
-      for (i = 0; i < arrPreviousLetters.length; i++) {
+      for (i = 0; i < previousLevelLetters.length; i++) {
         for (j = 0; j < letterBank[digits[currentDigit]].length; j++) {
-          newLayerLetters.push(arrPreviousLetters[i] + letterBank[digits[currentDigit]][j]);
+          // Store in new array
+          currentLevelLetters.push(previousLevelLetters[i] + letterBank[digits[currentDigit]][j]);
         }
       }
     }
-    
+
     currentDigit++;
-    // Store in new array
+
+    // Recurse until the length of each array contents equals digits.length
     if (currentDigit < digits.length) {
-      addMoreLetters(newLayerLetters);
+      convertToLetters(currentLevelLetters);
     } else {
-      // Recurse until the length of each array contents equals digits.length
-      answer = [...answer, ...newLayerLetters];
+      answer = [...answer, ...currentLevelLetters];
     }
   }
 
-  // Do first letter, store in array, and run recrusive helper on it
-  
+  convertToLetters([]);
+  return answer; 
 };
