@@ -56,7 +56,7 @@ var letterCombinations = function(digits) {
 
     // Do first letter, store in array, and run recrusive helper on it
     if (previousLevelLetters.length === 0) {
-      currentLevelLetters = [...letterBank[digits[0]]];
+      currentLevelLetters = [...letterBank[digits[currentDigit]]];
     } else {      
       // Take previous array, add all possibile letters of the next digit to each item
       for (i = 0; i < previousLevelLetters.length; i++) {
