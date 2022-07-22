@@ -30,5 +30,8 @@ Constraints:
  * @return {number}
  */
 var firstMissingPositive = function(nums) {
-    
+  // Iterate through nums and create hash table
+  // Iterate through positive numbers and see if the number is present in hash table; return first missing
+  
+
 };
