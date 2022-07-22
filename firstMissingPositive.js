@@ -46,5 +46,4 @@ var firstMissingPositive = function(nums) {
       return numberTested;
     }
   }
-
 };
