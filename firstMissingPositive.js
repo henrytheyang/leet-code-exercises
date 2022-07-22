@@ -31,7 +31,20 @@ Constraints:
  */
 var firstMissingPositive = function(nums) {
   // Iterate through nums and create hash table
-  // Iterate through positive numbers and see if the number is present in hash table; return first missing
+  let numbersPresent = {};
+  for (i = 0; i < nums.length; i++) {
+    numbersPresent[nums[i]] = true;
+  }
   
+  // Iterate through positive numbers and see if the number is present in hash table; return first missing
+  let answerFound = false;
+  let numberTested = 1;
+  while (answerFound === false) {
+    if (numbersPresent[numberTested] === true) {
+      numberTested++;
+    } else {
+      return numberTested;
+    }
+  }
 
 };
