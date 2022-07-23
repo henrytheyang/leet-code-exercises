@@ -30,20 +30,10 @@ Constraints:
  * @return {number}
  */
 var firstMissingPositive = function(nums) {
-  // Iterate through nums and create hash table
-  let numbersPresent = {};
-  for (i = 0; i < nums.length; i++) {
-    numbersPresent[nums[i]] = true;
-  }
-  
-  // Iterate through positive numbers and see if the number is present in hash table; return first missing
-  let answerFound = false;
-  let numberTested = 1;
-  while (answerFound === false) {
-    if (numbersPresent[numberTested] === true) {
-      numberTested++;
-    } else {
-      return numberTested;
-    }
-  }
+  // Solution must be in the range 1...n + 1, where n is the length of the array
+  // Iterate through array and overwrite irrelevant numbers (negatives, numbers > n + 1)
+  // Iterate through array- take the value at each index, go to that index number, and mark it by making it negative
+
+  // Iterate through array- return first positive number, else return n + 1
+
 };
