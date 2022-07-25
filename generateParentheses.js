@@ -24,9 +24,17 @@ Constraints:
  */
 var generateParenthesis = function(n) {
   // # open >= # closed
+  let stack = [];
+  let openCounter = 0;
+  
   // Use stack to track open/closed status, use counter to track how many opens used
     // If stack is empty, must use open next
     // Once all opens are used the rest must be closed
     // If stack is not empty, add either open or closed
     // Recurse
+  
+  const addNextParenthesis = (prevStrings, counter) => {
+
+  };
+
 };
