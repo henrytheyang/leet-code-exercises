@@ -1,14 +1,4 @@
 /*
-22. Generate Parentheses
-Medium
-
-14125
-
-531
-
-Add to List
-
-Share
 Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
  
@@ -33,5 +23,10 @@ Constraints:
  * @return {string[]}
  */
 var generateParenthesis = function(n) {
-    
+  // # open >= # closed
+  // Use stack to track open/closed status, use counter to track how many opens used
+    // If stack is empty, must use open next
+    // Once all opens are used the rest must be closed
+    // If stack is not empty, add either open or closed
+    // Recurse
 };
