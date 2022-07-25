@@ -1,0 +1,22 @@
+{
+  "name": "leet-code-exercises",
+  "version": "1.0.0",
+  "description": "",
+  "main": "addTwoNumbers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henrytheyang/leet-code-exercises.git"
+  },
+  "author": "henrytheyang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/henrytheyang/leet-code-exercises/issues"
+  },
+  "homepage": "https://github.com/henrytheyang/leet-code-exercises#readme",
+  "jshintConfig": {
+    "esversion": 6
+  }
+}
