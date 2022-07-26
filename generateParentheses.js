@@ -56,5 +56,3 @@ var generateParenthesis = function(n) {
   addNextParenthesis('', counter, stack);
   return answer;
 };
-
-generateParenthesis(3)
