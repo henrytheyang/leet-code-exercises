@@ -36,7 +36,7 @@ var generateParenthesis = function(n) {
       // If stack is empty, must use open next
       if (currentStack.length === 0) {
         let newBase = prevBase + '(';
-        let newCounter = currentCounter++;
+        let newCounter = currentCounter + 1;
         let newStack = [...currentStack, '('];
         addNextParenthesis(newBase, newCounter, newStack);
       } else {
@@ -47,7 +47,7 @@ var generateParenthesis = function(n) {
         addNextParenthesis(newBase, currentCounter, newStack);
 
         newBase = prevBase + '(';
-        newCounter++;
+        let newCounter = currentCounter + 1;
         newStack = [...currentStack, '('];
         addNextParenthesis(newBase, newCounter, newStack);
       }
