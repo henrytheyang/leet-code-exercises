@@ -37,3 +37,48 @@ k == lists.length
 lists[i] is sorted in ascending order.
 The sum of lists[i].length will not exceed 104.
 */
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+
+var mergeKLists = function(lists) {
+  // Edge cases- handle empty sets. All empty sets, some empty sets
+  // Merge 2 lists at a time until there is only one list left
+  // Return that list
+
+  // Helper merge function
+  const mergeList = (listA, listB) => {
+    let merged = new ListNode(0);
+    let currentNode = merged;
+
+    while (listA && listB) {    
+      if (listA.val < listB.val) {
+        currentNode.next = listA.val;
+        listA = listA.next;
+        currentNode = currentNode.next;
+      } else {
+        currentNode.next = listB.val;
+        listB = listB.next;
+        currentNode = currentNode.next;
+      }
+    }
+    // After one list runs out, append the other to the end
+    if (listA === null) {
+      currentNode.next = listB;
+    } else {
+      currentNode.next = listA;
+    }
+    return merged.next;
+  };
+
+
+};
