@@ -76,7 +76,7 @@ var mergeKLists = function(lists) {
 
   // Edge cases- handle empty sets. All empty sets, some empty sets
   if (lists.length === 0) {
-    return {};
+    return null;
   }
 
   // Merge 2 lists at a time until there is only one list left
