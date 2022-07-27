@@ -51,16 +51,11 @@ The sum of lists[i].length will not exceed 104.
  */
 
 var mergeKLists = function(lists) {
-  // Edge cases- handle empty sets. All empty sets, some empty sets
-  // Merge 2 lists at a time until there is only one list left
-  // Return that list
-
-  // Helper merge function
-  const mergeList = (listA, listB) => {
+  const mergeLists = (listA, listB) => {
     let merged = new ListNode(0);
     let currentNode = merged;
 
-    while (listA && listB) {    
+    while (listA && listB) {  
       if (listA.val < listB.val) {
         currentNode.next = listA.val;
         listA = listA.next;
@@ -80,5 +75,18 @@ var mergeKLists = function(lists) {
     return merged.next;
   };
 
+  // Edge cases- handle empty sets. All empty sets, some empty sets
+  if (lists.length === 0) {
+    return {};
+  }
 
+  // Merge 2 lists at a time until there is only one list left
+  // Return that list
+  let answer = null;
+  while (lists.length > 0) {
+    answer = answer || lists.pop();
+    let comparator = lists.pop();
+    answer = mergeLists(answer, comparator);
+  }
+  return answer;
 };
