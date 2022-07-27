@@ -55,16 +55,15 @@ var mergeKLists = function(lists) {
     let merged = new ListNode(0);
     let currentNode = merged;
 
-    while (listA && listB) {  
+    while (listA !== null && listB !== null) {  
       if (listA.val < listB.val) {
         currentNode.next = listA;
         listA = listA.next;
-        currentNode = currentNode.next;
       } else {
         currentNode.next = listB;
         listB = listB.next;
-        currentNode = currentNode.next;
       }
+      currentNode = currentNode.next;
     }
     // After one list runs out, append the other to the end
     if (listA === null) {
