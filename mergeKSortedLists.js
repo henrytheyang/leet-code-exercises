@@ -82,8 +82,8 @@ var mergeKLists = function(lists) {
   // Merge 2 lists at a time until there is only one list left
   // Return that list
   while (lists.length > 1) {
-    let a = lists.pop();
-    let b = lists.pop();
+    let a = lists.shift();
+    let b = lists.shift();
     lists.push(mergeLists(a, b));
   }
   return lists[0];
