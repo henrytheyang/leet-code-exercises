@@ -81,11 +81,10 @@ var mergeKLists = function(lists) {
 
   // Merge 2 lists at a time until there is only one list left
   // Return that list
-  let answer = null;
-  while (lists.length > 0) {
-    answer = answer || lists.pop();
-    let comparator = lists.pop();
-    answer = mergeLists(answer, comparator);
+  while (lists.length > 1) {
+    let a = lists.pop();
+    let b = lists.pop();
+    lists.push(mergeLists(a, b));
   }
-  return answer;
+  return lists[0];
 };
