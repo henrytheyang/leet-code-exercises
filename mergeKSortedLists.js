@@ -57,11 +57,11 @@ var mergeKLists = function(lists) {
 
     while (listA && listB) {  
       if (listA.val < listB.val) {
-        currentNode.next = listA.val;
+        currentNode.next = listA;
         listA = listA.next;
         currentNode = currentNode.next;
       } else {
-        currentNode.next = listB.val;
+        currentNode.next = listB;
         listB = listB.next;
         currentNode = currentNode.next;
       }
