@@ -64,7 +64,17 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
       tBank[t[i]] += 1;
     }
   }
+  
+  let leftPointer = 0;
+  let rightPointer = 0;
+  let validWindowLeft = null;
+  let validWindowRight = null;
+  let length = null;
 
+  // If sCount > tCount, increment conditionsMet
+  // Check if conditionsMet > # of unique chars in t; if true then validWindowFound = true
+    // Save leftEdge & rightEdge of window && length
+    // Compare to previous successful length; if length is smaller update leftEdge & rightEdge & length
   const checkHowManyConditions = () => {
     let satisfiedCondition = 0;
     for (var prop in tBank) {
@@ -74,25 +84,38 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
     }
     if (satisfiedCondition >= numberConditions) {
       validWindowFound = true;
+      if (length === null || rightPointer - leftPointer + 1 < length) {
+        validWindowLeft = leftPointer;
+        validWindowRight = rightPointer;
+        length = rightPointer - leftPointer + 1;
+      }
     } else {
       validWindowFound = false;
     }
   };
 
-  for (i = 0; i < s.length; i++) {
-    // Increment Right
-    // While validWindow === false && we haven't reached end of s, checking for presence of key chars.
+  while (rightPointer <= s.length){
+    // Check at rightPointer
+    // While validWindowFound === false && we haven't reached end of s, checking for presence of key chars.
+    if (validWindowFound === false) {
       // Update sCount when finding key chars
-      // If sCount > tCount, increment conditionsMet
-      // Check if conditionsMet > # of unique chars in t; if true then validWindow = true
-        // Save leftEdge & rightEdge of window && length
-        // Compare to previous successful length; if length is smaller update leftEdge & rightEdge & length
-    // While validWindow === true, increment L, starting from leftEdge
-      // Check if the char we just passed decreases sCount; update conditionsMet
-      // Check if conditionsMet < # of unique chars in t
-        // If so then validWindow = false; return to incrementing Right
-        // If not then continue to increment L
+      if (tBank[s[rightPointer]]) {
+        sBank[s[rightPointer]] = sBank[s[rightPointer]] + 1 || 1;
+        checkHowManyConditions();
+      }
+      rightPointer++;
+    } else if (validWindowFound === true) {
+      // While validWindowFound === true, increment L, starting from leftEdge
+        // Check if the char we just passed decreases sCount; update conditionsMet
+        // Check if conditionsMet < # of unique chars in t
+          // If so then validWindowFound = false; return to incrementing Right
+          // If not then continue to increment L
+
+    }
+    
 
   }
+
+
 
 };
