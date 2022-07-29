@@ -50,4 +50,20 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
   if (s.length < t.length || t.length === 0) {
     return answer;
   }
+
+  // Sliding window w/ 2 pointers, both Left & Right start at beginning of s.
+  // Create char bank for t
+  // Increment Right
+  // While validWindow === false && we haven't reached end of s, checking for presence of key chars.
+    // Update sCount when finding key chars
+    // If sCount > tCount, increment conditionsMet
+    // Check if conditionsMet > # of unique chars in t; if true then validWindow = true
+      // Save leftEdge & rightEdge of window && length
+      // Compare to previous successful length; if length is smaller update leftEdge & rightEdge & length
+  // While validWindow === true, increment L, starting from leftEdge
+    // Check if the char we just passed decreases sCount; update conditionsMet
+    // Check if conditionsMet < # of unique chars in t
+      // If so then validWindow = false; return to incrementing Right
+      // If not then continue to increment L
+
 };
