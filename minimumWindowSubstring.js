@@ -108,8 +108,13 @@ var minWindow = function(s, t) {
     } else {
       // While validWindowFound === true, increment L, starting from leftEdge
       while (validWindowFound === true) {
+        // Check if char we are passing decreases sCount
+        if (sBank[s[leftPointer]] !== undefined) {
+          if (sBank[s[leftPointer]] >= 1) {
+            sBank[s[leftPointer]]--;
+          }
+        }
         leftPointer++;
-        // Check if the char we just passed decreases sCount; update conditionsMet
         // Check if conditionsMet < # of unique chars in t
           // If so then validWindowFound = false; return to incrementing Right
           // If not then continue to increment L
