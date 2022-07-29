@@ -117,7 +117,5 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
       }
     }
   }
-
-
-
+  return s.slice(validWindowLeft, validWindowRight + 1);
 };
