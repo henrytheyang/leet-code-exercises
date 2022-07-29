@@ -84,6 +84,7 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
     }
     if (satisfiedCondition >= numberConditions) {
       validWindowFound = true;
+      // Updating when we find smaller window
       if (length === null || rightPointer - leftPointer + 1 < length) {
         validWindowLeft = leftPointer;
         validWindowRight = rightPointer;
@@ -94,7 +95,7 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
     }
   };
 
-  while (rightPointer <= s.length){
+  while (rightPointer <= s.length) {
     // Check at rightPointer
     // While validWindowFound === false && we haven't reached end of s, checking for presence of key chars.
     if (validWindowFound === false) {
@@ -104,16 +105,17 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
         checkHowManyConditions();
       }
       rightPointer++;
-    } else if (validWindowFound === true) {
+    } else {
       // While validWindowFound === true, increment L, starting from leftEdge
+      while (validWindowFound === true) {
+        leftPointer++;
         // Check if the char we just passed decreases sCount; update conditionsMet
         // Check if conditionsMet < # of unique chars in t
           // If so then validWindowFound = false; return to incrementing Right
           // If not then continue to increment L
-
+        checkHowManyConditions();
+      }
     }
-    
-
   }
 
 
