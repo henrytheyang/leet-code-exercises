@@ -47,6 +47,7 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
  */
  var minWindow = function(s, t) {
   let answer = '';
+  let validWindowFound = false;
   if (s.length < t.length || t.length === 0) {
     return answer;
   }
@@ -66,8 +67,18 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
   }
 
   const checkHowManyConditions = () => {
-    
-  }
+    let satisfiedCondition = 0;
+    for (var prop in tBank) {
+      if (sBank[prop] >= tBank[prop]) {
+        satisfiedCondition += 1;
+      }
+    }
+    if (satisfiedCondition >= numberConditions) {
+      validWindowFound = true;
+    } else {
+      validWindowFound = false;
+    }
+  };
   // Increment Right
   // While validWindow === false && we haven't reached end of s, checking for presence of key chars.
     // Update sCount when finding key chars
