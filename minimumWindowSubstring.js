@@ -53,6 +53,21 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
 
   // Sliding window w/ 2 pointers, both Left & Right start at beginning of s.
   // Create char bank for t
+  let tBank = {};
+  let sBank = {};
+  let numberConditions = 0;
+  for (i = 0; i < t.length; i++) {
+    if (tBank[t[i]] === null) {
+      numberConditions++;
+      tBank[t[i]] = 1;
+    } else {
+      tBank[t[i]] += 1;
+    }
+  }
+
+  const checkHowManyConditions = () => {
+    
+  }
   // Increment Right
   // While validWindow === false && we haven't reached end of s, checking for presence of key chars.
     // Update sCount when finding key chars
