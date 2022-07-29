@@ -47,7 +47,7 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
  */
  var minWindow = function(s, t) {
   let answer = '';
-  if (n > m) {
+  if (n > m || n === 0) {
     return answer;
   }
 };
