@@ -122,17 +122,21 @@ var minWindow = function(s, t) {
       }
     }
   }
-  console.log(s.slice(validWindowLeft, validWindowRight + 1));
-  return s.slice(validWindowLeft, validWindowRight + 1);
+  if (validWindowLeft && validWindowRight) {
+    return s.slice(validWindowLeft, validWindowRight + 1);
+  } else {
+    return '';
+  }
 };
 
 minWindow("ADOBECODEBANC","ABC");
 /*
-Your input
-"ADOBECODEBANC"
-"ABC"
+Input
+"a"
+"b"
+
 Output
-"A"
+"a"
 Expected
-"BANC"
+""
 */
