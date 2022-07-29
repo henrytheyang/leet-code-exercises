@@ -59,7 +59,7 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
   let numberConditions = 0;
   for (i = 0; i < t.length; i++) {
     if (tBank[t[i]] === null) {
-      numberConditions++;
+      numberConditions += 1;
       tBank[t[i]] = 1;
     } else {
       tBank[t[i]] += 1;
