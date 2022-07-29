@@ -45,7 +45,7 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
  * @param {string} t
  * @return {string}
  */
- var minWindow = function(s, t) {
+var minWindow = function(s, t) {
   let validWindowFound = false;
   if (s.length < t.length || t.length === 0) {
     return '';
@@ -57,7 +57,7 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
   let sBank = {};
   let numberConditions = 0;
   for (i = 0; i < t.length; i++) {
-    if (tBank[t[i]] === null) {
+    if (tBank[t[i]] === undefined) {
       numberConditions += 1;
       tBank[t[i]] = 1;
     } else {
@@ -117,5 +117,17 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
       }
     }
   }
+  console.log(s.slice(validWindowLeft, validWindowRight + 1));
   return s.slice(validWindowLeft, validWindowRight + 1);
 };
+
+minWindow("ADOBECODEBANC","ABC");
+/*
+Your input
+"ADOBECODEBANC"
+"ABC"
+Output
+"A"
+Expected
+"BANC"
+*/
