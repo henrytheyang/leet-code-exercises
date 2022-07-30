@@ -104,7 +104,9 @@ var minWindow = function(s, t) {
         sBank[s[rightPointer]] = sBank[s[rightPointer]] + 1 || 1;
         checkHowManyConditions();
       }
-      rightPointer++;
+      if (validWindowFound === false) {
+        rightPointer++;
+      }
     } else {
       // While validWindowFound === true, increment L, starting from leftEdge
       while (validWindowFound === true) {
@@ -130,13 +132,14 @@ var minWindow = function(s, t) {
   }
 };
 
-minWindow("a", "a");
+minWindow("ADOBECODEBANC", "ABC");
 /*
 Input
-"a"
-"a"
+"ADOBECODEBANC"
+"ABC"
+
 Output
-""
+"ADOBEC"
 Expected
-"a"
+"BANC"
 */
