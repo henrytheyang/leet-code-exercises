@@ -122,6 +122,7 @@ var minWindow = function(s, t) {
           // If not then continue to increment L
         checkHowManyConditions();
       }
+      rightPointer++;
     }
   }
   if (validWindowLeft !== null && validWindowRight !== null) {
@@ -134,12 +135,13 @@ var minWindow = function(s, t) {
 
 minWindow("ADOBECODEBANC", "ABC");
 /*
-Input
+Your input
 "ADOBECODEBANC"
 "ABC"
 
 Output
-"ADOBEC"
+"BA"
 Expected
 "BANC"
+
 */
