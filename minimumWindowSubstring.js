@@ -95,7 +95,7 @@ var minWindow = function(s, t) {
     }
   };
 
-  while (rightPointer <= s.length) {
+  while (rightPointer < s.length) {
     // Check at rightPointer
     // While validWindowFound === false && we haven't reached end of s, checking for presence of key chars.
     if (validWindowFound === false) {
@@ -129,14 +129,13 @@ var minWindow = function(s, t) {
   }
 };
 
-minWindow("ADOBECODEBANC","ABC");
+minWindow("a", "a");
 /*
 Input
 "a"
-"b"
-
-Output
 "a"
-Expected
+Output
 ""
+Expected
+"a"
 */
