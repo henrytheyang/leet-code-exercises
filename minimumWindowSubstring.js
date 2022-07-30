@@ -122,7 +122,8 @@ var minWindow = function(s, t) {
       }
     }
   }
-  if (validWindowLeft && validWindowRight) {
+  if (validWindowLeft !== null && validWindowRight !== null) {
+    console.log(s.slice(validWindowLeft, validWindowRight + 1))
     return s.slice(validWindowLeft, validWindowRight + 1);
   } else {
     return '';
