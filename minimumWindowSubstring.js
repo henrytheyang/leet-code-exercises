@@ -70,21 +70,22 @@ var minWindow = function(s, t) {
   let validWindowLeft = null;
   let validWindowRight = null;
   let length = null;
+  let satisfiedConditions = 0;
 
   // If sCount > tCount, increment conditionsMet
   // Check if conditionsMet > # of unique chars in t; if true then validWindowFound = true
     // Save leftEdge & rightEdge of window && length
     // Compare to previous successful length; if length is smaller update leftEdge & rightEdge & length
 
-  // Optimize check by only checking if newest char changes satisfiedCondition;
-  const checkHowManyConditions = () => {
-    let satisfiedCondition = 0;
-    for (var prop in tBank) {
-      if (sBank[prop] >= tBank[prop]) {
-        satisfiedCondition += 1;
-      }
+  // Optimize check by only checking if newest char changes satisfiedConditions;
+  const checkHowManyConditions = (newChar, addingOrSubtracting) => {
+    if (sBank[newChar] === tBank[newChar] && addingOrSubtracting === 'adding') {
+      satisfiedConditions += 1;
     }
-    if (satisfiedCondition >= numberConditions) {
+    if (sBank[newChar] === tBank[newChar] - 1 && addingOrSubtracting === 'subtracting') {
+      satisfiedConditions -= 1;
+    }
+    if (satisfiedConditions >= numberConditions) {
       validWindowFound = true;
       // Updating when we find smaller window
       if (length === null || rightPointer - leftPointer + 1 < length) {
@@ -104,7 +105,7 @@ var minWindow = function(s, t) {
       // Update sCount when finding key chars
       if (tBank[s[rightPointer]]) {
         sBank[s[rightPointer]] = sBank[s[rightPointer]] + 1 || 1;
-        checkHowManyConditions();
+        checkHowManyConditions(s[rightPointer], 'adding');
       }
       if (validWindowFound === false) {
         rightPointer++;
@@ -118,11 +119,11 @@ var minWindow = function(s, t) {
             sBank[s[leftPointer]]--;
           }
         }
+        checkHowManyConditions(s[leftPointer], 'subtracting');
         leftPointer++;
         // Check if conditionsMet < # of unique chars in t
           // If so then validWindowFound = false; return to incrementing Right
           // If not then continue to increment L
-        checkHowManyConditions();
       }
       rightPointer++;
     }
