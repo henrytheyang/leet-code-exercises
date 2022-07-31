@@ -47,7 +47,7 @@ var permute = function(nums) {
       } else {
         let newUnused = {};
         Object.assign(newUnused, unusedNums);
-        delete newUnused.num;
+        delete newUnused[num];
         addNewNumber(newArr, newUnused);
       }
     }
