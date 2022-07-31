@@ -91,7 +91,7 @@ var minWindow = function(s, t) {
       if (length === null || rightPointer - leftPointer + 1 < length) {
         validWindowLeft = leftPointer;
         validWindowRight = rightPointer;
-        length = rightPointer - leftPointer + 1;
+        length = validWindowRight - validWindowLeft + 1;
       }
     } else {
       validWindowFound = false;
@@ -119,8 +119,8 @@ var minWindow = function(s, t) {
             sBank[s[leftPointer]]--;
           }
         }
-        checkHowManyConditions(s[leftPointer], 'subtracting');
         leftPointer++;
+        checkHowManyConditions(s[leftPointer - 1], 'subtracting');
         // Check if conditionsMet < # of unique chars in t
           // If so then validWindowFound = false; return to incrementing Right
           // If not then continue to increment L
@@ -138,13 +138,14 @@ var minWindow = function(s, t) {
 
 minWindow("ADOBECODEBANC", "ABC");
 /*
-Your input
+Input
 "ADOBECODEBANC"
 "ABC"
 
 Output
-"BA"
+"EBANC"
 Expected
 "BANC"
+
 
 */
