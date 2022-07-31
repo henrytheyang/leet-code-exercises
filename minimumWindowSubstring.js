@@ -75,6 +75,8 @@ var minWindow = function(s, t) {
   // Check if conditionsMet > # of unique chars in t; if true then validWindowFound = true
     // Save leftEdge & rightEdge of window && length
     // Compare to previous successful length; if length is smaller update leftEdge & rightEdge & length
+
+  // Optimize check by only checking if newest char changes satisfiedCondition;
   const checkHowManyConditions = () => {
     let satisfiedCondition = 0;
     for (var prop in tBank) {
