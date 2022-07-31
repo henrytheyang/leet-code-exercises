@@ -31,6 +31,30 @@ All the integers of nums are unique.
 var permute = function(nums) {
   // Run loop through nums.
   // Copy previous array, adding current number to the end of the array
+  // Delete used number
   // Recurse until array length === nums length
   // Push arrays onto answer array
+  let answer = [];
+  let possibleNums = {};
+  nums.forEach(integer => possibleNums[integer] = integer);
+
+  const addNewNumber = (prevArr, unusedNums) => {
+    for (var num in unusedNums) {
+      let newArr = [...prevArr];
+      newArr.push(unusedNums[num]);
+      if (newArr.length === nums.length) {
+        answer.push(newArr);
+      } else {
+        let newUnused = {};
+        Object.assign(newUnused, unusedNums);
+        delete newUnused.num;
+        addNewNumber(newArr, newUnused);
+      }
+    }
+  };
+
+  addNewNumber([], possibleNums);
+  return answer;
 };
+
+console.log(permute([1,2,3]));
