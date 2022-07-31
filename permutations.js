@@ -29,5 +29,8 @@ All the integers of nums are unique.
  * @return {number[][]}
  */
 var permute = function(nums) {
-    
+  // Run loop through nums.
+  // Copy previous array, adding current number to the end of the array
+  // Recurse until array length === nums length
+  // Push arrays onto answer array
 };
