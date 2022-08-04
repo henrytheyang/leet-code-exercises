@@ -65,7 +65,7 @@ var permute = function(nums) {
   let answer = [];
   let usedStatus = Array(nums.length).fill(false, 0);
   const addNewNumber = (prevArr, usedList) => {
-    for (i = 0; i < nums.length; i++) {
+    for (var i = 0; i < nums.length; i++) {
       if (usedList[i] === true) {
         continue;
       } else {
