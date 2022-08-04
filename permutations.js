@@ -28,33 +28,65 @@ All the integers of nums are unique.
  * @param {number[]} nums
  * @return {number[][]}
  */
+// var permute = function(nums) {
+//   // Run loop through nums.
+//   // Copy previous array, adding current number to the end of the array
+//   // Delete used number
+//   // Recurse until array length === nums length
+//   // Push arrays onto answer array
+//   let answer = [];
+//   let possibleNums = {};
+//   nums.forEach(integer => possibleNums[integer] = integer);
+
+//   const addNewNumber = (prevArr, unusedNums) => {
+//     for (var num in unusedNums) {
+//       let newArr = [...prevArr];
+//       newArr.push(unusedNums[num]);
+//       if (newArr.length === nums.length) {
+//         answer.push(newArr);
+//       } else {
+//         let newUnused = {...unusedNums};
+//         delete newUnused[num];
+//         addNewNumber(newArr, newUnused);
+//       }
+//     }
+//   };
+
+//   addNewNumber([], possibleNums);
+//   return answer;
+// };
+
 var permute = function(nums) {
   // Run loop through nums.
   // Copy previous array, adding current number to the end of the array
-  // Delete used number
+  // Mark used number
   // Recurse until array length === nums length
   // Push arrays onto answer array
   let answer = [];
-  let possibleNums = {};
-  nums.forEach(integer => possibleNums[integer] = integer);
-
-  const addNewNumber = (prevArr, unusedNums) => {
-    for (var num in unusedNums) {
-      let newArr = [...prevArr];
-      newArr.push(unusedNums[num]);
-      if (newArr.length === nums.length) {
-        answer.push(newArr);
+  let usedStatus = Array(nums.length).fill(false, 0);
+  const addNewNumber = (prevArr, usedList) => {
+    for (i = 0; i < nums.length; i++) {
+      if (usedList[i] === true) {
+        continue;
       } else {
-        let newUnused = {};
-        Object.assign(newUnused, unusedNums);
-        delete newUnused[num];
-        addNewNumber(newArr, newUnused);
+        prevArr.push(nums[i]);
+        usedList[i] = true;
+        // Base case
+        if (prevArr.length === nums.length) {
+          answer.push([...prevArr]);
+        } else {
+          addNewNumber(prevArr, usedList);
+        }
+        // Backtrack, undo, prep for next iteration
+        prevArr.pop();
+        usedList[i] = false;
       }
     }
   };
-
-  addNewNumber([], possibleNums);
+  addNewNumber([], usedStatus);
   return answer;
 };
+
+
 
 console.log(permute([1,2,3]));
