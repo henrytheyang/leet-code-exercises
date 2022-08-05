@@ -35,5 +35,27 @@ var myPow = function(x, n) {
   // Pos
   // Neg
   // Fractional?
-  
+  let accumulator = 1;
+  let count = 0;
+  if (n === 0 || x === 1) return accumulator;
+  if (n > 0) {
+    while (count < n) {
+      accumulator = accumulator * x;
+      count++;
+    }
+  } else if (n < 0) {
+    while (count > n){
+      accumulator = accumulator / x;
+      count--;
+    }
+  }
+  return accumulator;
 };
+
+myPow(2.00000, -2147483648);
+/*
+Last executed input:
+2.00000
+-2147483648
+timeout
+*/
