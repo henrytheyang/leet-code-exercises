@@ -32,5 +32,8 @@ Constraints:
  * @return {number}
  */
 var myPow = function(x, n) {
-    
+  // Pos
+  // Neg
+  // Fractional?
+  
 };
