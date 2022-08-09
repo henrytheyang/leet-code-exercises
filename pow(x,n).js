@@ -33,12 +33,29 @@ Constraints:
  */
 var myPow = function(x, n) {
   // Manipulate exponent by squaring x and halving exponent
+  // If exponent is even multiply x by itself and half the exponent; recurse
+      // 2^8 = 2^4 * 2^4 = 2^2 ^4
+  // If exponent is odd multiply x by itself and subtract one from exponent, then divide by 2; multiply by exponent
+      // 2^9 = 2^4 * 2^4 * 2 = (2^2 ^ 4) * 2
+  if (n === 0 || x === 1) return 1;
+  let power = Math.abs(n);
+  let answer;
+  if (power % 2 === 0) {
+    answer = myPow(x * x, power/2);
+  } else {
+    answer = myPow(x * x, ((power - 1)/2) * x);
+  }
+  if (n < 0) {
+    return (1 / answer);
+  } else {
+    return answer;
+  }
 };
 
-myPow(2.00000, -2147483648);
+myPow(2, 50);
 /*
 Last executed input:
 2.00000
--2147483648
+-2147483648`
 timeout
 */
