@@ -43,7 +43,7 @@ var myPow = function(x, n) {
   if (power % 2 === 0) {
     answer = myPow(x * x, power/2);
   } else {
-    answer = myPow(x * x, ((power - 1)/2) * x);
+    answer = (myPow(x * x, (power - 1)/2)) * x;
   }
   if (n < 0) {
     return (1 / answer);
@@ -52,7 +52,7 @@ var myPow = function(x, n) {
   }
 };
 
-myPow(2, 50);
+myPow(2, 10);
 /*
 Last executed input:
 2.00000
