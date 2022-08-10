@@ -53,5 +53,10 @@ board[i][j] is a digit 1-9 or '.'.
  * @return {boolean}
 */
 var isValidSudoku = function(board) {
-    
+  // Iterate through arrays
+  // For each item, check the row/column/sub-box bank
+    // If the row/column/sub-box bank doesn't exist create it
+    // If the entry for the row/column/sub-box is false, mark true and continue
+    // If the entry for the row/column/sub-box is true, break and reeturn false
+  // Return true;
 };
