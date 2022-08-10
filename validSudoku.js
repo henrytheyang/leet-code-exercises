@@ -65,31 +65,31 @@ var isValidSudoku = function(board) {
         // If the row/column/sub-box bank doesn't exist create it
         // If the entry for the row/column/sub-box is false, mark true and continue
         // If the entry for the row/column/sub-box is true, break and return false
-      if (bank[row][i] === undefined) {           // Check row
-        bank[row][i] = {};
+      if (bank.row[i] === undefined) {           // Check row
+        bank.row[i] = {};
       } 
-      if (bank[row][i][board[i][j]] === undefined) {
-        bank[row][i][board[i][j]] = true;
+      if (bank.row[i][board[i][j]] === undefined) {
+        bank.row[i][board[i][j]] = true;
       } else {
         return false;
       }
 
-      if (bank[column][j] === undefined) {        // Check column
-        bank[column][j] = {};
+      if (bank.column[j] === undefined) {        // Check column
+        bank.column[j] = {};
       }
-      if (bank[column][j][board[i][j]] === undefined) {
-        bank[column][j][board[i][j]] = true;
+      if (bank.column[j][board[i][j]] === undefined) {
+        bank.column[j][board[i][j]] = true;
       } else {
         return false;
       }
 
       let subboxi = Math.floor(i/3);
       let subboxj = Math.floor(j/3);
-      if (bank[subbox][subboxi + subboxj] === undefined) {
-        bank[subbox][subboxi + subboxj] = {};
+      if (bank.subbox[subboxi + subboxj] === undefined) {
+        bank.subbox[subboxi + subboxj] = {};
       }
-      if (bank[subbox][subboxi + subboxj][board[i][j]] === undefined) {
-        bank[subbox][subboxi + subboxj][board[i][j]] = true;
+      if (bank.subbox[subboxi + subboxj][board[i][j]] === undefined) {
+        bank.subbox[subboxi + subboxj][board[i][j]] = true;
       } else {
         return false;
       }
