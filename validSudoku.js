@@ -65,6 +65,9 @@ var isValidSudoku = function(board) {
         // If the row/column/sub-box bank doesn't exist create it
         // If the entry for the row/column/sub-box is false, mark true and continue
         // If the entry for the row/column/sub-box is true, break and return false
+      if (board[i][j] === '.') {
+        continue;
+      }
       if (bank.row[i] === undefined) {           // Check row
         bank.row[i] = {};
       } 
@@ -97,3 +100,22 @@ var isValidSudoku = function(board) {
   }
   return true;
 };
+
+/*
+Input
+[
+  ["5","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+Output
+false
+Expected
+true
+*/
