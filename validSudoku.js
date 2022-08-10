@@ -86,8 +86,8 @@ var isValidSudoku = function(board) {
         return false;
       }
 
-      let subboxi = Math.floor(i/3);
-      let subboxj = Math.floor(j/3);
+      let subboxi = Math.floor(i/3).toString();              // Check subbox
+      let subboxj = Math.floor(j/3).toString();
       if (bank.subbox[subboxi + subboxj] === undefined) {
         bank.subbox[subboxi + subboxj] = {};
       }
@@ -100,6 +100,8 @@ var isValidSudoku = function(board) {
   }
   return true;
 };
+
+isValidSudoku([["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]);
 
 /*
 Input
