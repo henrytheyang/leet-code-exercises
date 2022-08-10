@@ -53,10 +53,47 @@ board[i][j] is a digit 1-9 or '.'.
  * @return {boolean}
 */
 var isValidSudoku = function(board) {
+  let bank = {
+    row: {},
+    column: {},
+    subbox: {},
+  };
   // Iterate through arrays
-  // For each item, check the row/column/sub-box bank
-    // If the row/column/sub-box bank doesn't exist create it
-    // If the entry for the row/column/sub-box is false, mark true and continue
-    // If the entry for the row/column/sub-box is true, break and reeturn false
-  // Return true;
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      // For each item, check the row/column/sub-box bank
+        // If the row/column/sub-box bank doesn't exist create it
+        // If the entry for the row/column/sub-box is false, mark true and continue
+        // If the entry for the row/column/sub-box is true, break and return false
+      if (bank[row][i] === undefined) {           // Check row
+        bank[row][i] = {};
+      } 
+      if (bank[row][i][board[i][j]] === undefined) {
+        bank[row][i][board[i][j]] = true;
+      } else {
+        return false;
+      }
+
+      if (bank[column][j] === undefined) {        // Check column
+        bank[column][j] = {};
+      }
+      if (bank[column][j][board[i][j]] === undefined) {
+        bank[column][j][board[i][j]] = true;
+      } else {
+        return false;
+      }
+
+      let subboxi = Math.floor(i/3);
+      let subboxj = Math.floor(j/3);
+      if (bank[subbox][subboxi + subboxj] === undefined) {
+        bank[subbox][subboxi + subboxj] = {};
+      }
+      if (bank[subbox][subboxi + subboxj][board[i][j]] === undefined) {
+        bank[subbox][subboxi + subboxj][board[i][j]] = true;
+      } else {
+        return false;
+      }
+    }
+  }
+  return true;
 };
