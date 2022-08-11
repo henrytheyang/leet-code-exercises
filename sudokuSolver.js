@@ -64,8 +64,17 @@ var solveSudoku = function(board) {
       bank.subgrid[subgridI + subgridJ][board[i][j]] = true;
     }
   }
-  const validateEntry = () => {
-
+  const validateEntry = (x, y, value) => {
+    if (bank.row[x][value] === true) {
+      return false;
+    }
+    if (bank.column[y][value] === true) {
+      return false;
+    }
+    if (bank.subgrid[Math.floor(x/3).toString() + Math.floor(y/3).toString()][value] === true) {
+      return false;
+    }
+    return true;
   };
   // Iterate through puzzle, filling in with increasing unused numbers
   // Validate if row/column/subgrid are valid
