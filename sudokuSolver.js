@@ -56,12 +56,11 @@ var solveSudoku = function(board) {
       } 
       bank.column[j][board[i][j]] = true;
       
-      let subgridI = Math.floor(i / 3).toString();
-      let subgridJ = Math.floor(j / 3).toString();
-      if (bank.subgrid[subgridI + subgridJ] === undefined) {
-        bank.subgrid[subgridI + subgridJ] = {};
+
+      if (bank.subgrid[Math.floor(i / 3).toString() + Math.floor(j / 3).toString()] === undefined) {
+        bank.subgrid[Math.floor(i / 3).toString() + Math.floor(j / 3).toString()] = {};
       } 
-      bank.subgrid[subgridI + subgridJ][board[i][j]] = true;
+      bank.subgrid[Math.floor(i / 3).toString() + Math.floor(j / 3).toString()][board[i][j]] = true;
     }
   }
   const validateEntry = (x, y, value) => {
