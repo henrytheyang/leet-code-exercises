@@ -35,6 +35,38 @@ It is guaranteed that the input board has only one solution.
  */
 var solveSudoku = function(board) {
   // Backtracking solution
+  let bank = {
+    row: {},
+    column: {},
+    subgrid: {},
+  };
+
+  for (let i = 0; i < board.length; i++) {            // Populate bank for constant lookup
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j] === '.') {
+        continue;
+      }
+      if (bank.row[i] === undefined) {
+        bank.row[i] = {};
+      } 
+      bank.row[i][board[i][j]] = true;
+      
+      if (bank.column[j] === undefined) {
+        bank.column[j] = {};
+      } 
+      bank.column[j][board[i][j]] = true;
+      
+      let subgridI = Math.floor(i / 3).toString();
+      let subgridJ = Math.floor(j / 3).toString();
+      if (bank.subgrid[subgridI + subgridJ] === undefined) {
+        bank.subgrid[subgridI + subgridJ] = {};
+      } 
+      bank.subgrid[subgridI + subgridJ][board[i][j]] = true;
+    }
+  }
+  const validateEntry = () => {
+
+  };
   // Iterate through puzzle, filling in with increasing unused numbers
   // Validate if row/column/subgrid are valid
     // If yes continue
