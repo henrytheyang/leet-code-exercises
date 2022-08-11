@@ -43,26 +43,25 @@ var solveSudoku = function(board) {
 
   for (let i = 0; i < board.length; i++) {            // Populate bank for constant lookup
     for (let j = 0; j < board[i].length; j++) {
-      if (board[i][j] === '.') {
-        continue;
-      }
       if (bank.row[i] === undefined) {
         bank.row[i] = {};
       } 
-      bank.row[i][board[i][j]] = true;
-      
       if (bank.column[j] === undefined) {
         bank.column[j] = {};
       } 
-      bank.column[j][board[i][j]] = true;
-      
-
       if (bank.subgrid[Math.floor(i / 3).toString() + Math.floor(j / 3).toString()] === undefined) {
         bank.subgrid[Math.floor(i / 3).toString() + Math.floor(j / 3).toString()] = {};
       } 
+      if (board[i][j] === '.') {
+        continue;
+      }
+
+      bank.row[i][board[i][j]] = true;
+      bank.column[j][board[i][j]] = true;
       bank.subgrid[Math.floor(i / 3).toString() + Math.floor(j / 3).toString()][board[i][j]] = true;
     }
   }
+
   const validateEntry = (x, y, value) => {
     if (bank.row[x][value] === true) {
       return false;
