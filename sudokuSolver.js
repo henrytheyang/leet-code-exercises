@@ -34,5 +34,10 @@ It is guaranteed that the input board has only one solution.
  * @return {void} Do not return anything, modify board in-place instead.
  */
 var solveSudoku = function(board) {
-    
+  // Backtracking solution
+  // Iterate through puzzle, filling in with increasing unused numbers
+  // Validate if row/column/subgrid are valid
+    // If yes continue
+    // If no, backtrack and try another solution
+  // Return valid board
 };
