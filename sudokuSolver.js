@@ -41,7 +41,8 @@ var solveSudoku = function(board) {
     subgrid: {},
   };
 
-  for (let i = 0; i < board.length; i++) {            // Populate bank for constant lookup
+  // Populate bank for constant lookup
+  for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
       if (bank.row[i] === undefined) {
         bank.row[i] = {};
@@ -79,6 +80,9 @@ var solveSudoku = function(board) {
     while (x < 9) {
       while (y <= 8) {
         if (board[x][y] !== '.') {
+          if (x === 8 && y === 8) {
+            break;
+          }
           if (y < 8) {
             y++;
           } else {
@@ -87,19 +91,20 @@ var solveSudoku = function(board) {
           }
           continue;
         }
+        if (x === 8 && y === 6) {
+          console.log('im at last wild box');
+        }
         // Do stuff
-        for (let l = 1; l <= 10; l++) {
-          if (l === 10) {
-            return;
-          }
-          if (validateEntry(x, y, l) === true) {
-            board[x][y] = l;
-            bank.row[x][l] = true;
-            bank.column[y][l] = true;
-            bank.subgrid[Math.floor(x/3).toString() + Math.floor(y/3).toString()][l] = true;
+        for (numberToTry = 1; numberToTry < 10; numberToTry++) {
+          if (validateEntry(x, y, numberToTry) === true) {
+            board[x][y] = numberToTry.toString();
+            bank.row[x][numberToTry] = true;
+            bank.column[y][numberToTry] = true;
+            bank.subgrid[Math.floor(x/3).toString() + Math.floor(y/3).toString()][numberToTry] = true;
             // Exit loop and return board when board is filled in truthfully
             if (x === 8 && y === 8) {
-              return board;
+              console.log('returning board');
+              break;
             }
             // Recurse?
             if (y < 8) {
@@ -107,17 +112,25 @@ var solveSudoku = function(board) {
             } else {
               fillBoard(x + 1, 0);
             }
-            // Backtrack?
-            board[x][y] = '.';
-            bank.row[x][l] = undefined;
-            bank.column[y][l] = undefined;
-            bank.subgrid[Math.floor(x/3).toString() + Math.floor(y/3).toString()][l] = undefined;
           }
         }
+        // Backtrack?
+        if (y === 0) {
+          x = x - 1;
+          y = 8;
+        } else {
+          y = y - 1;
+        }
+        let lastTried = board[x][y];
+        board[x][y] = '.';
+        bank.row[x][lastTried] = undefined;
+        bank.column[y][lastTried] = undefined;
+        bank.subgrid[Math.floor(x/3).toString() + Math.floor(y/3).toString()][lastTried] = undefined;
       }
     }
   };
   fillBoard(0, 0);
+  return board;
   // Iterate through puzzle, filling in with increasing unused numbers
   // Validate if row/column/subgrid are valid
     // If yes continue
