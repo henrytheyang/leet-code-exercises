@@ -74,9 +74,65 @@ var solveSudoku = function(board) {
     }
     return true;
   };
+
+  const fillBoard = (x, y) => {
+    while (x < 9) {
+      while (y <= 8) {
+        if (board[x][y] !== '.') {
+          if (y < 8) {
+            y++;
+          } else {
+            x++;
+            y = 0;
+          }
+          continue;
+        }
+        // Do stuff
+        for (let l = 1; l <= 10; l++) {
+          if (l === 10) {
+            return;
+          }
+          if (validateEntry(x, y, l) === true) {
+            board[x][y] = l;
+            bank.row[x][l] = true;
+            bank.column[y][l] = true;
+            bank.subgrid[Math.floor(x/3).toString() + Math.floor(y/3).toString()][l] = true;
+            // Exit loop and return board when board is filled in truthfully
+            if (x === 8 && y === 8) {
+              return board;
+            }
+            // Recurse?
+            if (y < 8) {
+              fillBoard(x, y + 1);
+            } else {
+              fillBoard(x + 1, 0);
+            }
+            // Backtrack?
+            board[x][y] = '.';
+            bank.row[x][l] = undefined;
+            bank.column[y][l] = undefined;
+            bank.subgrid[Math.floor(x/3).toString() + Math.floor(y/3).toString()][l] = undefined;
+          }
+        }
+      }
+    }
+  };
+  fillBoard(0, 0);
   // Iterate through puzzle, filling in with increasing unused numbers
   // Validate if row/column/subgrid are valid
     // If yes continue
     // If no, backtrack and try another solution
   // Return valid board
 };
+
+solveSudoku([
+  ["5","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]);
