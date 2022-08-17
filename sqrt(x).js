@@ -32,10 +32,15 @@ var mySqrt = function(x) {
   let high = x;
   let middle;
   while (high - low > 1) {
-    middle = Math.floor(high / 2);
+    middle = Math.floor((high + low) / 2);
+    // Answer less than middle
     if (middle * middle > x) {
-      
+      high = middle;
+    } else {
+      low = middle;
     }
   }
   return low;
 };
+
+mySqrt(4);
