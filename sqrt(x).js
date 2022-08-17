@@ -27,5 +27,15 @@ Constraints:
  * @return {number}
  */
 var mySqrt = function(x) {
-    
+  // Binary search between x & 1 until we find the two numbers that bracket; take lower
+  let low = 1;
+  let high = x;
+  let middle;
+  while (high - low > 1) {
+    middle = Math.floor(high / 2);
+    if (middle * middle > x) {
+      
+    }
+  }
+  return low;
 };
