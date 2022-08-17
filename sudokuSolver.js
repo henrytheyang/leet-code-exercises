@@ -111,8 +111,6 @@ var solveSudoku = function(board) {
             // Exit loop and return board when board is filled in truthfully
             if (x === 8 && y === 8) {
               solved = true;
-              console.log('returning board');
-              return board;
             }
             // Recurse?
             if (y < 8) {
