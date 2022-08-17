@@ -41,7 +41,7 @@ var solveSudoku = function(board) {
     // If yes continue
     // If no, backtrack and try another solution
   // Return valid board
-  
+
   let bank = {
     row: {},
     column: {},
@@ -133,7 +133,6 @@ var solveSudoku = function(board) {
         return;
       }
     }
-    return board;
   };
   fillBoard(0, 0);
 };
