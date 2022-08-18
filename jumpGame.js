@@ -34,4 +34,18 @@ var canJump = function(nums) {
   // Keep track of last valid jumping point to last index
   // Last valid jumping point if potential point value >= distance to last
   // If last valid jumping point is first index, return true else false
+  if (nums.length === 1) return true;
+  let lastValidIndex = nums.length - 1;
+  for (i = lastValidIndex - 1; i >= 0; i--) {
+    if (i + nums[i] >= lastValidIndex) {
+      lastValidIndex = i;
+    }
+  }
+  if (lastValidIndex === 0) {
+    return true;
+  } else {
+    return false;
+  }
 };
+
+canJump([2,3,1,1,4]);
