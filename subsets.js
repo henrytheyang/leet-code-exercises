@@ -44,3 +44,13 @@ var subsets = function(nums) {
   createNewSubset([], 0);
   return answer;
 };
+
+var subsetsBacktracking = function (nums) {
+  // DFS
+  // Each branch is a decision to include or exclude the current digit
+  // Each level is the current digit being considered
+  // We end when the level === nums.length, add to answer
+  // Add current digit, recurse
+  // Remove current digit, recurse
+  
+};
