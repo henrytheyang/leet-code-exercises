@@ -22,7 +22,7 @@ All the numbers of nums are unique.
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsets = function(nums) {
+var subsets = function(nums) { /// BFS avg runtime 97.3 ms, 10 tries
   // Recursive
   // Take previous input, add all possible numbers one at a time, starting after index of last element
   // Add to answer
@@ -46,31 +46,30 @@ var subsets = function(nums) {
   return answer;
 };
 
-var subsetsBacktracking = function (nums) {
+var subsetsBacktracking = function (nums) {  /// DFS avg runtime 85.3 ms, 10 tries
   // DFS
   // Each branch is a decision to include or exclude the current digit
   // Each level is the current digit being considered
   // We end when the level === nums.length, add to answer
   // Add current digit, recurse
   // Remove current digit, recurse
-  let answer = [[]];
-  if (nums.length === 0) return answer;
+  let answer = [];
+  if (nums.length === 0) return [[]];
   const dfs = (prevArr, currentIndex) => {
     prevArr.push(nums[currentIndex]);
     if (currentIndex === nums.length - 1) {
-      answer.push(prevArr);
+      answer.push([...prevArr]);
     } else {
       dfs(prevArr, currentIndex + 1);
     }
     prevArr.pop();
     if (currentIndex === nums.length - 1) {
-      answer.push(prevArr);
+      answer.push([...prevArr]);
     } else {
       dfs(prevArr, currentIndex + 1);
     }
   };
   dfs([], 0);
-  console.log(`answer = ${answer}`);
   return answer;
 };
 
