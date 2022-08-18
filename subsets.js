@@ -42,6 +42,7 @@ var subsets = function(nums) {
     }
   };
   createNewSubset([], 0);
+  console.log(`answer = ${answer}`);
   return answer;
 };
 
@@ -52,5 +53,25 @@ var subsetsBacktracking = function (nums) {
   // We end when the level === nums.length, add to answer
   // Add current digit, recurse
   // Remove current digit, recurse
-  
+  let answer = [[]];
+  if (nums.length === 0) return answer;
+  const dfs = (prevArr, currentIndex) => {
+    prevArr.push(nums[currentIndex]);
+    if (currentIndex === nums.length - 1) {
+      answer.push(prevArr);
+    } else {
+      dfs(prevArr, currentIndex + 1);
+    }
+    prevArr.pop();
+    if (currentIndex === nums.length - 1) {
+      answer.push(prevArr);
+    } else {
+      dfs(prevArr, currentIndex + 1);
+    }
+  };
+  dfs([], 0);
+  console.log(`answer = ${answer}`);
+  return answer;
 };
+
+subsetsBacktracking([1,2,3]);
