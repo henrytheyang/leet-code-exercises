@@ -23,5 +23,24 @@ All the numbers of nums are unique.
  * @return {number[][]}
  */
 var subsets = function(nums) {
-    
+  // Recursive
+  // Take previous input, add all possible numbers one at a time, starting after index of last element
+  // Add to answer
+  // If created length is less than nums.length, recurse on all subsets
+  let answer = [[]];
+  if (nums.length === 0) {
+    return answer;
+  }
+  const createNewSubset = (prevArr, startingIndex) => {
+    for (let i = startingIndex; i < nums.length; i++) {
+      let newArr = [...prevArr];
+      newArr.push(nums[i]);
+      answer.push(newArr);
+      if (newArr.length < nums.length) {
+        createNewSubset(newArr, i + 1);
+      }
+    }
+  };
+  createNewSubset([], 0);
+  return answer;
 };
