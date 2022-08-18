@@ -30,5 +30,8 @@ Constraints:
  * @return {boolean}
  */
 var canJump = function(nums) {
-    
+  // Starting at first index, mark all valid landing spots
+  // Visit each valid landing spot in turn, marking all valid landing spots
+  // If we reach the last element in array and it's valid return true, else false
+  
 };
