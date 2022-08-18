@@ -30,21 +30,8 @@ Constraints:
  * @return {boolean}
  */
 var canJump = function(nums) {
-  // Starting at first index, mark all valid landing spots
-  // Visit each valid landing spot in turn, marking all valid landing spots
-  // If we reach the last element in array and it's valid return true, else false
-  if (nums.length === 1) return true;
-  let validLandingSpots = new Array(nums.length).fill(false);
-  validLandingSpots[0] = true;
-  for (let i = 0; i < validLandingSpots.length; i++) {
-    if (validLandingSpots[i]) {
-      for (let j = 0; j <= nums[i]; j++) {
-        validLandingSpots[i + j] = true;
-        if (validLandingSpots[validLandingSpots.length - 1] === true) {
-          return true;
-        }
-      }
-    }
-  }
-  return false;
+  // Starting at last index, decrement
+  // Keep track of last valid jumping point to last index
+  // Last valid jumping point if potential point value >= distance to last
+  // If last valid jumping point is first index, return true else false
 };
