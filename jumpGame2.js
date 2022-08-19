@@ -50,7 +50,7 @@ var jump = function(nums) {
           if (amtJumpsToLast[i] === undefined) {
             amtJumpsToLast[i] = amtJumpsToLast[i + j] + 1;
           } else {
-            amtJumpsToLast[i] = Math.min(amtJumpsToLast, amtJumpsToLast[i + j] + 1);
+            amtJumpsToLast[i] = Math.min(amtJumpsToLast[i], (amtJumpsToLast[i + j] + 1));
           }
         }
       }
