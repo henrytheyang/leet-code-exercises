@@ -38,7 +38,7 @@ var jump = function(nums) {
   // Record least number of jumps to get to either last insdex or a valid landing spot
   // Edge case: nums[i] === 0;
   let amtJumpsToLast = new Array(nums.length - 1).fill(undefined);
-  for (i = nums.length - 2; i >= 0; i++) {
+  for (i = nums.length - 2; i >= 0; i--) {
     if (nums[i] === 0) continue;
     // If you can reach the last index, record 1
     if (i + nums[i] >= nums.length - 1) {
