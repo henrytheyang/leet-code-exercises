@@ -31,5 +31,9 @@ Constraints:
  * @return {number}
  */
 var jump = function(nums) {
-    
+  // Starting at index 1, increment & record min number of jumps to valid landing spots
+  // If valid landing spots are undefined, add current jump tally + 1 to spot
+  // If valid landing spot has a value, take the min between value & jump tally + 1
+  // Record each number of jumps to reach last index; keep min number
+
 };
