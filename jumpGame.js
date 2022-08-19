@@ -48,4 +48,22 @@ var canJump = function(nums) {
   }
 };
 
-canJump([2,3,1,1,4]);
+var canJumpLinearSlower = function(nums) {
+  // Starting at first index, mark all valid landing spots
+  // Visit each valid landing spot in turn, marking all valid landing spots
+  // If we reach the last element in array and it's valid return true, else false
+  if (nums.length === 1) return true;
+  let validLandingSpots = new Array(nums.length).fill(false);
+  validLandingSpots[0] = true;
+  for (let i = 0; i < validLandingSpots.length; i++) {
+    if (validLandingSpots[i]) {
+      for (let j = 0; j <= nums[i]; j++) {
+        validLandingSpots[i + j] = true;
+        if (validLandingSpots[validLandingSpots.length - 1] === true) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+};
