@@ -46,6 +46,10 @@ var jump = function(nums) {
       } else {
         numJumpsToIndex[i + j] = Math.min(numJumpsToIndex[i + j], numJumpsToIndex[i] + 1);
       }
+      if (i + j === nums.length - 1) {
+        answer = Math.min(answer, numJumpsToIndex[nums.length - 1]);
+      }
     }
   }
+  return answer;
 };
