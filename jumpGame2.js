@@ -37,6 +37,7 @@ var jump = function(nums) {
   // Decrement from the rear
   // Record least number of jumps to get to either last insdex or a valid landing spot
   // Edge case: nums[i] === 0;
+  if (nums.length === 1) return 0;
   let amtJumpsToLast = new Array(nums.length - 1).fill(undefined);
   for (i = nums.length - 2; i >= 0; i--) {
     if (nums[i] === 0) continue;
@@ -58,6 +59,15 @@ var jump = function(nums) {
   }
   return amtJumpsToLast[0];
 };
+/*
+Input:
+[0]
+Output:
+undefined
+Expected:
+0
+*/
+jump([0]);
 
 var jumpSlow = function(nums) {
   // Starting at index 1, increment & record min number of jumps to valid landing spots
@@ -85,4 +95,3 @@ var jumpSlow = function(nums) {
 // Time complexity: O(n * m), where m is avg nums[i]
 // Space complexity: O(n)
 
-jump([2,3,1,1,4]);
