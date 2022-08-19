@@ -30,7 +30,16 @@ Constraints:
  * @param {number[]} nums
  * @return {number}
  */
+
 var jump = function(nums) {
+  // Decrement from the rear
+  // Record least number of jumps to get to either last index or a valid landing spot
+  // If you can reach the last index, record 1
+  // Else add 1 to the smallest jump tally you can see
+  // Edge case: nums[i] === 0;
+};
+
+var jumpSlow = function(nums) {
   // Starting at index 1, increment & record min number of jumps to valid landing spots
   // If valid landing spots are undefined, add current jump tally + 1 to spot
   // If valid landing spot has a value, take the min between value & jump tally + 1
