@@ -56,7 +56,7 @@ var jump = function(nums) {
       }
     }
   }
-  return tallyJumps[0];
+  return amtJumpsToLast[0];
 };
 
 var jumpSlow = function(nums) {
