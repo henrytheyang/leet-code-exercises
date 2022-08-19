@@ -45,7 +45,7 @@ var jump = function(nums) {
       amtJumpsToLast[i] = 1;
     } else {
       // Else add 1 to the smallest valid jump tally you can see
-      for (j = 0; j <= nums[i]; j++) {
+      for (j = 1; j <= nums[i]; j++) {
         if (amtJumpsToLast[i + j]) {
           if (amtJumpsToLast[i] === undefined) {
             amtJumpsToLast[i] = amtJumpsToLast[i + j] + 1;
