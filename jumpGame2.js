@@ -41,6 +41,7 @@ var jump = function(nums) {
     // Update right side to furthest
     // Update left side to right side + 1;
   // When furthest includes last index return immediately
+  if (nums.length === 1) return 0;
   let [left, right, furthest, jumpsTaken] = [0, 0, 0, 0];
   for (i = 0; i < nums.length - 1; i++) {
     if (nums[i] + i >= furthest) furthest = i + nums[i];
