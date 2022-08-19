@@ -31,8 +31,6 @@ Constraints:
  * @return {number}
  */
 
-// [2,3,1,1,4]
-
 
 var jump = function(nums) {
   // Greedy- track furthest landing spot for each number of jumps
@@ -43,8 +41,21 @@ var jump = function(nums) {
     // Update right side to furthest
     // Update left side to right side + 1;
   // When furthest includes last index return immediately
+  let [left, right, furthest, jumpsTaken] = [0, 0, 0, 0];
+  for (i = 0; i < nums.length - 1; i++) {
+    if (nums[i] + i >= furthest) furthest = i + nums[i];
+    if (furthest >= nums.length - 1) {
+      return jumpsTaken + 1;
+    }
+    if (i === right) {
+      left = right + 1;
+      right = furthest;
+      jumpsTaken++;
+    }
+  }
 };
 
+jump([2,3,1,1,4]);
 
 var jumpBackwardsDP = function(nums) {
   // Decrement from the rear
