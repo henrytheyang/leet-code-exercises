@@ -53,3 +53,5 @@ var jump = function(nums) {
   }
   return answer;
 };
+// Time complexity: O(n * m), where m is avg nums[i]
+// Space complexity: O(n)
