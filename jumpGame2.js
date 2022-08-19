@@ -59,15 +59,7 @@ var jump = function(nums) {
   }
   return amtJumpsToLast[0];
 };
-/*
-Input:
-[0]
-Output:
-undefined
-Expected:
-0
-*/
-jump([0]);
+
 
 var jumpSlow = function(nums) {
   // Starting at index 1, increment & record min number of jumps to valid landing spots
@@ -94,4 +86,3 @@ var jumpSlow = function(nums) {
 };
 // Time complexity: O(n * m), where m is avg nums[i]
 // Space complexity: O(n)
-
