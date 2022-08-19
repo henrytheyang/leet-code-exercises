@@ -33,7 +33,20 @@ Constraints:
 
 // [2,3,1,1,4]
 
+
 var jump = function(nums) {
+  // Greedy- track furthest landing spot for each number of jumps
+  // Return jumps when furthest includes final index
+  // Iterate through array, updating furthest landing spot through current jump window
+  // When i reaches right side of window, a new jump window happens
+    // Update number of jumps
+    // Update right side to furthest
+    // Update left side to right side + 1;
+  // When furthest includes last index return immediately
+};
+
+
+var jumpBackwardsDP = function(nums) {
   // Decrement from the rear
   // Record least number of jumps to get to either last insdex or a valid landing spot
   // Edge case: nums[i] === 0;
