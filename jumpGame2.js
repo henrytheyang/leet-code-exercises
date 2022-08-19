@@ -35,5 +35,17 @@ var jump = function(nums) {
   // If valid landing spots are undefined, add current jump tally + 1 to spot
   // If valid landing spot has a value, take the min between value & jump tally + 1
   // Record each number of jumps to reach last index; keep min number
-
+  let answer = nums.length - 1;
+  let numJumpsToIndex = new Array(nums.length - 1);
+  numJumpsToIndex[0] = 0;
+  for (i = 0; i < nums.length - 1; i++) {
+    if (nums[i] === 0) continue;
+    for (j = 0; j <= nums[i]; j++) {
+      if (numJumpsToIndex[i + j] === undefined) {
+        numJumpsToIndex[i + j] = numJumpsToIndex[i] + 1;
+      } else {
+        numJumpsToIndex[i + j] = Math.min(numJumpsToIndex[i + j], numJumpsToIndex[i] + 1);
+      }
+    }
+  }
 };
