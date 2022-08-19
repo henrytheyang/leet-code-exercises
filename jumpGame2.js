@@ -31,21 +31,27 @@ Constraints:
  * @return {number}
  */
 
+// [2,3,1,1,4]
+
 var jump = function(nums) {
   // Decrement from the rear
   // Record least number of jumps to get to either last insdex or a valid landing spot
   // Edge case: nums[i] === 0;
-  let tallyJumps = new Array(nums.length - 1);
+  let amtJumpsToLast = new Array(nums.length - 1).fill(undefined);
   for (i = nums.length - 2; i >= 0; i++) {
     if (nums[i] === 0) continue;
     // If you can reach the last index, record 1
     if (i + nums[i] >= nums.length - 1) {
-      tallyJumps[i] = 1;
+      amtJumpsToLast[i] = 1;
     } else {
       // Else add 1 to the smallest valid jump tally you can see
       for (j = 0; j <= nums[i]; j++) {
-        if (tallyJumps[i + j]) {
-
+        if (amtJumpsToLast[i + j]) {
+          if (amtJumpsToLast[i] === undefined) {
+            amtJumpsToLast[i] = amtJumpsToLast[i + j] + 1;
+          } else {
+            amtJumpsToLast[i] = Math.min(amtJumpsToLast, amtJumpsToLast[i + j] + 1);
+          }
         }
       }
     }
@@ -78,3 +84,5 @@ var jumpSlow = function(nums) {
 };
 // Time complexity: O(n * m), where m is avg nums[i]
 // Space complexity: O(n)
+
+jump([2,3,1,1,4]);
