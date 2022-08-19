@@ -33,10 +33,24 @@ Constraints:
 
 var jump = function(nums) {
   // Decrement from the rear
-  // Record least number of jumps to get to either last index or a valid landing spot
-  // If you can reach the last index, record 1
-  // Else add 1 to the smallest jump tally you can see
+  // Record least number of jumps to get to either last insdex or a valid landing spot
   // Edge case: nums[i] === 0;
+  let tallyJumps = new Array(nums.length - 1);
+  for (i = nums.length - 2; i >= 0; i++) {
+    if (nums[i] === 0) continue;
+    // If you can reach the last index, record 1
+    if (i + nums[i] >= nums.length - 1) {
+      tallyJumps[i] = 1;
+    } else {
+      // Else add 1 to the smallest valid jump tally you can see
+      for (j = 0; j <= nums[i]; j++) {
+        if (tallyJumps[i + j]) {
+
+        }
+      }
+    }
+  }
+  return tallyJumps[0];
 };
 
 var jumpSlow = function(nums) {
