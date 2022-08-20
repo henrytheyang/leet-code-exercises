@@ -51,23 +51,40 @@ var canReach = function(arr, start) {
       // If they equal target return true
     // Else recurse
   // If we run out of valid recursing targets, return false
+  // Edge case- multiple indices w/ value 0
+
   let solved = false;
   let timesVisited = {};
-  let targetIndex = arr.indexOf(0);
+  // let targetIndex = arr.indexOf(0);
+  let targetIndex = [];
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) targetIndex.push(i);
+  }
   
-  const bfs = (landingIndex) => {
-    if (landingIndex - arr[landingIndex] === targetIndex || landingIndex + arr[landingIndex] === targetIndex) {
+  const dfs = (landingIndex) => {
+    if (targetIndex.indexOf(landingIndex - arr[landingIndex]) !== -1 || targetIndex.indexOf(landingIndex + arr[landingIndex]) !== -1) {
       solved = true;
       return;
     }
     timesVisited[landingIndex] = (timesVisited[landingIndex] === undefined) ? 1 : 2;
     if (landingIndex - arr[landingIndex] >= 0 && landingIndex - arr[landingIndex] <= arr.length - 1) {
-      if (timesVisited[landingIndex] === 1) bfs(landingIndex - arr[landingIndex])
+      if (timesVisited[landingIndex] === 1) dfs(landingIndex - arr[landingIndex])
     }
     if (landingIndex + arr[landingIndex] >= 0 && landingIndex + arr[landingIndex] <= arr.length + 1) {
-      if (timesVisited[landingIndex] === 1) bfs(landingIndex + arr[landingIndex])
+      if (timesVisited[landingIndex] === 1) dfs(landingIndex + arr[landingIndex])
     }
   }
-  bfs(start);
+  dfs(start);
   return solved;
 };
+// canReach([4,2,3,0,3,1,2], 5);
+canReach([0,3,0,6,3,3,4], 6);
+/*
+Input
+[0,3,0,6,3,3,4]
+6
+Output
+false
+Expected
+true
+*/
