@@ -70,10 +70,16 @@ var canReach = function(arr, start) {
       timesVisited[landingIndex] = {subtracted: false, added: false}
     }
     if (landingIndex - arr[landingIndex] >= 0 && landingIndex - arr[landingIndex] <= arr.length - 1) {
-      if (timesVisited[landingIndex].subtracted === false) dfs(landingIndex - arr[landingIndex])
+      if (timesVisited[landingIndex].subtracted === false) {
+        timesVisited[landingIndex].subtracted = true;
+        dfs(landingIndex - arr[landingIndex]);
+      }
     }
     if (landingIndex + arr[landingIndex] >= 0 && landingIndex + arr[landingIndex] <= arr.length + 1) {
-      if (timesVisited[landingIndex].added === false) dfs(landingIndex + arr[landingIndex])
+      if (timesVisited[landingIndex].added === false) {
+        timesVisited[landingIndex].added = true;
+        dfs(landingIndex + arr[landingIndex]);
+      }
     }
   }
   dfs(start);
