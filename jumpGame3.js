@@ -40,7 +40,29 @@ Constraints:
  * @param {number} start
  * @return {boolean}
  */
+
 var canReach = function(arr, start) {
+  // BFS
+  // Save current index as visited
+  // Add/subtract from current index
+    // If new index is target index return true
+    // If new index is visited, ignore
+    // Else add new index to array for next round
+    // If no valid indices for next round, return false;
+}
+canReach([4,2,3,0,3,1,2], 5);
+/*
+Input:
+[4,2,3,0,3,1,2]
+5
+Output:
+undefined
+Expected:
+true
+*/
+
+
+var canReachDFS = function(arr, start) {
   // Recursive BFS
   // Find target
   // Starting at 1st index, every choice is add or subtract.
@@ -86,7 +108,6 @@ var canReach = function(arr, start) {
   return solved;
 };
 
-canReach([4,4,1,3,0,3], 2);
 /* + 1 - 3 + 4
 Input:
 [4,4,1,3,0,3]
