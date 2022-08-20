@@ -55,4 +55,19 @@ var canReach = function(arr, start) {
   let timesVisited = {};
   let targetIndex = arr.indexOf(0);
   
+  const bfs = (landingIndex) => {
+    if (landingIndex - arr[landingIndex] === targetIndex || landingIndex + arr[landingIndex] === targetIndex) {
+      solved = true;
+      return;
+    }
+    timesVisited[landingIndex] = (timesVisited[landingIndex] === undefined) ? 1 : 2;
+    if (landingIndex - arr[landingIndex] >= 0 && landingIndex - arr[landingIndex] <= arr.length - 1) {
+      if (timesVisited[landingIndex] === 1) bfs(landingIndex - arr[landingIndex])
+    }
+    if (landingIndex + arr[landingIndex] >= 0 && landingIndex + arr[landingIndex] <= arr.length + 1) {
+      if (timesVisited[landingIndex] === 1) bfs(landingIndex + arr[landingIndex])
+    }
+  }
+  bfs(start);
+  return solved;
 };
