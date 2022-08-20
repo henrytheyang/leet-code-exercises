@@ -55,36 +55,38 @@ var canReach = function(arr, start) {
 
   let solved = false;
   let timesVisited = {};
-  // let targetIndex = arr.indexOf(0);
-  let targetIndex = [];
+  // let targetIndices = arr.indexOf(0);
+  let targetIndices = [];
   for (i = 0; i < arr.length; i++) {
-    if (arr[i] === 0) targetIndex.push(i);
+    if (arr[i] === 0) targetIndices.push(i);
   }
   
   const dfs = (landingIndex) => {
-    if (targetIndex.indexOf(landingIndex - arr[landingIndex]) !== -1 || targetIndex.indexOf(landingIndex + arr[landingIndex]) !== -1) {
+    if (targetIndices.indexOf(landingIndex - arr[landingIndex]) !== -1 || targetIndices.indexOf(landingIndex + arr[landingIndex]) !== -1) {
       solved = true;
       return;
     }
-    timesVisited[landingIndex] = (timesVisited[landingIndex] === undefined) ? 1 : 2;
+    if (timesVisited[landingIndex] === undefined) {
+      timesVisited[landingIndex] = {subtracted: false, added: false}
+    }
     if (landingIndex - arr[landingIndex] >= 0 && landingIndex - arr[landingIndex] <= arr.length - 1) {
-      if (timesVisited[landingIndex] === 1) dfs(landingIndex - arr[landingIndex])
+      if (timesVisited[landingIndex].subtracted === false) dfs(landingIndex - arr[landingIndex])
     }
     if (landingIndex + arr[landingIndex] >= 0 && landingIndex + arr[landingIndex] <= arr.length + 1) {
-      if (timesVisited[landingIndex] === 1) dfs(landingIndex + arr[landingIndex])
+      if (timesVisited[landingIndex].added === false) dfs(landingIndex + arr[landingIndex])
     }
   }
   dfs(start);
   return solved;
 };
-// canReach([4,2,3,0,3,1,2], 5);
-canReach([0,3,0,6,3,3,4], 6);
-/*
-Input
-[0,3,0,6,3,3,4]
-6
-Output
+
+canReach([4,4,1,3,0,3], 2);
+/* + 1 - 3 + 4
+Input:
+[4,4,1,3,0,3]
+2
+Output:
 false
-Expected
+Expected:
 true
 */
