@@ -49,7 +49,42 @@ var canReach = function(arr, start) {
     // If new index is visited, ignore
     // Else add new index to array for next round
     // If no valid indices for next round, return false;
-}
+  let answer = false;
+  let targetIndices = [];
+  let visitedIndices = {};
+  let nextSearchTargets = [];
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) targetIndices.push(i);
+  }
+  const bfs = (searchArr) => {
+    nextSearchTargets = [];
+    for (j = 0; j < searchArr.length; j++) {
+      visitedIndices[searchArr[j]] = true;
+      if (searchArr[j] - arr[searchArr[j]] >= 0 && searchArr[j] - arr[searchArr[j]] <= arr.length - 1) {
+        if (visitedIndices[searchArr[j] - arr[searchArr[j]]] === undefined) {
+          if (targetIndices.indexOf(searchArr[j] - arr[searchArr[j]]) !== -1) {
+            answer = true;
+            return;
+          }
+          nextSearchTargets.push(searchArr[j] - arr[searchArr[j]]);
+        }
+      }
+      if (searchArr[j] + arr[searchArr[j]] >= 0 && searchArr[j] + arr[searchArr[j]] <= arr.length - 1) {
+        if (visitedIndices[searchArr[j] + arr[searchArr[j]]] === undefined) {
+          if (targetIndices.indexOf(searchArr[j] + arr[searchArr[j]]) !== -1) {
+            answer = true;
+            return;
+          }
+          nextSearchTargets.push(searchArr[j] + arr[searchArr[j]]);
+        }
+      }
+    }
+    if (nextSearchTargets.length === 0) return false;
+    else bfs([...nextSearchTargets]);
+  };
+  bfs([start]);
+  return answer;
+};
 canReach([4,2,3,0,3,1,2], 5);
 /*
 Input:
