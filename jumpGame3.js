@@ -50,7 +50,7 @@ var canReach = function(arr, start) {
   const visited = new Array(arr.length - 1).fill(false);
   let stackToCheck = [start];
   while (stackToCheck.length > 0) {
-    if (stackToCheck[stackToCheck.length - 1] === 0) return true;
+    if (arr[stackToCheck[stackToCheck.length - 1]] === 0) return true;
     let justChecked = stackToCheck.pop();
     visited[justChecked] = true;
     if (visited[justChecked - arr[justChecked]] === false) {
