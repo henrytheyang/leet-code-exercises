@@ -47,7 +47,7 @@ var canReach = function(arr, start) {
   // Push new indices to stack
   // Pop indices from stack, add to visited, check for answer
   // Return false if stack is empty
-  const visited = new Array(arr.length - 1).fill(false);
+  const visited = new Array(arr.length).fill(false);
   let stackToCheck = [start];
   while (stackToCheck.length > 0) {
     if (arr[stackToCheck[stackToCheck.length - 1]] === 0) return true;
@@ -62,11 +62,11 @@ var canReach = function(arr, start) {
   }
   return false;
 };
-canReach([4,2,3,0,3,1,2], 5);
+canReach([3,0,1,2], 0);
 /*
 Input:
-[4,2,3,0,3,1,2]
-5
+[3,0,1,2]
+0
 Output:
 false
 Expected:
