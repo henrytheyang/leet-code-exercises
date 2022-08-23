@@ -42,6 +42,15 @@ Constraints:
  */
 
 var canReach = function(arr, start) {
+  // Iterative approach
+  // Track visited indices
+  // Push new indices to stack
+  // Pop indices from stack, add to visited, check for answer
+  // Return false if stack is empty
+  
+};
+
+var canReachBFS = function(arr, start) {
   // BFS
   // Save current index as visited
   // Add/subtract from current index
