@@ -62,16 +62,7 @@ var canReach = function(arr, start) {
   }
   return false;
 };
-canReach([3,0,1,2], 0);
-/*
-Input:
-[3,0,1,2]
-0
-Output:
-false
-Expected:
-true
-*/
+
 
 var canReachBFS = function(arr, start) {
   // BFS
