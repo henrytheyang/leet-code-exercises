@@ -47,8 +47,31 @@ var canReach = function(arr, start) {
   // Push new indices to stack
   // Pop indices from stack, add to visited, check for answer
   // Return false if stack is empty
-  
+  const visited = new Array(arr.length - 1).fill(false);
+  let stackToCheck = [start];
+  while (stackToCheck.length > 0) {
+    if (stackToCheck[stackToCheck.length - 1] === 0) return true;
+    let justChecked = stackToCheck.pop();
+    visited[justChecked] = true;
+    if (visited[justChecked - arr[justChecked]] === false) {
+      if (justChecked - arr[justChecked] >= 0) stackToCheck.push(justChecked - arr[justChecked]);
+    }
+    if (visited[justChecked + arr[justChecked]] === false) {
+      if (justChecked + arr[justChecked] <= arr.length - 1) stackToCheck.push(justChecked + arr[justChecked]);
+    }
+  }
+  return false;
 };
+canReach([4,2,3,0,3,1,2], 5);
+/*
+Input:
+[4,2,3,0,3,1,2]
+5
+Output:
+false
+Expected:
+true
+*/
 
 var canReachBFS = function(arr, start) {
   // BFS
@@ -95,17 +118,6 @@ var canReachBFS = function(arr, start) {
   bfs([start]);
   return answer;
 };
-canReach([4,2,3,0,3,1,2], 5);
-/*
-Input:
-[4,2,3,0,3,1,2]
-5
-Output:
-undefined
-Expected:
-true
-*/
-
 
 var canReachDFS = function(arr, start) {
   // Recursive BFS
@@ -152,13 +164,3 @@ var canReachDFS = function(arr, start) {
   dfs(start);
   return solved;
 };
-
-/* + 1 - 3 + 4
-Input:
-[4,4,1,3,0,3]
-2
-Output:
-false
-Expected:
-true
-*/
