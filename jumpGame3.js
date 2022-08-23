@@ -53,6 +53,7 @@ var canReach = function(arr, start) {
   let targetIndices = [];
   let visitedIndices = {};
   let nextSearchTargets = [];
+  if (arr[start] === 0) return true;
   for (i = 0; i < arr.length; i++) {
     if (arr[i] === 0) targetIndices.push(i);
   }
