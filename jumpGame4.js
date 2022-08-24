@@ -74,12 +74,12 @@ var minJumps = function(arr) {
           }
         }
       }
-    }
-      // Remove value from map
+    // Remove value from map
     delete valueMap[arr[currentSearchIndices[j]]];
+    }
   } while (nextSearchIndices.length > 0);
 
   return counter;
 };
 
-minJumps([100,-23,-23,404,100,23,23,23,3,404])
+minJumps([100,-23,-23,404,100,23,23,23,3,404]);
