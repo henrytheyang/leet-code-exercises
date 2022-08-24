@@ -56,6 +56,7 @@ var minJumps = function(arr) {
     // Increment jump counter
     counter++;
     // Create queue of next search: index - 1, index + 1, and other indices with matching values
+    nextSearchIndices = [];
     for (j = 0; j < currentSearchIndices.length; j++) {
       if (currentSearchIndices[j] - 1 >= 0 && valueMap[arr[currentSearchIndices[j] - 1]]) nextSearchIndices.push(currentSearchIndices[j] - 1);
       if (currentSearchIndices[j] + 1 === arr.length - 1) {
@@ -77,6 +78,7 @@ var minJumps = function(arr) {
     // Remove value from map
     delete valueMap[arr[currentSearchIndices[j]]];
     }
+    currentSearchIndices = nextSearchIndices;
   } while (nextSearchIndices.length > 0);
 
   return counter;
