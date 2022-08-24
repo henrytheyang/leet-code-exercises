@@ -41,8 +41,45 @@ Constraints:
  */
 var minJumps = function(arr) {
   // Map out values for constant time lookup
+  let counter = 0;
+  let currentSearchIndices = [0];
+  let nextSearchIndices = [];
+  if (arr.length === 1) return counter;
+  let valueMap = {};
+  for (i = 0; i < arr.length; i++) {
+    if (valueMap[arr[i]] === undefined) valueMap[arr[i]] = [i];
+    else valueMap[arr[i]].push(i);
+  }
+  
+  do {
   // Loop until we reach the last index:
     // Increment jump counter
+    counter++;
     // Create queue of next search: index - 1, index + 1, and other indices with matching values
-    // Remove value from map
+    for (j = 0; j < currentSearchIndices.length; j++) {
+      if (currentSearchIndices[j] - 1 >= 0 && valueMap[arr[currentSearchIndices[j] - 1]]) nextSearchIndices.push(currentSearchIndices[j] - 1);
+      if (currentSearchIndices[j] + 1 === arr.length - 1) {
+        return;
+      } else {
+        if (valueMap[arr[currentSearchIndices[j] + 1]]) nextSearchIndices.push(currentSearchIndices[j] + 1);
+      }
+      if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) {
+        return true;
+      } else {
+        for (k = 0; k < valueMap[arr[currentSearchIndices[j]]].length; k++) {
+          if (valueMap[arr[currentSearchIndices[j]]][k] === currentSearchIndices[j]) {
+            continue;
+          } else {
+            nextSearchIndices.push(valueMap[arr[currentSearchIndices[j]]][k]);
+          }
+        }
+      }
+    }
+      // Remove value from map
+    delete valueMap[arr[currentSearchIndices[j]]];
+  } while (nextSearchIndices.length > 0);
+
+  return counter;
 };
+
+minJumps([100,-23,-23,404,100,23,23,23,3,404])
