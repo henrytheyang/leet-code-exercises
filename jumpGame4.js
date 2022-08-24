@@ -64,7 +64,7 @@ var minJumps = function(arr) {
       } else {
         if (valueMap[arr[currentSearchIndices[j] + 1]]) nextSearchIndices.push(currentSearchIndices[j] + 1);
       }
-      if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) {
+      if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) { /// REARRANGE SO WE DON'T DOUBLE UP ADDING- NEED TO SCAN
         return true;
       } else {
         for (k = 0; k < valueMap[arr[currentSearchIndices[j]]].length; k++) {
