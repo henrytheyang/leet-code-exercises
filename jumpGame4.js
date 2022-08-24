@@ -40,5 +40,9 @@ Constraints:
  * @return {number}
  */
 var minJumps = function(arr) {
-    
+  // Map out values for constant time lookup
+  // Loop until we reach the last index:
+    // Increment jump counter
+    // Create queue of next search: index - 1, index + 1, and other indices with matching values
+    // Remove value from map
 };
