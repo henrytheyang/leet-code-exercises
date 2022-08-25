@@ -41,6 +41,7 @@ Constraints:
  */
 var minJumps = function(arr) {
   // Map out values for constant time lookup
+  let solved = false;
   let counter = 0;
   let currentSearchIndices = [0];
   let nextSearchIndices = [];
@@ -59,6 +60,7 @@ var minJumps = function(arr) {
     nextSearchIndices = [];
     for (let j = 0; j < currentSearchIndices.length; j++) {
       if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) { // Jump to any index with same value
+        solved = true;
         break;
       } else {
         if (valueMap[arr[currentSearchIndices[j]]]) { // If the indices for this value still exist, push them in
@@ -75,6 +77,7 @@ var minJumps = function(arr) {
         if (arr[currentSearchIndices[j] - 1] !== arr[currentSearchIndices[j]]) nextSearchIndices.push(currentSearchIndices[j] - 1);
       }
       if (currentSearchIndices[j] + 1 === arr.length - 1) {
+        solved = true;
         break;
       } else {
         if (valueMap[arr[currentSearchIndices[j] + 1]] && arr[currentSearchIndices[j] + 1] !== arr[currentSearchIndices[j]]) {
@@ -83,11 +86,18 @@ var minJumps = function(arr) {
       }
     // Remove value from map
     delete valueMap[arr[currentSearchIndices[j]]];
-    }
+  }
+  if (solved === true) return counter;
     currentSearchIndices = nextSearchIndices;
   } while (nextSearchIndices.length > 0);
-
-  return counter;
 };
 
-minJumps([100,-23,-23,404,100,23,23,23,3,404]);
+minJumps([11,22,7,7,7,7,7,7,7,22,13]);
+/*
+Input
+[11,22,7,7,7,7,7,7,7,22,13]
+Output
+5
+Expected
+3
+*/
