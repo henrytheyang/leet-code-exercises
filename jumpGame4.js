@@ -58,13 +58,7 @@ var minJumps = function(arr) {
     // Create queue of next search: index - 1, index + 1, and other indices with matching values
     nextSearchIndices = [];
     for (j = 0; j < currentSearchIndices.length; j++) {
-      if (currentSearchIndices[j] - 1 >= 0 && valueMap[arr[currentSearchIndices[j] - 1]]) nextSearchIndices.push(currentSearchIndices[j] - 1);
-      if (currentSearchIndices[j] + 1 === arr.length - 1) {
-        return;
-      } else {
-        if (valueMap[arr[currentSearchIndices[j] + 1]]) nextSearchIndices.push(currentSearchIndices[j] + 1);
-      }
-      if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) { /// REARRANGE SO WE DON'T DOUBLE UP ADDING- NEED TO SCAN
+      if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) {
         return true;
       } else {
         for (k = 0; k < valueMap[arr[currentSearchIndices[j]]].length; k++) {
@@ -73,6 +67,16 @@ var minJumps = function(arr) {
           } else {
             nextSearchIndices.push(valueMap[arr[currentSearchIndices[j]]][k]);
           }
+        }
+      }
+      if (currentSearchIndices[j] - 1 >= 0 && valueMap[arr[currentSearchIndices[j] - 1]]) {
+        if (arr[currentSearchIndices[j] - 1] !== arr[currentSearchIndices[j]]) nextSearchIndices.push(currentSearchIndices[j] - 1);
+      }
+      if (currentSearchIndices[j] + 1 === arr.length - 1) {
+        return;
+      } else {
+        if (valueMap[arr[currentSearchIndices[j] + 1]] && arr[currentSearchIndices[j] + 1] !== arr[currentSearchIndices[j]]) {
+          nextSearchIndices.push(currentSearchIndices[j] + 1);
         }
       }
     // Remove value from map
