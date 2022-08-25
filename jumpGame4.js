@@ -58,14 +58,16 @@ var minJumps = function(arr) {
     // Create queue of next search: index - 1, index + 1, and other indices with matching values
     nextSearchIndices = [];
     for (let j = 0; j < currentSearchIndices.length; j++) {
-      if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) {
-        return true;
+      if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) { // Jump to any index with same value
+        break;
       } else {
-        for (let k = 0; k < valueMap[arr[currentSearchIndices[j]]].length; k++) {
-          if (valueMap[arr[currentSearchIndices[j]]][k] === currentSearchIndices[j]) {
-            continue;
-          } else {
-            nextSearchIndices.push(valueMap[arr[currentSearchIndices[j]]][k]);
+        if (valueMap[arr[currentSearchIndices[j]]]) { // If the indices for this value still exist, push them in
+          for (let k = 0; k < valueMap[arr[currentSearchIndices[j]]].length; k++) {
+            if (valueMap[arr[currentSearchIndices[j]]][k] === currentSearchIndices[j]) {
+              continue;
+            } else {
+              nextSearchIndices.push(valueMap[arr[currentSearchIndices[j]]][k]);
+            }
           }
         }
       }
@@ -73,7 +75,7 @@ var minJumps = function(arr) {
         if (arr[currentSearchIndices[j] - 1] !== arr[currentSearchIndices[j]]) nextSearchIndices.push(currentSearchIndices[j] - 1);
       }
       if (currentSearchIndices[j] + 1 === arr.length - 1) {
-        return;
+        break;
       } else {
         if (valueMap[arr[currentSearchIndices[j] + 1]] && arr[currentSearchIndices[j] + 1] !== arr[currentSearchIndices[j]]) {
           nextSearchIndices.push(currentSearchIndices[j] + 1);
