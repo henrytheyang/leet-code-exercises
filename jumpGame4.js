@@ -57,11 +57,11 @@ var minJumps = function(arr) {
     counter++;
     // Create queue of next search: index - 1, index + 1, and other indices with matching values
     nextSearchIndices = [];
-    for (j = 0; j < currentSearchIndices.length; j++) {
+    for (let j = 0; j < currentSearchIndices.length; j++) {
       if (arr[currentSearchIndices[j]] === arr[arr.length - 1]) {
         return true;
       } else {
-        for (k = 0; k < valueMap[arr[currentSearchIndices[j]]].length; k++) {
+        for (let k = 0; k < valueMap[arr[currentSearchIndices[j]]].length; k++) {
           if (valueMap[arr[currentSearchIndices[j]]][k] === currentSearchIndices[j]) {
             continue;
           } else {
