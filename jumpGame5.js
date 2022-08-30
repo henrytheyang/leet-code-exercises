@@ -45,13 +45,30 @@ var maxJumps = function(arr, d) {
   // Memo solution
   // Max jumps for each index is either 1) previous max or 2) 1 + max jumps of the biggest index in range
   // Recursively calculate max jumps for each index within d of the index, memozing each
-  let max = 1;
+  let result = 1;
   let memo = new Array(arr.length).fill(0);
-  const jumpCalcHelper = () => {
-
+  const jumpCalcHelper = (currIndex) => {
+    if (memo[currIndex] !== -1) return memo[currIndex];
+    for (let j = currIndex + 1; j <= currIndex + d && j < arr.length && arr[j] < arr[currIndex]; j++) {
+      memo[currIndex] = Math.max(memo[currIndex], 1 + jumpCalcHelper(j));
+    }
+    for (let k = currIndex - 1; k >= currIndex - d && k >= 0 && arr[k] < arr[currIndex]; k--) {
+      memo[currIndex] = Math.max(memo[currIndex], 1 + jumpCalcHelper(k));
+    }
+    return memo[currIndex];
   };
 
   for (let i = 0; i < arr.length; i++) {
-    
+    result = Math.max(result, 1 + jumpCalcHelper(i));
   }
+  return result;
 };
+maxJumps([6,4,14,6,8,13,9,7,10,6,12], 2);
+/*
+Input
+[6,4,14,6,8,13,9,7,10,6,12], 2
+Output
+1
+Expected
+4
+*/
