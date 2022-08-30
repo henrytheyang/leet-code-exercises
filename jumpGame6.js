@@ -37,5 +37,12 @@ Constraints:
  * @return {number}
  */
 var maxResult = function(nums, k) {
-  
+  // Decrement from rear
+  // What is the greatest possible score if we jump from this index to any index in the window?
+    // Track greatest possible score for each index as we go for future use
+    // Update window as we decrement
+
 };
+
+
+maxResult([10, -1, -2, -3, -4, -5, -6, -7, -6, 8], 2)
