@@ -62,7 +62,6 @@ var maxJumps = function(arr, d) {
   for (let i = 0; i < arr.length; i++) {
     result = Math.max(result, 1 + jumpCalcHelper(i));
   }
-  console.log(`result = ${result}`);
   return result;
 };
 maxJumps([6,4,14,6,8,13,9,7,10,6,12], 2);
