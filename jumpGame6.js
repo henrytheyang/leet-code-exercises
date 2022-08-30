@@ -41,8 +41,22 @@ var maxResult = function(nums, k) {
   // What is the greatest possible score if we jump from this index to any index in the window?
     // Track greatest possible score for each index as we go for future use
     // Update window as we decrement
-
+  let memo = new Array(nums.length);
+  for (let i = nums.length - 1; i >= 0; i--) {
+    let max = nums[i];
+    for (let j = i + 1; j <= i + k && j < nums.length; j++) {
+      max = Math.max(max, nums[i] + nums[j]);
+    }
+    memo[i] = max;
+  }
+  return memo[0];
 };
-
-
-maxResult([10, -1, -2, -3, -4, -5, -6, -7, -6, 8], 2)
+maxResult([1,-1,-2,4,-7,3], 2);
+/*
+Input
+[1,-1,-2,4,-7,3], 2
+Output
+1
+Expected
+7
+*/
