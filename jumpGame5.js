@@ -41,7 +41,7 @@ Constraints:
  * @param {number} d
  * @return {number}
  */
-var maxJumps = function(arr, d) {
+ var maxJumps = function(arr, d) {
   // Memo solution
   // Max jumps for each index is either 1) previous max or 2) 1 + max jumps of the biggest index in range
   // Recursively calculate max jumps for each index within d of the index, memozing each
@@ -49,7 +49,7 @@ var maxJumps = function(arr, d) {
   let memo = new Array(arr.length);
   const jumpCalcHelper = (currIndex) => {
     if (memo[currIndex] !== undefined) return memo[currIndex];
-    memo[currIndex] = 0;
+    memo[currIndex] = 1;
     for (let j = currIndex + 1; j <= currIndex + d && j < arr.length && arr[j] < arr[currIndex]; j++) {
       memo[currIndex] = Math.max(memo[currIndex], 1 + jumpCalcHelper(j));
     }
@@ -60,7 +60,7 @@ var maxJumps = function(arr, d) {
   };
 
   for (let i = 0; i < arr.length; i++) {
-    result = Math.max(result, 1 + jumpCalcHelper(i));
+    result = Math.max(result, jumpCalcHelper(i));
   }
   return result;
 };
