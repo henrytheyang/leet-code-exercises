@@ -43,18 +43,19 @@ var maxResult = function(nums, k) {
     // Update window as we decrement
     // Recalculating every greatest in new window takes too long
     // Track greatest w/ size sorted queue
-      // Pop everything smaller
       // Pop everything that moves out of the window
+      // Pop everything smaller
   let memo = new Array(nums.length).fill(-1);
+  let queueDPMaxByIndex = [];
+  queueDPMaxByIndex[0] = nums.length - 1;
 
   for (let i = nums.length - 1; i >= 0; i--) {
-    memo[i] = nums[i];
-    let max;
-    for (let j = i + 1; j <= i + k && j < nums.length; j++) {
-      if (max === undefined) max = memo[j];
-      else max = Math.max(max, memo[j]);
+    memo[i] = nums[i] + queueDPMaxByIndex[0];
+    if (queueDPMaxByIndex[0] > i + k) queueDPMaxByIndex.shift();
+    for (let j = queueDPMaxByIndex.length - 1; j >= 0; j--) {
+      if (memo[i] > nums[queueDPMaxByIndex[j]]) queueDPMaxByIndex.pop();
     }
-    if (max !== undefined) memo[i] += max;
+    queueDPMaxByIndex.push(i);
   }
   return memo[0];
 };
@@ -63,7 +64,7 @@ maxResult([1,-1,-2,4,-7,3], 2);
 Input:
 [1,-1,-2,4,-7,3], 2
 Output:
-0
+4
 Expected:
 7
 */
