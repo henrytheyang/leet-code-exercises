@@ -48,12 +48,13 @@ var maxResult = function(nums, k) {
   let memo = new Array(nums.length).fill(-1);
   let queueDPMaxByIndex = [];
   queueDPMaxByIndex[0] = nums.length - 1;
+  memo[nums.length - 1] = nums[nums.length - 1];
 
-  for (let i = nums.length - 1; i >= 0; i--) {
-    memo[i] = nums[i] + queueDPMaxByIndex[0];
-    if (queueDPMaxByIndex[0] > i + k) queueDPMaxByIndex.shift();
+  for (let i = nums.length - 2; i >= 0; i--) {
+    memo[i] = nums[i] + memo[queueDPMaxByIndex[0]];
+    if (queueDPMaxByIndex[0] > i + k - 1) queueDPMaxByIndex.shift();
     for (let j = queueDPMaxByIndex.length - 1; j >= 0; j--) {
-      if (memo[i] > nums[queueDPMaxByIndex[j]]) queueDPMaxByIndex.pop();
+      if (memo[i] > memo[queueDPMaxByIndex[j]]) queueDPMaxByIndex.pop();
     }
     queueDPMaxByIndex.push(i);
   }
@@ -64,7 +65,7 @@ maxResult([1,-1,-2,4,-7,3], 2);
 Input:
 [1,-1,-2,4,-7,3], 2
 Output:
-4
+5
 Expected:
 7
 */
