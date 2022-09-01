@@ -46,17 +46,17 @@ var maxResult = function(nums, k) {
       // Pop everything that moves out of the window
       // Pop everything smaller
   let memo = new Array(nums.length).fill(-1);
-  let queueDPMaxByIndex = [];
-  queueDPMaxByIndex[0] = nums.length - 1;
+  let queueIndexOfDPMax = [];
+  queueIndexOfDPMax[0] = nums.length - 1;
   memo[nums.length - 1] = nums[nums.length - 1];
 
   for (let i = nums.length - 2; i >= 0; i--) {
-    memo[i] = nums[i] + memo[queueDPMaxByIndex[0]];
-    if (queueDPMaxByIndex[0] > i + k - 1) queueDPMaxByIndex.shift();
-    for (let j = queueDPMaxByIndex.length - 1; j >= 0; j--) {
-      if (memo[i] >= memo[queueDPMaxByIndex[j]]) queueDPMaxByIndex.pop();
+    memo[i] = nums[i] + memo[queueIndexOfDPMax[0]];
+    if (queueIndexOfDPMax[0] > i + k - 1) queueIndexOfDPMax.shift();
+    for (let j = queueIndexOfDPMax.length - 1; j >= 0; j--) {
+      if (memo[i] >= memo[queueIndexOfDPMax[j]]) queueIndexOfDPMax.pop();
     }
-    queueDPMaxByIndex.push(i);
+    queueIndexOfDPMax.push(i);
   }
   return memo[0];
 };
