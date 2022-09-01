@@ -54,7 +54,7 @@ var maxResult = function(nums, k) {
     memo[i] = nums[i] + memo[queueDPMaxByIndex[0]];
     if (queueDPMaxByIndex[0] > i + k - 1) queueDPMaxByIndex.shift();
     for (let j = queueDPMaxByIndex.length - 1; j >= 0; j--) {
-      if (memo[i] > memo[queueDPMaxByIndex[j]]) queueDPMaxByIndex.pop();
+      if (memo[i] >= memo[queueDPMaxByIndex[j]]) queueDPMaxByIndex.pop();
     }
     queueDPMaxByIndex.push(i);
   }
