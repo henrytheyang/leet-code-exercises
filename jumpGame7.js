@@ -37,17 +37,43 @@ s[0] == '0'
  */
 var canReach = function(s, minJump, maxJump) {
   // DP
+  // Mark all legal landing points from current
+  // Decrement from end of string; skip if illegal landing point
+  // Check if index 0 is within legal landing points; return true if yes
+    // Else mark all legal landing points
+
+};
+canReach("011001110001000",3,5);
+
+/*
+Input:
+"011001110001000",3,5
+Output:
+false
+Expected:
+true
+*/
+
+
+/*
+var canReach = function(s, minJump, maxJump) {
+  // DP
   // Decrement from rear, seeing how far you can push the possible jump window towards index 0
     // Look inside allowable jump window for a legal jump (value === 0)
     // If we find one update the window. If window includes index 0 return true
     // If we reach the end of the window, return false
+
+  // Mark all legal landing points from current
+  // Decrement from end of string; skip if illegal landing point
+  // Check if index 0 is within legal landing points; return true if yes
+    // Else mark all legal landing points
   if (s[s.length - 1] !== '0') return false;
   let left = s.length - 1 - maxJump;
   let right = s.length - 1 - minJump;
   let current = s.length - 1 - minJump;
   while (current >= left && current >= 0) {
     if (s[current] === '0') {
-      if (left <= 0 && right >= 0) return true;
+      if (current - maxJump <= 0 && current - minJump >= 0) return true;
       left = current - maxJump;
       right = current - minJump;
       current = current - minJump;
@@ -57,16 +83,4 @@ var canReach = function(s, minJump, maxJump) {
   }
   return false;
 };
-canReach("00", 1, 1);
-
-/*
-Input:
-"00"
-1
-1
-Output:
-false
-Expected:
-true
-
 */
