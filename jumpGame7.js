@@ -46,22 +46,24 @@ var canReach = function(s, minJump, maxJump) {
   let current = s.length - 1;
   let left = current - maxJump;
   legalLanding[current] = true;
+  legalLanding.fill(true, current - maxJump, current - minJump + 1);
   for (current; current >= 0 && current >= left; current--) {
     if (legalLanding[current] === false) continue;
     if (s[current] === '0') {
       if (current - maxJump <= 0 && current - minJump >= 0) return true;
-      legalLanding.fill(true, current - maxJump, current - minJump + 1);
+      // Can optimize by only filling in 
+      legalLanding.fill(true, current - maxJump, left + 1);
       left = current - maxJump;
     }
   }
   return false;
 };
-canReach("00111010", 3, 5);
+canReach("011100110101011011011110",4,5);
 
 /*
 Input:
-"00111010"
-3
+"011100110101011011011110"
+4
 5
 Output:
 true
