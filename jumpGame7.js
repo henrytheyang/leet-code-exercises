@@ -35,5 +35,10 @@ s[0] == '0'
  * @return {boolean}
  */
 var canReach = function(s, minJump, maxJump) {
+  // DP
+  // Decrement from rear, seeing how far you can push the possible jump window towards index 0
+    // Look inside allowable jump window for a legal jump (value === 0)
+    // If we find one update the window. If window includes index 0 return true
+    // If we reach the end of the window, return false
   
 };
