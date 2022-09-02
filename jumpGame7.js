@@ -45,11 +45,11 @@ var canReach = function(s, minJump, maxJump) {
   let left = s.length - 1 - maxJump;
   let right = s.length - 1 - minJump;
   let current = s.length - 1 - minJump;
-  while (current >= left) {
+  while (current >= left && current >= 0) {
     if (s[current] === '0') {
       left = current - maxJump;
-      if (left <= 0) return true;
       right = current - minJump;
+      if (left <= 0 && right >= 0) return true;
       current = current - minJump;
     } else {
       current--;
@@ -57,3 +57,15 @@ var canReach = function(s, minJump, maxJump) {
   }
   return false;
 };
+canReach("0000000000", 8, 8);
+
+/*
+Input:
+"0000000000"
+8
+8
+Output:
+true
+Expected:
+false
+*/
