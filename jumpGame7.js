@@ -41,17 +41,32 @@ var canReach = function(s, minJump, maxJump) {
   // Decrement from end of string; skip if illegal landing point
   // Check if index 0 is within legal landing points; return true if yes
     // Else mark all legal landing points
-
+  let legalLanding = new Array(s.length).fill(false);
+  if (s[s.length - 1] !== '0') return false;
+  let current = s.length - 1;
+  let left = current - maxJump;
+  legalLanding[current] = true;
+  for (current; current >= 0 && current >= left; current--) {
+    if (legalLanding[current] === false) continue;
+    if (s[current] === '0') {
+      if (current - maxJump <= 0 && current - minJump >= 0) return true;
+      legalLanding.fill(true, current - maxJump, current - minJump + 1);
+      left = current - maxJump;
+    }
+  }
+  return false;
 };
-canReach("011001110001000",3,5);
+canReach("00111010", 3, 5);
 
 /*
 Input:
-"011001110001000",3,5
+"00111010"
+3
+5
 Output:
-false
-Expected:
 true
+Expected:
+false
 */
 
 
