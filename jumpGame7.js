@@ -1,5 +1,6 @@
 /*
-You are given a 0-indexed binary string s and two integers minJump and maxJump. In the beginning, you are standing at index 0, which is equal to '0'. You can move from index i to index j if the following conditions are fulfilled:
+You are given a 0-indexed binary string s and two integers minJump and maxJump. In the beginning, you are 
+standing at index 0, which is equal to '0'. You can move from index i to index j if the following conditions are fulfilled:
 
 i + minJump <= j <= min(i + maxJump, s.length - 1), and
 s[j] == '0'.
@@ -40,5 +41,19 @@ var canReach = function(s, minJump, maxJump) {
     // Look inside allowable jump window for a legal jump (value === 0)
     // If we find one update the window. If window includes index 0 return true
     // If we reach the end of the window, return false
-  
+  if (s[s.length - 1] !== '0') return false;
+  let left = s.length - 1 - maxJump;
+  let right = s.length - 1 - minJump;
+  let current = s.length - 1 - minJump;
+  while (current >= left) {
+    if (s[current] === '0') {
+      left = current - maxJump;
+      if (left <= 0) return true;
+      right = current - minJump;
+      current = current - minJump;
+    } else {
+      current--;
+    }
+  }
+  return false;
 };
