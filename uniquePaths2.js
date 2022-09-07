@@ -44,7 +44,7 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
   // Return last entry of hash table
   let pathsToSquareDP = new Array(obstacleGrid.length);
   for (let i = 0; i < pathsToSquareDP.length; i++) {
-    pathsToSquareDP[i] = new Array(obstacleGrid.length[0]);
+    pathsToSquareDP[i] = new Array(obstacleGrid[0].length);
   }
   pathsToSquareDP[0][0] = 1;
   let barrier = false;
@@ -63,7 +63,7 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
   }
 
   for (let l = 1; l < pathsToSquareDP.length; l++) {
-    for (let m = 2; m < pathsToSquareDP[0].length; m++) {
+    for (let m = 1; m < pathsToSquareDP[0].length; m++) {
       if (obstacleGrid[l][m] === 1) pathsToSquareDP[l][m] = 0;
       else pathsToSquareDP[l][m] = (pathsToSquareDP[l - 1][m] + pathsToSquareDP[l][m - 1]);
     }
@@ -71,3 +71,13 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
 
   return pathsToSquareDP[pathsToSquareDP.length - 1][pathsToSquareDP[0].length - 1];
 };
+
+uniquePathsWithObstacles([[0,0,0],[0,1,0],[0,0,0]])
+/*
+Input:
+[[0,0,0],[0,1,0],[0,0,0]]
+Output:
+1
+Expected:
+2
+*/
