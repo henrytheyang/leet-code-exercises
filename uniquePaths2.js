@@ -42,5 +42,32 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
     // If the current square is an obstacle there are 0 paths
     // Current paths is sum of square to north and west
   // Return last entry of hash table
-  
+  let pathsToSquareDP = new Array(obstacleGrid.length);
+  for (let i = 0; i < pathsToSquareDP.length; i++) {
+    pathsToSquareDP[i] = new Array(obstacleGrid.length[0]);
+  }
+  pathsToSquareDP[0][0] = 1;
+  let barrier = false;
+
+  for (let j = 1; j < pathsToSquareDP[0].length; j++) {
+    if (obstacleGrid[0][j] === 1) barrier = true;
+    if (!barrier) pathsToSquareDP[0][j] = 1;
+    else pathsToSquareDP[0][j] = 0;
+  }
+
+  barrier = false;
+  for (let k = 1; k < pathsToSquareDP.length; k++) {
+    if (obstacleGrid[k][0] === 1) barrier = true;
+    if (!barrier) pathsToSquareDP[k][0] = 1;
+    else pathsToSquareDP[k][0] = 0;
+  }
+
+  for (let l = 1; l < pathsToSquareDP.length; l++) {
+    for (let m = 2; m < pathsToSquareDP[0].length; m++) {
+      if (obstacleGrid[l][m] === 1) pathsToSquareDP[l][m] = 0;
+      else pathsToSquareDP[l][m] = (pathsToSquareDP[l - 1][m] + pathsToSquareDP[l][m - 1]);
+    }
+  }
+
+  return pathsToSquareDP[pathsToSquareDP.length - 1][pathsToSquareDP[0].length - 1];
 };
