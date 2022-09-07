@@ -38,4 +38,18 @@ var uniquePaths = function(m, n) {
     // First row is all 1s, first column is all 1s
     // Every square is the sum of the squares above and to the left
     // Fill in the table until we get to the last square
+  let answerTable = new Array(m - 1);
+  for (let i = 0; i < m; i++) {
+    answerTable[i] = new Array(n - 1);
+    answerTable[i][0] = 1;
+  }
+  answerTable[0].fill(1);
+  for (let j = 1; j < m; j++) {
+    for (let k = 1; k < n; k++) {
+      answerTable[j][k] = answerTable[j - 1][k] + answerTable[j][k - 1];
+    }
+  }
+  return answerTable[m - 1][n - 1];
 };
+
+uniquePaths(3, 7);
