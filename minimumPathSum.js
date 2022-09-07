@@ -30,5 +30,8 @@ n == grid[i].length
  * @return {number}
  */
 var minPathSum = function(grid) {
+  // Create dp table recording minimum sum to arrive at each square
+  // Each square is the sum of the squares above and to the left
+  // Return last square
   
 };
