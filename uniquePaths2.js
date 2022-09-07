@@ -40,7 +40,17 @@ obstacleGrid[i][j] is 0 or 1.
 
 var uniquePathsWithObstacles = function(obstacleGrid) {
   // Optimize space by only making a 1D dp table
-  // new dp[i] = old dp[i] + dp[i - 1] => dp[i] = dp[i] + d[i - 1];
+  // new dp[j] = old dp[j] + dp[j - 1] => dp[j] = dp[j] + d[j - 1];
+  if (obstacleGrid[0][0] === 1) return 0;
+  let dp = new Array(obstacleGrid[0].length).fill(0);
+  dp[0] = 1;
+  for (let i = 0; i < obstacleGrid.length; i++) {
+    for (let j = 0; j < obstacleGrid[0].length; j++) {
+      if (obstacleGrid[i][j] === 1) dp[j] = 0;
+      else if (j > 0) dp[j] += dp[j - 1];
+    }
+  }
+  return dp[dp.length - 1];
 };
 uniquePathsWithObstacles([[0,0,0],[0,1,0],[0,0,0]])
 
