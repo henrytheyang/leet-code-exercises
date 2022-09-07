@@ -34,7 +34,7 @@ var minPathSum = function(grid) {
   // Each square is the sum of the squares above and to the left
   // Return last square
   let smallestPathHere = new Array(grid.length);
-  for (let i = 0; i < grid[0].length; i++) {
+  for (let i = 0; i < grid.length; i++) {
     smallestPathHere[i] = new Array(grid[0].length);
   }
 
@@ -54,5 +54,4 @@ var minPathSum = function(grid) {
 
   return smallestPathHere[grid.length - 1][grid[0].length - 1];
 };
-
-minPathSum([[1,2,3],[4,5,6]])
+minPathSum([[1,2,3],[4,5,6]]);
