@@ -37,7 +37,14 @@ obstacleGrid[i][j] is 0 or 1.
  * @param {number[][]} obstacleGrid
  * @return {number}
  */
+
 var uniquePathsWithObstacles = function(obstacleGrid) {
+  // Optimize space by only making a 1D dp table
+  // new dp[i] = old dp[i] + dp[i - 1] => dp[i] = dp[i] + d[i - 1];
+};
+uniquePathsWithObstacles([[0,0,0],[0,1,0],[0,0,0]])
+
+var uniquePathsWithObstacles2D = function(obstacleGrid) {
   // Create dp hash table recording possible paths to current square
     // If the current square is an obstacle there are 0 paths
     // Current paths is sum of square to north and west
@@ -73,7 +80,6 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
   return pathsToSquareDP[pathsToSquareDP.length - 1][pathsToSquareDP[0].length - 1];
 };
 
-uniquePathsWithObstacles([[0,0,0],[0,1,0],[0,0,0]])
 /*
 Input:
 [[0,0,0],[0,1,0],[0,0,0]]
