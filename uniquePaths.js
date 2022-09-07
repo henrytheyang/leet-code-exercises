@@ -33,5 +33,9 @@ Constraints:
  * @return {number}
  */
 var uniquePaths = function(m, n) {
-  
+  // DP solution with hash table
+  // Record number of paths to square in question
+    // First row is all 1s, first column is all 1s
+    // Every square is the sum of the squares above and to the left
+    // Fill in the table until we get to the last square
 };
