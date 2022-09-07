@@ -38,5 +38,9 @@ obstacleGrid[i][j] is 0 or 1.
  * @return {number}
  */
 var uniquePathsWithObstacles = function(obstacleGrid) {
+  // Create dp hash table recording possible paths to current square
+    // If the current square is an obstacle there are 0 paths
+    // Current paths is sum of square to north and west
+  // Return last entry of hash table
   
 };
