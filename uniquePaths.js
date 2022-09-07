@@ -38,9 +38,9 @@ var uniquePaths = function(m, n) {
     // First row is all 1s, first column is all 1s
     // Every square is the sum of the squares above and to the left
     // Fill in the table until we get to the last square
-  let answerTable = new Array(m - 1);
+  let answerTable = new Array(m);
   for (let i = 0; i < m; i++) {
-    answerTable[i] = new Array(n - 1);
+    answerTable[i] = new Array(n);
     answerTable[i][0] = 1;
   }
   answerTable[0].fill(1);
