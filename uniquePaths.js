@@ -35,8 +35,16 @@ Constraints:
 var uniquePaths = function(m, n) {
   // This is a permutation problem with identical elements
   // Unique permutations = (number of choices)! / ( (number of identical objects a)! * (number of identical objects b)! ... )
-  
+  const findFactorial = (num) => {
+    let answer = 1;
+    for (let i = 1; i < num; i++) {
+      answer = answer * (i + 1);
+    }
+    return answer;
+  }
+  return findFactorial(m - 1 + n - 1)/(findFactorial(m - 1) * findFactorial(n - 1));
 };
+uniquePaths(3, 7);
 
 var uniquePathsDP = function(m, n) {
   // DP solution with hash table
@@ -58,4 +66,3 @@ var uniquePathsDP = function(m, n) {
   return answerTable[m - 1][n - 1];
 }
 
-uniquePaths(3, 7);
