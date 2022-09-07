@@ -33,6 +33,12 @@ Constraints:
  * @return {number}
  */
 var uniquePaths = function(m, n) {
+  // This is a permutation problem with identical elements
+  // Unique permutations = (number of choices)! / ( (number of identical objects a)! * (number of identical objects b)! ... )
+  
+};
+
+var uniquePathsDP = function(m, n) {
   // DP solution with hash table
   // Record number of paths to square in question
     // First row is all 1s, first column is all 1s
@@ -50,6 +56,6 @@ var uniquePaths = function(m, n) {
     }
   }
   return answerTable[m - 1][n - 1];
-};
+}
 
 uniquePaths(3, 7);
