@@ -44,5 +44,9 @@ n == dungeon[i].length
  * @return {number}
  */
 var calculateMinimumHP = function(dungeon) {
-    
+  // Find max sum path
+  // Use dp array to record point values at each square
+    // Each square is the sum of the square above and to the left
+  // Return last square + 1
+
 };
