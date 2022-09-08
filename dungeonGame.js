@@ -48,5 +48,22 @@ var calculateMinimumHP = function(dungeon) {
   // Use dp array to record point values at each square
     // Each square is the sum of the square above and to the left
   // Return last square + 1
-
+  let HPTracker = new Array(dungeon[0].length + 1).fill(0);
+  HPTracker[0] = 0;
+  for (let i = 0; i < dungeon.length; i++) {
+    for (let j = 1; j <= dungeon[0].length; j++) {
+      HPTracker[j] = dungeon[i][j] + Math.max(HPTracker[j], HPTracker[j - 1]);
+    }
+  }
+  return HPTracker[HPTracker.length - 1] + 1;
 };
+calculateMinimumHP([[-2,-3,3],[-5,-10,1],[10,30,-5]]);
+
+/*
+Input:
+[[-2,-3,3],[-5,-10,1],[10,30,-5]]
+Output:
+NaN
+Expected:
+7
+*/
