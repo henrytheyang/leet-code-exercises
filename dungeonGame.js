@@ -52,36 +52,56 @@ var calculateMinimumHP = function(dungeon) {
     // If minimum is negative, return one more than the absolute value of the minimum
     // If the minimum is non-negative, return 1
 
-
   let HPTracker = new Array(dungeon[0].length);
+  let aboveSum;
+  let leftSum;
+  let aboveMin;
+  let leftMin;
   for (let i = 0; i < dungeon.length; i++) {
-    HPTracker[i] = new Array(dungeon[0].length);
+    HPTracker[i] = new Array(dungeon[0].length).fill({sum: 0, min: 0});
   }
-  HPTracker[0][0] = -2;
+  HPTracker[0][0] = {
+    sum: dungeon[0][0],
+    min: dungeon[0][0]
+  };
 
   for (let j = 1; j < dungeon.length; j++) {
-    HPTracker[j][0] = dungeon[j][0] + HPTracker[j - 1][0];
+    aboveSum = HPTracker[j - 1][0].sum;
+    aboveMin = HPTracker[j - 1][0].min;
+    HPTracker[j][0].sum = dungeon[j][0] + aboveSum;
+    HPTracker[j][0].min = Math.min(aboveMin, HPTracker[j][0].sum);
   }
 
   for (let k = 1; k < dungeon[0].length; k++) {
-    HPTracker[0][k] = dungeon[0][k] + HPTracker[0][k - 1];
+    leftSum = HPTracker[0][k - 1].sum;
+    leftMin = HPTracker[0][k - 1].min;
+    HPTracker[0][k].sum = dungeon[0][k] + leftSum;
+    HPTracker[0][k].min = Math.min(leftMin, HPTracker[0][k].sum)
+    // HPTracker[0][k] = dungeon[0][k] + HPTracker[0][k - 1];
   }
 
   for (let l = 1; l < dungeon.length; l++) {
     for (let m = 1; m < dungeon[0].length; m++) {
-      HPTracker[l][m] = dungeon[l][m] + Math.max(HPTracker[l][m - 1], HPTracker[l - 1][m])
+      aboveSum = HPTracker[l - 1][m].sum;
+      leftSum = HPTracker[l][m - 1].sum;
+      aboveMin = HPTracker[l - 1][m].min;
+      leftMin = HPTracker[l][m - 1].min;
+      HPTracker[l][m].sum = dungeon[l][m] + Math.max(leftSum, aboveSum);
+      HPTracker[l][m].min = Math.min(HPTracker[l][m].sum, leftMin, aboveMin);
     }
   }
 
-  return HPTracker[HPTracker.length - 1][HPTracker[0].length - 1] + 1;
+  if (HPTracker[HPTracker.length - 1][HPTracker[0].length - 1].min >= 0) return 1;
+  else return Math.abs(HPTracker[HPTracker.length - 1][HPTracker[0].length - 1].min) + 1;
 };
 calculateMinimumHP([[-2,-3,3],[-5,-10,1],[10,30,-5]]);
 
 /*
 Input:
+Input:
 [[-2,-3,3],[-5,-10,1],[10,30,-5]]
 Output:
-29
+13
 Expected:
 7
 */
