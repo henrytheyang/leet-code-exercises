@@ -44,18 +44,36 @@ n == dungeon[i].length
  * @return {number}
  */
 var calculateMinimumHP = function(dungeon) {
-  // Find max sum path
-  // Use dp array to record point values at each square
-    // Each square is the sum of the square above and to the left
-  // Return last square + 1
-  let HPTracker = new Array(dungeon[0].length + 1).fill(0);
-  HPTracker[0] = 0;
+  // We need to find the path that has the greatest minimum point
+  // DP track both the path minimum and the current sum
+    // At each square compute the current sum
+    // Compare current sum and old minimum; if the sum is lower than the minimum, replace
+  // At the last square
+    // If minimum is negative, return one more than the absolute value of the minimum
+    // If the minimum is non-negative, return 1
+
+
+  let HPTracker = new Array(dungeon[0].length);
   for (let i = 0; i < dungeon.length; i++) {
-    for (let j = 1; j <= dungeon[0].length; j++) {
-      HPTracker[j] = dungeon[i][j] + Math.max(HPTracker[j], HPTracker[j - 1]);
+    HPTracker[i] = new Array(dungeon[0].length);
+  }
+  HPTracker[0][0] = -2;
+
+  for (let j = 1; j < dungeon.length; j++) {
+    HPTracker[j][0] = dungeon[j][0] + HPTracker[j - 1][0];
+  }
+
+  for (let k = 1; k < dungeon[0].length; k++) {
+    HPTracker[0][k] = dungeon[0][k] + HPTracker[0][k - 1];
+  }
+
+  for (let l = 1; l < dungeon.length; l++) {
+    for (let m = 1; m < dungeon[0].length; m++) {
+      HPTracker[l][m] = dungeon[l][m] + Math.max(HPTracker[l][m - 1], HPTracker[l - 1][m])
     }
   }
-  return HPTracker[HPTracker.length - 1] + 1;
+
+  return HPTracker[HPTracker.length - 1][HPTracker[0].length - 1] + 1;
 };
 calculateMinimumHP([[-2,-3,3],[-5,-10,1],[10,30,-5]]);
 
@@ -63,7 +81,7 @@ calculateMinimumHP([[-2,-3,3],[-5,-10,1],[10,30,-5]]);
 Input:
 [[-2,-3,3],[-5,-10,1],[10,30,-5]]
 Output:
-NaN
+29
 Expected:
 7
 */
