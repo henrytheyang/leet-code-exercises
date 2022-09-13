@@ -58,7 +58,7 @@ var calculateMinimumHP = function(dungeon) {
   for (let i = 0; i < dungeon.length; i++) {
     DmgTracker[i] = new Array(dungeon[0].length);
   }
-  DmgTracker[dungeon.length - 1][dungeon[0].length - 1] = dungeon[dungeon.length - 1][dungeon[0].length - 1];
+  DmgTracker[dungeon.length - 1][dungeon[0].length - 1] = Math.min(0, dungeon[dungeon.length - 1][dungeon[0].length - 1]);
 
   for (let j = dungeon.length - 2; j >= 0; j--) {
     DmgTracker[j][dungeon[0].length - 1] = Math.min(0, DmgTracker[j + 1][dungeon[0].length - 1] + dungeon[j][dungeon[0].length - 1]);
