@@ -43,7 +43,13 @@ var twoSum = function(nums, target) {
   // Hashtable- hashtable index is nums value, hashtable value is index of nums where value can be found
   // One pass solution- iterate through nums; if complement is not found, add it to hashtable
   // Return if complement found
-
+  let hashTable = {}
+  for (let i = 0; i < nums.length; i++) {
+    if (hashTable[target - nums[i]] !== undefined) {
+      return [i, hashTable[target - nums[i]]];
+    }
+    else hashTable[nums[i]] = i;
+  }
 }
 
 
