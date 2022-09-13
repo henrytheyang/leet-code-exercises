@@ -39,4 +39,8 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
+  // Iterate through nums, create hash table where the value in nums = index of hashtable; hashtable value = index nums
+  // Then iterate through nums again; look at corresponding index in hashtable; if undefined, move on
+
+  
 };
