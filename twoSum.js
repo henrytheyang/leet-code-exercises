@@ -51,7 +51,7 @@ var twoSum = function(nums, target) {
     if (hashTable[target - nums[j]] === undefined) continue;
     else {
       // answer = [...nums[j], target - nums[j]]
-      answer.push(nums[j], target - nums[j])
+      answer.push(j, hashTable[target - nums[j]])
       break;
     };
   }
