@@ -49,7 +49,7 @@ var twoSum = function(nums, target) {
 
   for (let j = 0; j < nums.length; j++) {
     if (hashTable[target - nums[j]] === undefined) continue;
-    else {
+    else if (j !== hashTable[target - nums[j]]) {
       // answer = [...nums[j], target - nums[j]]
       answer.push(j, hashTable[target - nums[j]])
       break;
