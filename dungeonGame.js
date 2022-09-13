@@ -70,20 +70,20 @@ var calculateMinimumHP = function(dungeon) {
   
   for (let l = dungeon.length - 2; l >= 0; l--) {
     for (let m = dungeon[0].length - 2; m >= 0; m--) {
-      DmgTracker[l][m] = Math.min(0, dungeon[l][m]) + Math.max(DmgTracker[l + 1][m], DmgTracker[l][m + 1]);
+      DmgTracker[l][m] = Math.min(0, dungeon[l][m] + Math.max(DmgTracker[l + 1][m], DmgTracker[l][m + 1]));
     }
   }
 
   if (DmgTracker[0][0] >= 0) return 1;
   else return (- 1 * DmgTracker[0][0]) + 1;
 };
-calculateMinimumHP([[-3,5]]);
+calculateMinimumHP([[3,-20,30],[-3,4,0]]);
 
 /*
 Input:
-[[-3,5]]
+[[3,-20,30],[-3,4,0]]
 Output:
-1
-Expected:
 4
+Expected:
+1
 */
