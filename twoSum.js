@@ -38,7 +38,16 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
  * @param {number} target
  * @return {number[]}
  */
+
 var twoSum = function(nums, target) {
+  // Hashtable- hashtable index is nums value, hashtable value is index of nums where value can be found
+  // One pass solution- iterate through nums; if complement is not found, add it to hashtable
+  // Return if complement found
+
+}
+
+
+var twoSumTwoPass = function(nums, target) {
   // Iterate through nums, create hash table where the value in nums = index of hashtable; hashtable value = index nums
   // Then iterate through nums again; look at corresponding index in hashtable; if undefined, move on
   let hashTable = new Array(nums.length);
