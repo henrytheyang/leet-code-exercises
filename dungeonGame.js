@@ -51,52 +51,39 @@ var calculateMinimumHP = function(dungeon) {
   // At the last square
     // If minimum is negative, return one more than the absolute value of the minimum
     // If the minimum is non-negative, return 1
+  // DP from the entrance may make local mins but not global mins; try going from exit
 
-  let HPTracker = new Array(dungeon.length);
+  let DmgTracker = new Array(dungeon.length);
   let selectedPath;
   for (let i = 0; i < dungeon.length; i++) {
-    HPTracker[i] = new Array(dungeon[0].length);
-    for (let j = 0; j < HPTracker[i].length; j++) {
-      HPTracker[i][j] = {sum: 0, min: 0};
-    }
+    DmgTracker[i] = new Array(dungeon[0].length);
   }
-  HPTracker[0][0] = {
-    sum: dungeon[0][0],
-    min: dungeon[0][0]
-  };
+  DmgTracker[dungeon.length - 1][dungeon[0].length - 1] = dungeon[dungeon.length - 1][dungeon[0].length - 1];
 
-  for (let j = 1; j < dungeon.length; j++) {
-    HPTracker[j][0].sum = dungeon[j][0] + HPTracker[j - 1][0].sum;
-    HPTracker[j][0].min = Math.min(HPTracker[j - 1][0].min, HPTracker[j][0].sum);
+  for (let j = dungeon.length - 2; j >= 0; j--) {
+    DmgTracker[j][dungeon[0].length - 1] = Math.min(0, DmgTracker[j + 1][dungeon[0].length - 1] + dungeon[j][dungeon[0].length - 1]);
   }
 
-  for (let k = 1; k < dungeon[0].length; k++) {
-    HPTracker[0][k].sum = dungeon[0][k] + HPTracker[0][k - 1].sum;
-    HPTracker[0][k].min = Math.min(HPTracker[0][k - 1].min, HPTracker[0][k].sum)
+  for (let k = dungeon[0].length - 2; k >= 0; k--) {
+    DmgTracker[dungeon.length - 1][k] = Math.min(0, dungeon[dungeon.length - 1][k]  + DmgTracker[dungeon.length - 1][k + 1]);
   }
-
-  for (let l = 1; l < dungeon.length; l++) {
-    for (let m = 1; m < dungeon[0].length; m++) {
-      if (HPTracker[l][m - 1].min > HPTracker[l - 1][m].min) selectedPath = HPTracker[l][m - 1];
-      else if (HPTracker[l][m - 1].min < HPTracker[l - 1][m].min) selectedPath = HPTracker[l - 1][m];
-      else if (HPTracker[l][m - 1].sum >= HPTracker[l - 1][m].sum) selectedPath = HPTracker[l][m - 1];
-      else selectedPath = HPTracker[l - 1][m];
-
-      HPTracker[l][m].sum = dungeon[l][m] + selectedPath.sum;
-      HPTracker[l][m].min = Math.min(HPTracker[l][m].sum, selectedPath.min);
+  
+  for (let l = dungeon.length - 2; l >= 0; l--) {
+    for (let m = dungeon[0].length - 2; m >= 0; m--) {
+      DmgTracker[l][m] = Math.min(0, dungeon[l][m]) + Math.max(DmgTracker[l + 1][m], DmgTracker[l][m + 1]);
     }
   }
 
-  if (HPTracker[HPTracker.length - 1][HPTracker[0].length - 1].min >= 0) return 1;
-  else return Math.abs(HPTracker[HPTracker.length - 1][HPTracker[0].length - 1].min) + 1;
+  if (DmgTracker[0][0] >= 0) return 1;
+  else return (- 1 * DmgTracker[0][0]) + 1;
 };
-calculateMinimumHP([[1,-3,3],[0,-2,0],[-3,-3,-3]]);
+calculateMinimumHP([[-3,5]]);
 
 /*
 Input:
-[[1,-3,3],[0,-2,0],[-3,-3,-3]] 
+[[-3,5]]
 Output:
-5           // DP from the entrance may make local mins but not global mins; try going from exit
+1
 Expected:
-3
+4
 */
