@@ -1,16 +1,38 @@
-// Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+/*
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that 
+i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 
-// Note:
-// The solution set must not contain duplicate triplets.
+Notice that the solution set must not contain duplicate triplets.
 
-// Example:
-// Given array nums = [-1, 0, 1, 2, -1, -4],
+ 
 
-// A solution set is:
-// [
-//   [-1, 0, 1],
-//   [-1, -1, 2]
-// ]
+Example 1:
+
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+Explanation: 
+nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+The distinct triplets are [-1,0,1] and [-1,-1,2].
+Notice that the order of the output and the order of the triplets does not matter.
+Example 2:
+
+Input: nums = [0,1,1]
+Output: []
+Explanation: The only possible triplet does not sum up to 0.
+Example 3:
+
+Input: nums = [0,0,0]
+Output: [[0,0,0]]
+Explanation: The only possible triplet sums up to 0.
+ 
+
+Constraints:
+
+3 <= nums.length <= 3000
+-105 <= nums[i] <= 105
+*/
 
 
 /**
@@ -20,10 +42,35 @@
 
 var threeSum = function(nums) {
   // One pass solution with hashtable
+  // Index of hashtable is value of nums[i]; value of hashtable[x] = index of nums[i] 
   // Iterate through nums, current num is fixed. Add to hashtable
     // Nested loop- check if current num in nested loop has complement
     // Add to hashtable
+  let answer = [];
+  let valuesPresent = new Array(nums.length);
+  let newTriplet = [];
+  for (let i = 0; i < nums.length; i++) {
+    valuesPresent[nums[i]] = i;
+    for (let j = i; j < nums.length; j++) {
+      valuesPresent[nums[j]] = j;
+      if (valuesPresent[0 - nums[i] - nums[j]] !== undefined) newTriplet = ([nums[i], nums[j], 0 - nums[i] - nums[j]]).sort((a, b) => a - b);
+      if (answer.indexOf(newTriplet) !== -1) answer.push([...newTriplet]);
+    }
+  }
+  return answer;
 }
+
+threeSum([-1,0,1,2,-1,-4])
+/*
+Input:
+[-1,0,1,2,-1,-4]
+Output:
+[]
+Expected:
+[[-1,-1,2],[-1,0,1]]
+*/
+
+
 
 var threeSumBruteForce = function(nums) {
   let answerArray = [];
@@ -81,5 +128,3 @@ var threeSumBruteForce = function(nums) {
     // Edge case- dealing with duplicates. Anytime we advance 1st or 2nd, or decrease 3rd, if our new number === previous number, we skip 
   return answerArray;
 };
-
-threeSum([-8, -4, -8, 0, 0, 8, 1, 1, 1, 1, 3, 4, 4, 0]);
