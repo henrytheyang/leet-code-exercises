@@ -47,14 +47,16 @@ var threeSum = function(nums) {
     // Nested loop- check if current num in nested loop has complement
     // Add to hashtable
   let answer = [];
-  let valuesPresent = new Array(nums.length);
+  let valuesPresent = {};
   let newTriplet = [];
   for (let i = 0; i < nums.length; i++) {
     valuesPresent[nums[i]] = i;
-    for (let j = i; j < nums.length; j++) {
+    for (let j = i + 1; j < nums.length; j++) {
       valuesPresent[nums[j]] = j;
-      if (valuesPresent[0 - nums[i] - nums[j]] !== undefined) newTriplet = ([nums[i], nums[j], 0 - nums[i] - nums[j]]).sort((a, b) => a - b);
-      if (answer.indexOf(newTriplet) !== -1) answer.push([...newTriplet]);
+      if (valuesPresent[0 - nums[i] - nums[j]] !== undefined) {
+        newTriplet = ([nums[i], nums[j], 0 - nums[i] - nums[j]]).sort((a, b) => a - b)
+        if (answer.indexOf(newTriplet) === -1) answer.push([...newTriplet]);
+      };
     }
   }
   return answer;
@@ -65,7 +67,7 @@ threeSum([-1,0,1,2,-1,-4])
 Input:
 [-1,0,1,2,-1,-4]
 Output:
-[]
+[[-1,0,1],[-1,-1,2],[-1,-1,2],[-1,0,1],[-1,0,1],[-1,0,1],[-1,-1,2],[-4,2,2]]
 Expected:
 [[-1,-1,2],[-1,0,1]]
 */
