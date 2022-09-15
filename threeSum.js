@@ -17,42 +17,15 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-// var threeSum = function(nums) {
-//   let answerArray = [];
-//   let answerArrayTracker = {};
-//   let arraySortAsc = function (inputArr) {
-//     return inputArr.sort(function(a, b) {
-//       return a-b;
-//     })
-//   }
-//   let stringifyArrayElements = array => {
-//     // [1, -1, 3] -> '1,-1,3'
-//     return array.join();
-//   }
-//   for (var i = 0; i < nums.length - 2; i++) {
-//     for (var j = i + 1; j < nums.length - 1; j++) {
-//       for (var k = j + 1; k < nums.length; k++) {
-//         let newTriplet = [];
-//         if (nums[i] + nums[j] + nums[k] === 0) {
-//           newTriplet.push(nums[i], nums[j], nums[k]);
-//           newTriplet = arraySortAsc(newTriplet);
-//           let stringifiedArray = stringifyArrayElements(newTriplet);
-//           // If array is not stored, add to the tracker and push into answerArray
-//           if (answerArrayTracker[stringifiedArray] === undefined) {
-//             answerArrayTracker[stringifiedArray] = true;
-//             answerArray.push(newTriplet);
-//           }
-//         }
-//       }
-//     }
-//   }
-//   return answerArray;
-// };
 
-
-
-// [-8, -8, -4, 0, 0, 0, 1, 1, 1, 1, 3, 4, 4, 8]
 var threeSum = function(nums) {
+  // One pass solution with hashtable
+  // Iterate through nums, current num is fixed. Add to hashtable
+    // Nested loop- check if current num in nested loop has complement
+    // Add to hashtable
+}
+
+var threeSumBruteForce = function(nums) {
   let answerArray = [];
   let arraySortAsc = function (inputArr) {
     return inputArr.sort(function(a, b) {
