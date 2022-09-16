@@ -50,18 +50,32 @@ var threeSum = function(nums) {
   let duplicateTracker = [];
   let valuesPresent = {};
   let newTriplet = [];
+  let tripletFound = false;
+  let finishedScanning = false;
+  valuesPresent[nums[0]] = {0: true};
+
   for (let i = 0; i < nums.length; i++) {
-    valuesPresent[nums[i]] = i;
     for (let j = i + 1; j < nums.length; j++) {
-      valuesPresent[nums[j]] = j;
+      if (!finishedScanning) {
+        if (valuesPresent[nums[j]] == undefined) valuesPresent[nums[j]] = {j: 1};
+        else valuesPresent[nums[j]][j]++;
+      }
+
       if (valuesPresent[0 - nums[i] - nums[j]] !== undefined) {
-        newTriplet = ([nums[i], nums[j], 0 - nums[i] - nums[j]]).sort((a, b) => a - b)
-        if (duplicateTracker.indexOf(JSON.stringify(newTriplet)) === -1) {
-          answer.push([...newTriplet])
-          duplicateTracker.push(JSON.stringify(newTriplet));
-        };
+        if (valuesPresent[0 - nums[i] - nums[j]] !== valuesPresent[nums[i]] && valuesPresent[0 - nums[i] - nums[j]] !== valuesPresent[nums[j]]) {
+          tripletFound = true;
+        }
+        if (tripletFound) {          
+          newTriplet = ([nums[i], nums[j], 0 - nums[i] - nums[j]]).sort((a, b) => a - b)
+          if (duplicateTracker.indexOf(JSON.stringify(newTriplet)) === -1) {
+            answer.push([...newTriplet])
+            duplicateTracker.push(JSON.stringify(newTriplet));
+          };
+        }
+        tripletFound = false;
       };
     }
+    finishedScanning = true;
   }
   return answer;
 }
