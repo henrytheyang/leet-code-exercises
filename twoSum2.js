@@ -43,7 +43,11 @@ The tests are generated such that there is exactly one solution.
  * @return {number[]}
  */
 
-var twoSum = function(numbers, target) {
+var twoSum = function(numbers,target) {
+  // Two pointer pinching method
+}
+
+var twoSumStoring = function(numbers, target) {
   // Speed up by storing seen numbers
   // Iterate through numbers, checking if we've seen complement already
   let seenValues = {};
