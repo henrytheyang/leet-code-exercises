@@ -45,5 +45,27 @@ The tests are generated such that there is exactly one solution.
 var twoSum = function(numbers, target) {
   // Numbers is sorted- iterate through array for first number, and for each number binary search for complement
     // Continue when binary search pointers converge and dont add to target
-      
+  let high, low, mid;
+  for (let i = 0; i < numbers.length; i++) {
+    low = i + 1;
+    high = numbers.length - 1;
+    do {
+      mid = Math.floor((low + high) / 2);
+      if (numbers[i] + numbers[mid] === target) return [i + 1, mid + 1];
+      else {
+        if (numbers[i] + numbers[mid] < target) {
+          low = mid + 1;
+        } else if (numbers[i] + numbers[mid] > target) {
+          high = mid - 1;
+        }
+      }
+    } while (low <= high)
+  }
 };
+
+twoSum([2,7,11,15], 9);
+/*
+input:
+[2,7,11,15]
+9
+*/
