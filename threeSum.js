@@ -41,9 +41,50 @@ Constraints:
  */
 
 var threeSum = function(nums) {
-  // Map values, iterate from map to eliminate 
+  // Map values, iterate from map to eliminate repeats
+  let answer = [];
+  let duplicateTracker = {};
+  let valuesPresent = new Map();
+  let newTriplet = [];
+  let stringifiedTriplet = '';
+  let tripletFound = false;
   
+  for (let i = 0; i < nums.length; i++) {
+    if (valuesPresent.get(nums[i]) === undefined) valuesPresent.set(nums[i], 1);
+    else valuesPresent.set(nums[i], valuesPresent.get(nums[i]) + 1);
+  }
+
+  for (const [key, value] of valuesPresent) {
+    for (const [prop, count] of valuesPresent) {
+      if (valuesPresent.get(0 - key - prop) !== undefined) {
+        if (key !== (0 - key - prop) && prop !== (0 - key - prop)) {
+          tripletFound = true;
+        }
+        else if (key === 0 && prop === 0 && valuesPresent.get(0) >= 3) tripletFound = true;
+        else if (key !== 0 && prop !== 0 && valuesPresent.get(0 - key - prop) > 1) tripletFound = true;
+
+        if (tripletFound) {
+          newTriplet = ([key, prop, 0 - key - prop]).sort((a, b) => a - b)
+          stringifiedTriplet = JSON.stringify(newTriplet);
+          if (duplicateTracker[stringifiedTriplet] === undefined) {
+            answer.push([...newTriplet])
+            duplicateTracker[stringifiedTriplet] = true;
+          };
+        }
+      }
+    }
+  }
 }
+
+threeSum([-1,0,1,2,-1,-4])
+/*
+Input:
+[-1,0,1,2,-1,-4]
+Output:
+undefined
+Expected:
+[[-1,-1,2],[-1,0,1]]
+*/
 
 var threeSumFirst = function(nums) {
   // One pass solution with hashtable
@@ -87,17 +128,6 @@ var threeSumFirst = function(nums) {
   }
   return answer;
 }
-
-threeSum([4,4,3,-5,0,0,0,-2,3,-5,-5,0])
-/*
-Input:
-[4,4,3,-5,0,0,0,-2,3,-5,-5,0]
-Output:
-[]
-Expected:
-[[0,0,0]]
-*/
-
 
 
 var threeSumBruteForce = function(nums) {
