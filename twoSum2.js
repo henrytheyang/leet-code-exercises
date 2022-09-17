@@ -43,5 +43,7 @@ The tests are generated such that there is exactly one solution.
  * @return {number[]}
  */
 var twoSum = function(numbers, target) {
-    
+  // Numbers is sorted- iterate through array for first number, and for each number binary search for complement
+    // Continue when binary search pointers converge and dont add to target
+      
 };
