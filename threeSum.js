@@ -47,7 +47,7 @@ var threeSum = function(nums) {
     // Nested loop- check if current num in nested loop has complement
     // Add to hashtable
   let answer = [];
-  let duplicateTracker = [];
+  let duplicateTracker = {};
   let valuesPresent = {};
   let newTriplet = [];
   let tripletFound = false;
@@ -68,9 +68,9 @@ var threeSum = function(nums) {
 
         if (tripletFound) {          
           newTriplet = ([nums[i], nums[j], 0 - nums[i] - nums[j]]).sort((a, b) => a - b)
-          if (duplicateTracker.indexOf(JSON.stringify(newTriplet)) === -1) {
+          if (duplicateTracker[JSON.stringify(newTriplet)] === undefined) {
             answer.push([...newTriplet])
-            duplicateTracker.push(JSON.stringify(newTriplet));
+            duplicateTracker[JSON.stringify(newTriplet)] = true;
           };
         }
         tripletFound = false;
