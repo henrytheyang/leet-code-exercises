@@ -41,6 +41,11 @@ Constraints:
  */
 
 var threeSum = function(nums) {
+  // Map values, iterate from map to eliminate 
+  
+}
+
+var threeSumFirst = function(nums) {
   // One pass solution with hashtable
   // Index of hashtable is value of nums[i]; value of hashtable[x] = index of nums[i] 
   // Iterate through nums, current num is fixed. Add to hashtable
@@ -52,6 +57,7 @@ var threeSum = function(nums) {
   let newTriplet = [];
   let tripletFound = false;
   let finishedScanning = false;
+  let stringifiedTriplet = '';
   valuesPresent[nums[0]] = 1;
 
   for (let i = 0; i < nums.length; i++) {
@@ -68,9 +74,10 @@ var threeSum = function(nums) {
 
         if (tripletFound) {          
           newTriplet = ([nums[i], nums[j], 0 - nums[i] - nums[j]]).sort((a, b) => a - b)
-          if (duplicateTracker[JSON.stringify(newTriplet)] === undefined) {
+          stringifiedTriplet = JSON.stringify(newTriplet);
+          if (duplicateTracker[stringifiedTriplet] === undefined) {
             answer.push([...newTriplet])
-            duplicateTracker[JSON.stringify(newTriplet)] = true;
+            duplicateTracker[stringifiedTriplet] = true;
           };
         }
         tripletFound = false;
