@@ -56,6 +56,7 @@ var threeSum = function(nums) {
 
   for (const [key, value] of valuesPresent) {
     for (const [prop, count] of valuesPresent) {
+      if (key === prop && valuesPresent.get(key) < 2) continue;
       if (valuesPresent.get(0 - key - prop) !== undefined) {
         if (key !== (0 - key - prop) && prop !== (0 - key - prop)) {
           tripletFound = true;
@@ -70,19 +71,21 @@ var threeSum = function(nums) {
             answer.push([...newTriplet])
             duplicateTracker[stringifiedTriplet] = true;
           };
+          tripletFound = false;
         }
       }
     }
   }
+  return answer;
 }
 
 threeSum([-1,0,1,2,-1,-4])
 /*
-Input:
+Input
 [-1,0,1,2,-1,-4]
-Output:
-undefined
-Expected:
+Output
+[[-1,-1,2],[-1,0,1],[0,0,0],[-4,2,2]]
+Expected
 [[-1,-1,2],[-1,0,1]]
 */
 
