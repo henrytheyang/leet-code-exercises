@@ -63,7 +63,7 @@ var threeSum = function(nums) {
 
       if (valuesPresent[0 - nums[i] - nums[j]] !== undefined) {
         if (0 - nums[i] - nums[j] !== nums[i] && 0 - nums[i] - nums[j] !== nums[j]) tripletFound = true;
-        else if (nums[i] === 0 && nums[j] === 0 && valuesPresent[0 - nums[i] - nums[j]] === 3) tripletFound = true;
+        else if (nums[i] === 0 && nums[j] === 0 && valuesPresent[0 - nums[i] - nums[j]] >= 3) tripletFound = true;
         else if (nums[i] !== 0 && nums[j] !== 0 && valuesPresent[0 - nums[i] - nums[j]] > 1) tripletFound = true;
 
         if (tripletFound) {          
@@ -81,14 +81,14 @@ var threeSum = function(nums) {
   return answer;
 }
 
-threeSum([0,0,0])
+threeSum([4,4,3,-5,0,0,0,-2,3,-5,-5,0])
 /*
 Input:
-[-1,0,1,2,-1,-4]
+[4,4,3,-5,0,0,0,-2,3,-5,-5,0]
 Output:
-[[-1,0,1],[-1,-1,2],[-1,-1,2],[-1,0,1],[-1,0,1],[-1,0,1],[-1,-1,2],[-4,2,2]]
+[]
 Expected:
-[[-1,-1,2],[-1,0,1]]
+[[0,0,0]]
 */
 
 
