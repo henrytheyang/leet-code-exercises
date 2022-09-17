@@ -45,6 +45,14 @@ The tests are generated such that there is exactly one solution.
 
 var twoSum = function(numbers,target) {
   // Two pointer pinching method
+    let low = 0;
+  let high = numbers.length - 1;
+
+  while (low < high) {
+    if (numbers[low] + numbers[high] === target) return [low + 1, high + 1]; 
+    else if (numbers[low] + numbers[high] > target) high--;
+    else if (numbers[low] + numbers[high] < target) low++;
+  }
 }
 
 var twoSumStoring = function(numbers, target) {
