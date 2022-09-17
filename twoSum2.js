@@ -42,7 +42,12 @@ The tests are generated such that there is exactly one solution.
  * @param {number} target
  * @return {number[]}
  */
+
 var twoSum = function(numbers, target) {
+  // Speed up by storing seen numbers
+  // Iterate through numbers, checking if we've seen complement already
+}
+var twoSumBinarySearch = function(numbers, target) {
   // Numbers is sorted- iterate through array for first number, and for each number binary search for complement
     // Continue when binary search pointers converge and dont add to target
   let high, low, mid;
