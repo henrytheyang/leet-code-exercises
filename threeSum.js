@@ -52,19 +52,20 @@ var threeSum = function(nums) {
   let newTriplet = [];
   let tripletFound = false;
   let finishedScanning = false;
-  valuesPresent[nums[0]] = {0: true};
+  valuesPresent[nums[0]] = 1;
 
   for (let i = 0; i < nums.length; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       if (!finishedScanning) {
-        if (valuesPresent[nums[j]] == undefined) valuesPresent[nums[j]] = {j: 1};
-        else valuesPresent[nums[j]][j]++;
+        if (valuesPresent[nums[j]] == undefined) valuesPresent[nums[j]] = 1;
+        else valuesPresent[nums[j]]++;
       }
 
       if (valuesPresent[0 - nums[i] - nums[j]] !== undefined) {
-        if (valuesPresent[0 - nums[i] - nums[j]] !== valuesPresent[nums[i]] && valuesPresent[0 - nums[i] - nums[j]] !== valuesPresent[nums[j]]) {
-          tripletFound = true;
-        }
+        if (0 - nums[i] - nums[j] !== nums[i] && 0 - nums[i] - nums[j] !== nums[j]) tripletFound = true;
+        else if (nums[i] === 0 && nums[j] === 0 && valuesPresent[0 - nums[i] - nums[j]] === 3) tripletFound = true;
+        else if (nums[i] !== 0 && nums[j] !== 0 && valuesPresent[0 - nums[i] - nums[j]] > 1) tripletFound = true;
+
         if (tripletFound) {          
           newTriplet = ([nums[i], nums[j], 0 - nums[i] - nums[j]]).sort((a, b) => a - b)
           if (duplicateTracker.indexOf(JSON.stringify(newTriplet)) === -1) {
@@ -80,7 +81,7 @@ var threeSum = function(nums) {
   return answer;
 }
 
-threeSum([-1,0,1,2,-1,-4])
+threeSum([0,0,0])
 /*
 Input:
 [-1,0,1,2,-1,-4]
