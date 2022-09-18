@@ -42,8 +42,32 @@ Constraints:
 
 var threeSum = function(nums) {
   // Sort, then interate through nums and look for triplet using two pointers
-  
+  nums.sort((a, b) => a - b);
+  let low, high, prevNum, newTriplet, stringifiedTriplet;
+  let duplicateChecker = {};
+  let answer = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    low = i + 1;
+    high = nums.length - 1;
+    if (prevNum === nums[i]) continue;
+    while (low < high) {
+      if (nums[i] === -(nums[low] + nums[high])) {
+        newTriplet = [nums[i], nums[low], nums[high]];
+        stringifiedTriplet = JSON.stringify(newTriplet);
+        if (duplicateChecker[stringifiedTriplet] === undefined) {
+          duplicateChecker[stringifiedTriplet] = true;
+          answer.push([...newTriplet]);
+        }
+        low++;
+      }
+      else if (nums[i] > -(nums[low] + nums[high])) high--;
+      else low++;
+    }
+  }
+  return answer;
 }
+threeSum([-1,0,1,2,-1,-4]);
 
 var threeSumNestedLoopsFromMap = function(nums) {
   // Map values, iterate from map to eliminate repeats
@@ -83,16 +107,6 @@ var threeSumNestedLoopsFromMap = function(nums) {
   }
   return answer;
 }
-
-threeSum([-1,0,1,2,-1,-4])
-/*
-Input
-[-1,0,1,2,-1,-4]
-Output
-[[-1,-1,2],[-1,0,1],[0,0,0],[-4,2,2]]
-Expected
-[[-1,-1,2],[-1,0,1]]
-*/
 
 var threeSumFirst = function(nums) {
   // One pass solution with hashtable
