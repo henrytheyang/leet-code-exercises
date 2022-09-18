@@ -47,7 +47,7 @@ var threeSum = function(nums) {
   let duplicateChecker = {};
   let answer = [];
 
-  for (let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length - 2; i++) {
     low = i + 1;
     high = nums.length - 1;
     if (prevNum === nums[i]) continue;
