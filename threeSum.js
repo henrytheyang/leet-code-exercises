@@ -40,29 +40,24 @@ Constraints:
  * @return {number[][]}
  */
 
-var threeSum = function(nums) {
+ var threeSum = function(nums) {
   // Sort, then interate through nums and look for triplet using two pointers
   nums.sort((a, b) => a - b);
-  let low, high, prevNum, newTriplet, stringifiedTriplet;
-  let duplicateChecker = {};
+  let low, high, sum;
   let answer = [];
 
   for (let i = 0; i < nums.length - 2; i++) {
     low = i + 1;
     high = nums.length - 1;
-    if (prevNum === nums[i]) continue;
+    if (nums[i - 1] === nums[i]) continue;
     while (low < high) {
-      if (nums[i] === -(nums[low] + nums[high])) {
-        newTriplet = [nums[i], nums[low], nums[high]];
-        stringifiedTriplet = JSON.stringify(newTriplet);
-        if (duplicateChecker[stringifiedTriplet] === undefined) {
-          duplicateChecker[stringifiedTriplet] = true;
-          answer.push([...newTriplet]);
-        }
+      sum = nums[i] + nums[low] + nums[high]
+      if (sum === 0) {
+        answer.push([nums[i], nums[low], nums[high]]);
         low++;
         while (nums[low] === nums[low - 1] && low < high) low++;
       }
-      else if (nums[i] > -(nums[low] + nums[high])) high--;
+      else if (sum > 0) high--;
       else low++;
     }
   }
