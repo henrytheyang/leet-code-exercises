@@ -41,6 +41,11 @@ Constraints:
  */
 
 var threeSum = function(nums) {
+  // Sort, then interate through nums and look for triplet using two pointers
+  
+}
+
+var threeSumNestedLoopsFromMap = function(nums) {
   // Map values, iterate from map to eliminate repeats
   let answer = [];
   let duplicateTracker = {};
