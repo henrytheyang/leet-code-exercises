@@ -60,6 +60,7 @@ var threeSum = function(nums) {
           answer.push([...newTriplet]);
         }
         low++;
+        while (nums[low] === nums[low - 1] && low < high) low++;
       }
       else if (nums[i] > -(nums[low] + nums[high])) high--;
       else low++;
