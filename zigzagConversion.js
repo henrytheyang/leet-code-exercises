@@ -47,5 +47,7 @@ Submissions
  * @return {string}
  */
 var convert = function(s, numRows) {
+  // The strings for each row are built up one at a time
+  // Distribute the input strings to them one at a time, then return them mashed up
   
 };
