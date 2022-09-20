@@ -49,5 +49,46 @@ Submissions
 var convert = function(s, numRows) {
   // The strings for each row are built up one at a time
   // Distribute the input strings to them one at a time, then return them mashed up
+  let buildingStrings = [];
+  let answer = '';
+  let currentRowIndex = 0;
+  let isIncreasing = true;
   
+  for (let i = 0; i < numRows; i++) {
+    buildingStrings[i] = new Array();
+  }
+
+  for (let j = 0; j < s.length; j++) {
+    buildingStrings[currentRowIndex].push(s[j]);
+    if (isIncreasing) {
+      if (currentRowIndex < numRows - 1) currentRowIndex++;
+      else if (currentRowIndex === numRows - 1) {
+        isIncreasing = false;
+        currentRowIndex--;
+      }
+    }
+    else if (!isIncreasing) {
+      if (currentRowIndex > 0) currentRowIndex--;
+      else if (currentRowIndex === 0) {
+        isIncreasing = true;
+        currentRowIndex++;
+      }
+    }
+  }
+
+  for (let k = 0; k < buildingStrings.length; k++) {
+    answer.concat(buildingStrings[k].join(''))
+  }
+
+  return answer;
 };
+convert("PAYPALISHIRING", 3);
+/*
+Your input
+"PAYPALISHIRING"
+3
+Output
+""
+Expected
+"PAHNAPLSIIGYIR"
+*/
