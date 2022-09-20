@@ -47,5 +47,7 @@ Constraints:
  * @return {string}
  */
 var intToRoman = function(num) {
-  
+  // Divide by orders of ten, starting from 1000 and going down
+  // Use Math.floor of each division to find numbers for each place
+  // Mod after division is for the next few places
 };
