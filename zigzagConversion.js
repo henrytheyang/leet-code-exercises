@@ -77,7 +77,7 @@ var convert = function(s, numRows) {
   }
 
   for (let k = 0; k < buildingStrings.length; k++) {
-    answer.concat(buildingStrings[k].join(''))
+    answer = answer.concat(buildingStrings[k].join(''))
   }
 
   return answer;
