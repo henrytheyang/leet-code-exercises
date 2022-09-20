@@ -46,21 +46,18 @@ Submissions
  * @param {number} numRows
  * @return {string}
  */
-var convert = function(s, numRows) {
+
+ var convert = function(s, numRows) {
   // The strings for each row are built up one at a time
   // Distribute the input strings to them one at a time, then return them mashed up
-  let buildingStrings = [];
-  let answer = '';
+  let buildingStrings = new Array(numRows).fill('');
   let currentRowIndex = 0;
   let isIncreasing = true;
   
   if (numRows === 1) return s;
-  for (let i = 0; i < numRows; i++) {
-    buildingStrings[i] = new Array();
-  }
 
   for (let j = 0; j < s.length; j++) {
-    buildingStrings[currentRowIndex].push(s[j]);
+    buildingStrings[currentRowIndex] = buildingStrings[currentRowIndex] + s[j];
     if (isIncreasing) {
       if (currentRowIndex < numRows - 1) currentRowIndex++;
       else if (currentRowIndex === numRows - 1) {
@@ -77,11 +74,7 @@ var convert = function(s, numRows) {
     }
   }
 
-  for (let k = 0; k < buildingStrings.length; k++) {
-    answer = answer.concat(buildingStrings[k].join(''))
-  }
-
-  return answer;
+  return buildingStrings.join('');
 };
 convert("AB", 1);
 /*
@@ -89,5 +82,4 @@ Your input
 "AB"
 1
 Output
-
 */
