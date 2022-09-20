@@ -54,6 +54,7 @@ var convert = function(s, numRows) {
   let currentRowIndex = 0;
   let isIncreasing = true;
   
+  if (numRows === 1) return s;
   for (let i = 0; i < numRows; i++) {
     buildingStrings[i] = new Array();
   }
@@ -82,13 +83,11 @@ var convert = function(s, numRows) {
 
   return answer;
 };
-convert("PAYPALISHIRING", 3);
+convert("AB", 1);
 /*
 Your input
-"PAYPALISHIRING"
-3
+"AB"
+1
 Output
-""
-Expected
-"PAHNAPLSIIGYIR"
+
 */
