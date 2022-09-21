@@ -50,4 +50,61 @@ var intToRoman = function(num) {
   // Divide by orders of ten, starting from 1000 and going down
   // Use Math.floor of each division to find numbers for each place
   // Mod after division is for the next few places
+  let answer = '';
+  let currentInt = 0;
+  let checkingPlace = 3;
+
+  while (checkingPlace >= 0) {
+    currentInt = Math.floor(num / Math.pow(10, checkingPlace))
+    if (currentInt < 1) {
+      checkingPlace --;
+      continue;
+    }
+
+    if (currentInt <= 3) {
+      if (checkingPlace === 3) answer = answer.padEnd(answer.length + currentInt, 'M');
+      else if (checkingPlace === 2) answer = answer.padEnd(answer.length + currentInt, 'C');
+      else if (checkingPlace === 1) answer = answer.padEnd(answer.length + currentInt, 'X');
+      else if (checkingPlace === 0) answer = answer.padEnd(answer.length + currentInt, 'I');
+    }
+    else if (currentInt === 4) {
+      if (checkingPlace === 2) answer = answer + 'CD';
+      else if (checkingPlace === 1) answer = answer + 'XL';
+      else if (checkingPlace === 0) answer = answer + 'IV';
+    }
+    else if (currentInt >= 5 && currentInt < 9) {
+      if (checkingPlace === 2) {
+        answer = answer + 'D';
+        answer.padEnd(answer.length + currentInt - 5, 'C')
+      }
+      else if (checkingPlace === 1) {
+        answer = answer + 'L';
+        answer.padEnd(answer.length + currentInt - 5, 'X')
+      }
+      else if (checkingPlace === 0) {
+        answer = answer + 'V';
+        answer.padEnd(answer.length + currentInt - 5, 'I')
+      }
+    }
+    else if (currentInt === 9){
+      if (checkingPlace === 2) answer = answer + 'CM';
+      else if (checkingPlace === 1) answer = answer + 'XC';
+      else if (checkingPlace === 0) answer = answer + 'IX';
+    }
+
+    num = num % Math.pow(10, checkingPlace);
+    checkingPlace--;
+  }
+  return answer;
 };
+
+intToRoman(58)
+
+/*
+Input
+58
+Output
+"LV"
+Expected
+"LVIII"
+*/
