@@ -75,15 +75,15 @@ var intToRoman = function(num) {
     else if (currentInt >= 5 && currentInt < 9) {
       if (checkingPlace === 2) {
         answer = answer + 'D';
-        answer.padEnd(answer.length + currentInt - 5, 'C')
+        answer = answer.padEnd(answer.length + currentInt - 5, 'C')
       }
       else if (checkingPlace === 1) {
         answer = answer + 'L';
-        answer.padEnd(answer.length + currentInt - 5, 'X')
+        answer = answer.padEnd(answer.length + currentInt - 5, 'X')
       }
       else if (checkingPlace === 0) {
         answer = answer + 'V';
-        answer.padEnd(answer.length + currentInt - 5, 'I')
+        answer = answer.padEnd(answer.length + currentInt - 5, 'I')
       }
     }
     else if (currentInt === 9){
