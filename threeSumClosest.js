@@ -30,7 +30,13 @@ Constraints:
  * @param {number} target
  * @return {number}
  */
+
 var threeSumClosest = function(nums, target) {
+  // Two pointer approach, with binary search for mid
+  
+}
+
+ var threeSumClosestNaiveTwoPointer = function(nums, target) {
   // Have to scan all possibilities, and track closest to target
   // Sort, then iterate through nums, pinning first integer
     // Two pointer method to find other 2 integers
@@ -49,23 +55,18 @@ var threeSumClosest = function(nums, target) {
     if (nums[i] === nums[i - 1] && i > 0) continue; // Does nums[i - 1] need to exist
 
     while (left < right) {
+      if (nums[i] + nums[left] + nums[right] === target) return target;
       if (Math.abs(target - answer) > Math.abs(target - (nums[i] + nums[left] + nums[right]))) {
         answer = nums[i] + nums[left] + nums[right];
       }
-      if (nums[i] + nums[left] + nums[right] === -2806) {
-        console.log('problem after this')
-      }
       // if (Math.abs(target - prevSum) < Math.abs(target - (nums[i] + nums[left] + nums[right]))) break;
-      prevSum = nums[i] + nums[left] + nums[right];
+      // prevSum = nums[i] + nums[left] + nums[right];
       if (nums[i] + nums[left] + nums[right] > target) right--;
       else if (nums[i] + nums[left] + nums[right] < target) {
         left++;
         while (nums[left] === nums[left - 1]) left++;
       }
-      else {
-        return answer};
     }
-    if (answer === target) return answer;
   }
 
   return answer;
