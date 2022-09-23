@@ -33,6 +33,7 @@ Constraints:
 
 var threeSumClosest = function(nums, target) {
   // Two pointer approach, with binary search for mid
+    // Optimize by skipping repeats in left, right, low, high
   let left = 0;
   let right = nums.length - 1;
   let answer = Infinity;
