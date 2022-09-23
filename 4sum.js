@@ -32,4 +32,26 @@ Constraints:
  */
 var fourSum = function(nums, target) {
   // Nested two pointer solution
+  let min = 0;
+  let max = nums.length - 1;
+  let answer = [];
+  let numsSorted = nums.sort((a, b) => a - b);
+  
+  while (min + 3 <= max) {
+    let cycleBest = Infinity;
+    let left = min + 1;
+    let right = max - 1;
+    
+    while (left < right) {
+      let sum = numsSorted[min] + numsSorted[left] + numsSorted[right] + numsSorted[max];
+      if (Math.abs(target - sum) < Math.abs(target - cycleBest)) cycleBest = sum;
+      if (sum === target) answer.push([numsSorted[min], numsSorted[left], numsSorted[right], numsSorted[max]]);
+      if (sum <= target) left++;
+      else if (sum > target) right--;
+    }
+
+    if (cycleBest <= target) min++;
+    else if (cycleBest > target) max--;
+  }
+  return answer;
 };
