@@ -31,5 +31,5 @@ Constraints:
  * @return {number[][]}
  */
 var fourSum = function(nums, target) {
-  
+  // Nested two pointer solution
 };
