@@ -55,8 +55,14 @@ var threeSumClosest = function(nums, target) {
       if (sum < target) low = mid + 1;
       else if (sum > target) high = mid - 1;
     }
-    if (cycleClosest < target) left++;
-    else if (cycleClosest > target) right--;
+    if (cycleClosest < target) {
+      left++;
+      while (nums[left] === nums[left - 1]) left++;
+    }
+    else if (cycleClosest > target) {
+      right--;
+      while (nums[right] === nums[right + 1]) right--;
+    };
   }
   return answer;
 }
