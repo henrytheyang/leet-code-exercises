@@ -33,8 +33,33 @@ Constraints:
 
 var threeSumClosest = function(nums, target) {
   // Two pointer approach, with binary search for mid
-  
+  let left = 0;
+  let right = nums.length - 1;
+  let answer = Infinity;
+  let high, mid, low, cycleClosest, sum;
+  let numsSorted = nums.sort((a, b) => a - b);
+
+  while (left < right) {
+    cycleClosest = Infinity
+    low = left + 1;
+    high = right - 1;
+    while (high >= low) {
+      mid = Math.floor((high + low)/2);
+      sum = numsSorted[left] + numsSorted[mid] + numsSorted[right];
+      if (sum === target) {
+        return target;
+      }
+      if (Math.abs(target - sum) < Math.abs(target - answer)) answer = sum;
+      if (Math.abs(target - sum) < Math.abs(target - cycleClosest)) cycleClosest = sum
+      if (sum < target) low = mid + 1;
+      else if (sum > target) high = mid - 1;
+    }
+    if (cycleClosest < target) left++;
+    else if (cycleClosest > target) right--;
+  }
+  return answer;
 }
+threeSumClosest([-1,2,1,-4], 1);
 
  var threeSumClosestNaiveTwoPointer = function(nums, target) {
   // Have to scan all possibilities, and track closest to target
