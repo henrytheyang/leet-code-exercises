@@ -51,7 +51,7 @@ var threeSumClosest = function(nums, target) {
       if (Math.abs(target - answer) > Math.abs(target - (nums[i] + nums[left] + nums[right]))) {
         answer = nums[i] + nums[left] + nums[right];
       }
-      if (Math.abs(target - prevSum) < Math.abs(target - (nums[i] + nums[left] + nums[right]))) continue;
+      if (Math.abs(target - prevSum) < Math.abs(target - (nums[i] + nums[left] + nums[right]))) break;
       prevSum = nums[i] + nums[left] + nums[right];
       if (nums[i] + nums[left] + nums[right] > target) right--;
       else if (nums[i] + nums[left] + nums[right] < target) {
@@ -64,3 +64,10 @@ var threeSumClosest = function(nums, target) {
 
   return answer;
 };
+threeSumClosest([1,1,1,0], -100);
+
+/*
+[1,1,1,0]
+-100
+Output: time limit exceeded
+*/
