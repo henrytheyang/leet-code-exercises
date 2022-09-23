@@ -46,12 +46,36 @@ var fourSum = function(nums, target) {
       let sum = numsSorted[min] + numsSorted[left] + numsSorted[right] + numsSorted[max];
       if (Math.abs(target - sum) < Math.abs(target - cycleBest)) cycleBest = sum;
       if (sum === target) answer.push([numsSorted[min], numsSorted[left], numsSorted[right], numsSorted[max]]);
-      if (sum <= target) left++;
-      else if (sum > target) right--;
+      if (sum <= target) {
+        left++;
+        while (numsSorted[left] === numsSorted[left - 1]) left++;
+      }
+      else if (sum > target) {
+        right--;
+        while (numsSorted[right] === numsSorted[right + 1]) right++;
+      };
     }
 
-    if (cycleBest <= target) min++;
-    else if (cycleBest > target) max--;
+    if (cycleBest <= target) {
+      min++
+      while (numsSorted[min] === numsSorted[min - 1]) min++;
+    }
+    else if (cycleBest > target) {
+      max--
+      while (numsSorted[max] === numsSorted[max + 1]) max--;
+    };
   }
   return answer;
 };
+
+fourSum([2,2,2,2,2], 8);
+
+/*
+Input:
+[2,2,2,2,2]
+8
+Output:
+[[2,2,2,2],[2,2,2,2],[2,2,2,2]]
+Expected:
+[[2,2,2,2]]
+*/
