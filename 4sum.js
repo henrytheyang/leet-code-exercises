@@ -52,7 +52,7 @@ var fourSum = function(nums, target) {
       }
       else if (sum > target) {
         right--;
-        while (numsSorted[right] === numsSorted[right + 1]) right++;
+        while (numsSorted[right] === numsSorted[right + 1]) right--;
       };
     }
 
@@ -67,15 +67,14 @@ var fourSum = function(nums, target) {
   }
   return answer;
 };
-
-fourSum([2,2,2,2,2], 8);
+fourSum([-3,-2,-1,0,0,1,2,3], 0)
 
 /*
 Input:
-[2,2,2,2,2]
-8
+[-3,-2,-1,0,0,1,2,3]
+0
 Output:
-[[2,2,2,2],[2,2,2,2],[2,2,2,2]]
+[[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-2,-1,0,3],[-1,0,0,1]]
 Expected:
-[[2,2,2,2]]
+[[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-3,0,1,2],[-2,-1,0,3],[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
 */
