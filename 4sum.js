@@ -34,16 +34,39 @@ var fourSum = function(nums, target) {
   // Previous double set of two pointer solution missed too many solutions by only incrementing 
     // outside left pointer when a solution was found
   // Need to do a 3sum solution nested inside a for loop to find all solutions
-  
+  let answer = [];
+  let sorted = nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < sorted.length - 3; i++) {
+    if (sorted[i] === sorted[i - 1]) continue;
+    for (let j = i + 1; j < sorted.length - 2; j++) {
+      let low = j + 1;
+      let high = sorted.length - 1;
+      if (sorted[j] === sorted[j - 1]) continue;
+      while (low < high) {
+        let sum = sorted[i] + sorted[j] + sorted[low] + sorted[high];
+        if (sum === target) answer.push([sorted[i], sorted[j], sorted[low], sorted[high]]);
+        if (sum <= target) {
+          low++;
+          while (sorted[low] === sorted[low - 1]) low++;
+        } else if (sum > target) {
+          high--;
+          while (sorted[high] === sorted[high + 1]) high--;
+        }
+      }
+    }
+  }
+  return answer;
 };
-fourSum([-3,-2,-1,0,0,1,2,3], 0)
+fourSum([2,2,2,2,2], 8)
 
 /*
 Input:
-[-3,-2,-1,0,0,1,2,3]
-0
+[2,2,2,2,2]
+8
 Output:
-[[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-2,-1,0,3],[-1,0,0,1]]
+[]
 Expected:
-[[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-3,0,1,2],[-2,-1,0,3],[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+[[2,2,2,2]]
+
 */
