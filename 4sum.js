@@ -31,9 +31,7 @@ Constraints:
  * @return {number[][]}
  */
 
-var fourSumMap = fucntion(nums, target) {
-  // 3 pointers + searching for complement
-}
+
 var fourSum = function(nums, target) {
   // Previous double set of two pointer solution missed too many solutions by only incrementing 
     // outside left pointer when a solution was found
