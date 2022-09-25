@@ -38,11 +38,9 @@ var fourSum = function(nums, target) {
   let sorted = nums.sort((a, b) => a - b);
 
   for (let i = 0; i < sorted.length - 3; i++) {
-    if (sorted[i] === sorted[i - 1]) continue;
     for (let j = i + 1; j < sorted.length - 2; j++) {
       let low = j + 1;
       let high = sorted.length - 1;
-      if (sorted[j] === sorted[j - 1]) continue;
       while (low < high) {
         let sum = sorted[i] + sorted[j] + sorted[low] + sorted[high];
         if (sum === target) answer.push([sorted[i], sorted[j], sorted[low], sorted[high]]);
@@ -54,7 +52,15 @@ var fourSum = function(nums, target) {
           while (sorted[high] === sorted[high + 1]) high--;
         }
       }
+      if (sorted[j] === sorted[j + 1]) {
+        j++;
+        while (sorted[j] === sorted[j + 1]) j++;
+      };
     }
+    if (sorted[i] === sorted[i + 1]) {
+      i++;
+      while (sorted[i] === sorted[i + 1]) i++;
+    };
   }
   return answer;
 };
