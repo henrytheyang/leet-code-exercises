@@ -36,6 +36,15 @@ var fourSum = function(nums, target) {
   // Previous double set of two pointer solution missed too many solutions by only incrementing 
     // outside left pointer when a solution was found
   // Need to do a 3sum solution nested inside a for loop to find all solutions
+  // Optimizations- too big, too small when choosing i, j
+  // Too big- 
+    // if nums[i] + next 3 > target, break
+    // if nums[i] + nums[j] + next 2 > target, break;
+
+  // Too small- 
+    // if nums[i] + last 3 < target, continue
+    // if nums[i] + nums[j] + last 2 < target, break to next i
+
   let answer = [];
   let sorted = nums.sort((a, b) => a - b);
   let low, high, sum;
