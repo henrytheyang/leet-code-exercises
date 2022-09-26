@@ -50,7 +50,11 @@ var fourSum = function(nums, target) {
   let low, high, sum;
 
   for (let i = 0; i < sorted.length - 3; i++) {
+    if (sorted[i] + sorted[i + 1] + sorted[i + 2] + sorted[i + 3] > target) break;
+    if (sorted[i] + sorted[sorted.length - 3] + sorted[sorted.length - 2] + sorted[sorted.length - 1] < target) continue;
     for (let j = i + 1; j < sorted.length - 2; j++) {
+      if (sorted[i] + sorted[j] + sorted[j + 1] + sorted[j + 2] > target) break;
+      if (sorted[i] + sorted[j] + sorted[sorted.length - 2] + sorted[sorted.length - 1] < target) continue;
       low = j + 1;
       high = sorted.length - 1;
       while (low < high) {
