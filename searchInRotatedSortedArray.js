@@ -54,10 +54,10 @@ var search = function(nums, target) {
     mid = Math.floor((low + high) / 2);
     if (nums[mid] === target) return mid;
 
-    if (nums[low] < target && target < nums[mid]) high = mid - 1;
-    else if (nums[mid] < target && target < nums[high]) low = mid + 1;
-    else if (nums[low] > target && nums[mid] > target && nums[low] > nums[mid]) high = mid - 1;
-    else if (nums[mid] > target && nums[high] > target && nums[mid] > nums[high]) low = mid + 1;
+    if (nums[low] <= target && target < nums[mid]) high = mid - 1;
+    else if (nums[mid] < target && target <= nums[high]) low = mid + 1;
+    else if (nums[low] >= target && nums[mid] > target && nums[low] > nums[mid]) high = mid - 1;
+    else if (nums[mid] > target && nums[high] >= target && nums[mid] > nums[high]) low = mid + 1;
     else return -1;
   }
 };
