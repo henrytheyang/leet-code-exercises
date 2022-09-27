@@ -28,5 +28,9 @@ n == matrix.length == matrix[i].length
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
 var rotate = function(matrix) {
-    
+  // Rotation distance is determined by wall length - 1;
+  // Num of rounds of rotations determined by wall length - 1
+  // When # of rounds of rotations are done, decrease wall length by 2
+  // End when wall length <= 0;
+  
 };
