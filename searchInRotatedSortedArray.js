@@ -21,7 +21,6 @@ Example 3:
 
 Input: nums = [1], target = 0
 Output: -1
-5,6,7,0,1,2,4     3 
 
 Constraints:
 
@@ -42,4 +41,39 @@ var search = function(nums, target) {
     // If the target is between left and right and left < right this is a valid range
     // If the left is greater than target and the right is greater than target and left > right this is a valid range;
     // Keep going until low + 1 === mid && mid + 1 === high
+  let low = 0;
+  let high = nums.length - 1;
+  let mid;
+
+  if (nums.length === 1) {
+    if (nums[0] === target) return 0;
+    else return -1;
+  }
+
+  while (low <= high) {
+    mid = Math.floor((low + high) / 2);
+    if (nums[mid] === target) return mid;
+
+    if (nums[low] < target && target < nums[mid]) high = mid - 1;
+    else if (nums[mid] < target && target < nums[high]) low = mid + 1;
+    else if (nums[low] > target && nums[mid] > target) high = mid - 1;
+    else if (nums[mid] > target && nums[high] > target) low = mid + 1;
+    else return -1;
+  }
 };
+search([4,5,6,7,0,1,2], 0);
+
+/*
+Input:
+[4,5,6,7,0,1,2]
+0
+Output:
+undefined
+Expected:
+4
+*/
+
+// [8,0,1,4,5,6,7]
+// [5,6,7,8,0,1,4]      target = 3 
+// 0, 1, 2, 4
+// 
