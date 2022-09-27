@@ -56,8 +56,8 @@ var search = function(nums, target) {
 
     if (nums[low] < target && target < nums[mid]) high = mid - 1;
     else if (nums[mid] < target && target < nums[high]) low = mid + 1;
-    else if (nums[low] > target && nums[mid] > target) high = mid - 1;
-    else if (nums[mid] > target && nums[high] > target) low = mid + 1;
+    else if (nums[low] > target && nums[mid] > target && nums[low] > nums[mid]) high = mid - 1;
+    else if (nums[mid] > target && nums[high] > target && nums[mid] > nums[high]) low = mid + 1;
     else return -1;
   }
 };
@@ -68,7 +68,7 @@ Input:
 [4,5,6,7,0,1,2]
 0
 Output:
-undefined
+-1
 Expected:
 4
 */
