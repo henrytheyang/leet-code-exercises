@@ -21,7 +21,7 @@ Example 3:
 
 Input: nums = [1], target = 0
 Output: -1
- 
+5,6,7,0,1,2,4     3 
 
 Constraints:
 
@@ -37,5 +37,9 @@ nums is an ascending array that is possibly rotated.
  * @return {number}
  */
 var search = function(nums, target) {
-    
+  // Binary search
+  // Check mid- take either top or bottom depending on if it can contain the target
+    // If the target is between left and right and left < right this is a valid range
+    // If the left is greater than target and the right is greater than target and left > right this is a valid range;
+    // Keep going until low + 1 === mid && mid + 1 === high
 };
