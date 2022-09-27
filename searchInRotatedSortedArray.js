@@ -51,29 +51,32 @@ var search = function(nums, target) {
   }
 
   while (low <= high) {
+    if (low === high && nums[low] !== target) return -1;
     mid = Math.floor((low + high) / 2);
     if (nums[mid] === target) return mid;
 
     if (nums[low] <= target && target < nums[mid]) high = mid - 1;
     else if (nums[mid] < target && target <= nums[high]) low = mid + 1;
-    else if (nums[low] >= target && nums[mid] > target && nums[low] > nums[mid]) high = mid - 1;
-    else if (nums[mid] > target && nums[high] >= target && nums[mid] > nums[high]) low = mid + 1;
+    else if (nums[low] > nums[mid]) high = mid - 1;
+    else if (nums[mid] >= nums[high]) low = mid + 1;
     else return -1;
   }
 };
-search([4,5,6,7,0,1,2], 0);
+search([8,9,2,3,4], 9);
 
 /*
 Input:
-[4,5,6,7,0,1,2]
-0
+[8,9,2,3,4]
+9
 Output:
 -1
 Expected:
-4
+1
+
 */
 
 // [8,0,1,4,5,6,7]
 // [5,6,7,8,0,1,4]      target = 3 
 // 0, 1, 2, 4
 // 
+
