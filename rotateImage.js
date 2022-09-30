@@ -32,5 +32,34 @@ var rotate = function(matrix) {
   // Num of rounds of rotations determined by wall length - 1
   // When # of rounds of rotations are done, decrease wall length by 2
   // End when wall length <= 0;
-  
+  let wallLength = matrix.length;
+  let startingX = 0;
+  let startingY = 0;
+  let calcNewCoord = (someX, someY) => {
+    let newX, newY;
+
+    if (someY === startingY) {
+      newX = startingX + wallLength - 1; // 
+      newY = (startingY + wallLength - 1) - (newX - someX);
+      // [0,0] => (0 + 3 - 1) - (2 - 0) = 0
+      // [0,0] => (0 + 4 - 1) - (3 - 0) = 0
+      // [1,1] => (1 + 1 - 1) - (1 - 1) = 1
+      // [1,1] => (1 + 2 - 1) - (2 - 1) = 1
+    } else if (someX === startingX + wallLength - 1) {
+      newY = (startingY + wallLength - 1);
+      newX = (startingX + wallLength - 1) - (someY - startingY);
+      // [2,0] => (0 + 3 - 1) - (0 - 0) = 2
+      // [2,2] => (0 + 3 - 1) - (2 - 0) = 0
+    } else if (someY === startingX + wallLength - 1) {
+
+    } else if (someX === startingX) {
+      
+    }
+
+    return {
+      x: newX,
+      y: newY,
+    }
+  }
+
 };
