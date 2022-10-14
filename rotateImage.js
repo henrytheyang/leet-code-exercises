@@ -35,28 +35,48 @@ var rotate = function(matrix) {
   let wallLength = matrix.length;
   let firstSquareX = 0;
   let firstSquareY = 0;
+  let counter = 1;
   let calcNewCoord = (someX, someY) => {
     let newX, newY;
-    if (wallLength >= 2) {
-      if (someY === firstSquareY) {
-        newX = firstSquareX + wallLength - 1; // 
-        newY = someX
-      } else if (someX === firstSquareX + wallLength - 1) {
-        newY = (firstSquareY + wallLength - 1);
-        newX = (firstSquareX + wallLength - 1) - (someY) + firstSquareY;
-      } else if (someY === firstSquareY + wallLength - 1) {
-        newX = firstSquareX;
-        newY = someX
-      } else if (someX === firstSquareX) {
-        newY = firstSquareY;
-        newX = (firstSquareY + wallLength - 1) - someY + firstSquareX;
-      }
+    if (someY === firstSquareY) {
+      newX = firstSquareX + wallLength - 1; // 
+      newY = someX
+    } else if (someX === firstSquareX + wallLength - 1) {
+      newY = (firstSquareY + wallLength - 1);
+      newX = (firstSquareX + wallLength - 1) - (someY) + firstSquareY;
+    } else if (someY === firstSquareY + wallLength - 1) {
+      newX = firstSquareX;
+      newY = someX
+    } else if (someX === firstSquareX) {
+      newY = firstSquareY;
+      newX = (firstSquareY + wallLength - 1) - someY + firstSquareX;
     }
-
     return {
       x: newX,
       y: newY,
     }
   }
+  let currValue;
+  let prevValue = matrix[0][0];
+  let newCoord = {};
+  let currX = 0;
+  let currY = 0;
+  while (wallLength >= 2) {
+    while (counter <= 4) {
+      newCoord = calcNewCoord(currX, currY);
+      currValue = matrix[newCoord[x]][newCoord[y]];
+      matrix[newCoord[x]][newCoord[y]] = prevValue;
 
+      currX = newCoord[x];
+      currY = newCoord[y];
+      counter++;
+      prevValue = currValue;
+    }
+
+    wallLength--;
+    firstSquareX++;
+    firstSquareY++;
+  }
 };
+
+rotate([[1,2,3],[4,5,6],[7,8,9]]);
