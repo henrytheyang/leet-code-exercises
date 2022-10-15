@@ -61,22 +61,47 @@ var rotate = function(matrix) {
   let newCoord = {};
   let currX = 0;
   let currY = 0;
+  let wallPosition = 1;
   while (wallLength >= 2) {
-    while (counter <= 4) {
-      newCoord = calcNewCoord(currX, currY);
-      currValue = matrix[newCoord[x]][newCoord[y]];
-      matrix[newCoord[x]][newCoord[y]] = prevValue;
-
-      currX = newCoord[x];
-      currY = newCoord[y];
-      counter++;
-      prevValue = currValue;
+    while (wallPosition < wallLength) {
+      while (counter <= 4) {
+        newCoord = calcNewCoord(currX, currY);
+        currValue = matrix[newCoord.y][newCoord.x];
+        matrix[newCoord.y][newCoord.x] = prevValue;
+  
+        currX = newCoord.x;
+        currY = newCoord.y;
+        counter++;
+        prevValue = currValue;
+      }
+      currX++;
+      wallPosition++;
+      counter = 1;
+      prevValue = matrix[currY][currX];
     }
-
-    wallLength--;
+    wallPosition = 1;
+    wallLength = wallLength - 2;
     firstSquareX++;
     firstSquareY++;
   }
 };
 
 rotate([[1,2,3],[4,5,6],[7,8,9]]);
+
+/*
+Your input
+[
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]]
+Output
+[
+  [7,2,1],
+  [4,5,6],
+  [9,8,3]]
+Expected
+[
+  [7,4,1],
+  [8,5,2],
+  [9,6,3]]
+*/
