@@ -83,25 +83,17 @@ var rotate = function(matrix) {
     wallLength = wallLength - 2;
     firstSquareX++;
     firstSquareY++;
+    currX = firstSquareX;
+    currY = firstSquareY;
+    prevValue = matrix[currY][currX];
   }
 };
-
-rotate([[1,2,3],[4,5,6],[7,8,9]]);
-
+rotate([[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]);
 /*
 Your input
 [
-  [1,2,3],
-  [4,5,6],
-  [7,8,9]]
-Output
-[
-  [7,2,1],
-  [4,5,6],
-  [9,8,3]]
-Expected
-[
-  [7,4,1],
-  [8,5,2],
-  [9,6,3]]
+  [5,1,9,11],
+  [2,4,8,10],
+  [13,3,6,7],
+  [15,14,12,16]]
 */
