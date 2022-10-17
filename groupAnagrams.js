@@ -31,5 +31,8 @@ strs[i] consists of lowercase English letters.
  * @return {string[][]}
  */
 var groupAnagrams = function(strs) {
-  
+  // Sort each string, recording original string
+  // Compare sorted string to all encountered archetype
+    // If there's a match, add it to the matched answer array
+    // If there's no match, make a new answer array and add to archetype
 };
