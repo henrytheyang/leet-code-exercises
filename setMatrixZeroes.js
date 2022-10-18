@@ -32,3 +32,15 @@ A simple improvement uses O(m + n) space, but still not the best solution.
 Could you devise a constant space solution?
 */
 
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+var setZeroes = function(matrix) {
+  // Scan for 0s, record row & column
+  // Store 0 status in arrays of length m, n
+  // Iterate through 0status arrays
+    // Row- use fill to fill rows with 0
+    // Column- iterate through and set 0
+    
+};
