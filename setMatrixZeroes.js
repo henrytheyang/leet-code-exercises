@@ -42,5 +42,41 @@ var setZeroes = function(matrix) {
   // Iterate through 0status arrays
     // Row- use fill to fill rows with 0
     // Column- iterate through and set 0
-    
+
+  let rowIndexOfZeroes = new Array(matrix.length);
+  let columnIndexOfZeroes = new Array(matrix[0].length);
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (matrix[i][j] === 0) {
+        rowIndexOfZeroes[i] = true;
+        columnIndexOfZeroes[j] = true;
+      }
+    }
+  }
+  
+  for (let k = 0; k < rowIndexOfZeroes; k++) {
+    if (rowIndexOfZeroes[k] === true) matrix[k].fill(0);
+  }
+  for (let l = 0; l < columnIndexOfZeroes; l++) {
+    if (columnIndexOfZeroes[l] === true) {
+      for (let m = 0; m < matrix.length; m++) {
+        matrix[m][l] = 0;
+      }
+    }
+  }
 };
+
+/*
+Your input
+[[1,1,1],
+[1,0,1],
+[1,1,1]]
+Output
+[[1,1,1],
+[1,0,1],
+[1,1,1]]
+Expected
+[[1,0,1],
+[0,0,0],
+[1,0,1]]
+*/
