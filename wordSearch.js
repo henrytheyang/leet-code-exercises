@@ -41,5 +41,9 @@ Follow up: Could you use search pruning to make your solution faster with a larg
  * @return {boolean}
  */
 var exist = function(board, word) {
-    
+  // Iterate through matrix;
+  // When we find start of the word, check the surrounding letters
+    // Check if we have encountered this letter before; if yes, skip this letter and continue to next adjacent
+    // If we haven't encountered before, note that we've checked this path and check for the next letter
+  
 };
