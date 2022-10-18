@@ -54,10 +54,10 @@ var setZeroes = function(matrix) {
     }
   }
   
-  for (let k = 0; k < rowIndexOfZeroes; k++) {
+  for (let k = 0; k < rowIndexOfZeroes.length; k++) {
     if (rowIndexOfZeroes[k] === true) matrix[k].fill(0);
   }
-  for (let l = 0; l < columnIndexOfZeroes; l++) {
+  for (let l = 0; l < columnIndexOfZeroes.length; l++) {
     if (columnIndexOfZeroes[l] === true) {
       for (let m = 0; m < matrix.length; m++) {
         matrix[m][l] = 0;
@@ -65,6 +65,7 @@ var setZeroes = function(matrix) {
     }
   }
 };
+setZeroes([[1,1,1],[1,0,1],[1,1,1]]);
 
 /*
 Your input
