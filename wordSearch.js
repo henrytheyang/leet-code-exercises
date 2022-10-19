@@ -45,9 +45,10 @@ var exist = function(board, word) {
   // When we find start of the word, check the surrounding letters
     // Check if we have used this letter before; if yes, skip this letter and continue to next adjacent
     // If we haven't used before, note that we've used this letter and check for the next letter
+  // Optimization- include data on whether each letter has been used to as a branch head for specific strIndex
     let answer = false;
     let usedLetters = new Array(board.length).fill(0).map(() => new Array(board[0].length).fill(false));
-    let checkNeighbors = (m, n, strIndex) => { // Need to undo usedLetters status for deadbranch
+    let checkNeighbors = (m, n, strIndex) => {
       while (strIndex <= word.length - 1) {
         if (m - 1 >= 0 && board[m - 1][n] === word[strIndex] && usedLetters[m - 1][n] === false) {
           if (strIndex < word.length - 1) {
