@@ -54,7 +54,7 @@ var exist = function(board, word) {
           if (strIndex < word.length - 1) {
             usedLetters[m - 1][n] = true;
             checkNeighbors(m - 1, n, strIndex + 1);
-            usedLetters[m - 1][n] = false;
+            if (answer === false) usedLetters[m - 1][n] = false;
           } else {
             answer = true;
             return;
@@ -64,7 +64,7 @@ var exist = function(board, word) {
           if (strIndex < word.length - 1) {            
             usedLetters[m + 1][n] = true;
             checkNeighbors(m + 1, n, strIndex + 1);
-            usedLetters[m + 1][n] = false;
+            if (answer === false) usedLetters[m + 1][n] = false;
           } else {
             answer = true;
             return;
@@ -74,7 +74,7 @@ var exist = function(board, word) {
           if (strIndex < word.length - 1) {
             usedLetters[m][n - 1] = true;
             checkNeighbors(m, n - 1, strIndex + 1)
-            usedLetters[m][n - 1] = false;
+            if (answer === false) usedLetters[m][n - 1] = false;
           } else {
             answer = true;
             return;
@@ -84,7 +84,7 @@ var exist = function(board, word) {
           if (strIndex < word.length - 1) {
             usedLetters[m][n + 1] = true;
             checkNeighbors(m, n + 1, strIndex + 1);
-            usedLetters[m][n + 1] = false;
+            if (answer === false) usedLetters[m][n + 1] = false;
           } else {
             answer = true;
             return;
