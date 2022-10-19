@@ -96,6 +96,7 @@ var exist = function(board, word) {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[0].length; j++) {
         if (board[i][j] === word[0]) {
+          if (word.length === 1) return true;
           usedLetters[i][j] = true;  
           checkNeighbors(i, j, 1)
           usedLetters[i][j] = false;
@@ -106,8 +107,14 @@ var exist = function(board, word) {
 
     return answer;
 };
-exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCCED");
+exist([['a']], "a");
 /*
-board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
-Output: true
+Input:
+[["a"]]
+"a"
+Output:
+false
+Expected:
+true
+
 */
