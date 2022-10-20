@@ -28,5 +28,8 @@ n == matrix[i].length
  * @return {number[]}
  */
 var spiralOrder = function(matrix) {
+  // Set 4 boundaries- top right bottom left
+  // Spiral and traverse until we start on the boundary
+  // When we hit the boundary, decrement boundary and then turn in the new direction
   
 };
