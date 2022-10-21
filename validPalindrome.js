@@ -40,25 +40,35 @@ var isPalindrome = function(s) {
   // Exit conditions:
     // Pointers land on same character in the center- return true
     // Pointers are adjacent and are matching characters- return true
-  let str = s.replace(/[^a-z0-9]/gi, '');
+  let str = s.replace(/[^a-z0-9]/gi, '').toLowerCase();
   let left = 0;
   let right = str.length - 1;
   let answer = false;
 
+  if (str.length === 0 || str.length === 1) return true;
   while (left <= right) {
     if (str[left] !== str[right]) return false;
-    else {
-      left++;
-      right--;
-    }
+
     if (left === right) {
       answer = true;
       return answer;
     } else if (left + 1 === right && str[left] === str[right]) {
       answer = true;
       return answer;
+    } else {
+      left++;
+      right--;
     }
   }
 
   return answer;
 };
+isPalindrome("aa")
+/*
+Input
+"aa"
+Output
+false
+Expected
+true
+*/
