@@ -38,14 +38,14 @@ var spiralOrder = function(matrix) {
   let bottom = matrix.length - 1;
   let left = 0;
   let answer = [];
-  do {
+  while (top <= bottom && left <= right) {
     if (vector[vectorIndex] === 'right') {
-      for (let i = left; i < matrix[0].length; i++) {
+      for (let i = left; i <= right; i++) {
         answer.push(matrix[top][i]);
       }
       top++;
     } else if (vector[vectorIndex] === 'down') {
-      for (let j = top; j < matrix.length; j++) {
+      for (let j = top; j <= bottom; j++) {
         answer.push(matrix[j][right]);
       }
       right--;
@@ -64,16 +64,16 @@ var spiralOrder = function(matrix) {
     if (vectorIndex === 3) {
       vectorIndex = 0;
     } else vectorIndex++
-  } while (top !== bottom && left !== right)
+  }
 
   return answer;
-};
+}
 spiralOrder([[1,2,3],[4,5,6],[7,8,9]])
 /*
 Your input
 [[1,2,3],[4,5,6],[7,8,9]]
 Output
-[1,2,3,6,9,8,7]
+[1,2,3,6,9,8,7,4]
 Expected
 [1,2,3,6,9,8,7,4,5]
 */
