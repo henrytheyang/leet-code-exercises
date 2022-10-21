@@ -33,12 +33,32 @@ s consists only of printable ASCII characters.
  * @return {boolean}
  */
 var isPalindrome = function(s) {
+  // Discard non-alphanumeric chars
   // 2 pointers
-    // If we encounter a non-letter, discard it and continue
     // If we encounter a mismatch, return false
     // If we encounter a match move pointers inward
   // Exit conditions:
     // Pointers land on same character in the center- return true
     // Pointers are adjacent and are matching characters- return true
-  
+  let str = s.replace(/[^a-z0-9]/gi, '');
+  let left = 0;
+  let right = str.length - 1;
+  let answer = false;
+
+  while (left <= right) {
+    if (str[left] !== str[right]) return false;
+    else {
+      left++;
+      right--;
+    }
+    if (left === right) {
+      answer = true;
+      return answer;
+    } else if (left + 1 === right && str[left] === str[right]) {
+      answer = true;
+      return answer;
+    }
+  }
+
+  return answer;
 };
