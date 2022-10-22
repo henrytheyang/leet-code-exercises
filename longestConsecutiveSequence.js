@@ -44,7 +44,7 @@ var longestConsecutive = function(nums) {
     ordered.push(obj[props]);
   }
   let lastNumber = ordered[0];
-  for (let j = 1; j < ordered.length - 1; j++) {
+  for (let j = 1; j < ordered.length; j++) {
     if (ordered[j] === lastNumber + 1) currentStreak++;
     else currentStreak = 1;
 
@@ -54,12 +54,13 @@ var longestConsecutive = function(nums) {
 
   return answer;
 };
-longestConsecutive([100,4,200,1,3,2])
+longestConsecutive([0,3,7,2,5,8,4,6,0,1])
 /*
-Your input
-[100,4,200,1,3,2]
-Output
-1
-Expected
-4
+Input:
+[0,3,7,2,5,8,4,6,0,1]
+Output:
+8
+Expected:
+9
+
 */
