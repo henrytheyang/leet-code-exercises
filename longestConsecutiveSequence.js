@@ -27,5 +27,8 @@ Constraints:
  * @return {number}
  */
 var longestConsecutive = function(nums) {
-    
+  // Scan contents of nums into an object
+  // For... in loop the contents of object; numbers are iterated in ascending order ES6 for certain methods(Object.getOwnPropertyNames)
+  // Then iterate through and track longest streak
+
 };
