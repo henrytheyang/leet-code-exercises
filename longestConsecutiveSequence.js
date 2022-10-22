@@ -36,14 +36,14 @@ var longestConsecutive = function(nums) {
   let ordered = [];
 
   if (nums.length <= 1) return nums.length;
-  let lastNumber = nums[0];
-
+  
   for (let i = 0; i < nums.length; i++) {
     obj[nums[i]] = nums[i];
   }
   for (props in obj) {
-    ordered.push(props);
+    ordered.push(obj[props]);
   }
+  let lastNumber = ordered[0];
   for (let j = 1; j < ordered.length - 1; j++) {
     if (ordered[j] === lastNumber + 1) currentStreak++;
     else currentStreak = 1;
