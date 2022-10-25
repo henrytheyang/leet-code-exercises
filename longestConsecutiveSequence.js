@@ -40,13 +40,14 @@ var longestConsecutive = function(nums) {
   let foundLeftEdge = false;
   let foundRightEdge = false;
   
+  if (nums.length === 0) return 0;
   for (let i = 0; i < nums.length; i++) {
     stored[nums[i]] = nums[i];
   }
 
   for (let j = 0; j < nums.length; j++) {
     streak = 1;
-    if (nums[j] === 'used') continue;
+    if (stored[nums[j]] === 'used') continue;
     currentNum = nums[j];
     stored[currentNum] = 'used';
 
@@ -71,17 +72,17 @@ var longestConsecutive = function(nums) {
     }
     
     if (streak > answer) answer = streak;
-    streak = 1;
     foundLeftEdge = false;
     foundRightEdge = false;
   }
+  return answer;
 }
-longestConsecutive([9,1,-3,2,4,8,3,-1,6,-2,-4,7]);
+longestConsecutive([100,4,200,1,3,2]);
 /*
-Input
-[9,1,-3,2,4,8,3,-1,6,-2,-4,7]
+Your input
+[100,4,200,1,3,2]
 Output
-2
+undefined
 Expected
-3
+4
 */
