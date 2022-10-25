@@ -32,8 +32,51 @@ var longestConsecutive = function(nums) {
     // Check if each number is the start of a sequence by checking if the value one smaller is present
       // If present continue
       // If no and it's start of sequence start counting out how many consecutive integers you can reach
+  let answer;
+  if (nums.length > 0) answer = 1;
+  let stored = {};
+  let streak;
+  let currentNum;
+  let foundLeftEdge = false;
+  let foundRightEdge = false;
+  
+  for (let i = 0; i < nums.length; i++) {
+    stored[nums[i]] = nums[i];
+  }
 
-longestConsecutive([9,1,-3,2,4,8,3,-1,6,-2,-4,7])
+  for (let j = 0; j < nums.length; j++) {
+    streak = 1;
+    if (nums[j] === 'used') continue;
+    currentNum = nums[j];
+    stored[currentNum] = 'used';
+
+    while (foundLeftEdge === false) {
+      if (stored[currentNum - 1] === currentNum - 1) {
+        stored[currentNum - 1] = 'used';
+        streak++;
+        currentNum--;
+      } else {
+        foundLeftEdge = true;
+      }
+    }
+    currentNum = nums[j];
+    while (foundRightEdge === false) {
+      if (stored[currentNum + 1] === currentNum + 1) {
+         stored[currentNum + 1] = 'used';
+         streak++;
+         currentNum++;
+      } else {
+        foundRightEdge = true;
+      }
+    }
+    
+    if (streak > answer) answer = streak;
+    streak = 1;
+    foundLeftEdge = false;
+    foundRightEdge = false;
+  }
+}
+longestConsecutive([9,1,-3,2,4,8,3,-1,6,-2,-4,7]);
 /*
 Input
 [9,1,-3,2,4,8,3,-1,6,-2,-4,7]
