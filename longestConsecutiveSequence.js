@@ -28,39 +28,17 @@ Constraints:
  */
 var longestConsecutive = function(nums) {
   // Scan contents of nums into an object
-  // For... in loop the contents of object; numbers are iterated in ascending order ES6
-  // Then iterate through and track longest streak
-  let answer = 0;
-  let currentStreak = 1;
-  let obj = {};
-  let ordered = [];
+  // Iterate along array
+    // Check if each number is the start of a sequence by checking if the value one smaller is present
+      // If present continue
+      // If no and it's start of sequence start counting out how many consecutive integers you can reach
 
-  if (nums.length <= 1) return nums.length;
-  
-  for (let i = 0; i < nums.length; i++) {
-    obj[nums[i]] = nums[i];
-  }
-  for (props in obj) {
-    ordered.push(obj[props]);
-  }
-  let lastNumber = ordered[0];
-  for (let j = 1; j < ordered.length; j++) {
-    if (ordered[j] === lastNumber + 1) currentStreak++;
-    else currentStreak = 1;
-
-    lastNumber = ordered[j];
-    if (currentStreak > answer) answer = currentStreak;
-  }
-
-  return answer;
-};
-longestConsecutive([0,3,7,2,5,8,4,6,0,1])
+longestConsecutive([9,1,-3,2,4,8,3,-1,6,-2,-4,7])
 /*
-Input:
-[0,3,7,2,5,8,4,6,0,1]
-Output:
-8
-Expected:
-9
-
+Input
+[9,1,-3,2,4,8,3,-1,6,-2,-4,7]
+Output
+2
+Expected
+3
 */
