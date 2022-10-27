@@ -33,5 +33,8 @@ board[i][j] is 'X' or 'O'.
  * @return {void} Do not return anything, modify board in-place instead.
  */
 var solve = function(board) {
-  
+  // When we find first O start tracking current streak
+    // If we reach edge of board without enclosing, delete streak
+    // If we encounter another O in the row below it, it's part of the current streak, keep checking
+    // If we ever reach an edge with an O and it's not enclosed, delete current streak
 };
