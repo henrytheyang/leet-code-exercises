@@ -76,6 +76,7 @@ var solve = function(board) {
 
       seen[i][j] = true;
       if (board[i][j] === 'O') {
+        queuePossible.push({m: i, n: j});
         if (checkPeripheralO(i, j) === true) {
           let counter = 0;
           while (queuePossible.length > counter) {
