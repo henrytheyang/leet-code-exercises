@@ -37,4 +37,59 @@ var solve = function(board) {
     // If we reach edge of board without enclosing, delete streak
     // If we encounter another O in the row below it, it's part of the current streak, keep checking
     // If we ever reach an edge with an O and it's not enclosed, delete current streak
+  let queuePossible = [];
+  let confirmedFlips = [];
+  let seen = new Array(board.length).fill(0).map(x => new Array(board[0].length).fill(false));
+  
+  const checkPeripheralO = (m, n) => {
+    // If we encounter O on invalid edge return O
+    // Else return all Os to check
+    let detected = [];
+    let allClear = true;
+    if (board[m - 1][n] === 'O') {
+      if (m - 1 === 0) {
+        return false
+      } else detected.push({m: m - 1, n: n});
+    } 
+    if (board[m + 1][n] === 'O') {
+      if (m + 1 === board.length - 1) {
+        return false
+      } else detected.push({m: m + 1, n: n});
+    } 
+    if (board[m][n - 1] === 'O') {
+      if (n - 1 === 0) {
+        return false
+      } else detected.push({m: m, n: n - 1})
+    }
+    if (board[m][n + 1] === 'O') {
+      if (n + 1 === board[0].length - 1) {
+        return false
+      } else detected.push({m: m, n: n + 1});
+    }
+    // only here if we pass all
+    queuePossible = [...queuePossible, ... detected]
+  }
+
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[0].length; j++) {
+      if (seen[i][j] === true) continue;
+
+      seen[i][j] = true;
+      if (board[i][j] === 'O') {
+        if (checkPeripheralO(i, j) === false) {
+          continue;
+        } else {
+
+        }
+      }
+      while (queuePossible.length > 0) {
+
+      }
+
+    }
+  }
+ 
+
 };
+
+solve([["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]])
