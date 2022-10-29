@@ -45,7 +45,6 @@ var solve = function(board) {
     // If we encounter O on invalid edge return O
     // Else return all Os to check
     let detected = [];
-    let allClear = true;
     if (board[m - 1][n] === 'O') {
       if (m - 1 === 0) {
         return false
@@ -68,28 +67,36 @@ var solve = function(board) {
     }
     // only here if we pass all
     queuePossible = [...queuePossible, ... detected]
+    return true;
   }
 
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[0].length; j++) {
+  for (let i = 1; i < board.length - 1; i++) {
+    for (let j = 1; j < board[0].length - 1; j++) {
       if (seen[i][j] === true) continue;
 
       seen[i][j] = true;
       if (board[i][j] === 'O') {
-        if (checkPeripheralO(i, j) === false) {
-          continue;
-        } else {
-
+        if (checkPeripheralO(i, j) === true) {
+          let counter = 0;
+          while (queuePossible.length > counter) {
+            let currentCoord = queuePossible[counter];
+            counter++;
+            seen[currentCoord.m][currentCoord.n] = true;
+            if (checkPeripheralO(currentCoord.m, currentCoord.n) === false) {
+              queuePossible = [];
+            }
+          }
+          if (queuePossible.length > 0) {
+            confirmedFlips = [...confirmedFlips, ...queuePossible];
+            queuePossible = [];
+          }
         }
       }
-      while (queuePossible.length > 0) {
-
-      }
-
     }
   }
- 
-
+  for (let k = 0; k < confirmedFlips.length; k++) {
+    board[confirmedFlips[k].m][confirmedFlips[k].n] = 'X';
+  }
 };
 
 solve([["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]])
