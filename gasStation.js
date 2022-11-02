@@ -45,5 +45,7 @@ n == gas.length == cost.length
  * @return {number}
  */
 var canCompleteCircuit = function(gas, cost) {
-    
+  // Create an array tracking difference between gas and cost
+  // Iterate through diff, summing diff 
+    // If the total ever dips below 0, restart the summing at the next index starting point
 };
