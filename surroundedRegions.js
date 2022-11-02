@@ -35,7 +35,52 @@ board[i][j] is 'X' or 'O'.
 var solve = function(board) {
   // Check for illegal 'O' on border, and mark each, and each 'O' connected to it
   // Flip every other 'O'
-  
+  const markPeripheral = (m, n) => {
+    if (m - 1 >= 0 && board[m - 1][n] === 'O') {
+      board[m - 1][n] = '*';
+      markPeripheral(m - 1, n);
+    }
+    if (m + 1 <= board.length - 1 && board[m + 1][n] === 'O') {
+      board[m + 1][n] = '*';
+      markPeripheral(m + 1, n);
+    }
+    if (n - 1 >= 0 && board[m][n - 1] === 'O') {
+      board[m][n - 1] = '*';
+      markPeripheral(m, n - 1);
+    }
+    if (n + 1 <= board[0].length - 1 && board[m][n + 1] === 'O') {
+      board[m][n + 1] = '*';
+      markPeripheral(m, n + 1);
+    }
+  }
+
+  for (let i = 0; i < board[0].length; i++) {
+    if (board[0][i] === 'O') {
+      board[0][i] = '*';
+      markPeripheral(0, i);
+    }
+    if (board[board.length - 1][i] === 'O') {
+      board[board.length - 1][i] = '*';
+      markPeripheral(board.length - 1, i);
+    }
+  }
+  for (let j = 0; j < board.length; j++) {
+    if (board[j][0] === 'O') {
+      board[j][0] = '*';
+      markPeripheral(j, 0);
+    }
+    if (board[j][board[0].length - 1] === 'O') {
+      board[j][board[0].length - 1] = '*';
+      markPeripheral(j, board[0].length - 1);
+    }
+  }
+
+  for (let l = 0; l < board.length; l++) {
+    for (let m = 0; m < board[0].length; m++) {
+      if (board[l][m] === 'O') board[l][m] = 'X';
+      if (board[l][m] === '*') board[l][m] = 'O';
+    }
+  }
 };
 
 solve([
