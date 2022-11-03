@@ -44,7 +44,49 @@ n == gas.length == cost.length
  * @param {number[]} cost
  * @return {number}
  */
+
 var canCompleteCircuit = function(gas, cost) {
+  // Create an array tracking difference between gas and cost
+  // Check if sum of gas >= sum of cost
+  // Iterate through diff, summing diff 
+    // If the total ever dips below 0, restart the summing at the next index starting point
+  // Optimize by restarting summing diffs after failed stop, not from last starting point
+  let diff = [];
+  let gasTotal = 0;
+  let costTotal = 0;
+  let answer = 0;
+  let total = 0;
+
+  for (let i = 0; i < gas.length; i++) {
+    diff[i] = gas[i] - cost[i];
+    gasTotal+= gas[i];
+    costTotal+= cost[i];
+  }
+  if (gasTotal < costTotal) return -1;
+
+  for (let j = 0; j < diff.length; j++) {
+    if (total === 0) answer = j;
+    total += diff[j];
+    if (total >= 0) continue;
+    else if (total < 0) {
+      total = 0;
+    }
+  }
+  return answer;
+}
+canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2]);
+/*
+Your input
+[1,2,3,4,5]
+[3,4,5,1,2]
+Output
+Undefined
+Expected
+3
+*/
+
+
+var canCompleteCircuitSlow = function(gas, cost) {
   // Create an array tracking difference between gas and cost
   // Check if sum of gas >= sum of cost
   // Iterate through diff, summing diff 
@@ -74,13 +116,3 @@ var canCompleteCircuit = function(gas, cost) {
     if (counter === diff.length) return answer;
   }
 };
-canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2]);
-/*
-Your input
-[1,2,3,4,5]
-[3,4,5,1,2]
-Output
-Undefined
-Expected
-3
-*/
