@@ -49,6 +49,7 @@ var canCompleteCircuit = function(gas, cost) {
   // Check if sum of gas >= sum of cost
   // Iterate through diff, summing diff 
     // If the total ever dips below 0, restart the summing at the next index starting point
+  // Optimize by restarting summing diffs after failed stop, not from last starting point
   let diff = [];
   let gasTotal = 0;
   let costTotal = 0;
