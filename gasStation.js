@@ -67,10 +67,7 @@ var canCompleteCircuit = function(gas, cost) {
   for (let j = 0; j < diff.length; j++) {
     if (total === 0) answer = j;
     total += diff[j];
-    if (total >= 0) continue;
-    else if (total < 0) {
-      total = 0;
-    }
+    if (total < 0) total = 0;
   }
   return answer;
 }
