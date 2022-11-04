@@ -32,5 +32,10 @@ matrix[i][j] is '0' or '1'.
  * @return {number}
  */
 var maximalRectangle = function(matrix) {
+  // Convert matrix into rows of historgrams
+    // Each row is the sum total of current row and the height above it
+    // If the current row index is 0, it's 0 height
+  // Find the largest area of each row
+  // Track the largest area as we go.
   
 };
