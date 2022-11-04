@@ -38,7 +38,7 @@ var maximalRectangle = function(matrix) {
   // Find the largest area of each row
   // Track the largest area as we go.
   let answer = 0;
-  let currArea
+  let rowArea;
   let board = new Array(matrix.length).fill(0).map(element => new Array(matrix[0].length));
   for (let i = 0; i < board[0].length; i++) {
     board[0][i] = matrix[0][i] * 1;
@@ -51,12 +51,37 @@ var maximalRectangle = function(matrix) {
   }
   
   const findLargestArea = (rowIndex) => {
+    let heightStack = [];
+    let indexStack = [];
+    let tempIndex;
+    let largestArea = 0;
+    let currArea = 0;
 
+    for (l = 0; l < board[rowIndex].length; l++) {
+      if (heightStack.length === 0 || board[rowIndex][l] > heightStack[heightStack.length - 1]) {
+        heightStack.push(board[rowIndex][l]);
+        indexStack.push(l);
+      } else if (board[rowIndex][l] < heightStack[heightStack.length - 1]) {
+        while (board[rowIndex][l] < heightStack[heightStack.length - 1]) {
+          tempIndex = indexStack.pop();
+          currArea = (heightStack.pop()) *  (l - tempIndex);
+          if (largestArea < currArea) largestArea = currArea;
+        }
+        heightStack.push(board[rowIndex][l]);
+        indexStack.push(tempIndex);
+      }
+    }
+    // Pop leftover areas
+    while (heightStack.length > 0) {
+      currArea = heightStack.pop() * (l - indexStack.pop());
+      largestArea = Math.max(largestArea, currArea);
+    }
+    return largestArea;
   }
 
-  for (let l = 0; l < board.length; l++) {
-    currArea = findLargestArea(l)
-    if (answer < currArea) answer = currArea;
+  for (let m = 0; m < board.length; m++) {
+    rowArea = findLargestArea(m)
+    if (answer < rowArea) answer = rowArea;
   }
 
   return answer;
