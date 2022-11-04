@@ -37,5 +37,22 @@ var maximalRectangle = function(matrix) {
     // If the current row index is 0, it's 0 height
   // Find the largest area of each row
   // Track the largest area as we go.
-  
+  let board = new Array(matrix.length).fill(0).map(element => new Array(matrix[0].length));
+  for (let i = 0; i < board[0].length; i++) {
+    board[0][i] = matrix[0][i] * 1;
+  }
+  for (let j = 1; j < board.length; j++) {
+    for (let k = 0; k < board[0].length; k++) {
+      if (matrix[j][k] === '0') board[j][k] = 0;
+      else board[j][k] = board[j - 1][k] + matrix[j][k] * 1
+    }
+  }
+
 };
+
+maximalRectangle([
+  ["1","0","1","0","0"],
+  ["1","0","1","1","1"],
+  ["1","1","1","1","1"],
+  ["1","0","0","1","0"]
+]);
