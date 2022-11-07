@@ -32,5 +32,7 @@ matrix[i][j] is '0' or '1'.
  * @return {number}
  */
 var maximalSquare = function(matrix) {
-    
+  // Create dp square tracking how many rows deep the 1s are
+  // If a dp row contains as many columns as the rows deep of 1s, that's a square
+  // Track the current max squares
 };
