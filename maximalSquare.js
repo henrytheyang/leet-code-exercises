@@ -36,7 +36,7 @@ var maximalSquare = function(matrix) {
   // If a dp row contains as many columns as the rows deep of 1s, that's a square
   // Track the current max squares
 
-  let answer = 0;
+  let length = 0;
   let dp = new Array(matrix.length).fill(0).map(element => new Array(matrix[0].length));
   
   for (let i = 0; i < matrix.length; i++) {
@@ -57,11 +57,11 @@ var maximalSquare = function(matrix) {
         if (dp[k][m] < minHeight) minHeight = dp[k][m];
         if (counter === 0) counter = 1;
         else counter++;
-        if (minHeight > answer && counter > answer) answer = Math.min(answer, minHeight);
+        if (minHeight > length && counter > length) length = Math.min(counter, minHeight);
       }
     }
   }
-  return answer;
+  return length * length;
 };
 
 maximalSquare([["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]])
