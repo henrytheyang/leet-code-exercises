@@ -36,6 +36,13 @@ var maximalSquare = function(matrix) {
   // If a dp row contains as many columns as the rows deep of 1s, that's a square
   // Track the current max squares
 
+  // Space consideration- O(m * n)
+    // Since we only need the info from the prev row, we only need to save one row at a time.
+    // We can reduce space complexity to O(n)
+
+  // Time complexity- O(m * n * k), where k is avg length our loop backtracks to look for new square
+    // We can decrease some linear amount of time by making our code fill in dp and check for new area as we go
+
   let length = 0;
   let dp = new Array(matrix.length).fill(0).map(element => new Array(matrix[0].length));
   
