@@ -32,8 +32,16 @@ matrix[i][j] is '0' or '1'.
  * @return {number}
  */
 
-
 var maximalSquare = function(matrix) {
+  // We can use dp to store info on "the biggest square we can create with this tile as the top left corner"
+  // Starting at bottom right, populate bottom & right
+    // If the matrix cell is 0, dp cell is 0
+    // If the matrix cell is 1, dp cell is 1 + min(bottom, right, diag)
+  // Decrement row by row until top left corner
+  // Increment through dp searching for largest length
+}
+
+var maximalSquareSlow = function(matrix) {
   // Create dp square tracking how many rows deep the 1s are
   // If a dp row contains as many columns as the rows deep of 1s, that's a square
   // Track the current max squares
