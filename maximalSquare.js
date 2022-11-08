@@ -39,6 +39,7 @@ var maximalSquare = function(matrix) {
     // If the matrix cell is 1, dp cell is 1 + min(bottom, right, diag)
   // Decrement row by row until top left corner
   // Increment through dp searching for largest length
+  // If we track length as we go we don't need to do another nested loop at the end to determine it
   let length = 0;
   let numRow = matrix.length;
   let numCol = matrix[0].length;
