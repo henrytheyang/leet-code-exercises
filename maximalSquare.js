@@ -64,7 +64,7 @@ var maximalSquare = function(matrix) {
   for (let i = numRow - 2; i >= 0; i --) {
     for (let j = numCol - 2; j >= 0; j--) {
       if (matrix[i][j] === '0') dp[i][j] = 0;
-      else dp[i][j] = 1 + Math.min(dp[i + 1][j], dp[i][j + 1], d[i + 1][j + 1]);
+      else dp[i][j] = 1 + Math.min(dp[i + 1][j], dp[i][j + 1], dp[i + 1][j + 1]);
     }
   }
 
@@ -73,7 +73,7 @@ var maximalSquare = function(matrix) {
       if (dp[k][l] > length) length = dp[k][l];
     }
   }
-  
+
   return length * length;
 }
 
