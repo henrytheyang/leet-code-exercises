@@ -40,18 +40,19 @@ var maximalSquare = function(matrix) {
   // Decrement row by row until top left corner
   // Increment through dp searching for largest length
   // If we track length as we go we don't need to do another nested loop at the end to determine it
-  let length = 0;
   let numRow = matrix.length;
   let numCol = matrix[0].length;
   let counter;
   let dp = new Array(numRow).fill(0).map(element => new Array(numCol));
 
   dp[numRow - 1][numCol - 1] = matrix[numRow - 1][numCol - 1];
+  let length = dp[numRow - 1][numCol - 1]
 
   counter = numRow - 1;
   while(counter >= 0) {
     if (matrix[counter][numCol - 1] === '0') dp[counter][numCol - 1] = 0;
     else dp[counter][numCol - 1] = 1;
+    if (length < dp[counter][numCol - 1]) length = dp[counter][numCol - 1];
     counter--;
   }
 
@@ -59,6 +60,7 @@ var maximalSquare = function(matrix) {
   while (counter >= 0) {
     if (matrix[numRow - 1][counter] === '0') dp[numRow - 1][counter] = 0;
     else dp[numRow - 1][counter] = 1;
+    if (length < dp[numRow - 1][counter]) length = dp[numRow - 1][counter];
     counter--;
   }
 
@@ -66,12 +68,7 @@ var maximalSquare = function(matrix) {
     for (let j = numCol - 2; j >= 0; j--) {
       if (matrix[i][j] === '0') dp[i][j] = 0;
       else dp[i][j] = 1 + Math.min(dp[i + 1][j], dp[i][j + 1], dp[i + 1][j + 1]);
-    }
-  }
-
-  for (let k = 0; k < numRow; k++) {
-    for (let l = 0; l < numCol; l++) {
-      if (dp[k][l] > length) length = dp[k][l];
+      if (length < dp[i][j]) length = dp[i][j];
     }
   }
 
