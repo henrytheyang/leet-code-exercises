@@ -35,6 +35,12 @@ All the strings of wordDict are unique.
  * @param {string[]} wordDict
  * @return {string[]}
  */
+
 var wordBreak = function(s, wordDict) {
+  // DP solution- array where the index is true if some word in wordDict can reach a true index
+  // Decrementing through string, at each index
+    // Loop through words checking if they can start at the current s[index] and reach a nonfalse index
+    // Optimization- Skip current word if the length doesn't land in a true spot, or if it goes out of bounds
+    // If any words are found true, record the true words in the index, and concatenating the string from the true index it lands on
     
 };
