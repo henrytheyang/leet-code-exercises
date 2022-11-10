@@ -37,10 +37,32 @@ All the strings of wordDict are unique.
  */
 
 var wordBreak = function(s, wordDict) {
-  // DP solution- array where the index is true if some word in wordDict can reach a true index
+  // DP solution- array where the index is true if some word in wordDict can reach a NONFALSE index
   // Decrementing through string, at each index
-    // Loop through words checking if they can start at the current s[index] and reach a nonfalse index
+    // Loop through words checking if they can start at the current s[index] and reach a NONFALSE index
     // Optimization- Skip current word if the length doesn't land in a true spot, or if it goes out of bounds
     // If any words are found true, record the true words in the index, and concatenating the string from the true index it lands on
-    
+  let dp = new Array(s.length + 1).fill(false);
+  dp[s.length] = [''];
+
+  for (let i = s.length - 1; i >= 0; i++) {
+    let currentIndexStrings = [];
+
+    for (let j = 0; j < wordDict.length; j++) {
+      let foundWord = false;
+      if (dp[i + wordDict[j].length] === false || i + wordDict[j].length >= s.length + 1) continue;
+      for (let k = 0; k < wordDict[j].length; k++) {
+        if (s[i + k] !== wordDict[j][k]) break;
+        if (k === wordDict[j].length - 1) foundWord = true;
+      }
+      if (foundWord) {
+        for (let l = 0; l < dp[i + wordDict[j].length]; l++) {
+          currentIndexStrings.push(wordDict[j] + ' ' + dp[i + wordDict[j]][l]);
+        }
+      }
+    }
+    if (currentIndexStrings.length > 0) dp[i] = [...currentIndexStrings];
+  }
+  if (dp[0].length > 0) return dp[0];
+  else return [];
 };
