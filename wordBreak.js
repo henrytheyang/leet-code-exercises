@@ -55,7 +55,7 @@ var wordBreak = function(s, wordDict) {
       // Check if currrent word starting on current index can end on a true dp[someIndex]
       for (let k = 0; k < wordDict[j].length; k++) {
         if (wordDict[j][k] !== s[i + k]) break;
-        if (k = wordDict[j].length - 1) indexTrue = true;
+        if (k === wordDict[j].length - 1) indexTrue = true;
       }
       if (indexTrue) {
         dp[i] = true
@@ -66,11 +66,11 @@ var wordBreak = function(s, wordDict) {
   if (dp[0]) return true;
   else return false;
 };
-wordBreak('leetcode', ["leet","code"])
+wordBreak('a', ["a"])
 /*
-Your input
-"leetcode"
-["leet","code"]
+Input
+"a"
+["a"]
 Output
 false
 Expected
