@@ -51,7 +51,7 @@ var wordBreak = function(s, wordDict) {
       let indexTrue = false;
       // Iterate through wordDict, checking if word can reach either end of string or true dp[i];
       // Skip to next word if word length and index don't add to a true index
-      if (dp[wordDict[j].length + i] !== true || wordDict[j].length + i >= s.length) continue;
+      if (dp[wordDict[j].length + i] === false || wordDict[j].length + i >= s.length + 1) continue;
       // Check if currrent word starting on current index can end on a true dp[someIndex]
       for (let k = 0; k < wordDict[j].length; k++) {
         if (wordDict[j][k] !== s[i + k]) break;
