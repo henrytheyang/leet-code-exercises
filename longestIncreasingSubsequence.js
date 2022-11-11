@@ -35,14 +35,16 @@ var lengthOfLIS = function(nums) {
   // DP Solution
   // Starting from the rear, track how long of an incrementing sequence we can make from the current index
     // For each index, it's max of (1, or 1 + any dp[index]) that is larger than the current value
+  let answer = 0;
   let dp = new Array(nums.length).fill(1);
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = i; j < nums.length; j++) {
+  for (let i = nums.length - 1; i >= 0; i--) {
+    for (let j = i + 1; j < nums.length; j++) {
       if (nums[i] < nums[j]) dp[i] = Math.max(dp[i], 1 + dp[j]);
     }
+    if (dp[i] > answer) answer = dp[i];
   }
   
-  return dp[0];
+  return answer;
 };
 lengthOfLIS([10,9,2,5,3,7,101,18]);
 
