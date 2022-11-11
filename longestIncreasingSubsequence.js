@@ -32,5 +32,7 @@ Follow up: Can you come up with an algorithm that runs in O(n log(n)) time compl
  */
 
 var lengthOfLIS = function(nums) {
-  
+  // DP Solution
+  // Starting from the rear, track how long of an incrementing sequence we can make from the current index
+    // For each index, it's max of (1, or 1 + any dp[index]) that is larger than the current value
 };
