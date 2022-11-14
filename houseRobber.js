@@ -35,14 +35,26 @@ Constraints:
 var rob = function(nums) {
   // Dp solution
   // Track best possible running sum for each index, from the rear
+    // Select the best sum from nums[i], nums[i] + nums[i + 2], nums[i] + nums[i + 3];
+  let dp = new Array(nums.length);
+
+  dp[nums.length - 1] = nums[nums.length - 1];
+  if (nums.length >= 2) dp[nums.length - 2] = Math.max(nums[nums.length - 2], dp[nums.length - 1]);
+  if (nums.length >= 3) dp[nums.length - 3] = Math.max(nums[nums.length - 3] + dp[nums.length - 1], dp[nums.length - 2]);
+
+  for (let i = nums.length - 4; i >= 0; i--) {
+    dp[i] = Math.max(nums[i] + dp[i + 2], nums[i] + dp[i + 3], dp[i + 1]);
+  }
+
+  return dp[0];
 };
 
-rob([1,2,3,1])
+rob([1,2,1,1])
 /*
 Input
-[2,1,1,2]
+[1,2,1,1]
 Output
-3
+2
 Expected
-4
+3
 */
