@@ -35,7 +35,7 @@ Constraints:
 var rob = function(nums) {
   // Dp solution
   // Track best possible running sum for each index, from the rear
-    // Select the best sum from nums[i], nums[i] + nums[i + 2], nums[i] + nums[i + 3];
+    // Select the best sum from nums[i] + nums[i + 2], nums[i] + nums[i + 3], dp[i + 2];
   let dp = new Array(nums.length);
 
   dp[nums.length - 1] = nums[nums.length - 1];
