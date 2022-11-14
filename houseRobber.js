@@ -34,6 +34,15 @@ Constraints:
  */
 var rob = function(nums) {
   // Dp solution
-  // Track odds and even, return greater at the end
-  
+  // Track best possible running sum for each index, from the rear
 };
+
+rob([1,2,3,1])
+/*
+Input
+[2,1,1,2]
+Output
+3
+Expected
+4
+*/
