@@ -37,9 +37,24 @@ var rob = function(nums) {
   // Most indices sum is max of- nums[i] + dp[i + 2], nums[i] + dp[i + 3], dp[i + 1]
   // Special case for last 3, first
   // Compare answers for 2 subarrays- one missing the first index, the next missing the last index
+  const helper = (start, end) => {
+    let dp = new Array(end - start + 1);
+    dp[end] = nums[end];
+    if (nums.length >= 2) dp[end - 1] = Math.max(nums[end - 1], nums[end]);
+    if (nums.length >= 3) dp[end - 2] = Math.max(nums[end - 2] + dp[end], dp[end - 1]);
+    for (let i = end - 4; i >= 0; i--) {
+      dp[i] = Math.max(nums[i] + dp[i + 2], nums[i] + dp[i + 3], dp[i + 1]);
+    }
+    return dp[0];
+  }
+
+  let first = rob(0, nums.length - 2);
+  let second = rob(1, nums.length - 1);
+  return Math.max(first, second);
 };
+rob([2,3,2]);
 
 /*
-Input: nums = [1,2,3,1]
+Input: nums = [2,3,2]
 Output: 4
 */
