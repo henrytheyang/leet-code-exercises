@@ -33,5 +33,8 @@ Constraints:
  * @return {number}
  */
 var rob = function(nums) {
+  // Dp solution- track max sum at each index point. Sum starting from rear 3
+  // Most indices sum is max of- nums[i] + dp[i + 2], nums[i] + dp[i + 3], dp[i + 1]
+  // Special case for last 3, first
   
 };
