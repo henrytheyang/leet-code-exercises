@@ -37,24 +37,29 @@ var rob = function(nums) {
   // Most indices sum is max of- nums[i] + dp[i + 2], nums[i] + dp[i + 3], dp[i + 1]
   // Special case for last 3, first
   // Compare answers for 2 subarrays- one missing the first index, the next missing the last index
+  if (nums.length === 1) return nums[0];
   const helper = (start, end) => {
     let dp = new Array(end - start + 1);
     dp[end] = nums[end];
     if (nums.length >= 2) dp[end - 1] = Math.max(nums[end - 1], nums[end]);
-    if (nums.length >= 3) dp[end - 2] = Math.max(nums[end - 2] + dp[end], dp[end - 1]);
-    for (let i = end - 4; i >= 0; i--) {
+    if (nums.length >= 3 && end - start + 1 >= 3) dp[end - 2] = Math.max(nums[end - 2] + dp[end], dp[end - 1]);
+    for (let i = end - 3; i >= 0; i--) {
       dp[i] = Math.max(nums[i] + dp[i + 2], nums[i] + dp[i + 3], dp[i + 1]);
     }
-    return dp[0];
+    return dp[start];
   }
 
-  let first = rob(0, nums.length - 2);
-  let second = rob(1, nums.length - 1);
+  let first = helper(0, nums.length - 2);
+  let second = helper(1, nums.length - 1);
   return Math.max(first, second);
 };
-rob([2,3,2]);
+rob([200,3,140,20,10]);
 
 /*
-Input: nums = [2,3,2]
-Output: 4
+Input:
+[200,3,140,20,10]
+Output:
+NaN
+Expected:
+340
 */
