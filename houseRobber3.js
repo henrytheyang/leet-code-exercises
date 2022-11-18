@@ -47,5 +47,22 @@ var rob = function(root) {
     // dontUse value: max of left child + max of right child
   // Null roots return [0,0] for use/dontUse values
   // Use recursive function that takes a root, returns [use, dontUse] values, and recurses to children
-   
+
+  const determineValue = (someNode) => {
+    let values = {};
+
+    if (!someNode) return {use: 0, dontUse: 0}; // Null branches
+
+    let leftValues = determineValue(someNode.left)
+    let rightValues = determineValue(someNode.right);
+
+    values.use = someNode.val + leftValues.dontUse + rightValues.dontUse;
+    values.dontUse = Math.max(leftValues.dontUse, leftValues.use) + Math.max(rightValues.dontUse, rightValues.use);
+
+    return values;
+  }
+
+  let rootValues = determineValue(root);
+
+  return Math.max(rootValues.use, rootValues.dontUse);
 };
