@@ -41,5 +41,11 @@ The number of nodes in the tree is in the range [1, 104].
  * @return {number}
  */
 var rob = function(root) {
-    
+  // DFS solution-
+  // Each node has values based off of decision- useRoot/dontUse root
+    // Use root value: root value + dontUse of left + dontUse of right
+    // dontUse value: max of left child + max of right child
+  // Null roots return [0,0] for use/dontUse values
+  // Use recursive function that takes a root, returns [use, dontUse] values, and recurses to children
+   
 };
