@@ -23,10 +23,6 @@ Constraints:
 
 1 <= nums.length <= 5 * 104
 -5 * 104 <= nums[i] <= 5 * 104
-Accepted
-334,892
-Submissions
-562,503
 */
 
 /**
@@ -34,5 +30,14 @@ Submissions
  * @return {number[]}
  */
 var sortArray = function(nums) {
-    
+  // Divide & conquer strat + 3 pointers (pivot, i,j)
+    // Left & right side of array, set pivot to right side
+    // Increment j from left to pivot
+    // When you hit a value that is less than the pivot value
+      // Increment i, swap positions of i and j
+    // Keep incrementing j until it equals p
+    // Increment i one last time, swap places of p and i
+  // Next round, recursively run pivot on the two subarrays you've made on either side of pivot
+  // Continue while the subarrays left & right edges are discreet
+
 };
