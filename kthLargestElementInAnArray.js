@@ -29,4 +29,8 @@ Constraints:
  * @return {number}
  */
 var findKthLargest = function(nums, k) {
+  // Sort using a pivot.
+  // After pivot is sorted to the right place discard the subarray that doesn't contain the target index
+  // Continue until we sort the target index into place
+  
 };
