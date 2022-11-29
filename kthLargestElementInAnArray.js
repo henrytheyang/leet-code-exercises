@@ -32,10 +32,38 @@ var findKthLargest = function(nums, k) {
   // Use quick select
   // Check index against kth largest; quick select subarray kth largest is in
   // Continue until pivot is kth largest
-  
+  if (nums.length === 1) return nums[nums.length - k];
+  let target = nums.length - k;
+
+
+  const quickSelect = (leftWall, rightWall) => {
+    let pivot = rightWall;
+    let pointer = leftWall - 1;
+    for (let i = leftWall; i <= rightWall; i++) {
+      if (nums[i] < nums[pivot]) {
+        pointer++;
+        let temp = nums[i];
+        nums[i] = nums[pointer];
+        nums[pointer] = temp;
+      }
+    }
+    if (pointer < rightWall - 1) {
+      pointer++;
+      let temp = nums[pivot];
+      nums[pivot] = nums[pointer];
+      nums[pointer] = temp;
+    }
+    
+    if (target === pointer) return nums[pointer];
+    else if (target < pointer) quickSelect(leftWall, pointer);
+    else quickSelect(pointer, rightWall);
+  }
+
+  quickSelect(0, nums.length - 1);
+  return nums[target];
 }
-findKthLargest([3,2,1,5,6,4], 2);
+findKthLargest([2,1], 1);
 /*
-Input: nums = [3,2,1,5,6,4], k = 2
-Output: 5
+[2,1]
+1
 */
