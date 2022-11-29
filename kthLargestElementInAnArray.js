@@ -28,7 +28,7 @@ Constraints:
  * @param {number} k
  * @return {number}
  */
-var findKthLargest = function(nums, k) {
+ var findKthLargest = function(nums, k) {
   // Use quick select
   // Check index against kth largest; quick select subarray kth largest is in
   // Continue until pivot is kth largest
@@ -36,10 +36,9 @@ var findKthLargest = function(nums, k) {
   let target = nums.length - k;
 
   const quickSelect = (leftWall, rightWall) => {
-    let pivot = rightWall;
     let pointer = leftWall - 1;
     for (let i = leftWall; i <= rightWall; i++) {
-      if (nums[i] < nums[pivot]) {
+      if (nums[i] < nums[rightWall]) {
         pointer++;
         let temp = nums[i];
         nums[i] = nums[pointer];
@@ -47,8 +46,8 @@ var findKthLargest = function(nums, k) {
       }
     }
     pointer++;
-    let temp = nums[pivot];
-    nums[pivot] = nums[pointer];
+    let temp = nums[rightWall];
+    nums[rightWall] = nums[pointer];
     nums[pointer] = temp;
     
     if (target === pointer) return nums[pointer];
