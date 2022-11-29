@@ -29,32 +29,10 @@ Constraints:
  * @return {number}
  */
 var findKthLargest = function(nums, k) {
-  // Sort using a pivot.
-  // After pivot is sorted to the right place discard the subarray that doesn't contain the target index
-  // Divide and conquer, continue until we've divided down to a one length subarray at the target index
-  let foundTarget = false;
-
-  const quickSort = (left, right) => {
-    let pivot = Math.floor((left + right)/2);
-    while (left < right) {
-      while (nums[left] < nums[pivot] && left < right) left++;
-      while (nums[right] > nums[pivot] && left < right) right--;
-      let temp = nums[left];
-      nums[left] = nums[right];
-      nums[right] = temp;
-    }
-    if (left === k) foundTarget = true;
-    return left;
-  }
-
-  while (foundTarget === false) {
-    let pivot = quickSort(0, nums.length - 1);
-    if (foundTarget === true) return nums[k];
-    else if (k < pivot) quickSort(left, pivot);
-    else quickSort(pivot, right);
-  }
-
-  return nums[k];
+  // Use quick select
+  // Check index against kth largest; quick select subarray kth largest is in
+  // Continue until pivot is kth largest
+  
 }
 findKthLargest([3,2,1,5,6,4], 2);
 /*
