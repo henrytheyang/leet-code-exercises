@@ -39,11 +39,13 @@ All the pairs prerequisites[i] are unique.
  */
 var canFinish = function(numCourses, prerequisites) {
   // If there's a loop present it'll be impossible, otherwise it can be possible
-  // Iterate through prereqs and create LL chain of prereqs
-  // Return true if you get to the tail of prereqs
-  // Return false if we're stuck in a loop
-  // To detect the a loop we can try hare/tortoise
-    // We start the hare and tortoise at the head
-    // Hare goes twice as fast as tortoise
-    // we're in a loop if tortoise catches up to the hare we're in a loop
+  // Iterate through prereqs, mapping courses prereqs. Store prereqs at course array index
+  // Start through map
+    // Record visit, and look at prereq
+      // If we reach a node with an empty set, that's the end of the line
+      // Bubble up, check off that branch as true. Go down the other branch
+  // If we can travel through the whole map and mark all nodes as true, return true
+
+  // Track if we created a loop by tracking visited nodes, if yes return false;
+
 };
