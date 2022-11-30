@@ -38,5 +38,12 @@ All the pairs prerequisites[i] are unique.
  * @return {boolean}
  */
 var canFinish = function(numCourses, prerequisites) {
-
+  // If there's a loop present it'll be impossible, otherwise it can be possible
+  // Iterate through prereqs and create LL chain of prereqs
+  // Return true if you get to the tail of prereqs
+  // Return false if we're stuck in a loop
+  // To detect the a loop we can try hare/tortoise
+    // We start the hare and tortoise at the head
+    // Hare goes twice as fast as tortoise
+    // we're in a loop if tortoise catches up to the hare we're in a loop
 };
