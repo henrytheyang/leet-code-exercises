@@ -64,7 +64,6 @@ var canFinish = function(numCourses, prerequisites) {
       map[startingNode].pop();
     }
     visited[startingNode] = false;
-    return true;
   }
 
   for (let j = 0; j < numCourses; j++) {
