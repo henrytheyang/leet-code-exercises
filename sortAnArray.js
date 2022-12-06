@@ -67,3 +67,18 @@ Constraints:
   };
 
   sortArray([5,2,3,1]);
+
+  /*
+  const quickSort = (left, right) => {
+    let pivot = Math.floor((left + right)/2);
+    while (left < right) {
+      while (nums[left] < nums[pivot] && left < right) left++;
+      while (nums[right] > nums[pivot] && left < right) right--;
+      let temp = nums[left];
+      nums[left] = nums[right];
+      nums[right] = temp;
+    }
+    if (left === k) foundTarget = true;
+    return left;
+  }
+  */
