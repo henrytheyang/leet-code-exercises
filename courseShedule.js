@@ -48,7 +48,7 @@ var canFinish = function(numCourses, prerequisites) {
 
   // Track if we created a loop by tracking visited nodes, if yes return false;
   let map = new Array(numCourses).fill(0).map(element => new Array); // Map structure: index is class, value is prereq course
-  let visited = new Array(numCourses.length);
+  let visited = new Array(numCourses).fill(false);
 
   for (let i = 0; i < prerequisites.length; i++) {
     map[prerequisites[i][0]].push(prerequisites[i][1]);
@@ -61,9 +61,9 @@ var canFinish = function(numCourses, prerequisites) {
     visited[startingNode] = true;
     for (let i = map[startingNode].length - 1; i >= 0; i--) {
       if (mapCrawl(map[startingNode][i]) === false) return false;
+      map[startingNode].pop();
     }
     visited[startingNode] = false;
-    map[startingNode].pop();
     return true;
   }
 
@@ -74,7 +74,7 @@ var canFinish = function(numCourses, prerequisites) {
   return true;
 };
 
-canFinish(2, [[1,0],[0,1]])
+canFinish(5, [[0,1],[0,2],[1,3],[1,4],[3,4]])
 /*
 numCourses = 2, prerequisites = [[1,0],[0,1]]
 */
