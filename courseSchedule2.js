@@ -66,7 +66,7 @@ var findOrder = function(numCourses, prerequisites) {
   }
 
   for (let k = 0; k < numCourses; k++) {
-    if (dfs(k) === false) return answer;
+    if (dfs(k) === false) return [];
   }
 
   return answer;
