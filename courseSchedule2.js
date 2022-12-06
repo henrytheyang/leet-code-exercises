@@ -33,6 +33,11 @@ Output: [0]
  * @param {number[][]} prerequisites
  * @return {number[]}
  */
- var findOrder = function(numCourses, prerequisites) {
-    
+var findOrder = function(numCourses, prerequisites) {
+  // Build prereq graph
+  // Iterate through indices of prereq graph
+  // Recursively explore all nodes in DFS
+  // Track for double visits; if we encounter loop break and return []
+  // If we reach a node that has 0 prereqs, add to answer order, remember that it's used
+  // Return up a level, pop that prereq off the list, remove visited tag
 };
