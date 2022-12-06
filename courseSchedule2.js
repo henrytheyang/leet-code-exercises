@@ -48,17 +48,19 @@ var findOrder = function(numCourses, prerequisites) {
     graph[prerequisites[i][0]].push(prerequisites[i][1]);
   }
   const dfs = (node) => {
-    if (loopDetector[node] === true) return false; // order?
+    if (loopDetector[node] === true) return false;
     if (addedToAnswer[node] === true) return true;
 
-    loopDetector[node] = true;
-    // Iterate through list of dependencies if they exist
-    for (let j = graph[node].length - 1; j >= 0; j--) {
-      // let nextNode = graph[node][j];
-      let nextNode = graph[node].pop();
-      if (dfs(nextNode) === false) return answer;
+    if (graph[node].length > 0) {
+      loopDetector[node] = true;
+      // Iterate through list of dependencies if they exist
+      for (let j = graph[node].length - 1; j >= 0; j--) {
+        let nextNode = graph[node].pop();
+        if (dfs(nextNode) === false) return answer;
+      }
+      loopDetector[node] = false;
     }
-    loopDetector[node] = false;
+    
     if (graph[node].length === 0) { // Detect end of depenedency line
       answer.push(node);
       addedToAnswer[node] = true;
