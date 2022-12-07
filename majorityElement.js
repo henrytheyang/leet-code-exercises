@@ -48,3 +48,10 @@ var majorityElementLinearTime = function(nums) {
   }
 };
 
+var majorityElementConstantSpace = function(nums) {
+  // Constant space solution-
+  // Sort original input array
+  // If nums.length is even, return middle element
+  // If nums.length is odd, check middle 3 elements, return the one that shows up at least twice
+  
+}
