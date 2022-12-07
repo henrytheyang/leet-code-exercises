@@ -30,6 +30,21 @@ Follow-up: Could you solve the problem in linear time and in O(1) space?
  * @param {number[]} nums
  * @return {number}
  */
-var majorityElement = function(nums) {
-  
+var majorityElementLinearTime = function(nums) {
+  // Linear time, linear space solution-
+  // Keep count of max, keep track of each value as you iterate through array
+  // Return max when max greater than n/2 or when we reach the end
+  let count = 0;
+  let maxElement;
+  let memoryBank = {};
+  for (let i = 0; i < nums.length; i++) {
+    if (memoryBank[nums[i]] === undefined) memoryBank[nums[i]] = 1;
+    else memoryBank[nums[i]] = memoryBank[nums[i]] + 1;
+    if (memoryBank[nums[i]] > count) {
+      count = memoryBank[nums[i]]
+      maxElement = nums[i];
+    };
+    if (count > (nums.length) / 2) return maxElement;
+  }
 };
+
