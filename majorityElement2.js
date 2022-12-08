@@ -31,7 +31,7 @@ Follow up: Could you solve the problem in linear time and in O(1) space?
  * @param {number[]} nums
  * @return {number[]}
  */
- var majorityElement = function(nums) {
+var majorityElement = function(nums) {
   // Can be 2 at most
   // Any time a count is 0, assign new element
   // Track 2 elements at a time, with 2 counts
@@ -68,11 +68,13 @@ Follow up: Could you solve the problem in linear time and in O(1) space?
     if (nums[j] === b) countB++;
   }
 
-  if (countA > (nums.length / 3)) answer.push(countA);
-  if (countB > (nums.length / 3)) answer.push(countA);
+  if (countA > (nums.length / 3)) answer.push(a);
+  if (countB > (nums.length / 3)) answer.push(b);
 
   return answer;
 };
+
+majorityElement([3,2,3]);
 
 /*
 Input
