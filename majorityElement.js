@@ -30,6 +30,17 @@ Follow-up: Could you solve the problem in linear time and in O(1) space?
  * @param {number[]} nums
  * @return {number}
  */
+
+var majorityElement = function(nums) {
+  // Linear time, constant space solution- 
+  // Problem tells us there will always be a majority solution
+  // Starting from the first element, we can keep a running tally of the current element we hold in memory
+  // Any value not equal to the current element in memory cancels out one count; every repetition increments count
+  // If we hit a 0 count, the next element to be examined is added to memory
+  // Return the element in memory at the end
+  
+}
+
 var majorityElementLinearTime = function(nums) {
   // Linear time, linear space solution-
   // Keep count of max, keep track of each value as you iterate through array
