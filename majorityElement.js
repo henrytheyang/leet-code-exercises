@@ -38,7 +38,19 @@ var majorityElement = function(nums) {
   // Any value not equal to the current element in memory cancels out one count; every repetition increments count
   // If we hit a 0 count, the next element to be examined is added to memory
   // Return the element in memory at the end
-  
+  let answer = nums[0];
+  let count = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (count === 0) {
+      answer = nums[i];
+      count++;
+      continue;
+    };
+    if (answer !== nums[i]) count--;
+    else count++;
+
+  }
+  return answer;
 }
 
 var majorityElementLinearTime = function(nums) {
