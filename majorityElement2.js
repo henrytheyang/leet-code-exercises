@@ -32,5 +32,12 @@ Follow up: Could you solve the problem in linear time and in O(1) space?
  * @return {number[]}
  */
 var majorityElement = function(nums) {
-    
+  // Can be 2 at most
+  // Any time a count is 0, assign new element
+  // Track 2 elements at a time, with 2 counts
+  // Increment count when matching
+  // Any time a new value does not match either element, decrement both
+  // At the end of first loop will have 2 most common elements
+  // Run second loop to count to see if they're above n/3
+  
 };
