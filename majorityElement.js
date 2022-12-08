@@ -53,5 +53,6 @@ var majorityElementConstantSpace = function(nums) {
   // Sort original input array
   // If nums.length is even, return middle element
   // If nums.length is odd, check middle 3 elements, return the one that shows up at least twice
-  
+  nums.sort((a, b) => a - b);
+  return nums[Math.floor((nums.length - 1) / 2)];
 }
