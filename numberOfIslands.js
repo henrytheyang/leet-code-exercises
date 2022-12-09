@@ -52,19 +52,19 @@ var numIslands = function(grid) {
   const scanNeighbors = (r, c) => {
     if (r - 1 >= 0 &&  visited[r - 1][c] === false) {
       visited[r - 1][c] = true;
-      scanNeighbors(r - 1, c)
+      if (grid[r - 1][c] === '1') scanNeighbors(r - 1, c)
     }
     if (r + 1 < grid.length && visited[r + 1][c] === false) {
       visited[r + 1][c] = true;
-      scanNeighbors(r + 1, c);
+      if (grid[r + 1][c] === '1') scanNeighbors(r + 1, c);
     }
     if (c - 1 >= 0 &&  visited[r][c - 1] === false) {
       visited[r][c - 1] = true;
-      scanNeighbors(r, c - 1);
+      if (grid[r][c - 1] === '1') scanNeighbors(r, c - 1);
     }
     if (c + 1 < grid[0].length && visited[r][c + 1] === false) {
       visited[r][c + 1] = true;
-      scanNeighbors(r, c + 1);
+      if (grid[r][c + 1] === '1') scanNeighbors(r, c + 1);
     }
   }
 
@@ -72,7 +72,7 @@ var numIslands = function(grid) {
     for (let j = 0; j < grid[0].length; j++) {
       if (visited[i][j] === true) continue;
       visited[i][j] = true;
-      if (grid[i][j] === 1) {
+      if (grid[i][j] === '1') {
         islands++;
         scanNeighbors(i, j);
       }
@@ -80,10 +80,19 @@ var numIslands = function(grid) {
   }
   return islands;
 };
-
 numIslands([
-  ["1","1","1","1","0"],
-  ["1","1","0","1","0"],
   ["1","1","0","0","0"],
-  ["0","0","0","0","0"]
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
 ]);
+
+/*Input
+Input
+grid =
+[["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]
+Output
+1
+Expected
+3
+*/
