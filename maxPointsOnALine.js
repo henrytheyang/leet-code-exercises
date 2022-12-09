@@ -44,20 +44,20 @@ var maxPoints = function(points) {
     bank = {};
     for (let j = i + 1; j < points.length; j++) {
       slope = (points[j][1] - points[i][1]) / (points[j][0] - points[i][0]);
+      if (slope === Infinity || slope === -Infinity) slope = Infinity;
       bank[slope] = bank[slope] === undefined ? 2 : bank[slope] + 1;
       if (max < bank[slope]) max = bank[slope];
     }
   }
-  console.log('should never get here');
-  return max;
 };
-maxPoints([[1,1],[2,2],[3,3]]);
+maxPoints([[0,1],[0,0],[0,4],[0,-2],[0,-1],[0,3],[0,-4]]);
 /*
 Input
 points =
-[[1,1],[2,2],[3,3]]
+[[0,1],[0,0],[0,4],[0,-2],[0,-1],[0,3],[0,-4]]
+34 / 35 testcases passed
 Output
-2
+5
 Expected
-3
+7
 */
