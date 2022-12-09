@@ -28,5 +28,10 @@ All the points are unique.
  * @return {number}
  */
 var maxPoints = function(points) {
-    
+  // For any two points,  things are on a specific line if they share a point and have the same slope
+  // m = (y2 - y1) / (x2 - x1)
+  // Nested loop-
+  // Record max # of points on each slope line
+  // Keep going until there is fewer number of combinations than the max left over
+  
 };
