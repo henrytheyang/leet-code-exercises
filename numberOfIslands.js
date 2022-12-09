@@ -40,5 +40,11 @@ grid[i][j] is '0' or '1'.
  * @return {number}
  */
 var numIslands = function(grid) {
-    
+  // Iterate through matrix, marking each spot as visited
+  // Skip all visited spots
+  // When we encounter a 1, increment the number of islands
+    // Scan all neighbors, mark as visited
+    // If we encounter more 1s, scan all neighbors
+    // Once we finish scanning all neighbors, continue with iteration through matrix
+
 };
