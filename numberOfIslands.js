@@ -46,5 +46,44 @@ var numIslands = function(grid) {
     // Scan all neighbors, mark as visited
     // If we encounter more 1s, scan all neighbors
     // Once we finish scanning all neighbors, continue with iteration through matrix
+  let islands = 0;
+  let visited = new Array(grid.length).fill(0).map(element => new Array(grid[0].length).fill(false));
 
+  const scanNeighbors = (r, c) => {
+    if (r - 1 >= 0 &&  visited[r - 1][c] === false) {
+      visited[r - 1][c] = true;
+      scanNeighbors(r - 1, c)
+    }
+    if (r + 1 < grid.length && visited[r + 1][c] === false) {
+      visited[r + 1][c] = true;
+      scanNeighbors(r + 1, c);
+    }
+    if (c - 1 >= 0 &&  visited[r][c - 1] === false) {
+      visited[r][c - 1] = true;
+      scanNeighbors(r, c - 1);
+    }
+    if (c + 1 < grid[0].length && visited[r][c + 1] === false) {
+      visited[r][c + 1] = true;
+      scanNeighbors(r, c + 1);
+    }
+  }
+
+  for (let i = 0; i < grid.length; i ++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      if (visited[i][j] === true) continue;
+      visited[i][j] = true;
+      if (grid[i][j] === 1) {
+        islands++;
+        scanNeighbors(i, j);
+      }
+    }
+  }
+  return islands;
 };
+
+numIslands([
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]);
