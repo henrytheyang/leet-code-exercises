@@ -33,5 +33,20 @@ var maxPoints = function(points) {
   // Nested loop-
   // Record max # of points on each slope line
   // Keep going until there is fewer number of combinations than the max left over
-  
+  if (points.length <= 2) return points.length;
+  let bank, slope;
+  let max = 2;
+
+  for (let i = 0; i < points.length; i++) {
+    if (max >= points.length - i - 1) return max;
+
+    bank = {};
+    for (let j = i + 1; j < points.length; j++) {
+      slope = (points[j][1] - points[i][1]) / (points[j][0] - points[i][0]);
+      bank[slope] = bank[slope] === undefined ? 1 : bank[slope] + 1;
+      if (max < bank[slope]) max = bank[slope];
+    }
+  }
+  console.log('should never get here');
+  return max;
 };
