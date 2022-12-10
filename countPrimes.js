@@ -28,5 +28,9 @@ Constraints:
  * @return {number}
  */
 var countPrimes = function(n) {
-    
+  // Sieve of Eratosthenes
+  // From 2 to n:
+  // Iterate through integers, eliminating all multiples of each integer
+  // At the end, go through the integers between 2 to n, counting the number of primes left
+
 };
