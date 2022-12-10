@@ -32,5 +32,17 @@ var countPrimes = function(n) {
   // From 2 to n:
   // Iterate through integers, eliminating all multiples of each integer
   // At the end, go through the integers between 2 to n, counting the number of primes left
-
+  let answer = 0;
+  let primes = new Array(n).fill(true);
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n/i; j++) {
+      primes[i * j] = false;
+    }
+  }
+  for (let k = 0; k < n; k++) {
+    if (primes[k] === true) answer++;
+  }
+  return answer;
 };
+
+countPrimes(10);
