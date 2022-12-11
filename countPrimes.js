@@ -33,11 +33,12 @@ var countPrimes = function(n) {
   // Iterate through integers, eliminating all multiples of each integer
   // At the end, go through the integers between 2 to n, counting the number of primes left
   // Optimization- only need to go up to i = n/2
+  // Optimization- for j, after 2 only need to multiply by odd numbers
   let answer = 0;
   let limit = Math.floor(Math.sqrt(n));
   let primes = new Array(n).fill(true);
   [primes[0], primes[1]] = [false, false]
-  for (let i = 2; i < (n); i++) {
+  for (let i = 2; i < n/2; i++) {
     for (let j = 2; j < n/i; j++) {
       primes[i * j] = false;
     }
