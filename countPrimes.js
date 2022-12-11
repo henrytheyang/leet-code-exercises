@@ -34,14 +34,14 @@ var countPrimes = function(n) {
   // At the end, go through the integers between 2 to n, counting the number of primes left
   // Optimization- only need to go up to i = n/2
   // Optimization- for j, after 2 only need to multiply by odd numbers
+  // Optimization- skip all multiples of things found notprime
   let answer = 0;
   let primes = new Array(n).fill(true);
   [primes[0], primes[1]] = [false, false]
   for (let i = 2; i < n/2; i++) {
-    primes[i * 2] = false;
-    // odd integers starting with 3 = 2j + 1
-    for (let j = 1; j < ((n / i) - 1) / 2; j++) {
-      primes[i * (2 * j + 1)] = false;
+    if (primes[i] === false) continue;
+    for (let j = 2; j < (n / i); j ++) {
+      primes[i * j] = false;
     }
   }
   for (let k = 2; k <= n; k++) {
