@@ -31,6 +31,25 @@ var largestNumber = function(nums) {
     // Before comparing, string whole array
     // Compare any 2 value strings, a+b or b+a and sort descending
   // Edge case- all 0s. If the answer starts with 0,  return 0
+  let answer = '';
+  let stringified = [];
+  const compare = (a, b) => {
+    if (a + b > b + a) return -1;
+    else return 1;
+  }
 
-  
+  for (let i = 0; i < nums.length; i++) {
+    stringified[i] = nums[i].toString();
+  }
+  stringified.sort(compare);
+  answer = stringified.join('');
+
+  if (answer[0] === '0') return '0';
+  else return answer;
 };
+largestNumber([10,2]);
+
+/*
+Input: nums = [10,2]
+Output: "210"
+*/
