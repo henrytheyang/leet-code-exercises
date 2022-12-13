@@ -44,7 +44,6 @@ var findWords = function(board, words) {
     // If we can't run into a dead end, backtrack, unmarking as seen
   let answer = [];
   let used = new Array(board.length).fill(0).map(element => new Array(board[0].length).fill(false));
-  let wordCompleted;
 
   const searchNeighbors = (wordIndex, letterIndex, currentI, currentJ, board) => {
     let neighbors = [[currentI + 1, currentJ], [currentI - 1, currentJ], [currentI, currentJ + 1], [currentI, currentJ - 1]];
@@ -56,8 +55,7 @@ var findWords = function(board, words) {
         if (letterIndex === words[wordIndex].length - 1) { // Found end of word
           answer.push(words[wordIndex]);
           words[wordIndex] = true;
-          wordCompleted = true;
-          return;
+          return true;
         }
       used[r][c] = true;
       searchNeighbors(wordIndex, letterIndex + 1, r, c, board);
@@ -65,13 +63,13 @@ var findWords = function(board, words) {
       }
     }
     // Out of neighbors, have to backtrack
+    return false;
   }
 
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[0].length; j++) {
       for (let k = 0; k < words.length; k++) {
         if (words[k] === true) continue;
-        wordCompleted = false;
         if (board[i][j] === words[k][0]) {
           // If the word is finished(one letter word)
           if (words[k].length === 1) {
@@ -81,9 +79,13 @@ var findWords = function(board, words) {
           }
           // If there are more letters in word
           used[i][j] = true;
-          searchNeighbors(k, 1, i, j, board);
-          used[i][j] = false;
-          if (wordCompleted === true) break;
+          if (searchNeighbors(k, 1, i, j, board) === false) {
+            used[i][j] = false;
+          } else {
+            used[i][j] = false;
+            return;
+          }
+          
         }
       }
     }
@@ -91,10 +93,16 @@ var findWords = function(board, words) {
   return answer;
 };
 
-findWords([['a']],["ab"])
+findWords([["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]],["oa","oaa"])
 /*
+Input
 board =
-[["a"]]
+[["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]]
 words =
-["ab"]
+["oa","oaa"]
+29 / 64 testcases passed
+Output
+undefined
+Expected
+["oa","oaa"]
 */
