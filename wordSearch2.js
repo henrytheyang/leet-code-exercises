@@ -46,9 +46,8 @@ var findWords = function(board, words) {
   let used = new Array(board.length).fill(0).map(element => new Array(board[0].length).fill(false));
   let wordCompleted;
 
-  const searchNeighbors = (wordIndex, letterIndex, i, j) => {
-    let neighbors = [[i + 1, j], [i - 1][j], [i][j - 1], [i][j + 1]];
-    let foundNext = false;
+  const searchNeighbors = (wordIndex, letterIndex, currentI, currentJ, board) => {
+    let neighbors = [[currentI + 1, currentJ], [currentI - 1, currentJ], [currentI, currentJ + 1], [currentI, currentJ - 1]];
     for (let i = 0; i < neighbors.length; i++) {
       let r = neighbors[i][0];
       let c = neighbors[i][1];
@@ -61,7 +60,7 @@ var findWords = function(board, words) {
           return;
         }
       used[r][c] = true;
-      searchNeighbors(wordIndex, letterIndex + 1, r, c);
+      searchNeighbors(wordIndex, letterIndex + 1, r, c, board);
       used[r][c] = false;
       }
     }
@@ -82,7 +81,7 @@ var findWords = function(board, words) {
           }
           // If there are more letters in word
           used[i][j] = true;
-          searchNeighbors(k, 1, i, j);
+          searchNeighbors(k, 1, i, j, board);
           used[i][j] = false;
           if (wordCompleted === true) break;
         }
@@ -91,3 +90,9 @@ var findWords = function(board, words) {
   }
   return answer;
 };
+
+findWords([["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]],["oath","pea","eat","rain"])
+/*
+Input: board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
+Output: ["eat","oath"]
+*/
