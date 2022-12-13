@@ -35,13 +35,14 @@ var countPrimes = function(n) {
   // Optimization- only need to go up to i = n/2
   // Optimization- for j, after 2 only need to multiply by odd numbers
   // Optimization- skip all multiples of things found notprime
-  let answer = 0;
+  if (n < 3) return 0;
+  let answer = 1;
   let primes = new Array(n).fill(true);
   [primes[0], primes[1]] = [false, false]
-  for (let i = 2; i < n; i++) {
+  for (let i = 3; i < n; i += 2) {
     if (primes[i] === false) continue;
     answer++;
-    for (let j = 2; j < (n / i); j ++) {
+    for (let j = 3; j < (n / i); j += 2) {
       primes[i * j] = false;
     }
   }
