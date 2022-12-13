@@ -38,16 +38,24 @@ var countPrimes = function(n) {
   let answer = 0;
   let primes = new Array(n).fill(true);
   [primes[0], primes[1]] = [false, false]
-  for (let i = 2; i < n/2; i++) {
+  for (let i = 2; i < n; i++) {
     if (primes[i] === false) continue;
+    answer++;
     for (let j = 2; j < (n / i); j ++) {
       primes[i * j] = false;
     }
-  }
-  for (let k = 2; k <= n; k++) {
-    if (primes[k] === true) answer++;
   }
   return answer;
 };
 
 countPrimes(10);
+
+/*
+Input
+n =
+10
+Output
+2
+Expected
+4
+*/
