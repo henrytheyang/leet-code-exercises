@@ -36,5 +36,10 @@ All the strings of words are unique.
  * @return {string[]}
  */
 var findWords = function(board, words) {
-    
+  // Backtracking solution
+  // Iterate through board
+    // Compare current letter against first letter of each word in words
+    // When there's a match, mark as seen and continue searching neighbors
+    // If we reach the end of the word, add the word to the answer list, remove word from words
+    // If we can't run into a dead end, backtrack, unmarking as seen
 };
