@@ -26,5 +26,11 @@ Constraints:
  * @return {string}
  */
 var largestNumber = function(nums) {
-    
+  // Sort the array
+  // Comparator to use
+    // Before comparing, string whole array
+    // Compare any 2 value strings, a+b or b+a and sort descending
+  // Edge case- all 0s. If the answer starts with 0,  return 0
+
+  
 };
