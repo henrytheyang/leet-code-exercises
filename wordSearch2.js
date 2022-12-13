@@ -51,7 +51,7 @@ var findWords = function(board, words) {
     for (let i = 0; i < neighbors.length; i++) {
       let r = neighbors[i][0];
       let c = neighbors[i][1];
-      if (r < 0 || r > board.length || c < 0 || c > board[0].length) continue;
+      if (r < 0 || r === board.length || c < 0 || c === board[0].length) continue;
       if (board[r][c] === words[wordIndex][letterIndex]) {
         if (letterIndex === words[wordIndex].length - 1) { // Found end of word
           answer.push(words[wordIndex]);
@@ -91,8 +91,10 @@ var findWords = function(board, words) {
   return answer;
 };
 
-findWords([["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]],["oath","pea","eat","rain"])
+findWords([['a']],["ab"])
 /*
-Input: board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
-Output: ["eat","oath"]
+board =
+[["a"]]
+words =
+["ab"]
 */
