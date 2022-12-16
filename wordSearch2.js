@@ -35,7 +35,20 @@ All the strings of words are unique.
  * @param {string[]} words
  * @return {string[]}
  */
+
 var findWords = function(board, words) {
+  // Use trie data structure to organize words
+    // Build a tree, with each child node a the next letter in a possible word
+  // DFS for each spot in the board
+    // Keep track of seen/unseen, backtracking as necessary
+    // If the current spot matches a possible child node of the current layer of the trie
+      // Check all valid neighbors to see if it is a possible child node
+        // If it is, keep checking if it's a possible child node
+      // If you reach a node marked as possible wordend, add word to answer
+        // Backtrack
+};
+
+var findWordsBrute = function(board, words) {
   // Backtracking solution
   // Iterate through board
     // Compare current letter against first letter of each word in words
