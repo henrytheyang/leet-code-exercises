@@ -50,6 +50,9 @@ var findWords = function(board, words) {
     isEnd: false,
     children: {},
   };
+  let answer = [];
+  let used = new Array(board.length).fill(0).map(val => new Array(board[0].length).fill(false));
+  let foundWords = {};
 
   // Build tree
   for (let i = 0; i < words.length; i++) {
@@ -67,22 +70,60 @@ var findWords = function(board, words) {
       currentNode = currentNode.children[word[letter]];
       letter++;
     }
-    
   }
 
-  for (let j = 0; j < board.length; j++) {
-    for (let k = 0; k < board[0].length; k++) {
-
+  const searchNeighbors = (currJ, currK, currNode, stringBeingBuilt) => {
+    let neighbors = [[currJ - 1, currK], [currJ + 1, currK], [currJ, currK - 1], [currJ, currK + 1]];
+    for (let i = 0; i < neighbors.length; i++) {
+      let r = neighbors[i][0];
+      let c = neighbors[i][1];
+      if (r < 0 || r === board.length || c < 0 || c === board[0].length) continue;
+      if (currNode.children[board[r][c]]) { // Neighbor is valid child
+        let concatString = stringBeingBuilt + board[r][c];
+        if (currNode.children[board[r][c]].isEnd === true) { // Found end of valid word
+          if (foundWords[concatString] !== true) answer.push(concatString);
+        }
+        used[r][c] = true;
+        searchNeighbors(r, c, currNode.children[board[r][c]], concatString);
+        used[r][c] = false;
+      } 
     }
   }
 
+  for (let j = 0; j < board.length; j++) { // Scan board
+    for (let k = 0; k < board[0].length; k++) {
+      let string = board[j][k];
+      if (root.children[string]) { 
+        if (root.children[string].isEnd === true) { // Found end of one letter word
+          answer.push(string);
+          foundWords[string] = true;
+        } 
+        used[j][k] = true; // Check if any longer words possible starting from this pos
+        searchNeighbors(j, k, root.children[string], string); // FILL IN PARAMETERS
+        used[j][k] = false;
+      }
+    }
+  }
+  return answer;
 };
 
 findWords([
-  ["a","b"],
-  ["c","d"]
-], ["ab","cb","ad","bd","ac","ca","da","bc","db","adcb","dabc","abb","acb"])
+  ["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]
+], ["oa","oaa"])
 
+/*
+Input
+board =
+[["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]]
+words =
+["oa","oaa"]
+13 / 64 testcases passed
+Output
+["oa","oa","oaa"]
+Expected
+["oa","oaa"]
+
+*/
 
 
 
