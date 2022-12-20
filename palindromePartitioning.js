@@ -27,5 +27,17 @@ s contains only lowercase English letters.
  * @return {string[][]}
  */
 var partition = function(s) {
-    
+  // DP solution
+  // As we iterate down the string
+    // Send onto each subsequent index array of arrays of subsequences
+      // Prev palindromic subsequences
+        // Single letters
+        // Multiple letter subsequences
+        // If a new multi-letter palindromic subsequence is detected, start a new array and add to array
+      // New value is pushed onto prev arrays that were brought forward
+  // How to detect palindromic subsequence
+    // Stack
+      // Does the new value match either
+        // Top of stack
+        // Value under top of stack 
 };
