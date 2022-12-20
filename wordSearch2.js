@@ -80,8 +80,9 @@ var findWords = function(board, words) {
       if (r < 0 || r === board.length || c < 0 || c === board[0].length) continue;
       if (currNode.children[board[r][c]]) { // Neighbor is valid child
         let concatString = stringBeingBuilt + board[r][c];
-        if (currNode.children[board[r][c]].isEnd === true) { // Found end of valid word
-          if (foundWords[concatString] !== true) answer.push(concatString);
+        if (currNode.children[board[r][c]].isEnd === true && foundWords[concatString] !== true) { // Found end of valid word
+          foundWords[concatString] = true;
+          answer.push(concatString);
         }
         used[r][c] = true;
         searchNeighbors(r, c, currNode.children[board[r][c]], concatString);
@@ -94,7 +95,7 @@ var findWords = function(board, words) {
     for (let k = 0; k < board[0].length; k++) {
       let string = board[j][k];
       if (root.children[string]) { 
-        if (root.children[string].isEnd === true) { // Found end of one letter word
+        if (root.children[string].isEnd === true && foundWords[string] !== true) { // Found end of one letter word
           answer.push(string);
           foundWords[string] = true;
         } 
@@ -117,12 +118,11 @@ board =
 [["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]]
 words =
 ["oa","oaa"]
-13 / 64 testcases passed
+14 / 64 testcases passed
 Output
 ["oa","oa","oaa"]
 Expected
 ["oa","oaa"]
-
 */
 
 
