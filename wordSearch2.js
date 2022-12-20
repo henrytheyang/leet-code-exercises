@@ -54,7 +54,7 @@ var findWords = function(board, words) {
   let used = new Array(board.length).fill(0).map(val => new Array(board[0].length).fill(false));
   let foundWords = {};
 
-  // Build tree
+  // Build trie
   for (let i = 0; i < words.length; i++) {
     let letter = 0;
     let currentNode = root;
@@ -78,9 +78,9 @@ var findWords = function(board, words) {
       let r = neighbors[i][0];
       let c = neighbors[i][1];
       if (r < 0 || r === board.length || c < 0 || c === board[0].length) continue;
-      if (currNode.children[board[r][c]] && used[r][c] === false) { // Neighbor is valid child
+      if (currNode.children[board[r][c]] && used[r][c] === false) {
         let concatString = stringBeingBuilt + board[r][c];
-        if (currNode.children[board[r][c]].isEnd === true && foundWords[concatString] !== true) { // Found end of valid word
+        if (currNode.children[board[r][c]].isEnd === true && foundWords[concatString] !== true) {
           foundWords[concatString] = true;
           answer.push(concatString);
         }
@@ -95,12 +95,12 @@ var findWords = function(board, words) {
     for (let k = 0; k < board[0].length; k++) {
       let string = board[j][k];
       if (root.children[string]) { 
-        if (root.children[string].isEnd === true && foundWords[string] !== true) { // Found end of one letter word
+        if (root.children[string].isEnd === true && foundWords[string] !== true) {
           answer.push(string);
           foundWords[string] = true;
         } 
-        used[j][k] = true; // Check if any longer words possible starting from this pos
-        searchNeighbors(j, k, root.children[string], string); // FILL IN PARAMETERS
+        used[j][k] = true;
+        searchNeighbors(j, k, root.children[string], string);
         used[j][k] = false;
       }
     }
