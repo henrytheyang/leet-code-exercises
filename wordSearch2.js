@@ -78,7 +78,7 @@ var findWords = function(board, words) {
       let r = neighbors[i][0];
       let c = neighbors[i][1];
       if (r < 0 || r === board.length || c < 0 || c === board[0].length) continue;
-      if (currNode.children[board[r][c]]) { // Neighbor is valid child
+      if (currNode.children[board[r][c]] && used[r][c] === false) { // Neighbor is valid child
         let concatString = stringBeingBuilt + board[r][c];
         if (currNode.children[board[r][c]].isEnd === true && foundWords[concatString] !== true) { // Found end of valid word
           foundWords[concatString] = true;
@@ -109,20 +109,20 @@ var findWords = function(board, words) {
 };
 
 findWords([
-  ["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]
-], ["oa","oaa"])
+  ["a","a"]
+], ["aaa"])
 
 /*
 Input
 board =
-[["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]]
+[["a","a"]]
 words =
-["oa","oaa"]
-14 / 64 testcases passed
+["aaa"]
+33 / 64 testcases passed
 Output
-["oa","oa","oaa"]
+["aaa"]
 Expected
-["oa","oaa"]
+[]
 */
 
 
