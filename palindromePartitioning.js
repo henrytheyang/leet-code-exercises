@@ -44,8 +44,19 @@ var partition = function(s) {
     }
     return true;
   }
-  const dfs = (index, s, solutionInProgress) => {
+  const dfs = (i, s, solutionInProgress) => {
+    if (i === s.length) { // Base case, went past end of string
+      answer.push(solutionInProgress.slice());
+      return;
+    }
 
+    for (let j = i; j < s.length; j++) {
+      if (isPalindrome(s, i, j) === true) { // Palindrome detected
+        solutionInProgress.push(s.slice(i, j + 1)); // Copy palindromic subsequence
+        dfs(j + 1, s, solutionInProgress); // Add palindromic subsequence to solution
+        solutionInProgress.pop(); // Backtrack
+      }
+    }
   }
 
   dfs(0, s, solutionInProgress);
