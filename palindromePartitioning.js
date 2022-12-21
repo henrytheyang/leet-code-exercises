@@ -36,6 +36,20 @@ var partition = function(s) {
     // Backtrack
       // Remove last thing added to solution being built
       // Continue palindrome search
+  let answer = [];
+  let solutionInProgress = [];
+  const isPalindrome = (string, first, last) => {
+    while (first < last) {
+      if (string[first] !== string[last]) return false;
+    }
+    return true;
+  }
+  const dfs = (index, s, solutionInProgress) => {
+
+  }
+
+  dfs(0, s, solutionInProgress);
+  return answer
 };
 
 
