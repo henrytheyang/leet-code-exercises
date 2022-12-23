@@ -34,5 +34,10 @@ s consists of lowercase English letters only.
  * @return {number}
  */
 var minCut = function(s) {
+  // DP Solution
+  // Construct DP table recording the min number of cuts to subdivide at each ending index
+  // For each subsequent index check if each subsequence is a palindrome, then combine with 
+  // each prev stored DP value to get min cuts
+
   
 };
