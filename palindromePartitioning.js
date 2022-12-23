@@ -41,6 +41,8 @@ var partition = function(s) {
   const isPalindrome = (string, first, last) => {
     while (first < last) {
       if (string[first] !== string[last]) return false;
+      first++;
+      last--;
     }
     return true;
   }
@@ -62,6 +64,12 @@ var partition = function(s) {
   dfs(0, s, solutionInProgress);
   return answer
 };
+
+partition('aab');
+/*
+Input: s = "aab"
+Output: [["a","a","b"],["aa","b"]]
+*/
 
 
 
