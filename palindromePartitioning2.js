@@ -52,10 +52,10 @@ var minCut = function(s) {
     let min;
     for (let left = right; left >= 0; left--) {
       if (isPalindrome(left, right)) {
-        if (min === undefined) min = left === 0 ? 0 : dp[left - 1] + 1;
+        if (left === 0) min = 0;
         else {
-          if (left > 0) min = Math.min(min, dp[left - 1] + 1);
-          else min = 0;
+          if (min === undefined) min = dp[left - 1] + 1;
+          else min = Math.min(min, dp[left - 1] + 1);
         }
       }
     }
