@@ -38,6 +38,39 @@ var minCut = function(s) {
   // Construct DP table recording the min number of cuts to subdivide at each ending index
   // For each subsequent index check if each subsequence is a palindrome, then combine with 
   // each prev stored DP value to get min cuts
-
-  
+  let dp = new Array(s.length);
+  dp[0] = 0;
+  const isPalindrome = (first, last) => {
+    while (first < last) {
+      if (s[first] !== s[last]) return false;
+      first++;
+      last--;
+    }
+    return true;
+  }
+  for (let right = 0; right < s.length; right++) {
+    let min;
+    for (let left = right; left >= 0; left--) {
+      if (isPalindrome(left, right)) {
+        if (min === undefined) min = left === 0 ? 0 : dp[left - 1] + 1;
+        else {
+          if (left > 0) min = Math.min(min, dp[left - 1] + 1);
+          else min = 0;
+        }
+      }
+    }
+    dp[right] = min;
+  }
+  return dp[s.length - 1];
 };
+minCut('aab');
+
+/*
+Input
+s =
+"aab"
+Output
+undefined
+Expected
+1
+*/
