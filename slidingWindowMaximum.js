@@ -39,11 +39,32 @@ Constraints:
  * @return {number[]}
  */
 var maxSlidingWindow = function(nums, k) {
-  // 2 queues, one to track curent window, one sorted by size
+  // Queue sorted by size
   // When window shifts
-    // 'Shift the order'- slice the queue, add one onto the end
+    // 'Shift the order'
     // Binary search to delete the old value
     // Binary search to insert the new value
+  let maxWindowValues = [];
+  const insert = (val) => {
+    
+  }
+  const remove = (val) => {
+
+  }
+
+  let left = 0;
+  let right = k - 1;
+  let sorted = [...nums.slice(left, right + 1)].sort((a, b) => a - b);
+
+  maxWindowValues[0] = sorted[sorted.length - 1];
+  while (right <= nums.length - 1) {
+    remove(nums[left]);
+    left++;
+    right++;
+    insert(nums[right]);
+    maxWindowValues[left] = sorted[sorted.length - 1];
+  }
+  return maxWindowValues;
 };
 maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3);
 
