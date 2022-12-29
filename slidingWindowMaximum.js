@@ -43,4 +43,31 @@ var maxSlidingWindow = function(nums, k) {
   // Track left and right pointers at edges of k numbers
   // Subtract left, add right, save sum
   // Continue until right is at the end of nums
+  let windowSums = new Array(nums.length - k + 1).fill(0);
+  for (let i = 0; i < k; i++) {
+    windowSums[0] += nums[i];
+  }
+
+  let current = windowSums[0];
+  let left = 0;
+  let right = k - 1;
+  while (right <= k) {
+    current -= nums[left];
+    left++;
+    right++;
+    current += nums[right];
+  }
+  return windowSums;
 };
+
+/*
+Input
+nums =
+[1,3,-1,-3,5,3,6,7]
+k =
+3
+Output
+[3,0,0,0,0,0]
+Expected
+[3,3,5,5,6,7]
+*.
