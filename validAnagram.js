@@ -36,7 +36,19 @@ var isAnagram = function(s, t) {
     // Decrement count of storage if found
     // Delete storage of letter when count === 1
   // If length of storage keys === 0 return true else false
+  let storage = {};
+  for (let i = 0; i < s.length; i++) {
+    storage[s[i]] = storage[s[i]] === undefined? 1 : storage[s[i]] + 1;
+  }
+  for (let j = 0; j < t.length; j++) {
+    if (storage[t[j]] === undefined) return false;
+    if (storage[t[j]] > 1) storage[t[j]]--;
+    else delete storage[t[j]];
+  }
+  if (Object.keys(storage).length === 0) return true;
+  else return false;
 };
+isAnagram('anagram', 'nagaram');
 
 /*
 Input: s = "anagram", t = "nagaram"
