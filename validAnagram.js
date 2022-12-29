@@ -30,5 +30,15 @@ Follow up: What if the inputs contain Unicode characters? How would you adapt yo
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-  
+  // Track each letter of s
+  // Iterate through t
+    // If letter not in storage, return false
+    // Decrement count of storage if found
+    // Delete storage of letter when count === 1
+  // If length of storage keys === 0 return true else false
 };
+
+/*
+Input: s = "anagram", t = "nagaram"
+Output: true
+*/
