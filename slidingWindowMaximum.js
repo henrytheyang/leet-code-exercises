@@ -39,5 +39,8 @@ Constraints:
  * @return {number[]}
  */
 var maxSlidingWindow = function(nums, k) {
-  
+  // Calculate sum of first k numbers
+  // Track left and right pointers at edges of k numbers
+  // Subtract left, add right, save sum
+  // Continue until right is at the end of nums
 };
