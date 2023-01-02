@@ -46,13 +46,27 @@ var maxSlidingWindow = function(nums, k) {
     // Binary search to insert the new value
   let maxWindowValues = [];
   const insert = (val) => {
+    // if (k === 1) {
+    //   sorted = [val];
+    //   return;
+    // }
+    // if (k === 2) {
+    //   sorted = [...sorted, val].sort();
+    //   return;
+    // }
 
+    // let low = 0;
+    // let high = k - 1;
+    // let mid = (low + high) / 2;
+    // ;
+    sorted = [...sorted, val].sort((a, b) => a - b);
   }
   const remove = (val) => {
     let low = 0;
     let high = k - 1;
     let mid = (low + high) / 2;
     while (sorted[mid] !== val) {
+      mid = (low + high) / 2;
       if (sorted[mid] === val) {
         break;
       } else if (sorted[mid] < val) {
@@ -69,7 +83,7 @@ var maxSlidingWindow = function(nums, k) {
   }
 
   if (k === 1) return nums[nums.length - 1];
-  
+
   let left = 0;
   let right = k - 1;
   let sorted = [...nums.slice(left, right + 1)].sort((a, b) => a - b);
@@ -85,7 +99,6 @@ var maxSlidingWindow = function(nums, k) {
   return maxWindowValues;
 };
 maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3);
-
 /*
 Input
 nums =
