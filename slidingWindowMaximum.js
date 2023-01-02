@@ -41,26 +41,34 @@ Constraints:
 var maxSlidingWindow = function(nums, k) {
   // Implement queue to track the index of the max value in the window
   // Scan through nums to check if we add it to the queue
+  // If the first element in queue is outside window shift the queue
     // Pop all numbers smaller than the new value
-    // If the first element in queue is outside window shift the queue
     // Push the new value on
   // Once we have incremented enough that the window is full add the first number 
   // of the queue to the answer
-  
-
+  let maxes = []; // Tracks values max
+  let queue = []; // Tracks index of values
+  for (let i = 0; i < nums.length; i++) {
+    if (queue[0] <= i - k) queue.shift();
+    while (queue.length > 0 && nums[queue[0]] <= nums[i]) queue.pop();
+    queue.push(i);
+    if (i - k >= -1) maxes.push(nums[queue[0]]);
+  }
+  return maxes;
 }
-maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3);
-// maxSlidingWindow([1], 1)
+maxSlidingWindow([1,3,1,2,0,5], 3);
 /*
 Input
 nums =
-[1,3,-1,-3,5,3,6,7]
+[1,3,1,2,0,5]
 k =
 3
+28 / 51 testcases passed
 Output
-[3,3,3,5,14,16]
+[3,3,1,5]
 Expected
-[3,3,5,5,6,7]
+[3,3,2,5]
+
 */
 
 
