@@ -64,15 +64,15 @@ var maxSlidingWindow = function(nums, k) {
   const remove = (val) => {
     let low = 0;
     let high = k - 1;
-    let mid = (low + high) / 2;
+    let mid = Math.floor((low + high) / 2);
     while (sorted[mid] !== val) {
-      mid = (low + high) / 2;
+      mid = Math.floor((low + high) / 2);
       if (sorted[mid] === val) {
         break;
       } else if (sorted[mid] < val) {
-        low = mid;
+        low = mid + 1;
       } else if (sorted[mid] > val) {
-        high = mid;
+        high = mid - 1;
       }
     }
     if (mid === 0) {
@@ -89,7 +89,7 @@ var maxSlidingWindow = function(nums, k) {
   let sorted = [...nums.slice(left, right + 1)].sort((a, b) => a - b);
   maxWindowValues[0] = sorted[sorted.length - 1];
 
-  while (right <= nums.length - 1) {
+  while (right < nums.length - 1) {
     remove(nums[left]);
     left++;
     right++;
@@ -110,3 +110,4 @@ Output
 Expected
 [3,3,5,5,6,7]
 */
+
