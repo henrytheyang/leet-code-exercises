@@ -39,6 +39,32 @@ Constraints:
  * @return {number[]}
  */
 var maxSlidingWindow = function(nums, k) {
+  // Implement queue to track the index of the max value in the window
+  // Scan through nums to check if we add it to the queue
+    // Pop all numbers smaller than the new value
+    // If the first element in queue is outside window shift the queue
+    // Push the new value on
+  // Once we have incremented enough that the window is full add the first number 
+  // of the queue to the answer
+  
+
+}
+maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3);
+// maxSlidingWindow([1], 1)
+/*
+Input
+nums =
+[1,3,-1,-3,5,3,6,7]
+k =
+3
+Output
+[3,3,3,5,14,16]
+Expected
+[3,3,5,5,6,7]
+*/
+
+
+var maxSlidingWindowInsertRemove = function(nums, k) {
   // Queue sorted by size
   // When window shifts
     // 'Shift the order'
@@ -94,20 +120,9 @@ var maxSlidingWindow = function(nums, k) {
     left++;
     right++;
     insert(nums[right]);
-    maxWindowValues[left] = sorted[sorted.length - 1];
+    maxWindowValues.push(sorted[sorted.length - 1]);
   }
   return maxWindowValues;
 };
-maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3);
-/*
-Input
-nums =
-[1,3,-1,-3,5,3,6,7]
-k =
-3
-Output
-[3,3,3,5,14,16]
-Expected
-[3,3,5,5,6,7]
-*/
+
 
