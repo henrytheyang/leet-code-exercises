@@ -50,7 +50,7 @@ var maxSlidingWindow = function(nums, k) {
   let queue = []; // Tracks index of values
   for (let i = 0; i < nums.length; i++) {
     if (queue[0] <= i - k) queue.shift();
-    while (queue.length > 0 && nums[queue[0]] <= nums[i]) queue.pop();
+    while (queue.length > 0 && nums[queue[queue.length - 1]] <= nums[i]) queue.pop();
     queue.push(i);
     if (i - k >= -1) maxes.push(nums[queue[0]]);
   }
