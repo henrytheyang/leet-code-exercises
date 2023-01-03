@@ -41,5 +41,16 @@ Constraints:
  * @return {number}
  */
 var longestSubarray = function(nums, limit) {
-    
+  // Need to track first position of streak, largest, and smallest indices
+  // Also need to track new largest and smallest indices as things exit the window
+  // Track the size of streak, return the largest streak
+  // Track start/end of streak w/ 2 pointers
+  // Add new value to queues
+  // If the value is within the limit, increment right pointer
+  // If the new value is outside the limit, kick the inc queue until we get to an appropriate min value
+    // Increment start until we reach the appropriate min value index
+  // Use inc monotonic queue to track min
+    // New value- kick all values in queue bigger
+  // Use dec monotonic queue to track max
+    // New value- kick all values in queue smaller
 };
