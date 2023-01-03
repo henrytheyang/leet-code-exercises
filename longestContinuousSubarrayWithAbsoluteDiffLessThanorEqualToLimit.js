@@ -53,4 +53,29 @@ var longestSubarray = function(nums, limit) {
     // New value- kick all values in queue bigger
   // Use dec monotonic queue to track max
     // New value- kick all values in queue smaller
+  let incr = []; // Track index of values
+  let decr = []; // Track index of values
+  let left = 0;
+  let right = 0;
+  let bestStreak = 0;
+  let streak = 0;
+
+  while (right < nums.length) {
+    while (incr.length > 0 && nums[incr[incr.length - 1]] > nums[right]) incr.pop();
+    incr.push(right);
+    while (decr.length > 0 && nums[decr[decr.length - 1]] < nums[right]) decr.pop();
+    decr.push(right);
+    
+    if (limit >= nums[incr[incr.length - 1]] - nums[decr[decr.length - 1]]) {
+      streak = right - left;
+      if (streak > bestStreak) bestStreak = streak;
+    } else {
+      while (limit > nums[incr[incr.length - 1]] - nums[decr[decr.length - 1]]) {
+        decr.pop();
+      }
+      left = decr[decr.length - 1];
+    }
+    right++;
+  }
+  return bestStreak;
 };
