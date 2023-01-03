@@ -66,16 +66,30 @@ var longestSubarray = function(nums, limit) {
     while (decr.length > 0 && nums[decr[decr.length - 1]] < nums[right]) decr.pop();
     decr.push(right);
     
-    if (limit >= nums[incr[incr.length - 1]] - nums[decr[decr.length - 1]]) {
-      streak = right - left;
+    if (limit >= nums[decr[0]] - nums[incr[0]]) {
+      streak = right - left + 1;
       if (streak > bestStreak) bestStreak = streak;
     } else {
-      while (limit > nums[incr[incr.length - 1]] - nums[decr[decr.length - 1]]) {
-        decr.pop();
+      while (limit < nums[decr[0]] - nums[incr[0]]) {
+        left++;
+        if (decr[0] < left) decr.shift();
+        if (incr[0] < left) incr.shift();
       }
-      left = decr[decr.length - 1];
     }
     right++;
   }
   return bestStreak;
 };
+longestSubarray([10,1,2,4,7,2],5)
+
+/*
+Input
+nums =
+[10,1,2,4,7,2]
+limit =
+5
+Output
+3
+Expected
+4
+*/
