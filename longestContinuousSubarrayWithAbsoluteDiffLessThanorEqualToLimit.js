@@ -53,6 +53,8 @@ var longestSubarray = function(nums, limit) {
     // New value- kick all values in queue bigger
   // Use dec monotonic queue to track max
     // New value- kick all values in queue smaller
+  // Optimization to avoid array.shift()
+    // Instead of shifting, use a pointer to point at the valid starting point of each queue
   let incr = []; // Track index of values
   let decr = []; // Track index of values
   let left = 0;
