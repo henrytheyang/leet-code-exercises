@@ -61,37 +61,49 @@ var longestSubarray = function(nums, limit) {
   let right = 0;
   let bestStreak = 0;
   let streak = 0;
+  let minIndex = 0;
+  let maxIndex = 0;
 
   while (right < nums.length) {
-    while (incr.length > 0 && nums[incr[incr.length - 1]] > nums[right]) incr.pop();
+    while (incr.length > 0 && nums[incr[incr.length - 1]] > nums[right]) {
+      if (minIndex === incr.length - 1) {
+        incr = [];
+        minIndex = 0
+      } else incr.pop();
+    }
     incr.push(right);
-    while (decr.length > 0 && nums[decr[decr.length - 1]] < nums[right]) decr.pop();
+    while (decr.length > 0 && nums[decr[decr.length - 1]] < nums[right]) {
+      if (maxIndex === decr.length - 1) {
+        decr = [];
+        maxIndex = 0
+      } else decr.pop();
+    }
     decr.push(right);
     
-    if (limit >= nums[decr[0]] - nums[incr[0]]) {
+    if (limit >= nums[decr[maxIndex]] - nums[incr[minIndex]]) {
       streak = right - left + 1;
       if (streak > bestStreak) bestStreak = streak;
     } else {
-      while (limit < nums[decr[0]] - nums[incr[0]]) {
+      while (limit < nums[decr[maxIndex]] - nums[incr[minIndex]]) {
         left++;
-        if (decr[0] < left) decr.shift();
-        if (incr[0] < left) incr.shift();
+        if (decr[maxIndex] < left) maxIndex++;
+        if (incr[minIndex] < left) minIndex++;
       }
     }
     right++;
   }
   return bestStreak;
 };
-longestSubarray([10,1,2,4,7,2],5)
+longestSubarray([8,2,4,7],4)
 
 /*
 Input
 nums =
-[10,1,2,4,7,2]
+[8,2,4,7]
 limit =
-5
-Output
-3
-Expected
 4
+Output
+1
+Expected
+2
 */
