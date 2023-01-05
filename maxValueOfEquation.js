@@ -42,6 +42,19 @@ var findMaxValueOfEquation = function(points, k) {
   // Two pointer solution
   // Increment right pointer, finding sum until difference between x > k
   // Increment left pointer
+  // We're duplicating work by recalculating every point in frame
+  // We can instead use a monotonic decr queue to keep track of the best partner in the window
+  // Two pointer solution- left is set, right examines points for adding to monoqueue
+  // While the point is in range:
+    // Each new point seen by right- rel value = y - x
+    // Pop every point lower in value
+    // Push point to end
+    // Increment right
+  // When we right points at something out of range
+    // Find max of left + head of monoqueue
+    // Increment left
+    // Shift every point less than left
+    // Evaluate right as above
   const findSum = (i, j) => {
     return points[i][1] + points[j][1] + Math.abs(points[i][0] - points[j][0]);
   }
