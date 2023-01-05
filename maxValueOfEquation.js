@@ -38,10 +38,8 @@ xi form a strictly increasing sequence.
  * @param {number} k
  * @return {number}
  */
+
 var findMaxValueOfEquation = function(points, k) {
-  // Two pointer solution
-  // Increment right pointer, finding sum until difference between x > k
-  // Increment left pointer
   // We're duplicating work by recalculating every point in frame
   // We can instead use a monotonic decr queue to keep track of the best partner in the window
   // Two pointer solution- left is set, right examines points for adding to monoqueue
@@ -60,8 +58,65 @@ var findMaxValueOfEquation = function(points, k) {
   }
   let left = 0;
   let right = 1;
+  let sum, max, lastInQueue;
+  let queue = []; // Index of points
+
+  while (left < points.length - 1) {
+    if (Math.abs(points[left][0] - points[right][0]) <= k) { // Right in range
+      while (queue.length > 0) {
+        lastInQueue = queue[queue.length - 1];
+        if (points[lastInQueue][1] - points[lastInQueue][0] < points[right][1] - points[right][0]) {
+          points.pop(); 
+        } else break;
+      }
+      points.push(right);
+      if (max === undefined) max = findSum(left, queue[0]);
+      if (right < points.length - 1) right++;
+      else {
+        if (queue.length > 0) {
+          sum = findSum(left, queue[0]);
+          max = max === undefined ? sum : Math.max(max, sum);
+          left++;
+          while (queue.length > 0) {
+            if (queue[0][0] < left[0]) queue.shift();
+            else break;
+          }
+        }
+      }
+    } else { // Right out of range
+      if (queue.length > 0) {
+        sum = findSum(left, queue[0]);
+        max = max === undefined ? sum : Math.max(max, sum);
+        left++;
+        while (queue.length > 0) {
+          if (queue[0][0] < left[0]) queue.shift();
+          else break;
+        }
+      }
+    }
+  }
+  return max;
+};
+findMaxValueOfEquation([[1,3],[2,0],[5,10],[6,-10]], 1);
+/*
+Input: points = [[1,3],[2,0],[5,10],[6,-10]], k = 1
+Output: 4
+*/
+
+
+
+var bruteFindMaxValueOfEquation = function(points, k) {
+  // Two pointer solution
+  // Increment right pointer, finding sum until difference between x > k
+  // Increment left pointer
+  const findSum = (i, j) => {
+    return points[i][1] + points[j][1] + Math.abs(points[i][0] - points[j][0]);
+  }
+  let left = 0;
+  let right = 1;
   let sum;
   let max;
+  let queue = [];
   while (left < points.length - 1) {
     if (Math.abs(points[left][0] - points[right][0]) <= k) {
       sum = findSum(left, right);
