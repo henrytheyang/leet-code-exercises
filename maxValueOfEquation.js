@@ -45,7 +45,7 @@ var findMaxValueOfEquation = function(points, k) {
   for (current = 0; current <= points.length - 1; current++) {
     // Maintain decr monoqueue of indices in range behind you
     // Shift off all points out of range
-    while (queue.length > 0 && Math.abs(points[current][0] - points[queue[0][0]]) > k) {
+    while (queue.length > 0 && Math.abs(points[current][0] - points[queue[0]][0]) > k) {
       queue.shift();
     }
     // Compare current point to largest point (head of queue)
