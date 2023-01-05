@@ -34,16 +34,43 @@ xi form a strictly increasing sequence.
 */
 var findMaxValueOfEquation = function(points, k) {
   // One pass, one pointer solution
+  let current;
+  let max = -Infinity;
+  let queue = []; // Indices of points
+  
+  const findSum = (headOfQueue, pointer) => {
+    return points[headOfQueue][1] + points[pointer][1] + Math.abs(points[headOfQueue][0] - points[pointer][0]);
+  }
   // Iterate through points
-  // Maintain decr monoqueue of indices in range behind you
+  for (current = 0; current <= points.length - 1; current++) {
+    // Maintain decr monoqueue of indices in range behind you
     // Shift off all points out of range
+    while (queue.length > 0 && Math.abs(points[current][0] - points[queue[0][0]]) > k) {
+      queue.shift();
+    }
     // Compare current point to largest point (head of queue)
+    if (queue.length > 0) max = Math.max(max, findSum(queue[0], current));
     // Pop off all points on queue smaller than current point
+    while (queue.length > 0 && points[current][1] - points[current][0] > points[queue[0]][1] - points[queue[0]][0]) {
+      queue.pop();
+    }
     // Add current point to queue
+    queue.push(current);
+  }
+  return max;
 };
 
-findMaxValueOfEquation()
-
+findMaxValueOfEquation([[1,3],[2,0],[5,10],[6,-10]], 1)
+/*
+points =
+[[1,3],[2,0],[5,10],[6,-10]]
+k =
+1
+Output
+17
+Expected
+4
+*/
 
 var findMaxValueOfEquationTwoPointer = function(points, k) {
   // We're duplicating work by recalculating every point in frame
