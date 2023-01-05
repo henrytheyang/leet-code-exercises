@@ -39,5 +39,29 @@ xi form a strictly increasing sequence.
  * @return {number}
  */
 var findMaxValueOfEquation = function(points, k) {
-  
+  // Two pointer solution
+  // Increment right pointer, finding sum until difference between x > k
+  // Increment left pointer
+  const findSum = (i, j) => {
+    return points[i][1] + points[j][1] + Math.abs(points[i][0] - points[j][0]);
+  }
+  let left = 0;
+  let right = 1;
+  let sum;
+  let max;
+  while (left < points.length - 1) {
+    if (Math.abs(points[left][0] - points[right][0]) <= k) {
+      sum = findSum(left, right);
+      max = max === undefined ? sum : Math.max(max, sum);
+      if (right < points.length - 1) right++;
+      else {
+        left++;
+        right = left + 1;
+      }
+    } else {
+      left++;
+      right = left + 1;
+    }
+  }
+  return max;
 };
