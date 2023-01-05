@@ -51,7 +51,7 @@ var findMaxValueOfEquation = function(points, k) {
     // Compare current point to largest point (head of queue)
     if (queue.length > 0) max = Math.max(max, findSum(queue[0], current));
     // Pop off all points on queue smaller than current point
-    while (queue.length > 0 && points[current][1] - points[current][0] > points[queue[0]][1] - points[queue[0]][0]) {
+    while (queue.length > 0 && points[current][1] - points[current][0] > points[queue[queue.length - 1]][1] - points[queue[queue.length - 1]][0]) {
       queue.pop();
     }
     // Add current point to queue
@@ -60,16 +60,18 @@ var findMaxValueOfEquation = function(points, k) {
   return max;
 };
 
-findMaxValueOfEquation([[1,3],[2,0],[5,10],[6,-10]], 1)
+findMaxValueOfEquation([[-16,15],[-7,-18],[-4,2],[1,0],[7,10],[9,-6],[14,5],[15,13],[16,-12],[20,20]], 8)
 /*
+Input
 points =
-[[1,3],[2,0],[5,10],[6,-10]]
+[[-16,15],[-7,-18],[-4,2],[1,0],[7,10],[9,-6],[14,5],[15,13],[16,-12],[20,20]]
 k =
-1
+8
+64 / 66 testcases passed
 Output
-17
+31
 Expected
-4
+38
 */
 
 var findMaxValueOfEquationTwoPointer = function(points, k) {
