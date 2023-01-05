@@ -34,6 +34,9 @@ xi form a strictly increasing sequence.
 */
 var findMaxValueOfEquation = function(points, k) {
   // One pass, one pointer solution
+  // Possible optimization- .shift() is O(n) for length of queue
+  // We can instead use a pointer to point at max valid point, then delete 
+  // whole queue when popping gets to the pointer
   let current;
   let max = -Infinity;
   let queue = []; // Indices of points
