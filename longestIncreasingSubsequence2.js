@@ -47,15 +47,53 @@ Constraints:
  * @return {number}
  */
 var lengthOfLIS = function(nums, k) {
-  // DP solution
+  // DP solution, monotonic queue solution
   // We can eliminate extraneous values from nums by only tracking the index of the minimum last
   // value of an increasing subsequence of length x
   // For each value stored, we can store its path in an array by pointing at the index before it
   // Increment through nums
-    // If the value is greater than the last value stored, add it to the end of the array storing lasts
     // If the value is smaller than the first value stored, replace the first index
+    // If the value is greater than the last value stored, add it to the end of the array storing lasts
     // Else use binary search to find the stored value larger than the current value, and replace it
     // Store the value that comes immediately comes before it in the path
-  
+  let path = new Array(nums.length).fill(-1);
+  let indexOfMinLastValOfSeq = new Array(nums.length);
+  let answer = [];
+  const replaceValueBinarySearch = (val, index, indexOfMinLastValOfSeq) => {
+    let low = 0;
+    let high = indexOfMinLastValOfSeq.length - 1;
+    let mid = Math.floor((low + high) / 2); // Looking for mid, the first val greater than our searched val
+    while (nums[indexOfMinLastValOfSeq[mid]] < val || nums[indexOfMinLastValOfSeq[mid - 1]] > val) {
+      if (nums[indexOfMinLastValOfSeq[mid]] === val) return false;
+      else if (nums[indexOfMinLastValOfSeq[mid]] < val) {
+        low = mid + 1;
+        mid = Math.floor((low + high) / 2);
+      }
+      else if (nums[indexOfMinLastValOfSeq[mid - 1]] && nums[indexOfMinLastValOfSeq[mid - 1]] > val) {
+        high = mid - 1;
+        mid = Math.floor((low + high) / 2);
+      }
+    }
+    indexOfMinLastValOfSeq[mid] = index;
+    path[index] = mid - 1;
+  }
+  for (let i = 0; i < nums.length; i ++) {
+    if (indexOfMinLastValOfSeq.length === 0 || nums[i] < nums[indexOfMinLastValOfSeq[0]]) {
+      indexOfMinLastValOfSeq[0] = i;
+    } else if (nums[i] > nums[indexOfMinLastValOfSeq[indexOfMinLastValOfSeq.length -1]]) {
+      indexOfMinLastValOfSeq[indexOfMinLastValOfSeq.length - 1] = i;
+      path[i] = indexOfMinLastValOfSeq[indexOfMinLastValOfSeq.length - 1];
+    } else {
+      replaceValueBinarySearch();
+    }
+  }
 
+  let counter = indexOfMinLastValOfSeq.length - 1;
+  let nextIndex = indexOfMinLastValOfSeq[counter];
+  while (counter >= 0) {
+    answer[counter] = nums[nextIndex];
+    nextIndex = path[nextIndex];
+    counter--;
+  }
+  return answer;
 };
