@@ -48,6 +48,14 @@ Constraints:
  */
 var lengthOfLIS = function(nums, k) {
   // DP solution
-  // Decrementing from rear, at each index store the longest value subsequence you can store
+  // We can eliminate extraneous values from nums by only tracking the index of the minimum last
+  // value of an increasing subsequence of length x
+  // For each value stored, we can store its path in an array by pointing at the index before it
+  // Increment through nums
+    // If the value is greater than the last value stored, add it to the end of the array storing lasts
+    // If the value is smaller than the first value stored, replace the first index
+    // Else use binary search to find the stored value larger than the current value, and replace it
+    // Store the value that comes immediately comes before it in the path
   
+
 };
