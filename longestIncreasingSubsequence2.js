@@ -47,5 +47,7 @@ Constraints:
  * @return {number}
  */
 var lengthOfLIS = function(nums, k) {
-    
+  // DP solution
+  // Decrementing from rear, at each index store the longest value subsequence you can store
+  
 };
