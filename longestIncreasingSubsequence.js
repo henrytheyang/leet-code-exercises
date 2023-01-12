@@ -31,7 +31,15 @@ Follow up: Can you come up with an algorithm that runs in O(n log(n)) time compl
  * @return {number}
  */
 
-var lengthOfLIS = function(nums) {
+// We can augment a DP solution by using binary search to maintain an array of indices 
+// pointing at the minimum value of a LIS of a certain length
+// Whenever we encounter a new value we either add it to the end of the array if the value
+// is larger than the largest value, or we replace the first value that's larger than it
+
+
+
+
+var DPOnlyLengthOfLIS = function(nums) {
   // DP Solution
   // Starting from the rear, track how long of an incrementing sequence we can make from the current index
     // For each index, it's max of (1, or 1 + any dp[index]) that is larger than the current value
