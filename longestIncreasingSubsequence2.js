@@ -96,7 +96,7 @@ var lengthOfLIS = function(nums, k) {
     nextIndex = path[nextIndex];
     counter--;
   }
-  return answer;
+  return answer.length;
 };
 
 lengthOfLIS([4,2,1,4,3,4,5,8,15], 3)
