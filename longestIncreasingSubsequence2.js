@@ -75,7 +75,7 @@ var lengthOfLIS = function(nums, k) {
       }
     }
     indexOfMinLastValOfSeq[mid] = index;
-    path[index] = indexOfMinLastValOfSeq[index - 1];
+    path[index] = indexOfMinLastValOfSeq[mid - 1];
   }
 
   for (let i = 0; i < nums.length; i ++) {
