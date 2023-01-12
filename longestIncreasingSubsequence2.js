@@ -57,9 +57,9 @@ var lengthOfLIS = function(nums, k) {
     // Else use binary search to find the stored value larger than the current value, and replace it
     // Store the value that comes immediately comes before it in the path
   let path = new Array(nums.length).fill(-1);
-  let indexOfMinLastValOfSeq = new Array(nums.length);
+  let indexOfMinLastValOfSeq = new Array();
   let answer = [];
-  const replaceValueBinarySearch = (val, index, indexOfMinLastValOfSeq) => {
+  const replaceValueBinarySearch = (val, index) => {
     let low = 0;
     let high = indexOfMinLastValOfSeq.length - 1;
     let mid = Math.floor((low + high) / 2); // Looking for mid, the first val greater than our searched val
@@ -75,16 +75,17 @@ var lengthOfLIS = function(nums, k) {
       }
     }
     indexOfMinLastValOfSeq[mid] = index;
-    path[index] = mid - 1;
+    path[index] = indexOfMinLastValOfSeq[index - 1];
   }
+
   for (let i = 0; i < nums.length; i ++) {
     if (indexOfMinLastValOfSeq.length === 0 || nums[i] < nums[indexOfMinLastValOfSeq[0]]) {
       indexOfMinLastValOfSeq[0] = i;
     } else if (nums[i] > nums[indexOfMinLastValOfSeq[indexOfMinLastValOfSeq.length -1]]) {
-      indexOfMinLastValOfSeq[indexOfMinLastValOfSeq.length - 1] = i;
-      path[i] = indexOfMinLastValOfSeq[indexOfMinLastValOfSeq.length - 1];
+      indexOfMinLastValOfSeq[indexOfMinLastValOfSeq.length] = i;
+      path[i] = indexOfMinLastValOfSeq[indexOfMinLastValOfSeq.length - 2];
     } else {
-      replaceValueBinarySearch();
+      replaceValueBinarySearch(nums[i], i);
     }
   }
 
@@ -97,3 +98,16 @@ var lengthOfLIS = function(nums, k) {
   }
   return answer;
 };
+
+lengthOfLIS([4,2,1,4,3,4,5,8,15], 3)
+/*
+Input
+nums =
+[4,2,1,4,3,4,5,8,15]
+k =
+3
+Output
+NaN
+Expected
+5
+*/
