@@ -37,5 +37,11 @@ of which the time complexity is O(n log(n)).
  * @return {number}
  */
 var minSubArrayLen = function(target, nums) {
-    
+  // Because we only have pos numbers, the total as we iterate and sum will only increase
+  // Thus we can use a two pointer method to determine min window
+  // L & R start at index 0
+    // Iterate R until we hit or exceed target size
+    // Iterate L until we dip below target size
+    // Evaluate successful window size, compare to min so far
+    // Continue to iterate R until R goes out of bounds
 };
