@@ -44,4 +44,21 @@ var minSubArrayLen = function(target, nums) {
     // Iterate L until we dip below target size
     // Evaluate successful window size, compare to min so far
     // Continue to iterate R until R goes out of bounds
+  let min = Infinity, currMin, left = 0, right = 0, sum = nums[0];
+  while (right < nums.length) {
+    while (sum < target) {
+      right++;
+      if (right === nums.length) {
+        if (min === Infinity) return 0;
+        else return min;
+      }
+      sum += nums[right];
+    }
+    while (sum >= target) {
+      sum -= nums[left];
+      left++;
+    }
+    currMin = right - left + 2;
+    min = Math.min(min, currMin);
+  }
 };
