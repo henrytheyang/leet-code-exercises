@@ -34,5 +34,12 @@ Constraints:
  * @return {number}
  */
 var shortestSubarray = function(nums, k) {
-    
+  // We can use the sliding window technique if we maintain a monotonic queue of total sum
+  // We'll need to track total sum at current index, and current index
+  // Monotonic queue- with each new val:
+    // Pop all sums smaller than or equal to it
+    // Push the new sum & index onto the end
+  // Keep pushing sums onto monoqueue until we reach target sum
+  // Once we hit the target, shift sums off the front until we're below the target
+  // Compare num of items in windows vs prev min
 };
