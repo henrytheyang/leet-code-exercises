@@ -41,5 +41,14 @@ var shortestSubarray = function(nums, k) {
     // Push the new sum & index onto the end
   // Keep pushing sums onto monoqueue until we reach target sum
   // Once we hit the target, shift sums off the front until we're below the target
+    // Instead of using shift() which is O(n), designate & track the head of the queue which is O(1)
   // Compare num of items in windows vs prev min
+  let min = Infinity, currMin, sums = [];
+  const recordSumAndIndex = (val, idx) => {
+    // let arr = new Array;
+    // arr = [val, idx];
+    // return arr;
+    return [val, idx];
+  }
+
 };
