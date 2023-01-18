@@ -41,46 +41,37 @@ var shortestSubarray = function(nums, k) {
   // Once we hit the target, shift sums off the front until we're below the target
     // Instead of using shift() which is O(n), designate & track the head of the queue which is O(1)
   // Compare num of items in windows vs prev min
-  let min = Infinity, currSum, winLength, sums = [[nums[0], 0]], head = 0, right = 0;
-  const recordSumAndIndex = (val, idx) => {
-    // let arr = new Array;
-    // arr = [val, idx];
-    // return arr;
-    return [val, idx];
+  let min = Infinity, currSum, winLength, sums = [[nums[0], 0]], left = 0, right = 0, validWindow;
+  if (sums[0][0] >= k ) validWindow = true;
+  const moveLeftPointer = () => {
+    currSum = sums[sums.length - 1][0] - nums[left];
+    left++;
+    sums[sums.length - 1][0] = currSum;
+    if (currSum < k && validWindow) { // Found a boundary of a window
+      winLength = right - left + 2;
+      min = Math.min(min, winLength);
+      validWindow = false;
+    }
+    if (currSum >= k) validWindow = true; // For finding valid window after right hit boundary
   }
   
-  while (right < nums.length) {
+  while (right < nums.length - 1) {
     while (sums[sums.length - 1][0] < k) { // Haven't reached k yet
+      if (right === nums.length - 1) break;
       right++;
-      if (right === nums.length) { // Base condition, right beyond bound, return answer
-        if (min === Infinity) return -1;
-        else return min;
-      }
       currSum = sums[sums.length - 1][0] + nums[right];
-      while (currSum < sums[sums.length - 1][0]) { // Pop everything bigger than currSum to maintain monoqueue
-        sums.pop();
-        if (sums.length - 1 < head) { // Popped below head, reset sums
-          head = 0;
-          sums = [];
-          break;
-        } 
-      }
-      // sums.push(recordSumAndIndex(currSum, right));
+      while (sums.length > 0 && currSum < sums[sums.length - 1][0]) sums.pop(); // Pop everything bigger than currSum to maintain monoqueue
       sums.push([currSum, right]);
     }
     while (sums[sums.length - 1][0] >= k) { // Reached k, narrow window
-      head++;
-      currSum = sums[sums.length - 1][0] - sums[head][0];
-      sums[sums.length - 1][0] = currSum;
-      if (currSum < k) { // Found a boundary of a window
-        winLength = right - head + 2;
-        min = Math.min(min, winLength);
-      }
-      if (head > right) {
-        head = 0;
-        sums = [];
-      }
+      validWindow = true;
+      moveLeftPointer();
     }
   }
+  while (left <= right) { // Finish up and narrow window after right reached end
+    moveLeftPointer();
+  }
+  if (min === Infinity) return -1;
+  else return min;
 };
-shortestSubarray([2,-1,2], 3);
+shortestSubarray([1], 1);
