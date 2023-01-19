@@ -35,12 +35,31 @@ var shortestSubarray = function(nums, k) {
   // We can use the sliding window technique if we maintain a monotonic queue of total sum
   // We'll need to track total sum at current index, and current index
   // Monotonic queue- with each new val:
+    // Check if we hit the target, shift sums off the front until we're below the target
+      // Instead of using shift() which is O(n), designate & track the head of the queue which is O(1)
+      // Compare num of items in windows vs prev min
     // Pop all sums smaller than or equal to it
     // Push the new sum & index onto the end
-  // Keep pushing sums onto monoqueue until we reach target sum
-  // Once we hit the target, shift sums off the front until we're below the target
-    // Instead of using shift() which is O(n), designate & track the head of the queue which is O(1)
-  // Compare num of items in windows vs prev min
+    // Keep pushing sums onto monoqueue until we reach target sum
+
+
+};
+shortestSubarray([-28,81,-20,28,-29], 89); // Dont start summing until you reach first pos???
+
+/*
+Input
+nums =
+[-28,81,-20,28,-29]
+k =
+89
+63 / 97 testcases passed
+Output
+-1
+Expected
+3
+*/
+
+/*
   let min = Infinity, currSum, winLength, sums = [[nums[0], 0]], left = 0, right = 0, validWindow;
   if (sums[0][0] >= k ) validWindow = true;
   const moveLeftPointer = () => {
@@ -73,5 +92,4 @@ var shortestSubarray = function(nums, k) {
   }
   if (min === Infinity) return -1;
   else return min;
-};
-shortestSubarray([1], 1);
+*/
