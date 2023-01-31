@@ -35,6 +35,15 @@ Follow up: Could you implement a solution that runs in O(n) time complexity and 
  * @return {boolean}
  */
 var increasingTriplet = function(nums) {
+  // Monotonic queue solution, where the monoqueue is only 1 long
+  // Track 2 variables- small, big
+  // As soon as we encounter a number bigger than both, return true
+  // Overwrite small when we encounter a value smaller than both
+  // Overwrite big when we find a value bigger than small, smaller than big
+  
+};
+
+var increasingTripletNestedloop = function(nums) {
   // Greedy solution from rear, O(n^2) solution
   // Start from rear, nested loops to check 
   if (nums.length < 3) return false;
