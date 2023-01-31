@@ -46,6 +46,11 @@ Constraints:
  * @param {number} k
  * @return {number}
  */
+// https://leetcode.com/problems/longest-increasing-subsequence-ii/solutions/2560010/c-segment-tree-with-illustration-explanation/?orderBy=most_votes
+// https://leetcode.com/problems/longest-increasing-subsequence-ii/solutions/2560013/javascript-segment-tree/?orderBy=most_votes&languageTags=javascript
+// https://codeforces.com/blog/entry/18051
+
+
 var lengthOfLIS = function(nums, k) {
   // DP solution, monotonic queue solution
   // We can eliminate extraneous values from nums by only tracking the index of the minimum last
