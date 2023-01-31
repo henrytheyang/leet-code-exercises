@@ -40,7 +40,14 @@ var increasingTriplet = function(nums) {
   // As soon as we encounter a number bigger than both, return true
   // Overwrite small when we encounter a value smaller than both
   // Overwrite big when we find a value bigger than small, smaller than big
-  
+  if (nums.length < 3) return false;
+  let small = nums[0], big = Infinity;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > small && nums[i] > big) return true;
+    if (nums[i] < small) small = nums[i];
+    else if (nums[i] > small && nums[i] < big) big = nums[i];
+  }
+  return false;
 };
 
 var increasingTripletNestedloop = function(nums) {
