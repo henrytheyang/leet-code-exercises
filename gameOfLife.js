@@ -62,6 +62,7 @@ var gameOfLife = function(board) {
     for (let a = i - 1; a <= i + 1; a++) {
       for (let b = j - 1; b <= j + 1; b++) {
         if (a < 0 || a === board.length || b < 0 || b === board[0].length) continue;
+        if (a === i && b === j) continue;
         if (board[a][b] === 0 || board[a][b] === 'l') dead++;
         else live++;
       }
