@@ -50,24 +50,22 @@ var gameOfLife = function(board) {
   // Check neighbors, designate in place
   // Loop through final time to make needed changes
   // Can elimnate a variable by only counting live in neighbors
+  // Instead of traversing whole n again, only track changes
   // Potentially O(9n) time
+  let changeQueue = [];
   const checkNeighbors = (i, j) => {
-    let dead = 0;
-    let live = 0;
-
+    let live = 0;    
     for (let a = i - 1; a <= i + 1; a++) {
       for (let b = j - 1; b <= j + 1; b++) {
         if (a < 0 || a === board.length || b < 0 || b === board[0].length) continue;
         if (a === i && b === j) continue;
-        if (board[a][b] === 0 || board[a][b] === 'l') dead++;
-        else live++;
+        if (board[a][b] === 1 || board[a][b] === 'd') live++;
       }
     }
     if (board[i][j] === 0) {
-      if (live === 3) board[i][j] = 'l';
+      if (live === 3) changeQueue.push([i, j, 'l']);
     } else {
-      if (live < 2) board[i][j] = 'd';
-      else if (live > 3) board[i][j] = 'd';
+      if (live < 2 || live > 3) changeQueue.push([i, j, 'd']);
     }
   }
 
@@ -77,11 +75,9 @@ var gameOfLife = function(board) {
     }
   }
 
-  for (let k = 0; k < board.length; k++) {
-    for (let l = 0; l < board[0].length; l++) {
-      if (board[k][l] === 'l') board[k][l] = 1;
-      else if (board[k][l] === 'd') board[k][l] = 0;
-    }
+  for (let k = 0; k < changeQueue.length; k++) {
+    if (changeQueue[k][2] === 'l') board[changeQueue[k][0]][changeQueue[k][1]] = 1;
+    else board[changeQueue[k][0]][changeQueue[k][1]] = 0;
   }
 };
 gameOfLife([[0,1,0],[0,0,1],[1,1,1],[0,0,0]])
