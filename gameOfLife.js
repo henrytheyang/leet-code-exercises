@@ -55,5 +55,66 @@ var gameOfLife = function(board) {
   // Check neighbors, designate in place
   // Loop through final time to make needed changes
   // Potentially O(9n) time
-  
+  const checkNeighbors = (i, j) => {
+    let dead = 0;
+    let live = 0;
+
+    for (let a = i - 1; a <= i + 1; a++) {
+      for (let b = j - 1; b <= j + 1; b++) {
+        if (a < 0 || a === board.length || b < 0 || b === board[0].length) continue;
+        if (board[a][b] === 0 || board[a][b] === 'l') dead++;
+        else live++;
+      }
+    }
+    if (board[i][j] === 0) {
+      if (live === 3) board[i][j] = 'l';
+    } else {
+      if (live < 2) board[i][j] = 'd';
+      else if (live > 3) board[i][j] = 'd';
+    }
+  }
+
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[0].length; j++) {
+      checkNeighbors(i, j);
+    }
+  }
+
+  for (let k = 0; k < board.length; k++) {
+    for (let l = 0; l < board[0].length; l++) {
+      if (board[k][l] === 'l') board[k][l] = 1;
+      else if (board[k][l] === 'd') board[k][l] = 0;
+    }
+  }
 };
+gameOfLife([[0,1,0],[0,0,1],[1,1,1],[0,0,0]])
+/*
+Input
+board =
+[
+  [0,1,0],
+  [0,0,1],
+  [1,1,1],
+  [0,0,0]]
+Output
+[
+  [0,1,0],
+  [1,0,0],
+  [1,0,1],
+  [0,1,0]]
+Expected
+[
+  [0,0,0],
+  [1,0,1],
+  [0,1,1],
+  [0,1,0]]
+
+Input
+board =
+[[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
+Output
+[[0,1,0],[1,0,0],[1,0,1],[0,1,0]]
+Expected
+[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
+
+*/
