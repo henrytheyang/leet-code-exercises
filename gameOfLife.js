@@ -49,6 +49,7 @@ the array (i.e., live cells reach the border). How would you address these probl
 var gameOfLife = function(board) {
   // Check neighbors, designate in place
   // Loop through final time to make needed changes
+  // Can elimnate a variable by only counting live in neighbors
   // Potentially O(9n) time
   const checkNeighbors = (i, j) => {
     let dead = 0;
