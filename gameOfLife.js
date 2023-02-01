@@ -19,19 +19,15 @@ state of the m x n grid board, return the next state.
  
 
 Example 1:
-
-
 Input: board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
 Output: [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
+
 Example 2:
-
-
 Input: board = [[1,1],[1,0]]
 Output: [[1,1],[1,1]]
  
 
 Constraints:
-
 m == board.length
 n == board[i].length
 1 <= m, n <= 25
@@ -39,7 +35,6 @@ board[i][j] is 0 or 1.
  
 
 Follow up:
-
 Could you solve it in-place? Remember that the board needs to be updated simultaneously: 
 You cannot update some cells first and then use their updated values to update other cells.
 In this question, we represent the board using a 2D array. In principle, the board is 
@@ -89,33 +84,3 @@ var gameOfLife = function(board) {
   }
 };
 gameOfLife([[0,1,0],[0,0,1],[1,1,1],[0,0,0]])
-/*
-Input
-board =
-[
-  [0,1,0],
-  [0,0,1],
-  [1,1,1],
-  [0,0,0]]
-Output
-[
-  [0,1,0],
-  [1,0,0],
-  [1,0,1],
-  [0,1,0]]
-Expected
-[
-  [0,0,0],
-  [1,0,1],
-  [0,1,1],
-  [0,1,0]]
-
-Input
-board =
-[[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
-Output
-[[0,1,0],[1,0,0],[1,0,1],[0,1,0]]
-Expected
-[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
-
-*/
