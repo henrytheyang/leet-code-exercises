@@ -52,5 +52,8 @@ the array (i.e., live cells reach the border). How would you address these probl
  * @return {void} Do not return anything, modify board in-place instead.
  */
 var gameOfLife = function(board) {
-    
+  // Check neighbors, designate in place
+  // Loop through final time to make needed changes
+  // Potentially O(9n) time
+  
 };
