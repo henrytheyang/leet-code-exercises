@@ -33,5 +33,7 @@ All the integers in each column are sorted in ascending order.
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-    
+  // Iterate through rows, checking if answer is within range
+  // Binary search each row for target
+  
 };
