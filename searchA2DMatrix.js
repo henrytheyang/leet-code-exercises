@@ -38,4 +38,44 @@ var searchMatrix = function(matrix, target) {
   // We effectively have a strictly non-decreasing series of numbers
   // We can use a binary search algorithm if we can
   // Convert m,n to index number, and back
+  if (matrix.length === 1 && matrix[0].length === 1) {
+    if (matrix[0][0] === target) return true;
+    else return false;
+  }
+  const calcCoord = (index) => {
+    let arrLength = matrix[0].length;
+    let counter = 0;
+    while (index > arrLength) {
+      index -= arrLength;
+      counter++;
+    }
+    return {m: counter, n: index - 1};
+  }
+  let low = 1;
+  let high = (matrix.length) * (matrix[0].length);
+  let mid;
+
+  while (low <= high) {
+    mid = Math.floor((low + high) / 2)
+    let coord = calcCoord(mid);
+    if (matrix[coord.m][coord.n] === target) return true;
+    else if (matrix[coord.m][coord.n] < target) low = mid + 1;
+    else high = mid - 1;
+  }
+
+  return false;
 };
+searchMatrix([[1],[3]], 3);
+
+/*
+Input
+matrix =
+[[1],[3]]
+target =
+3
+115 / 133 testcases passed
+Output
+false
+Expected
+true
+*/
