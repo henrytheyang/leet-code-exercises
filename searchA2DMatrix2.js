@@ -38,6 +38,14 @@ var searchMatrix = function(matrix, target) {
   // Start in top right
     // If the search value > target then we can eliminate the whole row, increment row
     // If the search value < target then we can eliminate the whole column, decrement col
+  let row = 0;
+  let col = matrix[0].length - 1;
+  while (row < matrix.length && col >= 0) {
+    if (matrix[row][col] === target) return true;
+    else if (matrix[row][col] < target) row++;
+    else col--;
+  }
+  return false;
 }
 
 var binarySearchMatrix = function(matrix, target) {
