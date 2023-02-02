@@ -32,7 +32,15 @@ All the integers in each column are sorted in ascending order.
  * @param {number} target
  * @return {boolean}
  */
+
 var searchMatrix = function(matrix, target) {
+  // O(m, n) solution- because rows & col are sorted we can adjust the row/col of the search box
+  // Start in top right
+    // If the search value > target then we can eliminate the whole row, increment row
+    // If the search value < target then we can eliminate the whole column, decrement col
+}
+
+var binarySearchMatrix = function(matrix, target) {
   // Iterate through rows, checking if answer is within range
   // Binary search each row for target
   const binarySearchRow = (rowIdx) => {
