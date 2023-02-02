@@ -35,5 +35,7 @@ n == matrix[i].length
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-  
+  // We effectively have a strictly non-decreasing series of numbers
+  // We can use a binary search algorithm if we can
+  // Convert m,n to index number, and back
 };
