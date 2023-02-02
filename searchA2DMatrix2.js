@@ -35,5 +35,23 @@ All the integers in each column are sorted in ascending order.
 var searchMatrix = function(matrix, target) {
   // Iterate through rows, checking if answer is within range
   // Binary search each row for target
+  const binarySearchRow = (rowIdx) => {
+    let low = 0;
+    let high = matrix[0].length - 1;
+    let mid;
+    while (low <= high) {
+      mid = Math.floor((low + high) / 2);
+      if (matrix[rowIdx][mid] === target) return true;
+      else if (matrix[rowIdx][mid] < target) low = mid + 1;
+      else high = mid - 1;
+    }
+    return false;
+  }
   
+  for (let i = 0; i < matrix.length; i++) {
+    if (matrix[i][matrix[i].length - 1] < target) continue;
+    if (matrix[i][0] > target) break;
+    if (binarySearchRow(i)) return true;
+  }
+  return false;
 };
