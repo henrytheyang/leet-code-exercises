@@ -37,7 +37,7 @@ var searchMatrix = function(matrix, target) {
   // O(m, n) solution- because rows & col are sorted we can adjust the row/col of the search box
   // Start in top right
     // If the search value > target then we can eliminate the whole row, increment row
-    // If the search value < target then we can eliminate the whole column, decrement col
+    // If the search value < target then we can eliminate the whole col, decrement col
   let row = 0;
   let col = matrix[0].length - 1;
   while (row < matrix.length && col >= 0) {
