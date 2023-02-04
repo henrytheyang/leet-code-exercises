@@ -32,5 +32,13 @@ Constraints:
  */
 var fizzBuzz = function(n) {
   // String concatenation- fizz condition, then buzz, then if string length === 0 the index
-  
+  let answer = [], curr;
+  for (let i = 1; i <= n; i++) {
+    curr = '';
+    if (i % 3 === 0) curr += 'Fizz';
+    if (i % 5 === 0) curr += 'Buzz';
+    if (curr.length === 0) curr = i.toString();
+    answer.push(curr);
+  }
+  return answer;
 };
