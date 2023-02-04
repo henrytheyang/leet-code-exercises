@@ -31,5 +31,6 @@ Constraints:
  * @return {string[]}
  */
 var fizzBuzz = function(n) {
-    
+  // String concatenation- fizz condition, then buzz, then if string length === 0 the index
+  
 };
