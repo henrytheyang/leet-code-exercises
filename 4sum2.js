@@ -37,5 +37,15 @@ n == nums4.length
  * @return {number}
  */
 var fourSumCount = function(nums1, nums2, nums3, nums4) {
-  
+  // Progressive hashing of values
+  // Basic structure- nested/nested/nested/nested loop
+  // Store nums4 as we iterate through, after 1st time through
+  // sums can be compared to by searching for the complement directly
+  // Store every nums3/nums4 sum as we iterate, compare each nums1/nums2 
+  // sum to complement directly
+  // Store every nums2/nums3/nums4 sum as we iterate, compare each nums1
+  // sum after to complement directly
+  // Record indices for multiple tuples
+  // Time: O(n logn logn logn), Space: O(n^4)
+
 };
