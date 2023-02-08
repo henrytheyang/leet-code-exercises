@@ -42,6 +42,34 @@ var fourSumCount = function(nums1, nums2, nums3, nums4) {
   // for corresponding value in storage
   // TC: O(n^2)
   // SC: O(n^2)
+  let nums3Nums4Bank = {};
+  let count = 0;
+  for (let i = 0; i < nums3.length; i++) {
+    for (let j = 0; j < nums4.length; j++) {
+      nums3Nums4Bank[nums3[i] + nums4[j]] = nums3Nums4Bank[nums3[i] + nums4[j]] === undefined ? 1 : nums3Nums4Bank[nums3[i] + nums4[j]] + 1;
+    }
+  }
+  for (i = 0; i < nums1.length; i++) {
+    for (j = 0; j < nums2.length; j++) {
+      if (nums3Nums4Bank[-1 * (nums1[i] + nums2[j])] !== undefined) count+= nums3Nums4Bank[-1 * (nums1[i] + nums2[j])]
+    }
+  }
+  return count;
 };
+fourSumCount([1,2], [-2, -1], [-1, 2], [0, 2]);
 
-// Problems- when we go up a layer we don't have scope into the variable inside it, also we didn't memorize all possible combo values, just all nums4
+/*
+Input
+nums1 =
+[1,2]
+nums2 =
+[-2,-1]
+nums3 =
+[-1,2]
+nums4 =
+[0,2]
+Output
+NaN
+Expected
+2
+*/
