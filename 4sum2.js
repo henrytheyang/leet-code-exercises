@@ -37,47 +37,11 @@ n == nums4.length
  * @return {number}
  */
 var fourSumCount = function(nums1, nums2, nums3, nums4) {
-  // Progressive hashing of values
-  // Basic structure- nested/nested/nested/nested loop
-  // Store nums4 as we iterate through, after 1st time through
-  // sums can be compared to by searching for the complement directly
-  // Store every nums3/nums4 sum as we iterate, compare each nums1/nums2 
-  // sum to complement directly
-  // Store every nums2/nums3/nums4 sum as we iterate, compare each nums1
-  // sum after to complement directly
-  // Record indices for multiple tuples
-  // Time: O(n logn logn logn), Space: O(n^4)
-  let nums4Bank = {};
-  let nums3Nums4Bank = {};
-  let nums2Nums3Nums4Bank = {};
-  let tuples = 0;
-  for (let i = 0; i < nums1.length; i++) {
-    if (i > 0) {
-      if (nums2Nums3Nums4Bank[(- 1 * nums[i])] !== undefined) tuples += nums2Nums3Nums4Bank[(- 1 * nums[i])];
-    } else {
-      for (let j = 0; j < nums2.length; j++) {
-        if (j > 0) {
-          if (nums3Nums4Bank[(-1 * (nums1[i] + nums2[j]))] !== undefined) tuples += nums3Nums4Bank[(-1 * (nums1[i] + nums2[j]))];
-        } else {
-          for (let k = 0; k < nums3.length; k++) {
-            if (k > 0) {
-              if ( nums4Bank[(- 1 * (nums1[i] + nums2[j] + nums3[k]))] !== undefined) {
-                tuples += nums4Bank[(- 1 * (nums1[i] + nums2[j] + nums3[k]))];
-              }
-            } else {
-              for (let l = 0; l < nums4.length; l++) {
-                if (nums1[i] + nums2[j] + nums3[k] + nums4[l] === 0) tuples++;
-                nums4Bank[nums4[l]] = nums4Bank[nums4[l]] === undefined ? 1 : nums4Bank[nums4[l]] + 1;
-              }
-            }
-            nums3Nums4Bank[nums3[k] + nums4[l]] = nums3Nums4Bank[nums3[k] + nums4[l]] === undefined ? 1 : nums3Nums4Bank[nums3[k] + nums4[l]] + 1;
-          }
-        }
-        nums2Nums3Nums4Bank[nums2[j] + nums3[k] + nums4[l]] = nums2Nums3Nums4Bank[nums2[j] + nums3[k] + nums4[l]] === undefined ? 1 : nums2Nums3Nums4Bank[nums2[j] + nums3[k] + nums4[l]] + 1;
-      }
-    }
-  }
-  return tuples;
+  // Store value of every combo of nums3[x] + nums4[y] and # of instances
+  // Run nested loops with every combo of nums1[x] + nums2[y] and search in constant time
+  // for corresponding value in storage
+  // TC: O(n^2)
+  // SC: O(n^2)
 };
 
 // Problems- when we go up a layer we don't have scope into the variable inside it, also we didn't memorize all possible combo values, just all nums4
