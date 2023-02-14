@@ -45,9 +45,9 @@ var topKFrequent = function(nums, k) {
     }
   };
   nums.sort((a,b) => a - b);
-  let currVal = nums[0], count = 0, dyad = {}, index;
+  let currVal = nums[0], count = 1, dyad = {}, index;
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === currVal) count++;
+    if (nums[i] === currVal && i < nums.length - 1) count++;
     else {
       index = findIndex(count);
       monoQueueCount = [...monoQueueCount.slice(0, index), count, ...monoQueueCount.slice(index)];
@@ -62,3 +62,15 @@ var topKFrequent = function(nums, k) {
   }
   return monoQueueVal;
 };
+topKFrequent([1], 1);
+/*
+Input
+nums =
+[1]
+k =
+1
+Output
+[]
+Expected
+[1]
+*/
