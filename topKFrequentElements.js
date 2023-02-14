@@ -26,5 +26,9 @@ n is the array's size.
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-    
+  // Sort
+  // Iterate through nums, tracking count
+  // Once we have the count, compare with the monotonic decreasing queue of counts
+  // Binary search it until we find where it occurs in the order.
+    // If length of queue === k pop last element
 };
