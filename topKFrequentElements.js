@@ -35,7 +35,7 @@ var topKFrequent = function(nums, k) {
   let monoQueueCount = [];
   const findIndex = (count) => {
     let high = monoQueueCount.length - 1, low = 0, mid;
-    if (count < monoQueueCount[monoQueueCount.length - 1]) return monoQueueCount.length;
+    if (count <= monoQueueCount[monoQueueCount.length - 1]) return monoQueueCount.length;
     else if (count > monoQueueCount[0]) return 0;
     while (low < high) {
       mid = Math.floor((low + high) / 2);
@@ -45,32 +45,47 @@ var topKFrequent = function(nums, k) {
     }
   };
   nums.sort((a,b) => a - b);
-  let currVal = nums[0], count = 1, dyad = {}, index;
+  let val = nums[0], count = 0, index;
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === currVal && i < nums.length - 1) count++;
+    if (nums[i] === val && i < nums.length - 1) count++;
     else {
+      if (monoQueueCount.length === 0) {
+        monoQueueCount.push(count);
+        monoQueueVal.push(val);
+      } else {
+        index = findIndex(count);
+        monoQueueCount = [...monoQueueCount.slice(0, index), count, ...monoQueueCount.slice(index)];
+        monoQueueVal = [...monoQueueVal.slice(0, index), val, ...monoQueueVal.slice(index)];
+        if (monoQueueVal.length > k) {
+          monoQueueCount.pop();
+          monoQueueVal.pop();
+        }
+      }
+      val = nums[i];
+      count = 1;
+    }
+    if (i === nums.length - 1) {
       index = findIndex(count);
       monoQueueCount = [...monoQueueCount.slice(0, index), count, ...monoQueueCount.slice(index)];
-      monoQueueVal = [...monoQueueVal.slice(0, index), currVal, ...monoQueueVal.slice(index)];
+      monoQueueVal = [...monoQueueVal.slice(0, index), val, ...monoQueueVal.slice(index)];
       if (monoQueueVal.length > k) {
         monoQueueCount.pop();
         monoQueueVal.pop();
       }
-      currVal = nums[i];
-      count = 1;
     }
   }
   return monoQueueVal;
 };
-topKFrequent([1], 1);
+topKFrequent([1, 2], 2);
 /*
 Input
 nums =
-[1]
+[4,1,-1,2,-1,2,3]
 k =
-1
+2
+10 / 21 testcases passed
 Output
-[]
+[-1,1,2,-1]
 Expected
-[1]
+[-1,2]
 */
