@@ -42,19 +42,29 @@ var fourSumCount = function(nums1, nums2, nums3, nums4) {
   // for corresponding value in storage
   // TC: O(n^2)
   // SC: O(n^2)
-  let nums3Nums4Bank = {};
-  let count = 0;
+
+  // let nums3Nums4Bank = {};
+  let nums3Nums4Bank = new Map();
+  let sets = 0;
+  let count;
   for (let i = 0; i < nums3.length; i++) {
     for (let j = 0; j < nums4.length; j++) {
-      nums3Nums4Bank[nums3[i] + nums4[j]] = nums3Nums4Bank[nums3[i] + nums4[j]] === undefined ? 1 : nums3Nums4Bank[nums3[i] + nums4[j]] + 1;
+      // nums3Nums4Bank[nums3[i] + nums4[j]] = nums3Nums4Bank[nums3[i] + nums4[j]] === undefined ? 1 : nums3Nums4Bank[nums3[i] + nums4[j]] + 1;
+      count = nums3Nums4Bank.get(nums3[i] + nums4[j]);
+      count = count === undefined ? 1 : count + 1;
+      nums3Nums4Bank.set(nums3[i] + nums4[j], count);
     }
   }
   for (i = 0; i < nums1.length; i++) {
     for (j = 0; j < nums2.length; j++) {
-      if (nums3Nums4Bank[-1 * (nums1[i] + nums2[j])] !== undefined) count+= nums3Nums4Bank[-1 * (nums1[i] + nums2[j])]
+      // if (nums3Nums4Bank[-1 * (nums1[i] + nums2[j])] !== undefined) sets+= nums3Nums4Bank[-1 * (nums1[i] + nums2[j])]
+      count = nums3Nums4Bank.get(-1 * (nums1[i] + nums2[j]));
+      if (count !== undefined) {
+        sets+= count;
+      }
     }
   }
-  return count;
+  return sets;
 };
 fourSumCount([1,2], [-2, -1], [-1, 2], [0, 2]);
 
