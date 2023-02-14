@@ -31,4 +31,26 @@ var topKFrequent = function(nums, k) {
   // Once we have the count, compare with the monotonic decreasing queue of counts
   // Binary search it until we find where it occurs in the order.
     // If length of queue === k pop last element
+  let monoQueueVal = [];
+  let monoQueueCount = [];
+  const findIndex = (count) => {
+
+  };
+  nums.sort((a,b) => a - b);
+  let currVal = nums[0], count = 0, dyad = {}, index;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === currVal) count++;
+    else {
+      index = findIndex(count);
+      monoQueueCount = [...monoQueueCount.slice(0, index), count, ...monoQueueCount.slice(index)];
+      monoQueueVal = [...monoQueueVal.slice(0, index), val, ...monoQueueVal.slice(index)];
+      if (monoQueueVal.length > k) {
+        monoQueueCount.pop();
+        monoQueueVal.pop();
+      }
+      currVal = nums[i];
+      count = 1;
+    }
+  }
+  return monoQueueVal;
 };
