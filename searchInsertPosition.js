@@ -32,5 +32,8 @@ nums contains distinct values sorted in ascending order.
  * @return {number}
  */
 var searchInsert = function(nums, target) {
-  
+  // Binary search
+  // Searching for an index where the value is equal or greater than the search value, and the previous index
+  // is lesser than the search value
+
 };
