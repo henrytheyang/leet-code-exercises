@@ -35,5 +35,20 @@ var searchInsert = function(nums, target) {
   // Binary search
   // Searching for an index where the value is equal or greater than the search value, and the previous index
   // is lesser than the search value
-
+  let answer, low, high = [undefined, 0, nums.length - 1];
+  if (nums[nums.length - 1] < target) return nums.length;
+  else if (nums[0] > target) return 0;
+  
+  while (low <= high) {
+    answer = Math.floor((low + high) / 2);
+    if (nums[answer] === target) return answer;
+    else if (answer - 1>= 0 && nums[answer - 1] < target && nums[answer] > target) return answer;
+    else {
+      if (nums[answer] > target) {
+        high = answer - 1;
+      } else {
+        low = answer + 1;
+      }
+    }
+  }
 };
